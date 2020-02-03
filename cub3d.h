@@ -57,14 +57,6 @@ typedef struct s_data
     int     endian;
 }               t_data;
 
-/*
-*** typedef struct s_wdw
-*** {
-***    t_image image;
-***    t_pos   pos;
-*** }               t_wdw;
-*/
-
 typedef struct  s_player
 {
     t_pos   pos;
@@ -90,9 +82,12 @@ typedef struct  s_txt
 
 typedef struct s_all
 {
-    t_data  *data;
-    t_pos   *pos;
-    t_image *image;
+    t_data      *data;
+    t_pos       *pos;
+    t_image     *image;
+    t_ori       *ori;
+    t_player    *player;
+    t_txt       *txt;
 }               t_all;
 
 
