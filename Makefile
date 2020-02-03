@@ -6,7 +6,7 @@
 #    By: jdussert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/14 08:57:55 by jdussert          #+#    #+#              #
-#    Updated: 2020/01/30 17:31:26 by jdussert         ###   ########.fr        #
+#    Updated: 2020/01/31 15:05:05 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS	= Cub3D.c main.c map.cub
+SRCS = cub3d.c main.c
 
 NAME = cub3D
 
