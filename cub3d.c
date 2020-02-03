@@ -68,64 +68,65 @@ void	ft_init(void)
 	mlx_loop(mlx_ptr);
 }*/
 
-int		ft_error(t_image *image, t_pos *pos, t_data *data, int res)
+int		ft_error(t_all *all, int res)
 {
-	if(image)
+	if(all->image)
 	{
-		free(image);
-		image = NULL;
+		free(all->image);
+		all->image = NULL;
 	}
-	if(pos)
+	if(all->pos)
 	{
-		free(pos);
-		pos = NULL;
+		free(all->pos);
+		all->pos = NULL;
 	}
-	if (data)
+	if (all->data)
 	{
-		free(data);
-		data = NULL;
+		free(all->data);
+		all->data = NULL;
 	}
 	return(res);
 }
 
-int		ft_init(t_image *image, t_pos *pos, t_data *data)
+t_all	*ft_init(t_all *all)
 {
-	pos->x = 0;
-	pos->y = 0;
-	image->width = 1000;
-	image->height = 1000;
-	image->title = "cub3d";
-	if(!(image->mlx_ptr = mlx_init()))
-		return(ft_error(image, pos, data, -1));
-	if(!(image->win_ptr = mlx_new_window(image->mlx_ptr, image->width, image->height, image->title)))
-		return(ft_error(image, pos, data, -1));
-	if(!(image->img = mlx_new_image(image->mlx_ptr, image->width, image->height)))
-		return(ft_error(image, pos, data, -1));
-	if(!(data->m_data = (int *)mlx_get_data_addr(image->img, &data->bpp, &data->size_l, &data->endian)))
-		return(ft_error(image, pos, data, -1));
-	return(1);
+	if(!(all->image = (t_image *)malloc(sizeof(t_image))))
+		return(NULL);
+	if(!(all->pos = (t_pos *)malloc(sizeof(t_pos))))
+		return(NULL);
+	if(!(all->data = (t_data *)malloc(sizeof(t_data))))
+		return(NULL);
+	all->pos->x = 0;
+	all->pos->y = 0;
+	all->image->width = 1000;
+	all->image->height = 1000;
+	all->image->title = "cub3d";
+	if(!(all->image->mlx_ptr = mlx_init()))
+		return(NULL);
+	if(!(all->image->win_ptr = mlx_new_window(all->image->mlx_ptr, all->image->width, all->image->height, all->image->title)))
+		return(NULL);
+	if(!(all->image->img = mlx_new_image(all->image->mlx_ptr, all->image->width, all->image->height)))
+		return(NULL);
+	if(!(all->data->m_data = (int *)mlx_get_data_addr(all->image->img, &all->data->bpp, &all->data->size_l, &all->data->endian)))
+		return(NULL);
+	return(all);
 }
 
 int	main(void)
 {
-	t_image		*image;
-	t_data		*data;
-	t_pos		*pos;
 	int			i;
+	t_all		*all;
 
-	i = 1000;
-	if(!(image = (t_image *)malloc(sizeof(t_image))))
+	if(!(all = (t_all *)malloc(sizeof(t_all))))
 		return(-1);
-	if(!(pos = (t_pos *)malloc(sizeof(t_pos))))
-		return(ft_error(image, pos, data, -1));
-	if(!(data = (t_data *)malloc(sizeof(t_data))))
-		return(ft_error(image, pos, data, -1));
-	ft_init(image, pos, data);
+	i = 1000;
+	if(ft_init(all) == NULL)
+		return(ft_error(all, -1));
 	while(i++ - 1000 < 50)
-		data->m_data[500*i+500] = 0xAC9EF0;
-	if(!(mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img, pos->x, pos->y)))
-		return(ft_error(image, pos, data, -1));
-	if(!(mlx_loop(image->mlx_ptr)))
-		return(ft_error(image, pos, data, -1));
+		all->data->m_data[500*i+500] = 0xAC9EF0;
+	if(!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr, all->image->img, all->pos->x, all->pos->y)))
+		return(ft_error(all, -1));
+	if(!(mlx_loop(all->image->mlx_ptr)))
+		return(ft_error(all, -1));
 	return(0);
 }

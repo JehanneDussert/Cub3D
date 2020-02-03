@@ -88,15 +88,13 @@ int	ft_read(int fd, char **line, char **stock, char **buffer)
 	return (ret);
 }
 
-int	get_next_line(char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*stock = NULL;
 	char		*buffer;
 	int			ret;
 	int			s;
-	int			fd;
 
-	fd = open("map.cub", O_RDONLY);
 	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
 		return (-1);
 	if ((line[0] = ft_calloc(BUFFER_SIZE + 1, sizeof(line[0]))) == NULL)
@@ -112,21 +110,4 @@ int	get_next_line(char **line)
 	if (ret == 0)
 		return (ft_free(&stock, &buffer, 0));
 	return (ft_free(&stock, &buffer, 1));
-}
-
-int	main(void)
-{
-	char	*line;
-	int		n;
-
-	n = get_next_line(&line);
-	while (n == 1)
-	{
-		printf("%d:%s\n", n, line);
-		free(line);
-		n = get_next_line(&line);
-	}
-	printf("%d:%s\n", n, line);
-	free(line);
-	return (0);
 }

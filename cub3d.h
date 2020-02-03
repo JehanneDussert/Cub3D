@@ -6,20 +6,19 @@
 /*   By: jdussert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/01/31 15:06:17 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/03 15:20:41 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// # define speed = 1
-// # define angle = 1
-# define rot_sp = 1
-# define hauteur_regard = 1
-# define hauteur_mur = 1
-# define distance_mur = 1
-# define BUFFER_SIZE = 10
+// # define speed 1
+// # define angle 1
+# define rot_sp 1
+# define hauteur_regard 1
+# define hauteur_mur 1
+# define distance_mur 1
 #include <mlx.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -88,5 +87,13 @@ typedef struct  s_txt
 	int		cl[3];
 	char	**map;
 }               t_txt;
+
+typedef struct s_all
+{
+    t_data  *data;
+    t_pos   *pos;
+    t_image *image;
+}               t_all;
+
 
 #endif
