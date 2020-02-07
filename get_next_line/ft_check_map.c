@@ -57,7 +57,7 @@ char    *ft_check(char *map)
         return(ft_error(&map, &line, &info, "[ERROR]\nProbleme d'allocation de memoire"));
     if(!(map = (char *)malloc(sizeof(char) + 1)))
         return(ft_error(&map, &line, &info, "[ERROR]\nProbleme d'allocation de memoire."));
-    if(!(fd = open("map.cub", O_RDONLY)))
+    if(!(fd = open(txt, O_RDONLY)))
         return(ft_error(&map, &line, &info, "[ERROR]\nProbleme a l'ouverture du fichier."));
     n = get_next_line(fd, &line);
     while(n == 1)
@@ -81,8 +81,12 @@ int     main(int argc, char **argv)
 
     if(argc > 1 && argc < 4)
     {
-        if (!(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))
-            return("[ERROR]\nWrong filename.")
+        /* fonction pour verifier que nom fichier se termine par .cub */
+        if ()
+            return("[ERROR]\nWrong filename.");
+        /* fonction pour verifier que si argc == 3 le 3e arg == -save */
+        if (argc == 3 && !())
+            return("[ERROR]\nWrong argument.");
         map = ft_check(map);
         ft_printf("%s\n", map);
     }
