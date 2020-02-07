@@ -14,7 +14,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = cub3d.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRCS = cub3d.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+		ft_split.c check_map.c
 
 NAME = cub3D
 

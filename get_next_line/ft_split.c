@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
+#include "../cub3d.h"
 
 static int	count_words(const char *s, char c)
 {
