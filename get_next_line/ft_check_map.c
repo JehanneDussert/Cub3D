@@ -1,94 +1,138 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/10 15:07:31 by jdussert          #+#    #+#             */
+/*   Updated: 2020/02/11 17:42:54 by jdussert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include "../cub3d.h"
 #include "../ft_printf/ft_printf.h"
 #include "../libft/libft.h"
 
-char    *ft_error(char **map, char **line, t_map **info, char *message)
+void	ft_init(t_map *info)
 {
-    if(*map)
-    {
-        free(*map);
-        *map = NULL;
-    }
-    if (*line)
-    {
-        free(*line);
-        *line = NULL;
-    }
-    if (*info)
-    {
-        free(*info);
-        *info = NULL;
-    }
-    return(message);
+	info->reso[0] = -1;
+	info->reso[1] = -1;
+	info->n_path = NULL;
+	info->s_path = NULL;
+	info->w_path = NULL;
+	info->e_path = NULL;
+	info->spr_path = NULL;
+	info->f_path = NULL;
+	info->c_path = NULL;
 }
 
-void    ft_check_info(char **line, char **map, t_map info)
+char	*ft_error(char **map, char **line, t_map **info, char *message)
 {
-
+	if (*map)
+	{
+		free(*map);
+		*map = NULL;
+	}
+	if (*line)
+	{
+		free(*line);
+		*line = NULL;
+	}
+	if (*info)
+	{
+		free(*info);
+		*info = NULL;
+	}
+	return (message);
 }
 
-char    *ft_new_line(char **line, char **map, t_map **info)
+void	ft_jump(char *line, int *i)
 {
-    char *tmp;
-
-    if(!(tmp = ft_substr(*map, 0, ft_strlen(*map))))
-        return(ft_error(map, line, info, "[ERROR]\nProbleme d'allocation de memoire."));
-    free(*map);
-    *map = NULL;
-    if(!(*map = ft_strjoin(tmp, *line)))
-        return(ft_error(map, line, info, "[ERROR]\nProbleme de gestion de la map."));
-    free(*line);
-    *line = NULL;
-    free(tmp);
-    tmp = NULL;
-    return(*map);
+	while (line[*i] == ' ')
+		(*i)++;
 }
 
-char    *ft_check(char *map)
+int		ft_check_info(char *line, int reso, int *i)
 {
-    t_map   *info;
-    char    *line;
-    char    *tmp;
-    int     n;
-    int     fd;
-
-    if(!(info = (t_map *)malloc(sizeof(t_map) + 1)))
-        return(ft_error(&map, &line, &info, "[ERROR]\nProbleme d'allocation de memoire"));
-    if(!(map = (char *)malloc(sizeof(char) + 1)))
-        return(ft_error(&map, &line, &info, "[ERROR]\nProbleme d'allocation de memoire."));
-    if(!(fd = open(txt, O_RDONLY)))
-        return(ft_error(&map, &line, &info, "[ERROR]\nProbleme a l'ouverture du fichier."));
-    n = get_next_line(fd, &line);
-    while(n == 1)
-    {
-        ft_new_line(&line, &map, &info);
-        tmp = ft_substr(map, 0, ft_strlen(map));
-        free(map);
-        map = NULL;
-        map = ft_strjoin(tmp, "\n");
-        free(tmp);
-        tmp = NULL;
-        n = get_next_line(fd, &line);
-    }
-    ft_new_line(&line, &map, &info);
-    return(map);
+	if (line[*i] == ' ')
+		ft_jump(line, i);
+	if (line[*i] == 'R')
+	{
+		++(*i);
+		ft_jump(line, i);
+	}
+	if (line[*i] >= '0' && line[*i] <= '9')
+	{
+		reso = ft_l_atoi(line, i);
+		if (ft_int_len(reso, 10) == 4)
+			return (reso);
+	}
+	return (-1);
 }
 
-int     main(int argc, char **argv)
+void	ft_check(char *map, char *title)
 {
-    char    *map = NULL;
+	t_map	*info;
+	char	*line;
+	int		i;
+	int		n;
+	int		fd;
 
-    if(argc > 1 && argc < 4)
-    {
-        /* fonction pour verifier que nom fichier se termine par .cub */
-        if ()
-            return("[ERROR]\nWrong filename.");
-        /* fonction pour verifier que si argc == 3 le 3e arg == -save */
-        if (argc == 3 && !())
-            return("[ERROR]\nWrong argument.");
-        map = ft_check(map);
-        ft_printf("%s\n", map);
-    }
-    return(0);
+	i = 0;
+	if (!(info = (t_map *)malloc(sizeof(t_map) + 1)))
+		ft_error(&map, &line, &info, "[ERROR]\nProbleme d'allocation de memoire");
+	if (!(map = (char *)malloc(sizeof(char) + 1)))
+		ft_error(&map, &line, &info, "[ERROR]\nProbleme d'allocation de memoire.");
+	ft_init(info);
+	if (!(fd = open(title, O_RDONLY)))
+		ft_error(&map, &line, &info, "[ERROR]\nProbleme a l'ouverture du fichier.");
+	n = get_next_line(fd, &line);
+	if (line == NULL)
+		ft_error(&map, &line, &info, "[ERROR]\nProbleme de lecture");
+	else
+	{
+		info->reso[0] = ft_check_info(line, info->reso[0], &i);
+		info->reso[1] = ft_check_info(line, info->reso[1], &i);
+	}
+	ft_printf("%s\n", line);
+	ft_printf("%d\n%d\n", info->reso[0], info->reso[1]);
+	while (n == 1)
+	{
+		if (line[i] == ' ')
+			ft_jump(line, &i);
+		if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
+		{
+			if (!(ft_check_info(line, info->reso[0], &i)))
+				ft_error(&map, &line, &info, "[ERROR]\nWrong resolution.");
+			if (!(ft_check_info(line, info->reso[1], &i)))
+				ft_error(&map, &line, &info, "[ERROR]\nWrong resolution.");
+			else
+				break ;
+		}
+		else
+			break ;
+	}
+}
+
+int		main(int argc, char **argv)
+{
+	char	*map = NULL;
+
+	if (argc > 1 && argc < 4)
+	{
+		if (ft_last(argv[1], ".cub") != 1)
+		{
+			ft_printf("[ERROR]\nWrong filename.");
+			return (-1);
+		}
+		if (argc == 3 && !(ft_strncmp(argv[2], "-save", 5)))
+		{
+			ft_printf("[ERROR]\nWrong argument.");
+			return (-1);
+		}
+		ft_check(map, argv[1]);
+	}
+	return (0);
 }
