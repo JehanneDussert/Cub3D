@@ -6,12 +6,14 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:29:55 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/11 18:32:14 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/11 18:53:49 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PARSING_H
 # define PARSING_H
+
+# include <mlx.h>
 
 typedef struct	s_map
 {
@@ -30,5 +32,6 @@ void			ft_check(char *map, char *title);
 char			*ft_error(char **map, char **line, t_map **info, char *message);
 void			ft_jump(char *line, int *i);
 void			ft_init(t_map *info);
+void			ft_check_resolution(char *line, t_map *info, char *map, int *i);
 
 #endif
