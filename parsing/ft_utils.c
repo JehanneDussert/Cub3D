@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/11 18:36:18 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/12 18:25:23 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	ft_init(t_map *info)
 	info->w_path = NULL;
 	info->e_path = NULL;
 	info->spr_path = NULL;
-	info->f_path = NULL;
-	info->c_path = NULL;
+	info->f_path = -1;
+	info->c_path = -1;
 }
 
-char	*ft_error(char **map, char **line, t_map **info, char *message)
+char	*ft_error(char **map, char **line, t_map **info, t_image **image, char *message)
 {
 	if (*map)
 	{
@@ -45,6 +45,11 @@ char	*ft_error(char **map, char **line, t_map **info, char *message)
 	{
 		free(*info);
 		*info = NULL;
+	}
+	if (*image)
+	{
+		free(*image);
+		*image = NULL;
 	}
 	return (message);
 }
