@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/12 18:27:28 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:46:31 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../cub3d.h"
 #include "../ft_printf/ft_printf.h"
 #include "../libft/libft.h"
-#include "ft_parsing.h"
+#include "parsing.h"
 
 int			ft_colors(char *line, int *color, int *i)
 {

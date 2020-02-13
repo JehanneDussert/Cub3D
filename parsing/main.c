@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:33:56 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/12 12:34:21 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:48:38 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../cub3d.h"
 #include "../ft_printf/ft_printf.h"
 #include "../libft/libft.h"
-#include "ft_parsing.h"
+#include "parsing.h"
 
 int		main(int argc, char **argv)
 {

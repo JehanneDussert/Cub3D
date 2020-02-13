@@ -14,7 +14,7 @@
 #include "../cub3d.h"
 #include "../ft_printf/ft_printf.h"
 #include "../libft/libft.h"
-#include "ft_parsing.h"
+#include "parsing.h"
 
 void	ft_check(char *map, char *title)
 {

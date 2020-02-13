@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.h                                       :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 18:29:55 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/12 18:34:38 by jdussert         ###   ########.fr       */
+/*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
+/*   Updated: 2020/02/13 13:46:05 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void			ft_jump(char *line, int *i);
 void			ft_init(t_map *info);
 void			ft_check_resolution(char *line, t_map *info, t_image *image, char *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
-char			*ft_text(char *line, t_map *info, t_image *image, int *i);
+void			ft_text(char *line, t_map *info, t_image *image, int *i);
 
 #endif
