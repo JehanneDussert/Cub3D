@@ -6,15 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:47:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 13:49:14 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:29:00 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../get_next_line/get_next_line.h"
 #include "../cub3d.h"
-#include "../ft_printf/ft_printf.h"
-#include "../libft/libft.h"
-#include "parsing.h"
 
 int		ft_check_info(char *line, int *reso, int *i)
 {

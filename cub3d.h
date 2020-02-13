@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/10 14:52:42 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:27:47 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "get_next_line/get_next_line.h"
+# include "../ft_printf/ft_printf.h"
+# include "../get_next_line/get_next_line.h"
+# include "../libft/libft.h"
+# include "parsing/parsing.h"
 
 typedef struct	s_ori
 {
