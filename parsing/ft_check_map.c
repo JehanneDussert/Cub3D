@@ -20,7 +20,7 @@ void	ft_check(char *map, char *title)
 	int		i;
 	int		n;
 	int		fd;
-	
+
 	i = 0;
 	if (!(info = (t_map *)malloc(sizeof(t_map) + 1)))
 		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire");
@@ -40,6 +40,8 @@ void	ft_check(char *map, char *title)
 	ft_printf("Reso 1 :%d\nReso 2 :%d\n", info->reso[0], info->reso[1]);
 	while (n == 1)
 	{
+		if (line[i] == '\0')
+			n = get_next_line(fd, &line);
 		ft_jump(line, &i);
 		if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
 			ft_check_resolution(line, info, image, map, &i);	
@@ -48,8 +50,21 @@ void	ft_check(char *map, char *title)
 		else if (ft_strncmp(&line[i], "NO", 2) || ft_strncmp(&line[i], "SO", 2)
 				|| ft_strncmp(&line[i], "WE", 2) || ft_strncmp(&line[i], "EA", 2) || ft_strncmp(&line[i], "S", 1))
 			ft_text(line, info, image, &i);
+		else if (line[i] == '1' || line[i] == '2' || line[i] == '0' || line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E' || line[i] == '\0')
+			{
+				ft_printf("\n\nje suis rentree\n\n");
+				ft_map(map, line, info, image, &i);
+			}
+		ft_printf("Line avant traitement et [i] et mon line[i] :%s[%d](%c)\n", line, i, line[i]);
 		n = get_next_line(fd, &line);
-		/*else
-			break ;*/
 	}
+	n = get_next_line(fd, &line);
+	ft_map(map, line, info, image, &i);
+/*		ft_error(&map, &line, &info, &image, "[ERROR]\nMap incorrecte");
+	else
+	{
+		ft_map(map, line, info, image, &i);
+		*/
+	ft_printf("Contenu :%s\n", info->map);
+//	}
 }
