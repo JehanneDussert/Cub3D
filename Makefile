@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdussert <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/14 08:57:55 by jdussert          #+#    #+#              #
-#    Updated: 2020/01/31 15:05:05 by jdussert         ###   ########.fr        #
+#    Updated: 2020/02/13 14:33:20 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = cub3d.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-		ft_split.c check_map.c
+SRCS = parsing/ft_check_map.c parsing/ft_colors.c parsing/ft_resolution.c /
+		parsing/ft_textures.c parsing/ft_utils.c
 
 NAME = cub3D
 

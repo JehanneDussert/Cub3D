@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 14:27:47 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:52:00 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../ft_printf/ft_printf.h"
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include "parsing/parsing.h"
+
+# define BUFFER_SIZE 10
 
 typedef struct	s_ori
 {
@@ -40,16 +43,6 @@ typedef struct	s_pos
 	int			x;
 	int			y;
 }				t_pos;
-
-typedef struct	s_image
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img;
-	int			width;
-	int			height;
-	char		*title;
-}				t_image;
 
 typedef struct	s_data
 {

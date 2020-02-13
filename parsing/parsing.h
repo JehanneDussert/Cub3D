@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 13:46:05 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:48:51 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include <mlx.h>
+# include "../cub3d.h"
 
 typedef struct	s_map
 {
@@ -27,6 +28,16 @@ typedef struct	s_map
 	int			c_path;
 	char		**map;
 }				t_map;
+
+typedef struct	s_image
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img;
+	int			width;
+	int			height;
+	char		*title;
+}				t_image;
 
 void			ft_check(char *map, char *title);
 char			*ft_error(char **map, char **line, t_map **info, t_image **image, char *message);
