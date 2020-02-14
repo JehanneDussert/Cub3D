@@ -6,13 +6,13 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 14:29:09 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/14 14:18:50 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_path(char *line, void *orientation, t_image *image)
+char	*ft_path(char *line)
 {
 	int		i;
 
@@ -25,7 +25,7 @@ char	*ft_path(char *line, void *orientation, t_image *image)
 	 get data addr apres */
 }
 
-void	ft_text(char *line, t_map *info, t_image *image, int *i)
+void	ft_text(char *line, t_map *info)
 {
 	if (ft_ref_parse(line, "NO", ft_strlen(line)))
 	{

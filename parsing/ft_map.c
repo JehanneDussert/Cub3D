@@ -6,13 +6,21 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:06:42 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 19:13:52 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/14 14:42:21 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_clean_map(char *line, char **map, int *len, int *i)
+int		ft_check_char(char *line, int i)
+{
+	if (line[i] == '1' || line[i] == '2' || line[i] == '0' ||
+			line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+		return (1);
+	return (0);
+}
+
+char	*ft_clean_map(char *line, char **map, int *i)
 {
 	int j;
 
@@ -23,45 +31,55 @@ char	*ft_clean_map(char *line, char **map, int *len, int *i)
 		ft_printf("Hey toi\n");
 		if (line[*i] == ' ')
 			(*i)++;
-		if (line[*i] == '1' || line[*i] == '2' || line[*i] == '0' ||
-			line[*i] == 'N' || line[*i] == 'S' || line[*i] == 'W' || line[*i] == 'E')
+		if (ft_check_char(line, *i) == 1)
 			*map[j++] = line[(*i)++];
 		//	ft_lstadd_back((t_list **)map, (t_list *)line);
 	}
 	return (*map);
 }
 
-int		ft_map_len(char *line, int *i, int *len)
+int		ft_map_len(char *line, int *i)
 {
+	int	len;
+
+	len = 0;
 	while (line[*i])
 	{
 		if (line[*i] == ' ')
 			(*i)++;
-		if (line[*i] == '1' || line[*i] == '2' || line[*i] == '0' ||
-			line[*i] == 'N' || line[*i] == 'S' || line[*i] == 'W' || line[*i] == 'E')
-			(*len)++;
+		if (ft_check_char(line, *i))
+			len++;
 	}
-	ft_printf("Len :%d\n", *len);
-	return (*len);
+	ft_printf("Len :%d\n", len);
+	return (len);
 }
 
-void	ft_map(char *map, char *line, t_map *info, t_image *image, int *i)
+void	ft_map(char *line, t_map *info, int n, int fd)
 {
-	int len;
+	int	len;
+	int i;
 
 	len = 0;
+	i = 0;
 	ft_printf("%s\n", line);
-	ft_jump(line, i);
+	ft_jump(line, &i);
 	ft_printf("line :%s\n", line);
-	if (line[*i] == '0' || line[*i] == '1' || line[*i] == '2' || line[*i] == 'N'
-		|| line[*i] == 'S' || line[*i] == 'W' || line[*i] != 'E')
+	while (n == 1 || n == 0)
 	{
-		ft_map_len(line, i, &len);
-		free(info->map);
-		info->map = NULL;
-		if (!(info->map = (char **)malloc(sizeof(char *) * (len + 1))))
-			return ;
-		ft_printf("This is my len :%d\n", len);
-		ft_clean_map(line, info->map, &len, i);
+		ft_printf("heere\n");
+		if (ft_check_char(line, i) == 1)
+		{
+			ft_printf("hello\n");
+			len = ft_map_len(line, &i);
+			free(info->map);
+			info->map = NULL;
+			if (!(info->map = (char **)malloc(sizeof(char *) * (len + 1))))
+				return ;
+			ft_printf("This is my len :%d\n", len);
+			ft_clean_map(line, info->map, &i);
+		}
+		if (n == 0)
+			break;
+		n = get_next_line(fd, &line);
 	}
 }
