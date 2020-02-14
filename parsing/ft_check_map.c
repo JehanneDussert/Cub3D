@@ -38,7 +38,7 @@ void	ft_check(char *map, char *title)
 		ft_check_resolution(line, info, image, map, &i);
 	ft_printf("%s\n", line);
 	ft_printf("Reso 1 :%d\nReso 2 :%d\n", info->reso[0], info->reso[1]);
-	while (n == 1)
+	while (n == 1 && line[i] != '1')
 	{
 		if (line[i] == '\0' && (n = get_next_line(fd, &line) < 0))
 			break ;
@@ -53,7 +53,9 @@ void	ft_check(char *map, char *title)
 		ft_printf("Line avant traitement et [i] et mon line[i] :%s[%d](%c)\n", line, i, line[i]);
 		n = get_next_line(fd, &line);
 		i = 0;
+		ft_jump(line, &i);
 	}
+	ft_printf("%d\n", n);
 	if (n == 1)
 	{
 		ft_printf("c moa\n");

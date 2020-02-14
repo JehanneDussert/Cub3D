@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:06:42 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/14 14:42:21 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:01:47 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ int		ft_map_len(char *line, int *i)
 	{
 		if (line[*i] == ' ')
 			(*i)++;
-		if (ft_check_char(line, *i))
+		else if (ft_check_char(line, *i) == 1)
+		{
+			(*i)++;
 			len++;
+		}
+		else
+			break ;
 	}
 	ft_printf("Len :%d\n", len);
 	return (len);
