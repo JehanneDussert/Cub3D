@@ -22,6 +22,7 @@ void	ft_check(char *map, char *title)
 	int		fd;
 
 	i = 0;
+	n = 0;
 	if (!(info = (t_map *)malloc(sizeof(t_map) + 1)))
 		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire");
 	if (!(map = (char *)malloc(sizeof(char) + 1)))
@@ -31,41 +32,25 @@ void	ft_check(char *map, char *title)
 	ft_init(info);
 	if (!(fd = open(title, O_RDONLY)))
 		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme a l'ouverture du fichier.");
-	n = get_next_line(fd, &line);
-	if (line == NULL)
-		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme de lecture");
-	else
-		ft_check_resolution(line, info, image, map, &i);
-	ft_printf("%s\n", line);
-	ft_printf("Reso 1 :%d\nReso 2 :%d\n", info->reso[0], info->reso[1]);
-	while (n == 1 && line[i] != '1')
+	while ((n = get_next_line(fd, &line)) == 1 && line[i] != '1')
 	{
-		if (line[i] == '\0' && (n = get_next_line(fd, &line) < 0))
+		if ((line[i] == '\0' && (n = get_next_line(fd, &line) < 0)) || line == NULL)
 			break ;
 		ft_jump(line, &i);
 		if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
 			ft_check_resolution(line, info, image, map, &i);	
 		else if ((line[i] == 'F' && info->f_path == -1) || (line[i] == 'C' && info->c_path == -1))
 			line[i] == 'F' ? ft_colors(line, &info->f_path, &i) : ft_colors(line, &info->c_path, &i);
-		else if (ft_strncmp(&line[i], "NO", 2) || ft_strncmp(&line[i], "SO", 2)
-				|| ft_strncmp(&line[i], "WE", 2) || ft_strncmp(&line[i], "EA", 2) || ft_strncmp(&line[i], "S", 1))
+		else if (ft_check_text(line, i) == 1)
 			ft_text(line, info);
 		ft_printf("Line avant traitement et [i] et mon line[i] :%s[%d](%c)\n", line, i, line[i]);
+//		ft_printf("Reso 1 :%d\nReso 2 :%d\n", info->reso[0], info->reso[1]);
 		n = get_next_line(fd, &line);
 		i = 0;
 		ft_jump(line, &i);
 	}
-	ft_printf("%d\n", n);
+	ft_printf("LINE :%s\n", line);
 	if (n == 1)
-	{
-		ft_printf("c moa\n");
-		ft_map(line, info, n, fd);
-	}
-	/*		ft_error(&map, &line, &info, &image, "[ERROR]\nMap incorrecte");
-	else
-	{
-		ft_map(map, line, info, image, &i);
-		*/
+		info->map = ft_map(line, info, n, fd);
 	ft_printf("Contenu :%s\n", info->map);
-//	}
 }

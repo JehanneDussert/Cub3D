@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:06:42 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/14 15:01:47 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/14 17:45:10by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,16 @@ int		ft_map_len(char *line, int *i)
 		else
 			break ;
 	}
-	ft_printf("Len :%d\n", len);
 	return (len);
 }
 
-void	ft_map(char *line, t_map *info, int n, int fd)
+char	**ft_map(char *line, t_map *info, int n, int fd)
 {
 	int	len;
 	int i;
+	int	j;
 
+	j = 0;
 	len = 0;
 	i = 0;
 	ft_printf("%s\n", line);
@@ -71,20 +72,20 @@ void	ft_map(char *line, t_map *info, int n, int fd)
 	ft_printf("line :%s\n", line);
 	while (n == 1 || n == 0)
 	{
-		ft_printf("heere\n");
 		if (ft_check_char(line, i) == 1)
 		{
-			ft_printf("hello\n");
 			len = ft_map_len(line, &i);
 			free(info->map);
 			info->map = NULL;
 			if (!(info->map = (char **)malloc(sizeof(char *) * (len + 1))))
-				return ;
+				return (NULL);
 			ft_printf("This is my len :%d\n", len);
-			ft_clean_map(line, info->map, &i);
+			info->map[j] = ft_clean_map(line, info->map, &i);
+			j++;
 		}
 		if (n == 0)
 			break;
 		n = get_next_line(fd, &line);
 	}
+	return (info->map);
 }

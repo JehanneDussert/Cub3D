@@ -6,11 +6,20 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/14 14:18:50 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:16:58 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int		ft_check_text(char *line, int i)
+{
+	if (ft_strncmp(&line[i], "NO", 2) || ft_strncmp(&line[i], "SO", 2) ||
+		ft_strncmp(&line[i], "WE", 2) || ft_strncmp(&line[i], "EA", 2) ||
+		ft_strncmp(&line[i], "S", 1))
+		return (1);
+	return (0);
+}
 
 char	*ft_path(char *line)
 {
@@ -60,7 +69,7 @@ void	ft_text(char *line, t_map *info)
 		line = ft_ref_parse(line, "S", ft_strlen(line));
 		line = ft_strtrim(line, " ");
 		info->spr_path = line;
-		ft_printf("%s\n", info->spr_path);
+//		ft_printf("%s\n", info->spr_path);
 	}
 }
 
