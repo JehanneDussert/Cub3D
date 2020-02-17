@@ -28,7 +28,8 @@ char	*ft_clean_map(char *line, char **map, int *i, int *j, int len)
 	k = 0;
 	ft_printf("line ici :%s\n", line);
 	ft_printf("len :%d\n", len);
-	ft_printf("line[len] :%c\n", line[29]);
+	ft_printf("line[len] :%c\n", line[len]);
+	line[len] = '\0';
 	ft_printf("map ici :%s\n", map[*j]);
 	while (line[*i] != '\0')
 	{
@@ -73,10 +74,8 @@ char	**ft_map(char *line, t_map *info, int n, int fd)
 	j = 0;
 	len = 0;
 	i = 0;
-	ft_printf("ma len line :%d\n", ft_strlen(line));
 	ft_printf("%s\n", line);
 	ft_jump(line, &i);
-	ft_printf("voici mon i :%d\n", i);
 	ft_printf("line :%s\n", line);
 	while (n == 1 || n == 0)
 	{
@@ -84,7 +83,6 @@ char	**ft_map(char *line, t_map *info, int n, int fd)
 		{
 			ft_printf("yoooo\n");
 			len = ft_map_len(line, &i) + 1;
-			line[len] = '\0';
 			if (!(map = (char **)malloc(sizeof(char *) * (len))))
 				return (NULL);
 		//	ft_printf("This is my len :%d\n", len);

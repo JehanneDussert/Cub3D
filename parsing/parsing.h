@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/17 13:18:28 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:27:15 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct	s_image
 
 void			ft_check(char *map, char *title);
 char			*ft_error(char **map, char **line, t_map **info, t_image **image, char *message);
-char			*ft_jump(char **line, int *i);
+void			ft_jump(char *line, int *i);
 void			ft_init(t_map *info);
 void			ft_check_resolution(char *line, t_map *info, t_image *image, char *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
