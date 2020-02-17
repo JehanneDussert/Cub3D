@@ -29,7 +29,6 @@ char	*ft_clean_map(char *line, char **map, int *i, int *j, int len)
 	ft_printf("line ici :%s\n", line);
 	ft_printf("len :%d\n", len);
 	ft_printf("line[len] :%c\n", line[len]);
-	line[len] = '\0';
 	ft_printf("map ici :%s\n", map[*j]);
 	while (ft_check_char(line, *i) == 1 || line[*i] == ' ')
 	{
@@ -65,10 +64,12 @@ int		ft_map_len(char *line, int *i)
 
 char	**ft_map(char *line, int n, int fd)
 {
-	int	len;
+	t_list	*lst;
+//	utiliser lstnew while n == 1
+/*	int	len;
 	int i;
 	int	j;
-	char	**map;
+	char	**map = NULL;
 
 
 //	if (!(map = (char **)malloc(sizeof(char *) *)))
@@ -95,6 +96,6 @@ char	**ft_map(char *line, int n, int fd)
 			break;
 		i = 0;
 		n = get_next_line(fd, &line);
-	}
+	}*/
 	return (map);
 }
