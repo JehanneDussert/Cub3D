@@ -20,19 +20,24 @@ int		ft_check_char(char *line, int i)
 	return (0);
 }
 
-char	*ft_clean_map(char *line, char **map, int *i)
+char	*ft_clean_map(char *line, char **map, int *i, int *j, int len)
 {
-	int j;
+	int	k;
 
-	j = 0;
 	ft_printf("Je suis ici\n");
+	k = 0;
+	ft_printf("line ici :%s\n", line);
+	ft_printf("len :%d\n", len);
+	ft_printf("line[len] :%c\n", line[29]);
+	ft_printf("map ici :%s\n", map[*j]);
 	while (line[*i] != '\0')
 	{
 		ft_printf("Hey toi\n");
 		if (line[*i] == ' ')
 			(*i)++;
 		if (ft_check_char(line, *i) == 1)
-			*map[j++] = line[(*i)++];
+			ft_memcpy(map[*j], line, len);
+		//	map[*j][k++] = line[(*i)++];
 		//	ft_lstadd_back((t_list **)map, (t_list *)line);
 	}
 	return (*map);
@@ -63,29 +68,38 @@ char	**ft_map(char *line, t_map *info, int n, int fd)
 	int	len;
 	int i;
 	int	j;
+	char	**map;
 
 	j = 0;
 	len = 0;
 	i = 0;
+	ft_printf("ma len line :%d\n", ft_strlen(line));
 	ft_printf("%s\n", line);
 	ft_jump(line, &i);
+	ft_printf("voici mon i :%d\n", i);
 	ft_printf("line :%s\n", line);
 	while (n == 1 || n == 0)
 	{
 		if (ft_check_char(line, i) == 1)
 		{
-			len = ft_map_len(line, &i);
-			free(info->map);
-			info->map = NULL;
-			if (!(info->map = (char **)malloc(sizeof(char *) * (len + 1))))
+			ft_printf("yoooo\n");
+			len = ft_map_len(line, &i) + 1;
+			line[len] = '\0';
+			if (!(map = (char **)malloc(sizeof(char *) * (len))))
 				return (NULL);
-			ft_printf("This is my len :%d\n", len);
-			info->map[j] = ft_clean_map(line, info->map, &i);
+		//	ft_printf("This is my len :%d\n", len);
+			map[j] = ft_clean_map(line, map, &i, &j, len);
+			ft_printf("info->map :%s\n", map[j]);
 			j++;
 		}
 		if (n == 0)
 			break;
+		i = 0;
 		n = get_next_line(fd, &line);
+		/*ft_printf("yo %d\n", j);
+		ft_printf("la new line :%s\n", line);
+		ft_printf("mon ft_check_char :%d\n", ft_check_char(line, i));
+		ft_printf("mon line[i] :%c\n", line[i]);*/
 	}
 	return (info->map);
 }
