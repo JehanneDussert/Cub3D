@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/17 13:27:15 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:48:25 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			ft_init(t_map *info);
 void			ft_check_resolution(char *line, t_map *info, t_image *image, char *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
-char			**ft_map(char *line, t_map *info, int n, int fd);
+char			**ft_map(char *line, int n, int fd);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 

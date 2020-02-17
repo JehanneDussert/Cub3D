@@ -43,14 +43,13 @@ void	ft_check(char *map, char *title)
 			line[i] == 'F' ? ft_colors(line, &info->f_path, &i) : ft_colors(line, &info->c_path, &i);
 		else if (ft_check_text(line, i) == 1)
 			ft_text(line, info);
-		ft_printf("Line avant traitement et [i] et mon line[i] :%s[%d](%c)\n", line, i, line[i]);
+//		ft_printf("Line avant traitement et [i] et mon line[i] :%s[%d](%c)\n", line, i, line[i]);
 //		ft_printf("Reso 1 :%d\nReso 2 :%d\n", info->reso[0], info->reso[1]);
 		n = get_next_line(fd, &line);
 		i = 0;
 		ft_jump(line, &i);
 	}
-	ft_printf("LINE :%s\n", line);
 	if (n == 1)
-		info->map = ft_map(line, info, n, fd);
+		info->map = ft_map(line, n, fd);
 	ft_printf("Contenu :%s\n", info->map);
 }
