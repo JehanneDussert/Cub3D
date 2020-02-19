@@ -50,6 +50,6 @@ void	ft_check(char *map, char *title)
 		ft_jump(line, &i);
 	}
 	if (n == 1)
-		info->map = ft_map(line, n, fd);
+		info->map = ft_map(line, n, fd, info);
 	ft_printf("Contenu :%s\n", info->map);
 }

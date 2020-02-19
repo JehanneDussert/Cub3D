@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/18 17:39:57 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:21:51 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_map
 	int			f_path;
 	int			c_path;
 	t_list		*map;
+	char		ori;
 	int			map_len;
 }				t_map;
 
@@ -47,7 +48,7 @@ void			ft_init(t_map *info);
 void			ft_check_resolution(char *line, t_map *info, t_image *image, char *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
-t_list			*ft_map(char *line, int n, int fd);
+t_list			*ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 

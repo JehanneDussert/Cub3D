@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/13 14:34:59 by jdussert          #+#    #+#              #
-#    Updated: 2020/02/18 18:34:03 by jdussert         ###   ########.fr        #
+#    Updated: 2020/02/19 10:46:23 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ $(NAME)	:	${OBJS} ${LIBFT_PATH}${LIBFT}
 		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${LIBFT_PATH} -lft
 
 $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
-	make -C ${LIBFT_PATH}
+	make add -C ${LIBFT_PATH}
 
 all : ${NAME}
 
@@ -62,3 +62,5 @@ fclean : clean
 		make -C ${LIBFT_PATH} fclean
 
 re : fclean all
+
+work : all clean
