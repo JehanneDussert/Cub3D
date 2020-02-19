@@ -108,11 +108,9 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 	{
 		if (line != NULL)
 			map_len = ft_map_len(line, &info->ori);
-		if (line != NULL && map_len > 0)
-			clean_line = ft_clean_line(line, &info->ori, map_len);
-		else
+		if (map_len < 1)
 			return (NULL);
-	//	ft_printf("clean line :%s\n", clean_line);
+		clean_line = ft_clean_line(line, &info->ori, map_len);
 		if (s == 0)
 		{
 			if (ft_check_map_errors(clean_line, map_len, 0) == 0)
