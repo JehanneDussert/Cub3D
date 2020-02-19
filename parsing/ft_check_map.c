@@ -25,7 +25,7 @@ void	ft_check(char *map, char *title)
 	n = 0;
 	if (!(info = (t_map *)malloc(sizeof(t_map) + 1)))
 		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire");
-	if (!(map = (char *)malloc(sizeof(char) + 1)))
+	if (!(info->map = (t_list *)malloc(sizeof(t_list) + 1)))
 		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire.");
 	if (!(image = (t_image *)malloc(sizeof(t_image) + 1)))
 		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire");
@@ -43,13 +43,15 @@ void	ft_check(char *map, char *title)
 			line[i] == 'F' ? ft_colors(line, &info->f_path, &i) : ft_colors(line, &info->c_path, &i);
 		else if (ft_check_text(line, i) == 1)
 			ft_text(line, info);
-//		ft_printf("Line avant traitement et [i] et mon line[i] :%s[%d](%c)\n", line, i, line[i]);
-//		ft_printf("Reso 1 :%d\nReso 2 :%d\n", info->reso[0], info->reso[1]);
 		n = get_next_line(fd, &line);
 		i = 0;
 		ft_jump(line, &i);
 	}
 	if (n == 1)
 		info->map = ft_map(line, n, fd, info);
-	ft_printf("Contenu :%s\n", info->map);
+	while(info->map != NULL)
+	{
+		ft_printf("Contenu :%s\n", info->map->content);
+		info->map = info->map->next;
+	}
 }
