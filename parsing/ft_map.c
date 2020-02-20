@@ -108,23 +108,17 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 	t_list	*lst;
 	char	*clean_line;
 	int		map_len;
-	int		s;
 
-	s = 0;
-	if (!(info->ori = (char)malloc(2)))
-		return (NULL);
+	lst = NULL;
 	info->ori = '1';
 	while (n == 1 || n == 0)
 	{
-			map_len = ft_map_len(line, &info->ori);
+		map_len = ft_map_len(line, &info->ori);
 		if (map_len < 1)
 			return (NULL);
 		clean_line = ft_clean_line(line, &info->ori, map_len);
-		if (s == 0)
-		{
+		if (lst == NULL)
 			lst = ft_new_line(lst, clean_line, map_len, 0);
-			s++;
-		}
 		else
 		{
 			lst = ft_new_line(lst, clean_line, map_len, 1);
@@ -135,7 +129,5 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 		line = NULL;
 		n = get_next_line(fd, &line);
 	}
-	if (ft_check_map_errors(line, map_len, 1) == 1)
-		return (lst);
-	return (NULL);
+	return (ft_check_map_errors(line, map_len, 1) == 1 ? lst : NULL);
 }
