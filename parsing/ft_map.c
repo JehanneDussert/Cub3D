@@ -12,15 +12,6 @@
 
 #include "../cub3d.h"
 
-int		ft_check_char(char *line, int i)
-{
-	if (line[i] == '1' || line[i] == '2' || line[i] == '0')
-		return (1);
-	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
-		return (2);
-	return (0);
-}
-
 int		ft_check_map_errors(char *line, int len, int mode)
 {
 	int	i;
@@ -92,10 +83,29 @@ char	*ft_clean_line(char *line, char *ori, int len)
 	return(clean_line);
 }
 
+t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
+{
+	t_list	*tmp;
+
+	if (mode == 0)
+	{
+		if (ft_check_map_errors(clean_line, len, 0) == 0)
+			return (NULL);
+		lst = ft_lstnew(clean_line);	
+	}
+	else if (mode == 1)
+	{
+		if (ft_check_map_errors(clean_line, len, 1) == 0)
+			return (NULL);
+		tmp = ft_lstnew(clean_line);
+		ft_lstadd_back(&lst, tmp);
+	}
+	return (lst);
+}
+
 t_list	*ft_map(char *line, int n, int fd, t_map *info)
 {
 	t_list	*lst;
-	t_list	*tmp;
 	char	*clean_line;
 	int		map_len;
 	int		s;
@@ -112,17 +122,12 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 		clean_line = ft_clean_line(line, &info->ori, map_len);
 		if (s == 0)
 		{
-			if (ft_check_map_errors(clean_line, map_len, 0) == 0)
-				return (NULL);
-			lst = ft_lstnew(clean_line);
+			lst = ft_new_line(lst, clean_line, map_len, 0);
 			s++;
 		}
 		else
 		{
-			if (ft_check_map_errors(clean_line, map_len, 1) == 0)
-				return (NULL);
-			tmp = ft_lstnew(clean_line);
-			ft_lstadd_back(&lst, tmp);
+			lst = ft_new_line(lst, clean_line, map_len, 1);
 			if (n == 0 && ft_check_map_errors(clean_line, map_len, 0) == 1)
 				return (lst);
 		}

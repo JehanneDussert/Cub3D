@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/19 14:26:30 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:23:19 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,13 @@ void	ft_jump(char *line, int *i)
 {
 	while (line[*i] == ' ')
 		(*i)++;
+}
+
+int		ft_check_char(char *line, int i)
+{
+	if (line[i] == '1' || line[i] == '2' || line[i] == '0')
+		return (1);
+	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+		return (2);
+	return (0);
 }
