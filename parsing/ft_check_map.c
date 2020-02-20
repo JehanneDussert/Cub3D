@@ -12,12 +12,21 @@
 
 #include "../cub3d.h"
 
-int		ft_check_existence(t_map *info, char *line, int *i)
+int		ft_check_existence(t_map *info, char *line, int *i, int mode)
 {
-	if ((line[*i] == 'R' && (info->reso[0] != -1 || info->reso[1] != -1)) ||
-	(line[*i] == 'F' && info->f_path != -1) || (line[*i] == 'C'
-	&& info->c_path != -1))
-		return (1);
+	if (mode == 0)
+	{
+		if ((line[*i] == 'R' && (info->reso[0] != -1 || info->reso[1] != -1)) ||
+		(line[*i] == 'F' && info->f_path != -1) || (line[*i] == 'C'
+		&& info->c_path != -1))
+			return (1);
+	}
+	else if (mode == 1)
+	{
+		if (info->reso[0] != -1 && info->reso[1] != -1 && info->f_path != -1 &&
+		info->c_path != -1)
+			return (1);	
+	}
 	return (0);
 }
 
@@ -37,13 +46,12 @@ void	ft_check(char *map, char *title)
 	while ((n = get_next_line(fd, &line)) == 1 && line[i] != '1')
 	{
 		if ((line[i] == '\0' && n < 0) || line == NULL)
-			ft_error(&map, &line, &info, "Fichier invalide.") ;
-		line = ft_strtrim(line, " ");
-		if (ft_check_existence(info, line, &i) == 1)
-		{
-			ft_printf("yoyo\n");
 			ft_error(&map, &line, &info, "Fichier invalide.");
-			break ;
+		line = ft_strtrim(line, " ");
+		if (ft_check_existence(info, line, &i, 0) == 1)
+		{
+			ft_error(&map, &line, &info, "Fichier invalide.");
+			return ;
 		}
 		else if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
 			ft_check_resolution(line, info, map, &i);
@@ -55,8 +63,13 @@ void	ft_check(char *map, char *title)
 		line = NULL;
 		i = 0;
 	}
-	if (n == 1)
+	if ((ft_check_existence(info, line, &i, 1) == 1) && n == 1 && line[0] == '1')
 		info->map = ft_map(line, n, fd, info);
+	else
+	{
+		ft_error(&map, &line, &info, "Fichier invalide");
+		return ;
+	}
 	ft_printf("Resolution : %d %d\n", info->reso[0], info->reso[1]);
 	ft_printf("My floor :%d\n", info->f_path);
 	ft_printf("My ceiling :%d\n", info->c_path);
