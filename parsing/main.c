@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:33:56 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 14:29:27 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:53:39 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int		main(int argc, char **argv)
 {
-	char	*map = NULL;
+	char	*map;
 
+	map = NULL;
 	if (argc > 1 && argc < 4)
 	{
 		if (ft_last(argv[1], ".cub") != 1)
