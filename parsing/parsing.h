@@ -6,11 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/19 12:21:51 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:24:14 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PARSING_H
+#ifndef PARSING_H
 # define PARSING_H
 
 # include <mlx.h>
@@ -42,10 +42,10 @@ typedef struct	s_image
 }				t_image;
 
 void			ft_check(char *map, char *title);
-char			*ft_error(char **map, char **line, t_map **info, t_image **image, char *message);
+char			*ft_error(char **map, char **line, t_map **info, char *message);
 void			ft_jump(char *line, int *i);
-void			ft_init(t_map *info);
-void			ft_check_resolution(char *line, t_map *info, t_image *image, char *map, int *i);
+t_map			*ft_init(void);
+void			ft_check_resolution(char *line, t_map *info, char *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
 t_list			*ft_map(char *line, int n, int fd, t_map *info);

@@ -12,44 +12,61 @@
 
 #include "../cub3d.h"
 
+int		ft_check_existence(t_map *info, char *line, int *i)
+{
+	if ((line[*i] == 'R' && (info->reso[0] != -1 || info->reso[1] != -1)) ||
+	(line[*i] == 'F' && info->f_path != -1) || (line[*i] == 'C'
+	&& info->c_path != -1))
+		return (1);
+	return (0);
+}
+
 void	ft_check(char *map, char *title)
 {
 	t_map	*info;
-	t_image	*image;
 	char	*line;
 	int		i;
 	int		n;
 	int		fd;
 
 	i = 0;
-	n = 0;
-	if (!(info = (t_map *)malloc(sizeof(t_map) + 1)))
-		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire");
-	if (!(info->map = (t_list *)malloc(sizeof(t_list) + 1)))
-		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire.");
-	if (!(image = (t_image *)malloc(sizeof(t_image) + 1)))
-		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme d'allocation de memoire");
-	ft_init(info);
+	if (!(info = ft_init()))
+		ft_error(&map, &line, &info, "Probleme d'allocation de memoire.");
 	if (!(fd = open(title, O_RDONLY)))
-		ft_error(&map, &line, &info, &image, "[ERROR]\nProbleme a l'ouverture du fichier.");
+		ft_error(&map, &line, &info, "Probleme a l'ouverture du fichier.");
 	while ((n = get_next_line(fd, &line)) == 1 && line[i] != '1')
 	{
-		if ((line[i] == '\0' && (n = get_next_line(fd, &line) < 0)) || line == NULL)
+		if ((line[i] == '\0' && n < 0) || line == NULL)
+			ft_error(&map, &line, &info, "Fichier invalide.") ;
+		line = ft_strtrim(line, " ");
+		if (ft_check_existence(info, line, &i) == 1)
+		{
+			ft_printf("yoyo\n");
+			ft_error(&map, &line, &info, "Fichier invalide.");
 			break ;
-		ft_jump(line, &i);
-		if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
-			ft_check_resolution(line, info, image, map, &i);	
+		}
+		else if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
+			ft_check_resolution(line, info, map, &i);
 		else if ((line[i] == 'F' && info->f_path == -1) || (line[i] == 'C' && info->c_path == -1))
 			line[i] == 'F' ? ft_colors(line, &info->f_path, &i) : ft_colors(line, &info->c_path, &i);
 		else if (ft_check_text(line, i) == 1)
 			ft_text(line, info);
-		n = get_next_line(fd, &line);
+		free(line);
+		line = NULL;
 		i = 0;
-		ft_jump(line, &i);
 	}
 	if (n == 1)
 		info->map = ft_map(line, n, fd, info);
-	while(info->map != NULL)
+	ft_printf("Resolution : %d %d\n", info->reso[0], info->reso[1]);
+	ft_printf("My floor :%d\n", info->f_path);
+	ft_printf("My ceiling :%d\n", info->c_path);
+	ft_printf("My n_path :%s\n", info->n_path);
+	ft_printf("My s_path :%s\n", info->s_path);
+	ft_printf("My e_path :%s\n", info->e_path);
+	ft_printf("My w_path :%s\n", info->w_path);
+	ft_printf("My spr_path :%s\n", info->spr_path);
+	ft_printf("My ori :%c\n", info->ori);
+	while (info->map != NULL)
 	{
 		ft_printf("Contenu :%s\n", info->map->content);
 		info->map = info->map->next;

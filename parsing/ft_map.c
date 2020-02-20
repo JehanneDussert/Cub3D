@@ -26,7 +26,7 @@ int		ft_check_map_errors(char *line, int len, int mode)
 			i++;
 		}
 	}
-	if (mode == 1)
+	else if (mode == 1)
 	{
 		if (line[0] != '1' || line[len - 1] != '1')
 			return (0);
@@ -80,7 +80,7 @@ char	*ft_clean_line(char *line, char *ori, int len)
 		i++;
 	}
 	clean_line[len] = '\0';
-	return(clean_line);
+	return (clean_line);
 }
 
 t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
@@ -91,7 +91,7 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
 	{
 		if (ft_check_map_errors(clean_line, len, 0) == 0)
 			return (NULL);
-		lst = ft_lstnew(clean_line);	
+		lst = ft_lstnew(clean_line);
 	}
 	else if (mode == 1)
 	{

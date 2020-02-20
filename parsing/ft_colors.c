@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/17 13:26:42 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:45:45 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int			ft_colors(char *line, int *color, int *i)
 	}
 	tab[3] = 0;
 	*i = 0;
-//	ft_printf("Color :%x\n", *color);
-	return(*color);
+	return (*color);
 }

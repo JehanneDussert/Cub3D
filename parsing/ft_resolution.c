@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:47:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/17 13:27:37 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:14:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int		ft_check_info(char *line, int *reso, int *i)
 	return (*reso);
 }
 
-void	ft_check_resolution(char *line, t_map *info, t_image *image, char *map, int *i)
+void	ft_check_resolution(char *line, t_map *info, char *map, int *i)
 {
 	if (!(ft_check_info(line, &info->reso[0], i)))
-		ft_error(&map, &line, &info, &image, "[ERROR]\nWrong resolution.");
+		ft_error(&map, &line, &info, "[ERROR]\nWrong resolution.");
 	if (!(ft_check_info(line, &info->reso[1], i)))
-		ft_error(&map, &line, &info, &image, "[ERROR]\nWrong resolution.");
+		ft_error(&map, &line, &info, "[ERROR]\nWrong resolution.");
 	*i = 0;
 }
