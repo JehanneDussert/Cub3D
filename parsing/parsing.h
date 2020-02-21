@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/21 10:35:49 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/21 10:59:17 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void			ft_text(char *line, t_map *info);
 t_list			*ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
+void			ft_print(t_map *info);
 
 #endif
