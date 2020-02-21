@@ -18,13 +18,18 @@ int		ft_check_existence(t_map *info, char *line, int *i, int mode)
 	{
 		if ((line[*i] == 'R' && (info->reso[0] != -1 || info->reso[1] != -1)) ||
 		(line[*i] == 'F' && info->f_path != -1) || (line[*i] == 'C'
-		&& info->c_path != -1))
+		&& info->c_path != -1) || (ft_first(line, "NO") == 1 && info->n_path
+		!= NULL) || (ft_first(line, "SO") == 1 && info->s_path != NULL) ||
+		(ft_first(line, "WE") == 1 && info->w_path != NULL) ||
+		(ft_first(line, "EA") == 1 && info->e_path != NULL) ||
+		(ft_first(line, "S") == 1 && info->spr_path != NULL))
 			return (1);
 	}
 	else if (mode == 1)
 	{
 		if (info->reso[0] != -1 && info->reso[1] != -1 && info->f_path != -1 &&
-		info->c_path != -1)
+		info->c_path != -1 && info->n_path != NULL && info->s_path != NULL &&
+		info->spr_path != NULL && info->w_path != NULL && info->e_path != NULL)
 			return (1);	
 	}
 	return (0);
