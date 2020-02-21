@@ -34,12 +34,25 @@ typedef struct	s_map
 typedef struct	s_image
 {
 	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img;
+	void		*img_ptr;
 	int			width;
 	int			height;
 	char		*title;
 }				t_image;
+
+typedef struct	s_wdw
+{
+	t_image		*image;
+	void		*win_ptr;
+	int			bpp;
+	int			size_l;
+	int			endian;
+	int			x;
+	int			y;
+	int			color;
+	char		**xpm;
+}				t_wdw;
+
 
 void			ft_check(char *map, char *title);
 int				ft_error(char **map, char **line, t_map **info, char *message);

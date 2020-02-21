@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/20 15:08:12 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/21 18:33:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@ int		ft_check_text(char *line, int i)
 		ft_strncmp(&line[i], "S", 1))
 		return (1);
 	return (0);
+}
+
+void	*ft_create_image(void *text)
+{
+	t_wdw	*wdw;
+	int		x;
+	int		y;
+
+	if (!(wdw = (t_wdw *)malloc(sizeof(t_wdw) + 1)))
+		return (NULL);
+	if (!(wdw->image->img_ptr = mlx_xpm_file_to_image(wdw->image->mlx_ptr, wdw->image->title, &x, &y)))
+		return (NULL);
+	if (!(text = mlx_get_data_addr(wdw->image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian)))
+		return (NULL);
+	if (!(mlx_put_image_to_window(wdw->image->mlx_ptr, wdw->win_ptr, wdw->image->img_ptr, 1000, 10000)))
+		return (NULL);
+	mlx_loop(wdw->image->mlx_ptr);
+	return (wdw);
 }
 
 void	ft_text(char *line, t_map *info)
