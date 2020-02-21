@@ -40,19 +40,16 @@ void	ft_check(char *map, char *title)
 
 	i = 0;
 	if (!(info = ft_init()))
-		ft_error(&map, &line, &info, "Probleme d'allocation de memoire.");
+		exit (ft_error(&map, &line, &info, "Probleme d'allocation de memoire."));
 	if (!(fd = open(title, O_RDONLY)))
-		ft_error(&map, &line, &info, "Probleme a l'ouverture du fichier.");
+		exit (ft_error(&map, &line, &info, "Probleme a l'ouverture du fichier."));
 	while ((n = get_next_line(fd, &line)) == 1 && line[i] != '1')
 	{
 		if ((line[i] == '\0' && n < 0) || line == NULL)
-			ft_error(&map, &line, &info, "Fichier invalide.");
+			exit (ft_error(&map, &line, &info, "Fichier invalide."));
 		line = ft_strtrim(line, " ");
 		if (ft_check_existence(info, line, &i, 0) == 1)
-		{
-			ft_error(&map, &line, &info, "Fichier invalide.");
-			return ;
-		}
+			exit (ft_error(&map, &line, &info, "Fichier invalide."));
 		else if (line[i] == 'R' && info->reso[0] == -1 && info->reso[1] == -1)
 			ft_check_resolution(line, info, map, &i);
 		else if ((line[i] == 'F' && info->f_path == -1) || (line[i] == 'C' && info->c_path == -1))
@@ -66,10 +63,7 @@ void	ft_check(char *map, char *title)
 	if ((ft_check_existence(info, line, &i, 1) == 1) && n == 1 && line[0] == '1')
 		info->map = ft_map(line, n, fd, info);
 	else
-	{
-		ft_error(&map, &line, &info, "Fichier invalide.");
-		return ;
-	}
+		exit (ft_error(&map, &line, &info, "Fichier invalide."));
 	ft_printf("Resolution : %d %d\n", info->reso[0], info->reso[1]);
 	ft_printf("My floor :%d\n", info->f_path);
 	ft_printf("My ceiling :%d\n", info->c_path);

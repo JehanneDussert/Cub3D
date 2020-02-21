@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/21 10:24:46 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/21 10:35:38 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_map	*ft_init(void)
 	return (info);
 }
 
-void	ft_error(char **map, char **line, t_map **info, char *message)
+int		ft_error(char **map, char **line, t_map **info, char *message)
 {
 	if (*map)
 	{
@@ -50,6 +50,7 @@ void	ft_error(char **map, char **line, t_map **info, char *message)
 		*info = NULL;
 	}
 	ft_printf("%s\n", message);
+	return (-1);
 }
 
 void	ft_jump(char *line, int *i)
