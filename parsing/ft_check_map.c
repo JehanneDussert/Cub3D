@@ -67,7 +67,7 @@ void	ft_check(char *map, char *title)
 		info->map = ft_map(line, n, fd, info);
 	else
 	{
-		ft_error(&map, &line, &info, "Fichier invalide");
+		ft_error(&map, &line, &info, "Fichier invalide.");
 		return ;
 	}
 	ft_printf("Resolution : %d %d\n", info->reso[0], info->reso[1]);
