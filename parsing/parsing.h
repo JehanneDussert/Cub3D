@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 13:45:59 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/2 14:24:14 by jdussert         ###   ########.fr       */
+/*   Created: 2020/02/24 14:34:53 by jdussert          #+#    #+#             */
+/*   Updated: 2020/02/24 14:40:56 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct	s_wdw
 	int			y;
 	int			color;
 	char		**xpm;
+	char		*data;
 }				t_wdw;
-
 
 void			ft_check(char *map, char *title);
 int				ft_error(char **map, char **line, t_map **info, char *message);
