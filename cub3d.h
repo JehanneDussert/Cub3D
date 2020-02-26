@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/13 14:52:00 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/26 12:31:27 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include "parsing/parsing.h"
+# include "raycasting/raycasting.h"
 
 # define BUFFER_SIZE 10
 
