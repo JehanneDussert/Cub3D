@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/24 14:35:33 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:26:26 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_map_len(char *line, char *ori)
 	return (map_len);
 }
 
-char	*ft_clean_line(char *line, char *ori, int len)
+char	*ft_clean_line(char *line, char *ori, int len, int *x)
 {
 	char	*clean_line;
 	int		i;
@@ -73,7 +73,10 @@ char	*ft_clean_line(char *line, char *ori, int len)
 		if (ft_check_char(line, i) == 1 || ft_check_char(line, i) == 2)
 		{
 			if (ft_check_char(line, i) == 2)
+			{
 				*ori = line[i];
+				*x = i;
+			}
 			clean_line[j] = line[i];
 			j++;
 		}
@@ -83,7 +86,7 @@ char	*ft_clean_line(char *line, char *ori, int len)
 	return (clean_line);
 }
 
-t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
+t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode, int *y)
 {
 	t_list	*tmp;
 
@@ -92,12 +95,14 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
 		if (ft_check_map_errors(clean_line, len, 0) == 0)
 			return (NULL);
 		lst = ft_lstnew(clean_line);
+		(*y)++;
 	}
 	else if (mode == 1)
 	{
 		if (ft_check_map_errors(clean_line, len, 1) == 0)
 			return (NULL);
 		tmp = ft_lstnew(clean_line);
+		(*y)++;
 		ft_lstadd_back(&lst, tmp);
 	}
 	return (lst);
@@ -114,14 +119,14 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 	while (n == 1 || n == 0)
 	{
 		map_len = ft_map_len(line, &info->ori);
-		if (map_len < 1)
+		if (map_len < 3)
 			return (NULL);
-		clean_line = ft_clean_line(line, &info->ori, map_len);
+		clean_line = ft_clean_line(line, &info->ori, map_len, &info->pos->x);
 		if (lst == NULL)
-			lst = ft_new_line(lst, clean_line, map_len, 0);
+			lst = ft_new_line(lst, clean_line, map_len, 0, &info->pos->y);
 		else
 		{
-			lst = ft_new_line(lst, clean_line, map_len, 1);
+			lst = ft_new_line(lst, clean_line, map_len, 1, &info->pos->y);
 			if (n == 0 && ft_check_map_errors(clean_line, map_len, 0) == 1)
 				return (lst);
 		}
