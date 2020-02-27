@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/27 19:31:55 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/27 19:57:03 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,28 @@ int		ft_rounded_down(float f)
 	return (res);
 }
 
-int		ft_tan(int)
+/* Racine carree */
+int		ft_sqrt(int nb)
 {
+	int	sqrt;
 
+	if (nb < 0)
+		return (0);
+	sqrt = 1;
+	while (sqrt * sqrt < nb)
+		++sqrt;
+	if (sqrt * sqrt == nb)
+		return (sqrt);
+	return (0);
+}
+
+/* Calcul de tangente */
+int		ft_tan(int angle)
+{
+	int	res;
+
+	if (angle == 30)
+		res = (1 / 2) / 
 }
 
 int		ft_ray(t_map *info, t_pos *pos)
@@ -70,6 +89,7 @@ int		ft_ray(t_map *info, t_pos *pos)
 
 	// Coordonnee x de l'intersection
 	tmp = pos->x + (pos->y - inter_y) / ft_tan(angle);
+	inter_x = ft_rounded_down(tmp / 64);
 }
 
 void	ft_loop(t_map *info)
