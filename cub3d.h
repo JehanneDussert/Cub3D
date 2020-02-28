@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/26 12:31:27 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 10:47:45 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ typedef struct	s_ori
 	char		*ea;
 	char		*we;
 }				t_ori;
-
-typedef struct	s_pos
-{
-	int			x;
-	int			y;
-}				t_pos;
 
 typedef struct	s_data
 {
@@ -86,5 +80,23 @@ typedef struct	s_all
 	t_player	*player;
 	t_txt		*txt;
 }				t_all;
+
+/* Intervalles des walls, du floor et ceiling a colorier */
+
+typedef struct 	s_inter
+{
+	int			wall[2];
+	int			floor[2];
+	int			ceiling[2];
+}				t_inter;
+
+/* Point of view of the player : coordinate x, y and angle */
+/* Angle =/= FOV mais jsais ap pq */
+
+typedef struct s_pov
+{
+	t_pos		coor;
+	int			angle;
+}				t_pov;
 
 #endif
