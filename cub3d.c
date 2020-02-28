@@ -6,12 +6,14 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 14:56:48 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/11 19:11:52 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 13:27:28 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
+
+// This is a test
 
 /*
 int	test(void)
