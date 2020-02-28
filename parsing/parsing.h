@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:34:53 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 10:48:11 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 15:01:25 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_pos
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 }				t_pos;
 
 typedef struct	s_map

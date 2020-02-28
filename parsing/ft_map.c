@@ -6,11 +6,35 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 11:25:42 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 15:11:56 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+t_pos	*ft_check_pos(t_pos *pos, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+ 		{
+			if (ft_check_char(map[i], j) == 2)
+			{
+				pos->x = i;
+				pos->y = j;
+				return (pos);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
+}
 
 int		ft_check_map_errors(char *line, int len, int mode)
 {
@@ -58,7 +82,7 @@ int		ft_map_len(char *line, char *ori)
 	return (map_len);
 }
 
-char	*ft_clean_line(char *line, char *ori, int len, int *x)
+char	*ft_clean_line(char *line, char *ori, int len)
 {
 	char	*clean_line;
 	int		i;
@@ -73,10 +97,7 @@ char	*ft_clean_line(char *line, char *ori, int len, int *x)
 		if (ft_check_char(line, i) == 1 || ft_check_char(line, i) == 2)
 		{
 			if (ft_check_char(line, i) == 2)
-			{
 				*ori = line[i];
-				*x = i;
-			}
 			clean_line[j] = line[i];
 			j++;
 		}
@@ -86,23 +107,20 @@ char	*ft_clean_line(char *line, char *ori, int len, int *x)
 	return (clean_line);
 }
 
-t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode, int *y)
+t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
 {
 	t_list	*tmp;
-	(void)y;
 	if (mode == 0)
 	{
 		if (ft_check_map_errors(clean_line, len, 0) == 0)
 			return (NULL);
 		lst = ft_lstnew(clean_line);
-		(*y)++;
 	}
 	else if (mode == 1)
 	{
 		if (ft_check_map_errors(clean_line, len, 1) == 0)
 			return (NULL);
 		tmp = ft_lstnew(clean_line);
-		(*y)++;
 		ft_lstadd_back(&lst, tmp);
 	}
 	return (lst);
@@ -121,12 +139,12 @@ t_list	*ft_list(char *line, int n, int fd, t_map *info)
 		map_len = ft_map_len(line, &info->ori);
 		if (map_len < 3)
 			return (NULL);
-		clean_line = ft_clean_line(line, &info->ori, map_len, &info->pos->x);
+		clean_line = ft_clean_line(line, &info->ori, map_len);
 		if (lst == NULL)
-			lst = ft_new_line(lst, clean_line, map_len, 0, &info->pos->y);
+			lst = ft_new_line(lst, clean_line, map_len, 0);
 		else
 		{
-			lst = ft_new_line(lst, clean_line, map_len, 1, &info->pos->y);
+			lst = ft_new_line(lst, clean_line, map_len, 1);
 			if (n == 0 && ft_check_map_errors(clean_line, map_len, 0) == 1)
 				return (lst);
 		}
@@ -157,5 +175,5 @@ char	**ft_map(char *line, int n, int fd, t_map *info)
 		lst = lst->next;
 		i++;
 	}
-	return (map);
+	return (ft_check_pos(info->pos, map) != NULL ? map : NULL);
 }
