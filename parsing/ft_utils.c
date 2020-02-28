@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/21 10:35:38 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 11:15:29 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ t_map	*ft_init(void)
 
 	if (!(info = (t_map *)malloc(sizeof(t_map) + 1)))
 		return (NULL);
-	if (!(info->map = (t_list *)malloc(sizeof(t_list) + 1)))
+	if (!(info->map = (char **)malloc(sizeof(char *) + 1)))
+		return (NULL);
+	if (!(info->pos = (t_pos *)malloc(sizeof(int) * 2)))
 		return (NULL);
 	info->reso[0] = -1;
 	info->reso[1] = -1;
@@ -29,6 +31,8 @@ t_map	*ft_init(void)
 	info->spr_path = NULL;
 	info->f_path = -1;
 	info->c_path = -1;
+	info->pos->x = 0;
+	info->pos->y = 0;
 	return (info);
 }
 

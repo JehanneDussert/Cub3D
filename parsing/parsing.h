@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:34:53 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/25 11:51:03 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 10:48:11 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <mlx.h>
 # include "../cub3d.h"
+
+typedef struct s_pos
+{
+	int			x;
+	int			y;
+}				t_pos;
 
 typedef struct	s_map
 {
@@ -26,18 +32,11 @@ typedef struct	s_map
 	void		*spr_path;
 	int			f_path;
 	int			c_path;
-	t_list		*map;
+	char		**map;
 	t_pos		*pos;
 	char		ori;
 	int			map_len;
 }				t_map;
-
-typedef struct s_pos
-{
-	int			x;
-	int			y;
-}				t_pos;
-
 
 typedef struct	s_image
 {
@@ -69,7 +68,8 @@ t_map			*ft_init(void);
 void			ft_check_resolution(char *line, t_map *info, char *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
-t_list			*ft_map(char *line, int n, int fd, t_map *info);
+t_list			*ft_list(char *line, int n, int fd, t_map *info);
+char			**ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_map *info);

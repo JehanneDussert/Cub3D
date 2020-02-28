@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/26 18:26:26 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 11:25:42 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ft_clean_line(char *line, char *ori, int len, int *x)
 t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode, int *y)
 {
 	t_list	*tmp;
-
+	(void)y;
 	if (mode == 0)
 	{
 		if (ft_check_map_errors(clean_line, len, 0) == 0)
@@ -108,7 +108,7 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode, int *y)
 	return (lst);
 }
 
-t_list	*ft_map(char *line, int n, int fd, t_map *info)
+t_list	*ft_list(char *line, int n, int fd, t_map *info)
 {
 	t_list	*lst;
 	char	*clean_line;
@@ -117,7 +117,7 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 	lst = NULL;
 	info->ori = '1';
 	while (n == 1 || n == 0)
-	{
+	{	
 		map_len = ft_map_len(line, &info->ori);
 		if (map_len < 3)
 			return (NULL);
@@ -135,4 +135,27 @@ t_list	*ft_map(char *line, int n, int fd, t_map *info)
 		n = get_next_line(fd, &line);
 	}
 	return (ft_check_map_errors(line, map_len, 1) == 1 ? lst : NULL);
+}
+
+char	**ft_map(char *line, int n, int fd, t_map *info)
+{
+	char	**map;
+	t_list	*lst;
+	int		len;
+	int		i;
+	int		j;
+
+	lst = ft_list(line, n, fd, info);
+	len = ft_lstsize(lst);
+	i = 0;
+	j = 0;
+	if ((map = ft_calloc(len + 1, sizeof(map))) == NULL)
+		return (NULL);
+	while (lst)
+	{
+		map[i] = lst->content;
+		lst = lst->next;
+		i++;
+	}
+	return (map);
 }
