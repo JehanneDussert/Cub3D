@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 10:53:30 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:03:05 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		ft_check_text(char *line, int i)
 		return (1);
 	return (0);
 }
+
 /*
 char	*ft_create_image(void)
 {
@@ -38,6 +39,7 @@ char	*ft_create_image(void)
 	return (wdw->data);
 }
 */
+
 void	ft_text(char *line, t_map *info)
 {
 	if (ft_ref_parse(line, "NO", ft_strlen(line)))

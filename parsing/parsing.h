@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:34:53 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 15:01:25 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:04:29 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <mlx.h>
 # include "../cub3d.h"
 
-typedef struct s_pos
+typedef struct	s_pos
 {
 	double		x;
 	double		y;

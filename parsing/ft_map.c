@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 15:11:56 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:01:45 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_pos	*ft_check_pos(t_pos *pos, char **map)
 	{
 		j = 0;
 		while (map[i][j])
- 		{
+		{
 			if (ft_check_char(map[i], j) == 2)
 			{
 				pos->x = i;
@@ -110,6 +110,7 @@ char	*ft_clean_line(char *line, char *ori, int len)
 t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
 {
 	t_list	*tmp;
+
 	if (mode == 0)
 	{
 		if (ft_check_map_errors(clean_line, len, 0) == 0)
@@ -135,7 +136,7 @@ t_list	*ft_list(char *line, int n, int fd, t_map *info)
 	lst = NULL;
 	info->ori = '1';
 	while (n == 1 || n == 0)
-	{	
+	{
 		map_len = ft_map_len(line, &info->ori);
 		if (map_len < 3)
 			return (NULL);
