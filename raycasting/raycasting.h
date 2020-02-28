@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 11:41:31 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 10:46:38 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 15:18:03 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@
 # define FOV 60 // champ de vision
 # include "../cub3d.h"
 # include <math.h>
+
+void	ft_raycasting(t_map *info);
 
 #endif

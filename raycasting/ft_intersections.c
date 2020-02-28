@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 11:36:34 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/02/28 14:08:20 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int		ft_tan(int angle)
 	int	res;
 
 	if (angle == 30)
-		res = (1 / 2) / 
+		res = (1 / ft_sqrt(3));
+	else if (angle == 60)
+		res = ft_sqrt(3);
 }
 
 int		ft_ray(t_map *info, t_pos *pos)
@@ -87,7 +89,7 @@ int		ft_ray(t_map *info, t_pos *pos)
 	inter_y = (int)(inter_y / GRID);
 
 	// Coordonnee x de l'intersection
-	inter_x = pos->x + (pos->y - inter_y) / ft_tan(angle);
+	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle);
 	inter_x = (int)(inter_x / 64);
 }
 
