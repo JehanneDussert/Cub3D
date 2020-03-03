@@ -6,11 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 11:15:29 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:09:55 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_map	*ft_init(void)
 {

@@ -6,11 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/21 11:57:09 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:08:58 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 int			ft_colors(char *line, int *color, int *i)
 {

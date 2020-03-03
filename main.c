@@ -6,11 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:33:56 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 16:05:32 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:10:18 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 int		main(int argc, char **argv)
 {

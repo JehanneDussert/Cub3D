@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/03 11:35:30 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:07:07 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 # include "../../ft_printf/ft_printf.h"
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
-# include "parsing.h"
-# include "raycasting.h"
 
 # define BUFFER_SIZE 10
 
@@ -42,6 +40,21 @@ typedef struct	s_ori
 	char		*ea;
 	char		*we;
 }				t_ori;
+
+typedef struct	s_pos
+{
+	double		x;
+	double		y;
+}				t_pos;
+
+typedef struct	s_image
+{
+	void		*mlx_ptr;
+	void		*img_ptr;
+	int			width;
+	int			height;
+	char		*title;
+}				t_image;
 
 typedef struct	s_data
 {
@@ -54,7 +67,7 @@ typedef struct	s_data
 
 typedef struct	s_player
 {
-	t_pos		pos;
+	t_pos		pos;;
 	/* vecteur de direction */
 	int			rot;
 	int			angle;
@@ -103,12 +116,6 @@ typedef struct s_pov
 	int			angle;
 }				t_pov;
 
-typedef struct	s_pos
-{
-	double		x;
-	double		y;
-}				t_pos;
-
 typedef struct	s_map
 {
 	int			reso[2];
@@ -124,15 +131,6 @@ typedef struct	s_map
 	char		ori;
 	int			map_len;
 }				t_map;
-
-typedef struct	s_image
-{
-	void		*mlx_ptr;
-	void		*img_ptr;
-	int			width;
-	int			height;
-	char		*title;
-}				t_image;
 
 typedef struct	s_wdw
 {

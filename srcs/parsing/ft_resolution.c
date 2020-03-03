@@ -6,11 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:47:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/20 14:14:24 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:09:39 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 int		ft_check_info(char *line, int *reso, int *i)
 {

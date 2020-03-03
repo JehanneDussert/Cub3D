@@ -6,11 +6,11 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 16:01:45 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:09:32 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_pos	*ft_check_pos(t_pos *pos, char **map)
 {
