@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/28 10:47:45 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/03 11:35:30 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,19 @@
 *** # define HAUTEUR_REGARD 1
 *** # define HAUTEUR_MUR 1
 *** # define DISTANCE_MUR 1*/
+# define PAS 0.001
+# define GRID 64 // hauteur de chaque case (sol) et du mur
+# define PLAYER_HEIGHT 32 // hauteur du perso
+# define FOV 60 // champ de vision
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../ft_printf/ft_printf.h"
-# include "../get_next_line/get_next_line.h"
-# include "../libft/libft.h"
-# include "parsing/parsing.h"
-# include "raycasting/raycasting.h"
+# include "../../ft_printf/ft_printf.h"
+# include "../../get_next_line/get_next_line.h"
+# include "../../libft/libft.h"
+# include "parsing.h"
+# include "raycasting.h"
 
 # define BUFFER_SIZE 10
 
@@ -98,5 +102,64 @@ typedef struct s_pov
 	t_pos		coor;
 	int			angle;
 }				t_pov;
+
+typedef struct	s_pos
+{
+	double		x;
+	double		y;
+}				t_pos;
+
+typedef struct	s_map
+{
+	int			reso[2];
+	void		*n_path;
+	void		*s_path;
+	void		*e_path;
+	void		*w_path;
+	void		*spr_path;
+	int			f_path;
+	int			c_path;
+	char		**map;
+	t_pos		*pos;
+	char		ori;
+	int			map_len;
+}				t_map;
+
+typedef struct	s_image
+{
+	void		*mlx_ptr;
+	void		*img_ptr;
+	int			width;
+	int			height;
+	char		*title;
+}				t_image;
+
+typedef struct	s_wdw
+{
+	t_image		*image;
+	void		*win_ptr;
+	int			bpp;
+	int			size_l;
+	int			endian;
+	int			x;
+	int			y;
+	int			color;
+	char		**xpm;
+	char		*data;
+}				t_wdw;
+
+void			ft_check(char *map, char *title);
+int				ft_error(char **map, char **line, t_map **info, char *message);
+void			ft_jump(char *line, int *i);
+t_map			*ft_init(void);
+void			ft_check_resolution(char *line, t_map *info, char *map, int *i);
+int				ft_colors(char *line, int *color, int *i);
+void			ft_text(char *line, t_map *info);
+t_list			*ft_list(char *line, int n, int fd, t_map *info);
+char			**ft_map(char *line, int n, int fd, t_map *info);
+int				ft_check_char(char *line, int i);
+int				ft_check_text(char *line, int i);
+void			ft_print(t_map *info);
+void			ft_raycasting(t_map *info);
 
 #endif
