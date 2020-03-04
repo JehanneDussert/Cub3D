@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/13 14:34:59 by jdussert          #+#    #+#              #
-#    Updated: 2020/03/03 11:54:26 by jdussert         ###   ########.fr        #
+#    Updated: 2020/03/04 16:32:41 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ GNL_SRCS = ${addprefix ${GNL_PATH}, ${GNL_FILES}}
 
 SRCS = srcs/parsing/ft_check_map.c srcs/parsing/ft_colors.c srcs/parsing/ft_resolution.c \
 		srcs/parsing/ft_textures.c srcs/parsing/ft_utils.c srcs/parsing/ft_map.c main.c \
-		${GNL_SRCS} ${FT_PRINTF_SRCS}
+		srcs/raycasting/ft_intersections.c srcs/raycasting/ft_r_utils.c ${GNL_SRCS} \
+		${FT_PRINTF_SRCS}
 
 SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c \
