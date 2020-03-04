@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 14:39:07 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:33:52 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ typedef struct	s_wdw
 	char		*data;
 }				t_wdw;
 
-void			ft_check(char *map, char *title);
+t_map			*ft_check(char *map, char *title);
 int				ft_error(char **map, char **line, t_map **info, char *message);
 void			ft_jump(char *line, int *i);
 t_map			*ft_init(void);
@@ -168,5 +168,8 @@ int				ft_degre_to_rad(int deg);
 int				ft_rounded_down(float f);
 int				ft_sqrt(int nb);
 int				ft_tan(int angle);
+double			ft_def_angle(char ori);
+int				ft_ray(t_pos *pos, double angle);
+void			ft_loop(t_map *info);
 
 #endif
