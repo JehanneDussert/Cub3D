@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 17:10:23 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 18:08:27 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,28 @@ int		ft_ray(t_pos *pos, double angle)
 		A.y = (Pos.y/64) * 64 + 64;
 	*/
 
+	printf("My pos y :%f\n", pos->y);
+	// Le ray angle - 30
 	// Coordonnee y de l'intersection
-	inter_y = (int)pos->y - 1;
+	inter_y = (int)pos->y;
 /*	inter_y = (int)(inter_y / GRID);
 	ft_printf("My GRID :%d\n", GRID); */
 
 	// Coordonnee x de l'intersection
 	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
 //	inter_x = (int)(inter_x / GRID);
+	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+
+	inter_y -= 1;
+	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
+	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+
+	inter_y -= 1;
+	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
+	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+
+	inter_y -= 1;
+	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
 	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
 	return (1);
 }
