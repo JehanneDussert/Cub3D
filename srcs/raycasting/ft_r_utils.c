@@ -6,17 +6,17 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:37:41 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 16:02:15 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:39:27 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 int		ft_degre_to_rad(int deg)
 {
 	int res;
 
-	res = deg x M_PI / 180;
+	res = deg * 3.14 / 180;
 	return (res);
 }
 
@@ -54,19 +54,18 @@ int		ft_tan(int angle)
 		res = (1 / ft_sqrt(3));
 	else if (angle == 60)
 		res = ft_sqrt(3);
+	return (-1);
 }
 
 double	ft_def_angle(char ori)
 {
-	double	angle;
-
 	if (ori == 'E')
-		angle = 0;
+		return (0);
 	else if (ori == 'N')
-		angle = 90;
+		return (90);
 	else if (ori == 'O')
-		angle = 180;
+		return (180);
 	else if (ori == 'W')
-		angle = 270;
-	exit();
+		return (270);
+	return (-1);
 }

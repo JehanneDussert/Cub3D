@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:33:56 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/03 12:10:18 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:30:39 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int		main(int argc, char **argv)
 {
 	char	*map;
+	t_map	*info;
 
 	map = NULL;
+	info = NULL;
 	if (argc > 1 && argc < 4)
 	{
 		if (ft_last(argv[1], ".cub") != 1)
@@ -29,7 +31,8 @@ int		main(int argc, char **argv)
 			ft_printf("[ERROR]\nWrong argument.");
 			return (-1);
 		}
-		ft_check(map, argv[1]);
+		info = ft_check(map, argv[1]);
+		ft_loop(info);
 	}
 	return (0);
 }

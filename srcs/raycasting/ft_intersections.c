@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 14:38:13 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:10:23 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@
 	Dm a recalculer pour chaque colonne de pixels dans le champ de vision.
 */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
-int		ft_ray(t_map *info, t_pos *pos)
+int		ft_ray(t_pos *pos, double angle)
 {
-	int	dist;
 	int	inter_y;
 	int	inter_x;
-	int	angle;
+	int	ray;
 
-	angle = 60;
+	ray = -30;
 	/* On va chercher la premiere intersection
 		Si le ray va vers le nord
 	La coordonnee y de l'intersection A sera :
@@ -42,18 +41,24 @@ int		ft_ray(t_map *info, t_pos *pos)
 
 	// Coordonnee y de l'intersection
 	inter_y = (int)pos->y - 1;
-	inter_y = (int)(inter_y / GRID);
+/*	inter_y = (int)(inter_y / GRID);
+	ft_printf("My GRID :%d\n", GRID); */
 
 	// Coordonnee x de l'intersection
-	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle);
-	inter_x = (int)(inter_x / 64);
+	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
+//	inter_x = (int)(inter_x / GRID);
+	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+	return (1);
 }
 
 void	ft_loop(t_map *info)
 {
 	int	i;
+	double angle;
 
 	i = 0;
-	while (i++ < info->reso[0])
-		ft_ray(info);
+	angle = ft_def_angle(info->ori);
+	printf("this is my angle :%f\n", angle);
+	while (i++ < 1)
+		ft_ray(info->pos, angle);
 }
