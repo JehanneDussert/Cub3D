@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/03 12:07:07 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 14:39:07 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@
 # include "../../libft/libft.h"
 
 # define BUFFER_SIZE 10
+
+typedef struct	s_angle
+{
+	double		angle;
+}				t_angle;
 
 typedef struct	s_ori
 {
@@ -159,5 +164,9 @@ int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_map *info);
 void			ft_raycasting(t_map *info);
+int				ft_degre_to_rad(int deg);
+int				ft_rounded_down(float f);
+int				ft_sqrt(int nb);
+int				ft_tan(int angle);
 
 #endif
