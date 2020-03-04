@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/03 11:55:26 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:29:04 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_check_existence(t_map *info, char *line, int *i, int mode)
 	return (0);
 }
 
-void	ft_check(char *map, char *title)
+t_map	*ft_check(char *map, char *title)
 {
 	t_map	*info;
 	char	*line;
@@ -75,6 +75,7 @@ void	ft_check(char *map, char *title)
 	else
 		exit(ft_error(&map, &line, &info, "Fichier invalide."));
 	ft_print(info);
+	return (info);
 }
 
 void	ft_print(t_map *info)
