@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 18:08:27 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/05 17:40:53 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ int		ft_ray(t_pos *pos, double angle)
 	// Coordonnee x de l'intersection
 	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
 //	inter_x = (int)(inter_x / GRID);
-	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
 
 	inter_y -= 1;
 	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
 
 	inter_y -= 1;
 	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
 
 	inter_y -= 1;
 	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-	printf("This is my inter_y :%d\n And my inter_x :%d\n", inter_y, inter_x);
+	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
 	return (1);
 }
 
@@ -71,8 +71,11 @@ void	ft_loop(t_map *info)
 	double angle;
 
 	i = 0;
+	// On fait un mlx new window
 	angle = ft_def_angle(info->ori);
 	printf("this is my angle :%f\n", angle);
+	// On va tracer un ray par coordonnee horizontale
 	while (i++ < 1)
 		ft_ray(info->pos, angle);
+	// mlx loop
 }
