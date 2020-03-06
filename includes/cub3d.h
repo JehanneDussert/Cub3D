@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 16:33:52 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/06 10:52:58 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@
 # include "../../libft/libft.h"
 
 # define BUFFER_SIZE 10
-
-typedef struct	s_angle
-{
-	double		angle;
-}				t_angle;
 
 typedef struct	s_ori
 {
@@ -93,16 +88,6 @@ typedef struct	s_txt
 	char		**map;
 }				t_txt;
 
-typedef struct	s_all
-{
-	t_data		*data;
-	t_pos		*pos;
-	t_image		*image;
-	t_ori		*ori;
-	t_player	*player;
-	t_txt		*txt;
-}				t_all;
-
 /* Intervalles des walls, du floor et ceiling a colorier */
 
 typedef struct 	s_inter
@@ -118,7 +103,9 @@ typedef struct 	s_inter
 typedef struct s_pov
 {
 	t_pos		coor;
-	int			angle;
+	double		angle;
+	double		plane_X;
+	double		plane_Y;
 }				t_pov;
 
 typedef struct	s_map
@@ -151,6 +138,19 @@ typedef struct	s_wdw
 	char		*data;
 }				t_wdw;
 
+typedef struct	s_all
+{
+	t_data		*data;
+	t_pos		*pos;
+	t_image		*image;
+	t_ori		*ori;
+	t_pov		*pov;
+	t_player	*player;
+	t_txt		*txt;
+	t_inter		*inter;
+	t_map		*map;
+}				t_all;
+
 t_map			*ft_check(char *map, char *title);
 int				ft_error(char **map, char **line, t_map **info, char *message);
 void			ft_jump(char *line, int *i);
@@ -170,6 +170,6 @@ int				ft_sqrt(int nb);
 int				ft_tan(int angle);
 double			ft_def_angle(char ori);
 int				ft_ray(t_pos *pos, double angle);
-void			ft_loop(t_map *info);
+void			ft_loop(t_map *info, t_image *image);
 
 #endif
