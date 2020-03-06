@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/13 14:34:59 by jdussert          #+#    #+#              #
-#    Updated: 2020/03/04 16:32:41 by jdussert         ###   ########.fr        #
+#    Updated: 2020/03/06 14:43:15 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 OBJS	= ${SRCS:.c=.o}
 
 $(NAME)	:	${OBJS} ${LIBFT_PATH}${LIBFT}
-		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${LIBFT_PATH} -lft
+		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${LIBFT_PATH} -lft -lmlx -framework OpenGL -framework AppKit
 
 $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
 	make add -C ${LIBFT_PATH}
