@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:37:41 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 16:39:27 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:52:31 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,33 @@ double	ft_def_angle(char ori)
 		return (0);
 	else if (ori == 'N')
 		return (90);
-	else if (ori == 'O')
-		return (180);
 	else if (ori == 'W')
+		return (180);
+	else if (ori == 'S')
 		return (270);
 	return (-1);
+}
+
+void	ft_dir(t_player *player, char ori)
+{
+	if (ori == 'E')
+		{
+			player->dir[0] = 1;
+			player->dir[1] = 0;
+		}
+	else if (ori == 'N')
+		{
+			player->dir[0] = 0;
+			player->dir[1] = -1;
+		}
+	else if (ori == 'W')
+		{
+			player->dir[0] = -1;
+			player->dir[1] = 0;
+		}
+	else if (ori == 'S')
+		{
+			player->dir[0] = 0;
+			player->dir[1] = 1;
+		}
 }

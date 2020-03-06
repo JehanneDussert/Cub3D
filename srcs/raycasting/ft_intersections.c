@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 10:27:08 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:00:49 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ int		ft_ray(t_pos *pos, double angle)
 void	ft_loop(t_map *info, t_image *image)
 {
 	int		i;
-	double	angle;
 
 	i = 0;
 	image->mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title)
-	angle = ft_def_angle(info->ori);
-	printf("this is my angle :%f\n", angle);
+	image->pov->plane_X = 0;
+	image->pov->plane_Y = 0.6;
+	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title)
+	image->player->angle = ft_def_angle(info->ori);
+	ft_dir(image->player, info->ori);
+	printf("this is my angle :%f\n", image->player->angle);
 	// On trace un ray par coordonnee horizontale
 	while (i++ < info->reso[0])
 		ft_ray(info->pos, angle);
