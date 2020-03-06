@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 14:54:34 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:23:43 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	ft_loop(t_map *info, t_image *image)
 	image->player->angle = ft_def_angle(info->ori, image->player);
 	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
 	wdw->data = (int *)mlx_get_data_addr (image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
-	while (i++ < 300)
-		wdw->data[100 *(i + 1000) + 100] = 0xAC9EF0;
+	while (i++ < info->reso[0])
+		wdw->data[500 * (i + 500) + 500] = 0xAC9EF0;
 	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, wdw->x, wdw->y);
 	printf("this is my angle :%f\n", image->player->angle);
 	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
 	// On trace un ray par coordonnee horizontale
-//	while (i++ < info->reso[0])
-		//ft_ray(info->pos, image->player->angle);
+	while (i++ < info->reso[0])
+		ft_ray(info->pos, image->player->angle);
 	mlx_loop(image->mlx_ptr);
 }
