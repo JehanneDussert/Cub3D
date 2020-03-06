@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 11:56:51 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:36:55 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define GRID 64 // hauteur de chaque case (sol) et du mur
 # define PLAYER_HEIGHT 32 // hauteur du perso
 # define FOV 60 // champ de vision
+# define BUFFER_SIZE 10
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -31,10 +32,14 @@
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
 
-# define BUFFER_SIZE 10
-
 /* Point of view of the player : coordinate x, y and angle */
 /* Angle =/= FOV mais jsais ap pq */
+
+typedef struct	s_pos
+{
+	double		x;
+	double		y;
+}				t_pos;
 
 typedef struct s_pov
 {
@@ -52,32 +57,6 @@ typedef struct	s_ori
 	char		*we;
 }				t_ori;
 
-typedef struct	s_pos
-{
-	double		x;
-	double		y;
-}				t_pos;
-
-typedef struct	s_image
-{
-	void		*mlx_ptr;
-	void		*img_ptr;
-	int			width;
-	int			height;
-	char		*title;
-	t_pov		*pov;
-	t_player	*player;
-}				t_image;
-
-typedef struct	s_data
-{
-	t_image		image;
-	int			bpp;
-	int			*m_data;
-	int			size_l;
-	int			endian;
-}				t_data;
-
 typedef struct	s_player
 {
 	t_pos		pos;
@@ -88,6 +67,27 @@ typedef struct	s_player
 	int			speed;
 	int			speed_rot;
 }				t_player;
+
+typedef struct	s_image
+{
+	void		*mlx_ptr;
+	void		*img_ptr;
+	int			width;
+	int			height;
+	char		*title;
+	t_pov		*pov;
+	t_player	*player;
+	void		*win_ptr;
+}				t_image;
+
+typedef struct	s_data
+{
+	t_image		image;
+	int			bpp;
+	int			*m_data;
+	int			size_l;
+	int			endian;
+}				t_data;
 
 typedef struct	s_txt
 {
@@ -130,7 +130,6 @@ typedef struct	s_map
 typedef struct	s_wdw
 {
 	t_image		*image;
-	void		*win_ptr;
 	int			bpp;
 	int			size_l;
 	int			endian;
@@ -138,7 +137,7 @@ typedef struct	s_wdw
 	int			y;
 	int			color;
 	char		**xpm;
-	char		*data;
+	int			*data;
 }				t_wdw;
 
 typedef struct	s_all
@@ -171,9 +170,8 @@ int				ft_degre_to_rad(int deg);
 int				ft_rounded_down(float f);
 int				ft_sqrt(int nb);
 int				ft_tan(int angle);
-double			ft_def_angle(char ori);
+double			ft_def_angle(char ori, t_player *player);
 int				ft_ray(t_pos *pos, double angle);
 void			ft_loop(t_map *info, t_image *image);
-void			ft_dir(t_player *player, char ori);
 
 #endif
