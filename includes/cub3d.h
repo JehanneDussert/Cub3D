@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 10:52:58 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:56:51 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@
 
 # define BUFFER_SIZE 10
 
+/* Point of view of the player : coordinate x, y and angle */
+/* Angle =/= FOV mais jsais ap pq */
+
+typedef struct s_pov
+{
+	t_pos		coor;
+	double		angle;
+	double		plane_X;
+	double		plane_Y;
+}				t_pov;
+
 typedef struct	s_ori
 {
 	char		*no;
@@ -54,6 +65,8 @@ typedef struct	s_image
 	int			width;
 	int			height;
 	char		*title;
+	t_pov		*pov;
+	t_player	*player;
 }				t_image;
 
 typedef struct	s_data
@@ -67,10 +80,11 @@ typedef struct	s_data
 
 typedef struct	s_player
 {
-	t_pos		pos;;
+	t_pos		pos;
 	/* vecteur de direction */
 	int			rot;
-	int			angle;
+	double		angle;
+	int			dir[2];
 	int			speed;
 	int			speed_rot;
 }				t_player;
@@ -96,17 +110,6 @@ typedef struct 	s_inter
 	int			floor[2];
 	int			ceiling[2];
 }				t_inter;
-
-/* Point of view of the player : coordinate x, y and angle */
-/* Angle =/= FOV mais jsais ap pq */
-
-typedef struct s_pov
-{
-	t_pos		coor;
-	double		angle;
-	double		plane_X;
-	double		plane_Y;
-}				t_pov;
 
 typedef struct	s_map
 {
@@ -171,5 +174,6 @@ int				ft_tan(int angle);
 double			ft_def_angle(char ori);
 int				ft_ray(t_pos *pos, double angle);
 void			ft_loop(t_map *info, t_image *image);
+void			ft_dir(t_player *player, char ori);
 
 #endif
