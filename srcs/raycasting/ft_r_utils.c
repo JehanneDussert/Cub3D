@@ -6,11 +6,21 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:37:41 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 13:24:29 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:47:51 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int		ft_abs(double nb)
+{
+	if (nb < 0)
+	{
+		nb *= -1;
+		return ((int)(nb));
+	}
+	return ((int)nb);
+}
 
 int		ft_degre_to_rad(int deg)
 {
@@ -20,8 +30,7 @@ int		ft_degre_to_rad(int deg)
 	return (res);
 }
 
-
-/* On arrondi */
+// On arrondi
 int		ft_rounded_down(float f)
 {
 	int res;
@@ -30,7 +39,7 @@ int		ft_rounded_down(float f)
 	return (res);
 }
 
-/* Racine carree */
+// Racine carree
 int		ft_sqrt(int nb)
 {
 	int	sqrt;
@@ -45,7 +54,7 @@ int		ft_sqrt(int nb)
 	return (0);
 }
 
-/* Calcul de tangente */
+// Calcul de tangente
 int		ft_tan(int angle)
 {
 	int	res;
@@ -84,4 +93,11 @@ double	ft_def_angle(char ori, t_player *player)
 		return (270);
 	}
 	return (-1);
+}
+
+int		ft_hit(char **map, int x, int y)
+{
+	if (map[x][y] == '1')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 14:36:55 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:26:25 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,31 @@ typedef struct	s_pos
 	double		y;
 }				t_pos;
 
+typedef	struct s_ray_dir
+{
+	double		x;
+	double		y;
+}				t_ray_dir;
+
+typedef struct	s_delta_dist
+{
+	double		x;
+	double		y;
+}				t_delta_dist;
+
+
+typedef struct	s_camera
+{
+	double		x;
+	double		y;
+}				t_camera;
+
 typedef struct s_pov
 {
 	t_pos		coor;
 	double		angle;
-	double		plane_X;
-	double		plane_Y;
+	double		plane_x;
+	double		plane_y;
 }				t_pov;
 
 typedef struct	s_ori
@@ -60,6 +79,9 @@ typedef struct	s_ori
 typedef struct	s_player
 {
 	t_pos		pos;
+	t_camera	camera;
+	t_ray_dir	ray_dir;
+	t_delta_dist	delta_dist;
 	/* vecteur de direction */
 	int			rot;
 	double		angle;
@@ -173,5 +195,7 @@ int				ft_tan(int angle);
 double			ft_def_angle(char ori, t_player *player);
 int				ft_ray(t_pos *pos, double angle);
 void			ft_loop(t_map *info, t_image *image);
+int				ft_abs(double nb);
+int				ft_hit(char **map, int x, int y);
 
 #endif

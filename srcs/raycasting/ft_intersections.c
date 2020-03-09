@@ -6,63 +6,84 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/06 18:23:43 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:47:51 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* On va checker les intersections avec les walls */
-
-/* 
-	On connait Hm (hauteur mur) et De (distance ecran)
-	On calcule notre inconnue Dm (distance mur) cf ft_intervalles. 
-	C'est ce qui va me permettre de colorier mes pixels apres et de definir mes 
-	intervalles mur / plafond / sol.
-
-	Dm a recalculer pour chaque colonne de pixels dans le champ de vision.
-*/
-
 #include "../../includes/cub3d.h"
 
-int		ft_ray(t_pos *pos, double angle)
+void	ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *player, t_image *image)
 {
-	int	inter_y;
-	int	inter_x;
-	int	ray;
+	int	i;
 
-	ray = -30;
-	/* On va chercher la premiere intersection
-		Si le ray va vers le nord
-	La coordonnee y de l'intersection A sera :
-		A.y = (Pos.y/64) (a arrondir) * 64 - 1;
+	i = 0;
+	while (i++ < info->reso[0])
+	{
+		// On calcule la position du ray et sa direction
+		camera->x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
+		ray_dir->x = player->dir[0] + image->pov->x * camera->x;
+		ray_dir->y = player->dir[1] + image->pov->y * camera->x;
+	}
+}
 
-		Si le ray va vers le sud
-		A.y = (Pos.y/64) * 64 + 64;
-	*/
+void	ft_delta_dist(t_delta_dist *delta_dist, t_ray_dir *ray_dir, t_pos pos)
+{
+	int		map_x;
+	int		map_y;
+	double	sideDist_x;
+	double	sideDist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		hit;
 
-	printf("My pos y :%f\n", pos->y);
-	// Le ray angle - 30
-	// Coordonnee y de l'intersection
-	inter_y = (int)pos->y;
-/*	inter_y = (int)(inter_y / GRID);
-	ft_printf("My GRID :%d\n", GRID); */
-
-	// Coordonnee x de l'intersection
-	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-//	inter_x = (int)(inter_x / GRID);
-	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
-
-	inter_y -= 1;
-	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
-
-	inter_y -= 1;
-	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
-
-	inter_y -= 1;
-	inter_x = (int)pos->x + ((int)pos->y - inter_y) / ft_tan(angle + ray);
-	printf("This is my inter_y :%d\nAnd my inter_x :%d\n", inter_y, inter_x);
-	return (1);
+	// Savoir dans quelle carre on est
+	map_x = (int)pos.x;
+	map_y = (int)pos.y;
+	hit = 0;
+	// Distance pour aller d'un cote x a un autre et d'un cote y a un autre
+	delta_dist->x = (ray_dir->y == 0) ? 0 : ((ray_dir->x == 0) ? 1 : ft_abs(1 / ray_dir->x));
+	delta_dist->y = (ray_dir->x == 0) ? 0 : ((ray_dir->y == 0) ? 1 : ft_abs(1 / ray_dir->y));
+	if (ray_dir->x < 0)
+	{
+		step_x = -1;
+		sideDist_x = (pos.x - map_x) * delta_dist->x;
+	}
+	else
+	{
+		step_x = -1;
+		sideDist_x = (map_x + 1.0 - pos.x) * delta_dist->x;
+	}
+	if (ray_dir->y < 0)
+	{
+		step_y = -1;
+		sideDist_y = (pos->y - map_y) * delta_dist->y;
+	}
+	else
+	{
+		step_y = 1;
+		sideDist_y = (map_y + 1.0 - pos.y) * delta_dist->y;
+	}
+	//perform DDA
+	while (hit == 0)
+	{
+	//jump to next map square, OR in x-direction, OR in y-direction
+		if (sideDist_x < sideDist_y)
+		{
+			sideDist_x += delta_dist->x;
+			map_x += step_x;
+			side = 0;
+		}
+		else
+		{
+			sideDist_y += delta_dist->y;
+			map_y += step_y;
+			side = 1;
+		}
+		//Check if ray has hit a wall
+		if (info->map[map_x][map_y] > 0)
+			hit = 1;
+	} 
 }
 
 void	ft_loop(t_map *info, t_image *image)
@@ -74,13 +95,13 @@ void	ft_loop(t_map *info, t_image *image)
 	image->mlx_ptr = mlx_init();
 	if (!(image->pov = (t_pov *)malloc(sizeof(t_pov))))
 		return ;
-	image->pov->plane_X = 0;
-	image->pov->plane_Y = 0.6;
+	image->pov->plane_x = 0;
+	image->pov->plane_y = 0.6;
 	if (!(image->player = (t_player *)malloc(sizeof(t_player))))
 		return ;
 	if (!(wdw = (t_wdw *)malloc(sizeof(t_wdw))))
 		return ;
-	printf("This is my plane X :%f\nAnd my plane Y:%f\n", image->pov->plane_X, image->pov->plane_Y);
+	printf("This is my plane X :%f\nAnd my plane Y:%f\n", image->pov->plane_x, image->pov->plane_y);
 	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title);
 	image->player->angle = ft_def_angle(info->ori, image->player);
 	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
