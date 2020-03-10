@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/10 13:07:07 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:12:33 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_ldv
 	int			step_y;
 	int			side;
 	int			hit;
+	double		dist;
 }				t_ldv;
 
 
