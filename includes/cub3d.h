@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/09 19:26:25 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:07:07 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,18 @@
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
 
-/* Point of view of the player : coordinate x, y and angle */
-/* Angle =/= FOV mais jsais ap pq */
+typedef struct s_ldv
+{
+	int			map_x;
+	int			map_y;
+	double		sideDist_x;
+	double		sideDist_y;
+	int			step_x;
+	int			step_y;
+	int			side;
+	int			hit;
+}				t_ldv;
+
 
 typedef struct	s_pos
 {
@@ -193,9 +203,9 @@ int				ft_rounded_down(float f);
 int				ft_sqrt(int nb);
 int				ft_tan(int angle);
 double			ft_def_angle(char ori, t_player *player);
-int				ft_ray(t_pos *pos, double angle);
+void			ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *player);
 void			ft_loop(t_map *info, t_image *image);
 int				ft_abs(double nb);
-int				ft_hit(char **map, int x, int y);
+int				ft_hit(char **map, t_ldv *ldv, t_delta_dist *delta_dist);
 
 #endif

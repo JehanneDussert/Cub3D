@@ -6,13 +6,13 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:00:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/09 19:47:51 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/10 11:56:33 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *player, t_image *image)
+void	ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *player)
 {
 	int	i;
 
@@ -21,69 +21,89 @@ void	ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *pla
 	{
 		// On calcule la position du ray et sa direction
 		camera->x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
-		ray_dir->x = player->dir[0] + image->pov->x * camera->x;
-		ray_dir->y = player->dir[1] + image->pov->y * camera->x;
+		ray_dir->x = player->dir[0] + player->pos.x * camera->x;
+		ray_dir->y = player->dir[1] + player->pos.y * camera->x;
 	}
 }
 
-void	ft_delta_dist(t_delta_dist *delta_dist, t_ray_dir *ray_dir, t_pos pos)
+int		ft_hit(char **map, t_ldv *ldv, t_delta_dist *delta_dist)
 {
-	int		map_x;
-	int		map_y;
-	double	sideDist_x;
-	double	sideDist_y;
-	int		step_x;
-	int		step_y;
-	int		side;
-	int		hit;
+	ldv->hit = 0;
+	//jump to next map square, OR in x-direction, OR in y-direction
+	if (ldv->sideDist_x < ldv->sideDist_y)
+	{
+		ldv->sideDist_x += delta_dist->x;
+		ldv->map_x += ldv->step_x;
+		ldv->side = 0;
+	}
+	else
+	{
+		ldv->sideDist_y += delta_dist->y;
+		ldv->map_y += ldv->step_y;
+		ldv->side = 1;
+	}
+	//Check if ray has hit a wall
+	if (map[ldv->map_x][ldv->map_y] > 0)
+	{
+		ldv->hit = 1;
+		return (ldv->hit);
+	}
+	return (ldv->hit);
+}
+
+
+void	ft_delta_dist(t_map *info)
+{
+	t_ldv			*ldv;
+	t_camera		*camera;
+	t_player		*player;
+	t_delta_dist	*delta_dist;
+	t_ray_dir		*ray_dir;
+	t_pos			*pos;
 
 	// Savoir dans quelle carre on est
-	map_x = (int)pos.x;
-	map_y = (int)pos.y;
-	hit = 0;
+	if (!(ldv = (t_ldv *)malloc(sizeof(t_ldv))))
+		return ;
+	if (!(camera = (t_camera *)malloc(sizeof(t_camera))))
+		return ;
+	if (!(player = (t_player *)malloc(sizeof(t_camera))))
+		return ;
+	if (!(delta_dist = (t_delta_dist *)malloc(sizeof(delta_dist))))
+		return ;
+	if (!(ray_dir = (t_ray_dir *)malloc(sizeof(t_ray_dir))))
+		return ;
+	if (!(pos = (t_pos *)malloc(sizeof(t_pos))))
+		return ;
+	ft_ray_dir(info, camera, ray_dir, player);
+	ldv->map_x = (int)pos->x;
+	ldv->map_y = (int)pos->y;
+	ldv->hit = 0;
 	// Distance pour aller d'un cote x a un autre et d'un cote y a un autre
 	delta_dist->x = (ray_dir->y == 0) ? 0 : ((ray_dir->x == 0) ? 1 : ft_abs(1 / ray_dir->x));
 	delta_dist->y = (ray_dir->x == 0) ? 0 : ((ray_dir->y == 0) ? 1 : ft_abs(1 / ray_dir->y));
 	if (ray_dir->x < 0)
 	{
-		step_x = -1;
-		sideDist_x = (pos.x - map_x) * delta_dist->x;
+		ldv->step_x = -1;
+		ldv->sideDist_x = (pos->x - ldv->map_x) * delta_dist->x;
 	}
 	else
 	{
-		step_x = -1;
-		sideDist_x = (map_x + 1.0 - pos.x) * delta_dist->x;
+		ldv->step_x = -1;
+		ldv->sideDist_x = (ldv->map_x + 1.0 - pos->x) * delta_dist->x;
 	}
 	if (ray_dir->y < 0)
 	{
-		step_y = -1;
-		sideDist_y = (pos->y - map_y) * delta_dist->y;
+		ldv->step_y = -1;
+		ldv->sideDist_y = (pos->y - ldv->map_y) * delta_dist->y;
 	}
 	else
 	{
-		step_y = 1;
-		sideDist_y = (map_y + 1.0 - pos.y) * delta_dist->y;
+		ldv->step_y = 1;
+		ldv->sideDist_y = (ldv->map_y + 1.0 - pos->y) * delta_dist->y;
 	}
 	//perform DDA
-	while (hit == 0)
-	{
-	//jump to next map square, OR in x-direction, OR in y-direction
-		if (sideDist_x < sideDist_y)
-		{
-			sideDist_x += delta_dist->x;
-			map_x += step_x;
-			side = 0;
-		}
-		else
-		{
-			sideDist_y += delta_dist->y;
-			map_y += step_y;
-			side = 1;
-		}
-		//Check if ray has hit a wall
-		if (info->map[map_x][map_y] > 0)
-			hit = 1;
-	} 
+	while (ft_hit(info->map, ldv, delta_dist) == 0)
+		ldv->hit = ft_hit(info->map, ldv, delta_dist);
 }
 
 void	ft_loop(t_map *info, t_image *image)
@@ -113,6 +133,6 @@ void	ft_loop(t_map *info, t_image *image)
 	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
 	// On trace un ray par coordonnee horizontale
 	while (i++ < info->reso[0])
-		ft_ray(info->pos, image->player->angle);
+		ft_delta_dist(info);
 	mlx_loop(image->mlx_ptr);
 }
