@@ -26,7 +26,7 @@ void ft_ray_dir(t_map *info, t_vec *vec, t_player *player)
 	}
 }
 
-void ft_init_sideDist(t_vec *vec)
+void ft_init_sideDist(t_vec *vec, t_pos *pos)
 {
 	if (vec->ray_dir_x < 0)
 	{
@@ -79,7 +79,7 @@ int ft_hit(char **map, t_vec *vec)
 	return (vec->hit);
 }
 
-int ft_vec_side(t_vec *vec)
+int ft_vec_side(t_vec *vec, t_pos *pos)
 {
 	if (vec->side == 0)
 		vec->dist = (vec->map_x - pos->x + (1 - vec->step_x) / 2) / vec->ray_dir_x;
@@ -90,15 +90,15 @@ int ft_vec_side(t_vec *vec)
 
 void ft_delta_dist(t_map *info)
 {
-	t_vec *vec;
-	t_player *player;
-	t_pos *pos;
-	int i;
+	t_vec		*vec;
+	t_player	*player;
+	t_pos		*pos;
+	int			i;
 
 	i = 0;
 	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
 		return;
-	if (!(player = (t_player *)malloc(sizeof(t_camera))))
+	if (!(player = (t_player *)malloc(sizeof(t_player))))
 		return;
 	if (!(pos = (t_pos *)malloc(sizeof(t_pos))))
 		return;
@@ -119,7 +119,7 @@ void ft_delta_dist(t_map *info)
 		*/
 		vec->delta_dist_x = (vec->ray_dir_y == 0) ? 0 : ((vec->ray_dir_x == 0) ? 1 : ft_abs(1 / vec->ray_dir_x));
 		vec->delta_dist_y = (vec->ray_dir_x == 0) ? 0 : ((vec->ray_dir_y == 0) ? 1 : ft_abs(1 / vec->ray_dir_y));
-		ft_init_sideDist(vec);
+		ft_init_sideDist(vec, pos);
 		/*
 		** DDA : on va avancer dans les x / y jusqu'a frapper un mur
 		*/
@@ -128,7 +128,7 @@ void ft_delta_dist(t_map *info)
 		/*
 		** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
 		*/
-		vec->side = ft_vec_side(vec);
+		vec->side = ft_vec_side(vec, pos);
 		/*
 		** On calcule la hauteur de la ligne a dessiner sur l'ecran
 		*/

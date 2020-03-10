@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/10 18:53:05 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/10 19:11:25 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,6 @@ typedef struct	s_pos
 	double		y;
 }				t_pos;
 
-typedef	struct s_ray_dir
-{
-	double		x;
-	double		y;
-}				t_ray_dir;
-
-typedef struct	s_delta_dist
-{
-	double		x;
-	double		y;
-}				t_delta_dist;
-
-
-typedef struct	s_camera
-{
-	double		x;
-	double		y;
-}				t_camera;
-
 typedef struct s_pov
 {
 	t_pos		coor;
@@ -98,9 +79,6 @@ typedef struct	s_ori
 typedef struct	s_player
 {
 	t_pos		pos;
-	t_camera	camera;
-	t_ray_dir	ray_dir;
-	t_delta_dist	delta_dist;
 	/* vecteur de direction */
 	int			rot;
 	double		angle;
@@ -212,9 +190,9 @@ int				ft_rounded_down(float f);
 int				ft_sqrt(int nb);
 int				ft_tan(int angle);
 double			ft_def_angle(char ori, t_player *player);
-void			ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *player);
+void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player);
 void			ft_loop(t_map *info, t_image *image);
 int				ft_abs(double nb);
-int				ft_hit(char **map, t_vec *vec, t_delta_dist *delta_dist);
+int				ft_hit(char **map, t_vec *vec);
 
 #endif
