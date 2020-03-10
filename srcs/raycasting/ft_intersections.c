@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *player)
+void ft_ray_dir(t_map *info, t_vec *vec, t_player *player)
 {
 	int i;
 
@@ -20,116 +20,128 @@ void ft_ray_dir(t_map *info, t_camera *camera, t_ray_dir *ray_dir, t_player *pla
 	while (i++ < info->reso[0])
 	{
 		// On calcule la position du ray et sa direction
-		camera->x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
-		ray_dir->x = player->dir[0] + player->pos.x * camera->x;
-		ray_dir->y = player->dir[1] + player->pos.y * camera->x;
+		vec->camera_x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
+		vec->ray_dir_x = player->dir[0] + player->pos.x * vec->camera_x;
+		vec->ray_dir_y = player->dir[1] + player->pos.y * vec->camera_x;
 	}
 }
 
-int ft_hit(char **map, t_ldv *ldv, t_delta_dist *delta_dist)
+void ft_init_sideDist(t_vec *vec)
 {
-	ldv->hit = 0;
-	/* 
-	** On va incrementer x ou y d'un carre jusqu'a hit un wall
-	*/
-	if (ldv->sideDist_x < ldv->sideDist_y)
+	if (vec->ray_dir_x < 0)
 	{
-		ldv->sideDist_x += delta_dist->x;
-		ldv->map_x += ldv->step_x;
-		ldv->side = 0;
+		vec->step_x = -1;
+		vec->sideDist_x = (pos->x - vec->map_x) * vec->ray_dir_x;
 	}
 	else
 	{
-		ldv->sideDist_y += delta_dist->y;
-		ldv->map_y += ldv->step_y;
-		ldv->side = 1;
+		vec->step_x = -1;
+		vec->sideDist_x = (vec->map_x + 1.0 - pos->x) * vec->ray_dir_x;
+	}
+	if (vec->ray_dir_y < 0)
+	{
+		vec->step_y = -1;
+		vec->sideDist_y = (pos->y - vec->map_y) * vec->delta_dist_y;
+	}
+	else
+	{
+		vec->step_y = 1;
+		vec->sideDist_y = (vec->map_y + 1.0 - pos->y) * vec->delta_dist_y;
+	}
+}
+
+int ft_hit(char **map, t_vec *vec)
+{
+	vec->hit = 0;
+	/* 
+	** On va incrementer x ou y d'un carre jusqu'a hit un wall
+	*/
+	if (vec->sideDist_x < vec->sideDist_y)
+	{
+		vec->sideDist_x += vec->delta_dist_x;
+		vec->map_x += vec->step_x;
+		vec->side = 0;
+	}
+	else
+	{
+		vec->sideDist_y += vec->delta_dist_y;
+		vec->map_y += vec->step_y;
+		vec->side = 1;
 	}
 	/*
 	** On regarde si on a frappe un wall
 	*/
-	if (map[ldv->map_x][ldv->map_y] > 0)
+	if (map[vec->map_x][vec->map_y] > 0)
 	{
-		ldv->hit = 1;
-		return (ldv->hit);
+		vec->hit = 1;
+		return (vec->hit);
 	}
-	return (ldv->hit);
+	return (vec->hit);
+}
+
+int ft_vec_side(t_vec *vec)
+{
+	if (vec->side == 0)
+		vec->dist = (vec->map_x - pos->x + (1 - vec->step_x) / 2) / vec->ray_dir_x;
+	else
+		vec->dist = (vec->map_y - pos->y + (1 - vec->step_y) / 2) / vec->ray_dir_y;
+	return (vec->side);
 }
 
 void ft_delta_dist(t_map *info)
 {
-	t_ldv *ldv;
-	t_camera *camera;
+	t_vec *vec;
 	t_player *player;
-	t_delta_dist *delta_dist;
-	t_ray_dir *ray_dir;
 	t_pos *pos;
-	int lineHeight;
-	int drawStart;
-	int	drawEnd;
+	int i;
 
-	// Savoir dans quelle carre on est
-	if (!(ldv = (t_ldv *)malloc(sizeof(t_ldv))))
-		return;
-	if (!(camera = (t_camera *)malloc(sizeof(t_camera))))
+	i = 0;
+	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
 		return;
 	if (!(player = (t_player *)malloc(sizeof(t_camera))))
 		return;
-	if (!(delta_dist = (t_delta_dist *)malloc(sizeof(delta_dist))))
-		return;
-	if (!(ray_dir = (t_ray_dir *)malloc(sizeof(t_ray_dir))))
-		return;
 	if (!(pos = (t_pos *)malloc(sizeof(t_pos))))
 		return;
-	ft_ray_dir(info, camera, ray_dir, player);
-	ldv->map_x = (int)pos->x;
-	ldv->map_y = (int)pos->y;
-	ldv->hit = 0;
-	// Distance pour aller d'un cote x a un autre et d'un cote y a un autre
-	delta_dist->x = (ray_dir->y == 0) ? 0 : ((ray_dir->x == 0) ? 1 : ft_abs(1 / ray_dir->x));
-	delta_dist->y = (ray_dir->x == 0) ? 0 : ((ray_dir->y == 0) ? 1 : ft_abs(1 / ray_dir->y));
+	vec->hit = 0;
 	while (i++ < info->reso[0])
 	{
-		if (ray_dir->x < 0)
-		{
-			ldv->step_x = -1;
-			ldv->sideDist_x = (pos->x - ldv->map_x) * delta_dist->x;
-		}
-		else
-		{
-			ldv->step_x = -1;
-			ldv->sideDist_x = (ldv->map_x + 1.0 - pos->x) * delta_dist->x;
-		}
-		if (ray_dir->y < 0)
-		{
-			ldv->step_y = -1;
-			ldv->sideDist_y = (pos->y - ldv->map_y) * delta_dist->y;
-		}
-		else
-		{
-			ldv->step_y = 1;
-			ldv->sideDist_y = (ldv->map_y + 1.0 - pos->y) * delta_dist->y;
-		}
+		/* 
+		** On calcule la position du ray et la direction
+		*/
+		ft_ray_dir(info, vec, player);
 		/*
-	** DDA : on va avancer dans les x / y jusqu'a frapper un mur
-	*/
-		while (ft_hit(info->map, ldv, delta_dist) == 0)
-			ldv->hit = ft_hit(info->map, ldv, delta_dist);
+		** Savoir dans quel carre on est
+		*/
+		vec->map_x = (int)pos->x;
+		vec->map_y = (int)pos->y;
 		/*
-	** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
-	*/
-		if (ldv->side == 0)
-			ldv->dist = (ldv->map_x - pos->x + (1 - ldv->step_x) / 2) / ray_dir->x;
-		else
-			ldv->dist = (ldv->map_y - pos->y + (1 - ldv->step_y) / 2) / ray_dir->y;
-	//Calculate height of line to draw on screen
-	lineHeight = (int)(info->reso[1] / perpWallDist);
-	//calculate lowest and highest pixel to fill in current stripe
-	drawStart = -lineHeight / 2 + info->reso[1] / 2;
-	if(drawStart < 0)
-		drawStart = 0;
-	drawEnd = lineHeight / 2 + info->reso[1] / 2;
-	if (drawEnd >= info->reso[1])
-		drawEnd = info->reso[1] - 1;
+		** Distance pour aller d'un cote x a un autre et d'un cote y a un autre
+		*/
+		vec->delta_dist_x = (vec->ray_dir_y == 0) ? 0 : ((vec->ray_dir_x == 0) ? 1 : ft_abs(1 / vec->ray_dir_x));
+		vec->delta_dist_y = (vec->ray_dir_x == 0) ? 0 : ((vec->ray_dir_y == 0) ? 1 : ft_abs(1 / vec->ray_dir_y));
+		ft_init_sideDist(vec);
+		/*
+		** DDA : on va avancer dans les x / y jusqu'a frapper un mur
+		*/
+		while (ft_hit(info->map, vec) == 0)
+			vec->hit = ft_hit(info->map, vec);
+		/*
+		** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
+		*/
+		vec->side = ft_vec_side(vec);
+		/*
+		** On calcule la hauteur de la ligne a dessiner sur l'ecran
+		*/
+		vec->lineHeight = (int)(info->reso[1] / vec->dist);
+		/*
+		** On calcule le premier et le dernier pixel a colorier dans la colonne
+		*/
+		vec->drawStart = -(vec->lineHeight) / 2 + info->reso[1] / 2;
+		if (vec->drawStart < 0)
+			vec->drawStart = 0;
+		vec->drawEnd = vec->lineHeight / 2 + info->reso[1] / 2;
+		if (vec->drawEnd >= info->reso[1])
+			vec->drawEnd = info->reso[1] - 1;
 	}
 }
 
