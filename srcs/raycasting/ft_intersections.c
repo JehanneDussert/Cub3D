@@ -88,6 +88,28 @@ int ft_vec_side(t_vec *vec, t_pos *pos)
 	return (vec->side);
 }
 
+void ft_init_draw(t_vec *vec, int height)
+{
+	/*
+	** On calcule la hauteur de la ligne a dessiner sur l'ecran
+	*/
+	vec->lineHeight = (int)(info->reso[1] / vec->dist);
+	/*
+	** On calcule le premier et le dernier pixel a colorier dans la colonne
+	*/
+	vec->drawStart = -(vec->lineHeight) / 2 + info->reso[1] / 2;
+	if (vec->drawStart < 0)
+		vec->drawStart = 0;
+	vec->drawEnd = vec->lineHeight / 2 + info->reso[1] / 2;
+	if (vec->drawEnd >= info->reso[1])
+		vec->drawEnd = info->reso[1] - 1;
+}
+
+void ft_draw(i, vec->drawStart, vec->drawEnd)
+{
+	// A faire
+}
+
 void ft_delta_dist(t_map *info)
 {
 	t_vec		*vec;
@@ -129,19 +151,12 @@ void ft_delta_dist(t_map *info)
 		** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
 		*/
 		vec->side = ft_vec_side(vec, pos);
+		ft_init_draw(vec, info->reso[1]);
 		/*
-		** On calcule la hauteur de la ligne a dessiner sur l'ecran
+		** if (side == 1)
+		**		color = color / 2;
 		*/
-		vec->lineHeight = (int)(info->reso[1] / vec->dist);
-		/*
-		** On calcule le premier et le dernier pixel a colorier dans la colonne
-		*/
-		vec->drawStart = -(vec->lineHeight) / 2 + info->reso[1] / 2;
-		if (vec->drawStart < 0)
-			vec->drawStart = 0;
-		vec->drawEnd = vec->lineHeight / 2 + info->reso[1] / 2;
-		if (vec->drawEnd >= info->reso[1])
-			vec->drawEnd = info->reso[1] - 1;
+		ft_draw(i, vec->drawStart, vec->drawEnd);
 	}
 }
 

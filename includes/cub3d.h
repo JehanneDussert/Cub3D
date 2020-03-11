@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/10 19:11:25 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 11:41:39 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@
 # define PLAYER_HEIGHT 32 // hauteur du perso
 # define FOV 60 // champ de vision
 # define BUFFER_SIZE 10
+# define SKYBLUE 0x7fffff
+# define GREEN 0xff00
+# define D_BLUE 0x555
+# define D_RED 0x7f0000
+# define RED 0xff0000
+# define GREY 0x333333
+# define ORANGE 0xFF6900
+# define GREY_FLOOR 0x424242
+# define YELLOW 0xFFED2D
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
