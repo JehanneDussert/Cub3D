@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:33:56 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 14:02:27 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 14:57:03 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		main(int argc, char **argv)
 			return (-1);
 		}
 		info = ft_check(map, image->title);
-		ft_loop(info, image);
+		ft_raycasting(info, image);
 	}
 	return (0);
 }

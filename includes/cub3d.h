@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 13:58:06 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 16:00:47 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,15 +188,16 @@ char			**ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_map *info);
-void			ft_raycasting(t_map *info);
 int				ft_degre_to_rad(int deg);
 int				ft_rounded_down(float f);
 int				ft_sqrt(int nb);
 int				ft_tan(int angle);
 double			ft_def_angle(char ori, t_player *player);
 void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player);
-void			ft_loop(t_map *info, t_image *image);
+void			ft_raycasting(t_map *info, t_image *image);
+void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
 int				ft_abs(double nb);
 int				ft_hit(char **map, t_vec *vec);
+void			ft_draw(t_image *image, t_map *info, t_wdw *wdw);
 
 #endif

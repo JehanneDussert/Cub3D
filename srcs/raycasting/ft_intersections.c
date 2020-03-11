@@ -111,30 +111,17 @@ void ft_draw(int i, int start, int end)
 	// A faire
 }*/
 
-void ft_delta_dist(t_map *info)
+void ft_delta_dist(t_map *info, t_player *player, t_vec *vec)
 {
-	t_vec		*vec;
-	t_player	*player;
 	int			i;
 
 	i = 0;
-	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
-		return;
-	if (!(player = (t_player *)malloc(sizeof(t_player))))
-		return;
-	vec->hit = 0;
-	printf("pos_x :%f\npos_y :%f\n", info->pos_x, info->pos_y);
 	while (i++ < info->reso[0])
 	{
 		/* 
 		** On calcule la position du ray et la direction
 		*/
 		ft_ray_dir(info, vec, player);
-		/*
-		** Savoir dans quel carre on est
-		*/
-		vec->map_x = (int)info->pos_x;
-		vec->map_y = (int)info->pos_y;
 		/*
 		** Distance pour aller d'un cote x a un autre et d'un cote y a un autre
 		*/
@@ -159,32 +146,19 @@ void ft_delta_dist(t_map *info)
 	}
 }
 
-void ft_loop(t_map *info, t_image *image)
+void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 {
-	int i;
-	t_wdw *wdw;
+	t_vec	*vec;
 
-	i = 0;
-	image->mlx_ptr = mlx_init();
-	if (!(image->pov = (t_pov *)malloc(sizeof(t_pov))))
+	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
 		return;
-	image->pov->plane_x = 0;
-	image->pov->plane_y = 0.6;
-	if (!(image->player = (t_player *)malloc(sizeof(t_player))))
-		return;
-	if (!(wdw = (t_wdw *)malloc(sizeof(t_wdw))))
-		return;
-	printf("This is my plane X :%f\nAnd my plane Y:%f\n", image->pov->plane_x, image->pov->plane_y);
-	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title);
-	image->player->angle = ft_def_angle(info->ori, image->player);
-	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
-	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
-	while (i++ < info->reso[0])
-		wdw->data[500 * (i + 500) + 500] = 0xAC9EF0;
-	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, wdw->x, wdw->y);
-	printf("this is my angle :%f\n", image->player->angle);
-	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
+	vec->hit = 0;
+	/*
+	** Savoir dans quel carre on est
+	*/
+	vec->map_x = (int)info->pos_x;
+	vec->map_y = (int)info->pos_y;
 	// On trace un ray par coordonnee horizontale
-	ft_delta_dist(info);
-	mlx_loop(image->mlx_ptr);
+	ft_delta_dist(info, player, vec);
+	ft_draw(image, info, wdw);
 }
