@@ -135,8 +135,6 @@ void ft_delta_dist(t_map *info)
 		*/
 		vec->map_x = (int)info->pos_x;
 		vec->map_y = (int)info->pos_y;
-		//ft_printf("map_x :%d\nmap_y :%d\n", vec->map_x, vec->map_y);
-		//ft_printf("pos_x :%d\npos_y :%d\n", info->pos_x, info->pos_y);
 		/*
 		** Distance pour aller d'un cote x a un autre et d'un cote y a un autre
 		*/
