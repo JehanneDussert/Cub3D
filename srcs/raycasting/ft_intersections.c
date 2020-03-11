@@ -21,7 +21,7 @@ void ft_ray_dir(t_map *info, t_vec *vec, t_player *player)
 	{
 		// On calcule la position du ray et sa direction
 		vec->camera_x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
-		vec->ray_dir_x = player->dir[0] + PLANE_X * vec->camera_x;
+		vec->ray_dir_x = player->dir[0] + PLANE_X * vec->camera_x; // A confirmer si erreur reglee
 		vec->ray_dir_y = player->dir[1] + PLANE_Y * vec->camera_x;
 	}
 }
