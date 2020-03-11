@@ -6,13 +6,13 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 16:47:53 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 14:18:22 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_pos	*ft_check_pos(t_pos *pos, char **map)
+t_map	*ft_check_pos(t_map *info, char **map)
 {
 	int	i;
 	int	j;
@@ -25,9 +25,9 @@ t_pos	*ft_check_pos(t_pos *pos, char **map)
 		{
 			if (ft_check_char(map[i], j) == 2)
 			{
-				pos->x = i + 0.5;
-				pos->y = j + 0.5;
-				return (pos);
+				info->pos_x = (double)i + 0.5;
+				info->pos_y = (double)j + 0.5;
+				return (info);
 			}
 			j++;
 		}
@@ -176,5 +176,5 @@ char	**ft_map(char *line, int n, int fd, t_map *info)
 		lst = lst->next;
 		i++;
 	}
-	return (ft_check_pos(info->pos, map) != NULL ? map : NULL);
+	return (ft_check_pos(info, map) != NULL ? map : NULL);
 }

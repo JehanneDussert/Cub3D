@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/04 16:29:04 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 14:19:27 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	ft_print(t_map *info)
 	ft_printf("My w_path :%s\n", info->w_path);
 	ft_printf("My spr_path :%s\n", info->spr_path);
 	ft_printf("My ori :%c\n", info->ori);
-	printf("My x :%f\n", info->pos->x);
-	printf("My y :%f\n", info->pos->y);
+//	printf("My x :%f\n", info->pos_x);
+//	printf("My y :%f\n", info->pos_y);
 	int i = 0;
 	while (info->map[i])
 	{
