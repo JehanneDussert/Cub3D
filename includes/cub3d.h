@@ -33,6 +33,8 @@
 # define ORANGE 0xFF6900
 # define GREY_FLOOR 0x424242
 # define YELLOW 0xFFED2D
+# define PLANE_X 0
+# define PLANE_Y 0.66
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
