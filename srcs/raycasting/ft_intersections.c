@@ -105,15 +105,10 @@ void ft_init_draw(t_vec *vec, int height)
 	if (vec->drawEnd >= height)
 		vec->drawEnd = height - 1;
 }
-/*
-void ft_draw(int i, int start, int end)
-{
-	// A faire
-}*/
 
-void ft_delta_dist(t_map *info, t_player *player, t_vec *vec)
+void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 {
-	int			i;
+	int i;
 
 	i = 0;
 	while (i++ < info->reso[0])
@@ -142,13 +137,14 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec)
 		** if (side == 1)
 		**		color = color / 2;
 		*/
-		//ft_draw(i, vec->drawStart, vec->drawEnd);
+		ft_printf("yo\n");
+		ft_draw_ray(i, vec->drawStart, vec->drawEnd, info, wdw);
 	}
 }
 
 void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 {
-	t_vec	*vec;
+	t_vec *vec;
 
 	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
 		return;
@@ -159,6 +155,14 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 	vec->map_x = (int)info->pos_x;
 	vec->map_y = (int)info->pos_y;
 	// On trace un ray par coordonnee horizontale
-	ft_delta_dist(info, player, vec);
-	ft_draw(image, info, wdw);
+	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title);
+	image->player->angle = ft_def_angle(info->ori, image->player);
+	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
+	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
+	ft_delta_dist(info, player, vec, wdw);
+	ft_printf("coucou\n");
+	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, wdw->x, wdw->y);
+	printf("this is my angle :%f\n", image->player->angle);
+	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
+	mlx_loop(image->mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 16:00:47 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:13:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,6 @@ void			ft_raycasting(t_map *info, t_image *image);
 void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
 int				ft_abs(double nb);
 int				ft_hit(char **map, t_vec *vec);
-void			ft_draw(t_image *image, t_map *info, t_wdw *wdw);
+void			ft_draw_ray(int i, int start, int end, t_map *info, t_wdw *wdw);
 
 #endif
