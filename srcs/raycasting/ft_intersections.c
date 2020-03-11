@@ -82,6 +82,8 @@ int ft_hit(char **map, t_vec *vec)
 
 int ft_vec_side(t_vec *vec, t_map *info)
 {
+	//printf("side :%d\n", vec->side);
+	//printf("map_y :%d\npos_y :%f\nstep_y :%d\nray_dir_y :%f\n", vec->map_y, info->pos_y, vec->step_y, vec->ray_dir_y);
 	if (vec->side == 0)
 		vec->dist = (vec->map_x - info->pos_x + (1 - vec->step_x) / 2) / vec->ray_dir_x;
 	else
@@ -94,10 +96,12 @@ void ft_init_draw(t_vec *vec, int height)
 	/*
 	** On calcule la hauteur de la ligne a dessiner sur l'ecran
 	*/
+	//printf("Height :%d\nDist :%f\n", height, vec->dist);
 	vec->lineHeight = (int)(height / vec->dist);
 	/*
 	** On calcule le premier et le dernier pixel a colorier dans la colonne
 	*/
+	printf("lineHeight :%d\nheight :%d\n", vec->lineHeight, height);
 	vec->drawStart = -(vec->lineHeight) / 2 + height / 2;
 	if (vec->drawStart < 0)
 		vec->drawStart = 0;

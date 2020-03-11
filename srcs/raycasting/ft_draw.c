@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 14:44:42 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 18:05:50 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:59:15 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void ft_draw_ray(int i, int start, int end, t_map *info, t_wdw *wdw)
 	int j;
 
 	j = -1;
+//	start = 200;
+//	end = 700;
+	printf("My start:%d\nMy end :%d\n", start, end);
 	while (++j < start)
 		wdw->data[j * info->reso[0] + i] = SKYBLUE;
 	while (++j < end)
