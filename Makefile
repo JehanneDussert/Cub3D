@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/13 14:34:59 by jdussert          #+#    #+#              #
-#    Updated: 2020/03/11 15:59:57 by jdussert         ###   ########.fr        #
+#    Updated: 2020/03/11 18:00:11 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 LIBFT_PATH = ../libft/
 LIBFT = libft.a

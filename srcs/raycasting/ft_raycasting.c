@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 11:39:38 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 15:04:49 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:59:55 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_raycasting(t_map *info, t_image *image)
 {
 	t_wdw	*wdw;
 
-	image->mlx_ptr = mlx_init();
+	image->mlx_ptr = mlx_init(); // Mettre une protection
 	if (!(image->pov = (t_pov *)malloc(sizeof(t_pov))))
 		return;
 	image->pov->plane_x = 0;

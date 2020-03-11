@@ -110,8 +110,8 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 {
 	int i;
 
-	i = 0;
-	while (i++ < info->reso[0])
+	i = -1;
+	while (++i < info->reso[0])
 	{
 		/* 
 		** On calcule la position du ray et la direction
@@ -126,7 +126,7 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 		/*
 		** DDA : on va avancer dans les x / y jusqu'a frapper un mur
 		*/
-		while (ft_hit(info->map, vec) == 0)
+		while (vec->hit == 0)
 			vec->hit = ft_hit(info->map, vec);
 		/*
 		** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
@@ -137,7 +137,6 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 		** if (side == 1)
 		**		color = color / 2;
 		*/
-		ft_printf("yo\n");
 		ft_draw_ray(i, vec->drawStart, vec->drawEnd, info, wdw);
 	}
 }
@@ -160,9 +159,9 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
 	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
 	ft_delta_dist(info, player, vec, wdw);
-	ft_printf("coucou\n");
-	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, wdw->x, wdw->y);
-	printf("this is my angle :%f\n", image->player->angle);
-	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
+//	ft_printf("coucou\n");
+	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, 0, 0);
+//	printf("this is my angle :%f\n", image->player->angle);
+//	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
 	mlx_loop(image->mlx_ptr);
 }
