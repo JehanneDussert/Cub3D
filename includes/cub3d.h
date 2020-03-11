@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 11:41:39 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/11 13:58:06 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
 
+typedef struct	s_map
+{
+	int			reso[2];
+	void		*n_path;
+	void		*s_path;
+	void		*e_path;
+	void		*w_path;
+	void		*spr_path;
+	int			f_path;
+	int			c_path;
+	char		**map;
+	double		pos_x;
+	double		pos_y;
+	char		ori;
+	int			map_len;
+}				t_map;
+
 typedef struct s_vec
 {
 	int			map_x;
@@ -63,15 +80,9 @@ typedef struct s_vec
 	int			drawEnd;
 }				t_vec;
 
-typedef struct	s_pos
-{
-	double		x;
-	double		y;
-}				t_pos;
-
 typedef struct s_pov
 {
-	t_pos		coor;
+	t_map		*info;
 	double		angle;
 	double		plane_x;
 	double		plane_y;
@@ -87,7 +98,7 @@ typedef struct	s_ori
 
 typedef struct	s_player
 {
-	t_pos		pos;
+	t_map		*info;
 	/* vecteur de direction */
 	int			rot;
 	double		angle;
@@ -139,22 +150,6 @@ typedef struct 	s_inter
 	int			ceiling[2];
 }				t_inter;
 
-typedef struct	s_map
-{
-	int			reso[2];
-	void		*n_path;
-	void		*s_path;
-	void		*e_path;
-	void		*w_path;
-	void		*spr_path;
-	int			f_path;
-	int			c_path;
-	char		**map;
-	t_pos		*pos;
-	char		ori;
-	int			map_len;
-}				t_map;
-
 typedef struct	s_wdw
 {
 	t_image		*image;
@@ -171,7 +166,7 @@ typedef struct	s_wdw
 typedef struct	s_all
 {
 	t_data		*data;
-	t_pos		*pos;
+	t_map		*info;
 	t_image		*image;
 	t_ori		*ori;
 	t_pov		*pov;
