@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/12 12:43:24 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/12 16:09:16 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_vec
 	double		delta_dist_x;
 	double		delta_dist_y;
 	double		camera_x;
-	double		camera_y;
 	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
@@ -191,7 +190,7 @@ double			ft_def_angle(char ori, t_player *player);
 void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i);
 void			ft_raycasting(t_map *info, t_image *image);
 void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
-int				ft_hit(char **map, t_vec *vec);
+void			ft_hit(char **map, t_vec *vec);
 void			ft_draw_ray(int i, int start, int end, t_map *info, t_wdw *wdw);
 
 #endif

@@ -25,12 +25,12 @@ void ft_init_sideDist(t_vec *vec, t_map *info)
 	if (vec->ray_dir_x < 0)
 	{
 		vec->step_x = -1;
-		vec->sideDist_x = (info->pos_x - vec->map_x) * vec->ray_dir_x;
+		vec->sideDist_x = (info->pos_x - vec->map_x) * vec->delta_dist_x;
 	}
 	else
 	{
-		vec->step_x = -1;
-		vec->sideDist_x = (vec->map_x + 1.0 - info->pos_x) * vec->ray_dir_x;
+		vec->step_x = 1;
+		vec->sideDist_x = (vec->map_x + 1.0 - info->pos_x) * vec->delta_dist_x;
 	}
 	if (vec->ray_dir_y < 0)
 	{
@@ -44,12 +44,13 @@ void ft_init_sideDist(t_vec *vec, t_map *info)
 	}
 }
 
-int ft_hit(char **map, t_vec *vec)
+void ft_hit(char **map, t_vec *vec)
 {
-	vec->hit = 0;
 	/* 
 	** On va incrementer x ou y d'un carre jusqu'a hit un wall
 	*/
+	while (vec->hit == 0)
+	{
 	if (vec->sideDist_x < vec->sideDist_y)
 	{
 		vec->sideDist_x += vec->delta_dist_x;
@@ -65,12 +66,9 @@ int ft_hit(char **map, t_vec *vec)
 	/*
 	** On regarde si on a frappe un wall
 	*/
-	if (map[vec->map_x][vec->map_y] > '0')
-	{
+	if (map[vec->map_y][vec->map_x] > '0')
 		vec->hit = 1;
-		return (vec->hit);
 	}
-	return (vec->hit);
 }
 
 int ft_vec_side(t_vec *vec, t_map *info)
@@ -91,7 +89,6 @@ void ft_init_draw(t_vec *vec, int height)
 	/*
 	** On calcule le premier et le dernier pixel a colorier dans la colonne
 	*/
-	printf("lineHeight :%d\nheight :%d\n", vec->lineHeight, height);
 	vec->drawStart = -(vec->lineHeight) / 2 + height / 2;
 	if (vec->drawStart < 0)
 		vec->drawStart = 0;
@@ -111,6 +108,9 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 		** On calcule la position du ray et la direction
 		*/
 		ft_ray_dir(info, vec, player, i);
+		vec->map_x = (int)info->pos_x;
+		vec->map_y = (int)info->pos_y;
+		vec->hit = 0;
 		/*
 		** Distance pour aller d'un cote x a un autre et d'un cote y a un autre
 		*/
@@ -120,8 +120,7 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 		/*
 		** DDA : on va avancer dans les x / y jusqu'a frapper un mur
 		*/
-		while (vec->hit == 0)
-			vec->hit = ft_hit(info->map, vec);
+		ft_hit(info->map, vec);
 		/*
 		** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
 		*/
@@ -141,12 +140,6 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 
 	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
 		return;
-	vec->hit = 0;
-	/*
-	** Savoir dans quel carre on est
-	*/
-	vec->map_x = (int)info->pos_x;
-	vec->map_y = (int)info->pos_y;
 	// On trace un ray par coordonnee horizontale
 	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title);
 	image->player->angle = ft_def_angle(info->ori, image->player);
@@ -154,9 +147,5 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
 	ft_delta_dist(info, player, vec, wdw);
 	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, 0, 0);
-	//	printf("this is my angle :%f\n", image->player->angle);
-	printf("Plane :%f  %f\n", player->plane[0], player->plane[1]);
-	printf("Pos player :%f  %f\n", info->pos_x, info->pos_y);
-	printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
 	mlx_loop(image->mlx_ptr);
 }

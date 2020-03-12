@@ -6,17 +6,17 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:33:56 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 14:57:03 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/12 17:28:22 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-int		main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	char	*map;
-	t_image	*image;
-	t_map	*info;
+	char *map;
+	t_image *image;
+	t_map *info;
 
 	map = NULL;
 	info = NULL;
