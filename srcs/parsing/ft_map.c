@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 14:18:22 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/12 16:31:08 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_map	*ft_check_pos(t_map *info, char **map)
 		{
 			if (ft_check_char(map[i], j) == 2)
 			{
-				info->pos_x = (double)i + 0.5;
-				info->pos_y = (double)j + 0.5;
+				info->pos_x = (double)j + 0.5;
+				info->pos_y = (double)i + 0.5;
 				return (info);
 			}
 			j++;
