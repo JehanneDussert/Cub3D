@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 19:25:37 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:03:52 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 # define ORANGE 0xFF6900
 # define GREY_FLOOR 0x424242
 # define YELLOW 0xFFED2D
-# define PLANE_X 0
-# define PLANE_Y 0.66
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -105,8 +103,7 @@ typedef struct	s_player
 	int			rot;
 	double		angle;
 	int			dir[2];
-	int			speed;
-	int			speed_rot;
+	double		plane[2];
 }				t_player;
 
 typedef struct	s_image
@@ -195,7 +192,7 @@ int				ft_rounded_down(float f);
 int				ft_sqrt(int nb);
 int				ft_tan(int angle);
 double			ft_def_angle(char ori, t_player *player);
-void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player);
+void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i);
 void			ft_raycasting(t_map *info, t_image *image);
 void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
 int				ft_abs(double nb);

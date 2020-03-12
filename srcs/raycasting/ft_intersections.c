@@ -12,17 +12,14 @@
 
 #include "../../includes/cub3d.h"
 
-void ft_ray_dir(t_map *info, t_vec *vec, t_player *player)
+void ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i)
 {
-	int i;
-
-	i = 0;
-	while (i++ < info->reso[0])
+	//while (i++ < info->reso[0])
 	{
 		// On calcule la position du ray et sa direction
 		vec->camera_x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
-		vec->ray_dir_x = player->dir[0] + PLANE_X * vec->camera_x; // A confirmer si erreur reglee
-		vec->ray_dir_y = player->dir[1] + PLANE_Y * vec->camera_x;
+		vec->ray_dir_x = player->dir[0] + player->plane[0] * vec->camera_x; // A confirmer si erreur reglee
+		vec->ray_dir_y = player->dir[1] + player->plane[1] * vec->camera_x;
 	}
 }
 
@@ -110,7 +107,7 @@ void ft_init_draw(t_vec *vec, int height)
 		vec->drawEnd = height - 1;
 }
 
-void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw, t_image *image)
+void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 {
 	int i;
 
@@ -120,7 +117,7 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw, t_imag
 		/* 
 		** On calcule la position du ray et la direction
 		*/
-		ft_ray_dir(info, vec, player);
+		ft_ray_dir(info, vec, player, i);
 		/*
 		** Distance pour aller d'un cote x a un autre et d'un cote y a un autre
 		*/
@@ -166,6 +163,8 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 //	ft_printf("coucou\n");
 	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, 0, 0);
 //	printf("this is my angle :%f\n", image->player->angle);
-//	ft_printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
+	printf("Plane :%f  %f\n", player->plane[0], player->plane[1]);
+	printf("Pos player :%f  %f\n", info->pos_x, info->pos_y);
+	printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
 	mlx_loop(image->mlx_ptr);
 }
