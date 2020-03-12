@@ -14,13 +14,10 @@
 
 void ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i)
 {
-	//while (i++ < info->reso[0])
-	{
-		// On calcule la position du ray et sa direction
-		vec->camera_x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
-		vec->ray_dir_x = player->dir[0] + player->plane[0] * vec->camera_x; // A confirmer si erreur reglee
-		vec->ray_dir_y = player->dir[1] + player->plane[1] * vec->camera_x;
-	}
+	// On calcule la position du ray et sa direction
+	vec->camera_x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
+	vec->ray_dir_x = player->dir[0] + player->plane[0] * vec->camera_x;
+	vec->ray_dir_y = player->dir[1] + player->plane[1] * vec->camera_x;
 }
 
 void ft_init_sideDist(t_vec *vec, t_map *info)
@@ -68,7 +65,6 @@ int ft_hit(char **map, t_vec *vec)
 	/*
 	** On regarde si on a frappe un wall
 	*/
-	//ft_printf("map_x :%d\nmap_y :%d\n", vec->map_x, vec->map_y);
 	if (map[vec->map_x][vec->map_y] > '0')
 	{
 		vec->hit = 1;
@@ -79,8 +75,6 @@ int ft_hit(char **map, t_vec *vec)
 
 int ft_vec_side(t_vec *vec, t_map *info)
 {
-	//printf("side :%d\n", vec->side);
-	//printf("map_y :%d\npos_y :%f\nstep_y :%d\nray_dir_y :%f\n", vec->map_y, info->pos_y, vec->step_y, vec->ray_dir_y);
 	if (vec->side == 0)
 		vec->dist = (vec->map_x - info->pos_x + (1 - vec->step_x) / 2) / vec->ray_dir_x;
 	else
@@ -93,7 +87,6 @@ void ft_init_draw(t_vec *vec, int height)
 	/*
 	** On calcule la hauteur de la ligne a dessiner sur l'ecran
 	*/
-	//printf("Height :%d\nDist :%f\n", height, vec->dist);
 	vec->lineHeight = (int)(height / vec->dist);
 	/*
 	** On calcule le premier et le dernier pixel a colorier dans la colonne
@@ -160,9 +153,8 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
 	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
 	ft_delta_dist(info, player, vec, wdw);
-//	ft_printf("coucou\n");
 	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, 0, 0);
-//	printf("this is my angle :%f\n", image->player->angle);
+	//	printf("this is my angle :%f\n", image->player->angle);
 	printf("Plane :%f  %f\n", player->plane[0], player->plane[1]);
 	printf("Pos player :%f  %f\n", info->pos_x, info->pos_y);
 	printf("This is my dir[0]:%d\nAnd my dir[1]:%d\n", image->player->dir[0], image->player->dir[1]);
