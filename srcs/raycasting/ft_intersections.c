@@ -130,7 +130,7 @@ void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
 		** if (side == 1)
 		**		color = color / 2;
 		*/
-		ft_draw_ray(i, vec->drawStart, vec->drawEnd, info, wdw);
+		ft_draw_ray(i, vec->drawStart, vec->drawEnd, info, wdw, vec);
 	}
 }
 
