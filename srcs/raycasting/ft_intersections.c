@@ -142,7 +142,7 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 		return;
 	// On trace un ray par coordonnee horizontale
 	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title);
-	image->player->angle = ft_def_angle(info->ori, image->player);
+	ft_def_dir_plane(info->ori, image->player);
 	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
 	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
 	ft_delta_dist(info, player, vec, wdw);

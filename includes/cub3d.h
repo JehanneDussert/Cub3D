@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/13 01:43:38 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/03/13 02:36:44 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@
 # define ORANGE 0xFF6900
 # define GREY_FLOOR 0x424242
 # define YELLOW 0xFFED2D
+# define ARROW_UP 126
+# define ARROW_DOWN 125
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define EXIT_CODE 53
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define W_KEY 13
+# define SHIFT_KEY 257
+# define C_KEY 8
+# define R_KEY 15
+# define P_KEY 35
+# define SPACE_KEY 49
+# define M_KEY 46
+# define L_KEY 37
+# define I_KEY 34
+# define O_KEY 31
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -100,7 +118,6 @@ typedef struct	s_player
 	t_map		*info;
 	/* vecteur de direction */
 	int			rot;
-	double		angle;
 	int			dir[2];
 	double		plane[2];
 }				t_player;
@@ -186,7 +203,7 @@ char			**ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_map *info);
-double			ft_def_angle(char ori, t_player *player);
+void			ft_def_dir_plane(char ori, t_player *player);
 void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i);
 void			ft_raycasting(t_map *info, t_image *image);
 void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
