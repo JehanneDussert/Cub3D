@@ -51,7 +51,8 @@
 # define L_KEY 37
 # define I_KEY 34
 # define O_KEY 31
-# include <mlx.h>
+//# include <mlx.h>
+# include "../../minilibx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>

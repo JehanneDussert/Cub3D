@@ -29,11 +29,14 @@ GNL_PATH = ../get_next_line/
 GNL_FILES = get_next_line.c
 GNL_SRCS = ${addprefix ${GNL_PATH}, ${GNL_FILES}}
 
+MINILIBX_PATH = ../minilibx/
+MINILIBX = libmlx.a
+
 SRCS = srcs/parsing/ft_check_map.c srcs/parsing/ft_colors.c srcs/parsing/ft_resolution.c \
 		srcs/parsing/ft_textures.c srcs/parsing/ft_utils.c srcs/parsing/ft_map.c main.c \
 		srcs/raycasting/ft_intersections.c srcs/raycasting/ft_r_utils.c \
 		srcs/raycasting/ft_raycasting.c srcs/raycasting/ft_draw.c \
-		${GNL_SRCS} ${FT_PRINTF_SRCS}
+		${GNL_SRCS} ${FT_PRINTF_SRCS} ${MINILIBX_SRCS}
 
 SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c \
@@ -47,13 +50,18 @@ SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			ft_lstmap.c ft_itoa_base.c ft_last.c ft_int_len.c ft_first.c \
 			ft_ref_parse.c
 
+SRCS_MINILIBX = mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
+
 OBJS	= ${SRCS:.c=.o}
 
-$(NAME)	:	${OBJS} ${LIBFT_PATH}${LIBFT}
-		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${LIBFT_PATH} -lft -lmlx -framework OpenGL -framework AppKit
+$(NAME)	:	${OBJS} ${LIBFT_PATH}${LIBFT} ${MINILIBX_PATH}${MINILIBX}
+		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MINILIBX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
 
 $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
 	make add -C ${LIBFT_PATH}
+
+${MINILIBX_PATH}${MINILIBX} : ${MINILIBX_FILES}
+	make -C ${MINILIBX_PATH}
 
 all : ${NAME}
 
@@ -62,7 +70,7 @@ clean :
 
 fclean : clean
 		rm -f ${NAME}
-		make -C ${LIBFT_PATH} fclean
+		make -C ${LIBFT_PATH} ${MINILIBX_PATH} fclean
 
 re : fclean all
 
