@@ -71,14 +71,12 @@ typedef struct	s_map
 	double		pos_x;
 	double		pos_y;
 	char		ori;
-	int			map_len;
 }				t_map;
 
 typedef struct	s_player
 {
 	t_map		*info;
 	/* vecteur de direction */
-	int			rot;
 	int			dir[2];
 	double		plane[2];
 }				t_player;
@@ -131,58 +129,21 @@ typedef struct s_vec
 	t_player	*player;
 }				t_vec;
 
-typedef struct	s_data
-{
-	t_image		image;
-	int			bpp;
-	int			*m_data;
-	int			size_l;
-	int			endian;
-}				t_data;
-
-typedef struct	s_txt
-{
-	int			res[2];
-	int			n_txt;
-	int			s_txt;
-	int			we_txt;
-	int			ea_txt;
-	int			sp_txt;
-	int			fl[3];
-	int			cl[3];
-	char		**map;
-}				t_txt;
-
-/* Intervalles des walls, du floor et ceiling a colorier */
-
-typedef struct 	s_inter
-{
-	int			wall[2];
-	int			floor[2];
-	int			ceiling[2];
-}				t_inter;
-
 typedef struct	s_wdw
 {
 	t_image		*image;
 	int			bpp;
 	int			size_l;
 	int			endian;
-	int			x;
-	int			y;
-	int			color;
 	char		**xpm;
 	int			*data;
 }				t_wdw;
 
 typedef struct	s_all
 {
-	t_data		*data;
 	t_map		*info;
 	t_image		*image;
 	t_player	*player;
-	t_txt		*txt;
-	t_inter		*inter;
 	t_map		*map;
 }				t_all;
 
