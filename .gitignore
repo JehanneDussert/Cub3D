@@ -1,0 +1,11 @@
+/srcs/parsing/*.o
+main.o
+/srcs/raycasting/*.o
+../mlx/*.o
+../mlx/*.a
+../mlx/*.a
+../libft/*.o
+../ft_printf/*.o
+../get_next_line/*.o
+cub3D
+a.out*

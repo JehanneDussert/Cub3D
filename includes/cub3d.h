@@ -13,17 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* # define SPEED 1
-*** # define ANGLE 1
-*** # define ROT_SP 1
-*** # define HAUTEUR_REGARD 1
-*** # define HAUTEUR_MUR 1
-*** # define DISTANCE_MUR 1*/
-# define PAS 0.001
-# define GRID 64 // hauteur de chaque case (sol) et du mur
-# define PLAYER_HEIGHT 32 // hauteur du perso
-# define FOV 60 // champ de vision
 # define BUFFER_SIZE 10
+
 # define SKYBLUE 0x7fffff
 # define GREEN 0xff00
 # define D_BLUE 0x555
@@ -33,6 +24,7 @@
 # define ORANGE 0xFF6900
 # define GREY_FLOOR 0x424242
 # define YELLOW 0xFFED2D
+
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
@@ -51,14 +43,19 @@
 # define L_KEY 37
 # define I_KEY 34
 # define O_KEY 31
-//# include <mlx.h>
-# include "../../minilibx/mlx.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
+
 # include "../../ft_printf/ft_printf.h"
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
+# include "../../minilibx/mlx.h"
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+#include <math.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 typedef struct	s_map
 {
@@ -76,6 +73,26 @@ typedef struct	s_map
 	char		ori;
 	int			map_len;
 }				t_map;
+
+typedef struct	s_player
+{
+	t_map		*info;
+	/* vecteur de direction */
+	int			rot;
+	int			dir[2];
+	double		plane[2];
+}				t_player;
+
+typedef struct	s_image
+{
+	void		*mlx_ptr;
+	void		*img_ptr;
+	int			width;
+	int			height;
+	char		*title;
+	t_player	*player;
+	void		*win_ptr;
+}				t_image;
 
 typedef struct s_vec
 {
@@ -96,44 +113,23 @@ typedef struct s_vec
 	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
-}				t_vec;
-
-typedef struct s_pov
-{
-	t_map		*info;
-	double		angle;
-	double		plane_x;
-	double		plane_y;
-}				t_pov;
-
-typedef struct	s_ori
-{
-	char		*no;
-	char		*so;
-	char		*ea;
-	char		*we;
-}				t_ori;
-
-typedef struct	s_player
-{
-	t_map		*info;
-	/* vecteur de direction */
-	int			rot;
-	int			dir[2];
-	double		plane[2];
-}				t_player;
-
-typedef struct	s_image
-{
-	void		*mlx_ptr;
-	void		*img_ptr;
-	int			width;
-	int			height;
-	char		*title;
-	t_pov		*pov;
+	int			keyUp;
+	int			keyDown;
+	int			keyLeft;
+	int			keyRight;
+	int			keyTurnRight;
+	int			keyTurnLeft;
+	double		moveSpeed;
+	double		rotSpeed;
+	int			killWindow;
+	double		oldDir_x;
+	double		oldDir_y;
+	double		oldPlane_x;
+	double		oldPlane_y;
+	t_map		*map;
+	t_image		*img;
 	t_player	*player;
-	void		*win_ptr;
-}				t_image;
+}				t_vec;
 
 typedef struct	s_data
 {
@@ -184,8 +180,6 @@ typedef struct	s_all
 	t_data		*data;
 	t_map		*info;
 	t_image		*image;
-	t_ori		*ori;
-	t_pov		*pov;
 	t_player	*player;
 	t_txt		*txt;
 	t_inter		*inter;
@@ -210,5 +204,17 @@ void			ft_raycasting(t_map *info, t_image *image);
 void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
 void			ft_hit(char **map, t_vec *vec);
 void			ft_draw_ray(int i, int start, int end, t_map *info, t_wdw *wdw, t_vec *vec);
+int				keyRelease(int keycode, t_vec *vec);
+int				keyPress(int keycode, t_vec *vec);
+int				keyDeal(t_vec *vec);
+void			ft_keys_init(t_vec *vec);
+int				KillWindow(int key, t_vec *vec);
+void			move_up(t_vec *vec, t_map *map);
+void			move_down(t_vec *vec, t_map *map);
+void			move_right(t_vec *vec, t_map *map);
+void			move_left(t_vec *vec, t_map *map);
+void			turn_right(t_vec *vec, t_player *player);
+void			turn_left(t_vec *vec, t_player *player);
+int				KillWindow(int key, t_vec *vec);
 
 #endif

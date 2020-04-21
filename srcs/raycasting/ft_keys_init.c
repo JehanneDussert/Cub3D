@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_raycasting.c                                    :+:      :+:    :+:   */
+/*   ft_keys_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 11:39:38 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/11 17:59:55 by jdussert         ###   ########.fr       */
+/*   Created: 2020/04/18 16:34:58 by jdussert          #+#    #+#             */
+/*   Updated: 2020/04/18 16:34:34 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_raycasting(t_map *info, t_image *image)
+void ft_keys_init(t_vec *vec)
 {
-	t_wdw	*wdw;
-
-	if (!(image->mlx_ptr = mlx_init()))
-		return ;
-	if (!(image->player = (t_player *)malloc(sizeof(t_player))))
-		return;
-	if (!(wdw = (t_wdw *)malloc(sizeof(t_wdw))))
-		return;
-	ft_ray(info, image, image->player, wdw);
+    vec->keyUp = 0;
+	vec->keyDown = 0;
+	vec->keyLeft = 0;
+	vec->keyRight = 0;
+	vec->keyTurnRight = 0;
+	vec->keyTurnLeft = 0;
+	vec->killWindow = 0;
+    vec->moveSpeed = 0.05;
+    vec->rotSpeed = 0.01;
 }

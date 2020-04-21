@@ -14,9 +14,9 @@
 
 int main(int argc, char **argv)
 {
-	char *map;
-	t_image *image;
-	t_map *info;
+	char	*map;
+	t_image	*image;
+	t_map	*info;
 
 	map = NULL;
 	info = NULL;
@@ -38,6 +38,14 @@ int main(int argc, char **argv)
 		}
 		info = ft_check(map, image->title);
 		ft_raycasting(info, image);
+		while (1)
+		{
+			mlx_hook(image->win_ptr, 2, 0, keyPress, &image);
+    		mlx_hook(image->win_ptr, 3, 0, keyRelease, &image);
+    		mlx_hook(image->win_ptr, 17, 0, KillWindow, &image);
+    		mlx_loop_hook(image->mlx_ptr, keyDeal, &image);
+    		mlx_loop(image->mlx_ptr);
+		}
 	}
 	return (0);
 }

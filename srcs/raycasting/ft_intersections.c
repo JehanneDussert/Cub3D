@@ -147,5 +147,5 @@ void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
 	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
 	ft_delta_dist(info, player, vec, wdw);
 	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, 0, 0);
-	mlx_loop(image->mlx_ptr);
+	//mlx_loop(image->mlx_ptr);
 }
