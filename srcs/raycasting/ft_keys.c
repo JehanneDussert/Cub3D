@@ -15,7 +15,7 @@
 int keyPress(int keycode, t_vec *vec)
 {
 	// En fonction de la keyPressed on va turn / move
-	printf("hey");
+	printf("hey\n");
 	if (keycode == W_KEY)
 		vec->keyUp = 1;
 	if (keycode == S_KEY)
@@ -28,11 +28,11 @@ int keyPress(int keycode, t_vec *vec)
     	vec->keyTurnRight = 1;
   	if (keycode == ARROW_LEFT)
    		vec->keyTurnLeft = 1;
-  	/*if (keycode == 12)
-    	keys->moveSpeed = (keys->moveSpeed < 0.18) ?  (keys->moveSpeed * 1.5) : keys->moveSpeed;
+  	if (keycode == 12)
+    	vec->moveSpeed = (vec->moveSpeed < 0.18) ?  (vec->moveSpeed * 1.5) : vec->moveSpeed;
   	if (keycode == 6)
-    	keys->moveSpeed = (keys->moveSpeed > 0.08) ?  (keys->moveSpeed / 1.5) : keys->moveSpeed; 
-  	if (keycode == 46)
+    	vec->moveSpeed = (vec->moveSpeed > 0.08) ?  (vec->moveSpeed / 1.5) : vec->moveSpeed; 
+  	/*if (keycode == 46)
   	{
 		if (mlx->move.mode == 0)
     		mlx->move.mode = 1;
@@ -46,45 +46,51 @@ int keyPress(int keycode, t_vec *vec)
 	return (0);
 }
 
-int keyRelease(int keycode, t_vec *vec)
+int keyRelease(int keycode, t_all *all)
 {
 	// On va réinitialiser les keys à 0 pour arrêter de turn / move
-	printf("This is my key :%d\n", keycode);
+	//printf("This is my key :%d\n", keycode);
+	printf("In function key release\n");
+	//keyDeal(all);
 	if (keycode == 13)
-    	vec->keyUp = 0;
+    	all->vec->keyUp = 0;
   	if (keycode == 1)
-    	vec->keyDown = 0;
+    	all->vec->keyDown = 0;
   	if (keycode == 2)
-    	vec->keyRight = 0;
+    	all->vec->keyRight = 0;
   	if (keycode == 0)
-    	vec->keyLeft = 0;
+    	all->vec->keyLeft = 0;
   	if (keycode == 124)
-    	vec->keyTurnRight = 0;
+    	all->vec->keyTurnRight = 0;
   	if (keycode == 123)
-    	vec->keyTurnLeft = 0;
+    	all->vec->keyTurnLeft = 0;
   	if (keycode == 53)
-    	vec->killWindow = 0;
+    	all->vec->killWindow = 0;
+	//keyDeal(all);
 	return (0);
 }
 
-int keyDeal(t_vec *vec)
+int keyDeal(t_all *all)
 {
-	if(vec->keyUp == 1)
-		move_up(vec, vec->map);
-  	if(vec->keyDown == 1)
-    	move_down(vec, vec->map);
-  	if(vec->keyRight == 1)
-    	move_right(vec, vec->map);
-  	if(vec->keyLeft == 1)
-    	move_left(vec, vec->map);
-  	if(vec->keyTurnRight == 1)
-    	turn_right(vec, vec->player);
-  	if(vec->keyTurnLeft == 1)
-    	turn_left(vec, vec->player);
-	if (vec->killWindow == 1)
+	printf("yoyoyo\n");
+	if (all->vec->keyUp == 1)
+		move_up(all->vec, all->map);
+  	if (all->vec->keyDown == 1)
+    	move_down(all->vec, all->map);
+  	if (all->vec->keyRight == 1)
+    	move_right(all->vec, all->map);
+  	if (all->vec->keyLeft == 1)
+    	move_left(all->vec, all->map);
+  	if (all->vec->keyTurnRight == 1)
+    	turn_right(all->vec);
+  	if (all->vec->keyTurnLeft == 1)
+    	turn_left(all->vec);
+	if (all->vec->killWindow == 1)
 		exit (0);
-  	ft_raycasting(vec->map, vec->img);  
-	return(0);
+	printf("keydeal\n");
+  	ft_raycasting(all);  
+	printf("new raycasting\n");
+	return (0);
 }
 
 int KillWindow(int key, t_vec *vec)

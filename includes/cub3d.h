@@ -44,7 +44,7 @@
 # define I_KEY 34
 # define O_KEY 31
 
-# include "../../ft_printf/ft_printf.h"
+//# include "../../ft_printf/ft_printf.h"
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
 # include "../../minilibx/mlx.h"
@@ -73,23 +73,19 @@ typedef struct	s_map
 	char		ori;
 }				t_map;
 
-typedef struct	s_player
-{
-	t_map		*info;
-	/* vecteur de direction */
-	int			dir[2];
-	double		plane[2];
-}				t_player;
-
 typedef struct	s_image
 {
 	void		*mlx_ptr;
 	void		*img_ptr;
+	void		*win_ptr;
 	int			width;
 	int			height;
 	char		*title;
-	t_player	*player;
-	void		*win_ptr;
+	int			bpp;
+	int			size_l;
+	int			endian;
+	char		**xpm;
+	int			*data;
 }				t_image;
 
 typedef struct s_vec
@@ -124,58 +120,58 @@ typedef struct s_vec
 	double		oldDir_y;
 	double		oldPlane_x;
 	double		oldPlane_y;
+	int			dir[2];
+	double		plane[2];
 	t_map		*map;
 	t_image		*img;
-	t_player	*player;
 }				t_vec;
-
-typedef struct	s_wdw
-{
-	t_image		*image;
-	int			bpp;
-	int			size_l;
-	int			endian;
-	char		**xpm;
-	int			*data;
-}				t_wdw;
 
 typedef struct	s_all
 {
-	t_map		*info;
-	t_image		*image;
-	t_player	*player;
 	t_map		*map;
+	t_image		*image;
+	t_vec		*vec;
 }				t_all;
 
-t_map			*ft_check(char *map, char *title);
-int				ft_error(char **map, char **line, t_map **info, char *message);
+/* Parsing */
+t_map			*ft_parsing(t_all *all, char *title);
 void			ft_jump(char *line, int *i);
-t_map			*ft_init(void);
-void			ft_check_resolution(char *line, t_map *info, char *map, int *i);
+int				ft_check_resolution(char *line, t_map *info, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
 t_list			*ft_list(char *line, int n, int fd, t_map *info);
 char			**ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
-void			ft_print(t_map *info);
-void			ft_def_dir_plane(char ori, t_player *player);
-void			ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i);
-void			ft_raycasting(t_map *info, t_image *image);
-void			ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw);
+void			ft_print(t_all *all);
+
+/* Raycasting */
+t_all			*ft_raycasting(t_all *all);
+t_all			*ft_def_dir_plane(t_all *all);
+t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
+void			ft_ray_dir(t_vec *vec, t_map *map, int i);
 void			ft_hit(char **map, t_vec *vec);
-void			ft_draw_ray(int i, int start, int end, t_map *info, t_wdw *wdw, t_vec *vec);
-int				keyRelease(int keycode, t_vec *vec);
+void			ft_draw_ray(int i, t_all *all);
+int				keyRelease(int keycode, t_all *all);
 int				keyPress(int keycode, t_vec *vec);
-int				keyDeal(t_vec *vec);
-void			ft_keys_init(t_vec *vec);
+int				keyDeal(t_all *all);
 int				KillWindow(int key, t_vec *vec);
 void			move_up(t_vec *vec, t_map *map);
 void			move_down(t_vec *vec, t_map *map);
 void			move_right(t_vec *vec, t_map *map);
 void			move_left(t_vec *vec, t_map *map);
-void			turn_right(t_vec *vec, t_player *player);
-void			turn_left(t_vec *vec, t_player *player);
+void			turn_right(t_vec *vec);
+void			turn_left(t_vec *vec);
 int				KillWindow(int key, t_vec *vec);
+
+/* Utils */
+int     		ft_error(int msg, t_all *all);
+void    		ft_free_all(t_all **all);
+int				ft_l_atoi(const char *str, int *i);
+
+/* Init */
+t_all		    *ft_init_all(t_all *all);
+t_map			*ft_init_map(t_map *map);
+t_vec			*ft_keys_init(t_vec *vec);
 
 #endif

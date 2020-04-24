@@ -12,46 +12,47 @@
 
 #include "../../includes/cub3d.h"
 
-void ft_north(t_player *player)
+void ft_north(t_vec *vec)
 {
-	player->dir[0] = 0;
-	player->dir[1] = -1;
-	player->plane[0] = 0.66;
-	player->plane[1] = 0;
+	vec->dir[0] = 0;
+	vec->dir[1] = -1;
+	vec->plane[0] = 0.66;
+	vec->plane[1] = 0;
 }
 
-void ft_south(t_player *player)
+void ft_south(t_vec *vec)
 {
-	player->dir[0] = 0;
-	player->dir[1] = 1;
-	player->plane[0] = -0.66;
-	player->plane[1] = 0;
+	vec->dir[0] = 0;
+	vec->dir[1] = 1;
+	vec->plane[0] = -0.66;
+	vec->plane[1] = 0;
 }
 
-void ft_east(t_player *player)
+void ft_east(t_vec *vec)
 {
-	player->dir[0] = 1;
-	player->dir[1] = 0;
-	player->plane[0] = 0;
-	player->plane[1] = 0.66;
+	vec->dir[0] = 1;
+	vec->dir[1] = 0;
+	vec->plane[0] = 0;
+	vec->plane[1] = 0.66;
 }
 
-void ft_west(t_player *player)
+void ft_west(t_vec *vec)
 {
-	player->dir[0] = -1;
-	player->dir[1] = 0;
-	player->plane[0] = 0;
-	player->plane[1] = -0.66;
+	vec->dir[0] = -1;
+	vec->dir[1] = 0;
+	vec->plane[0] = 0;
+	vec->plane[1] = -0.66;
 }
 
-void ft_def_dir_plane(char ori, t_player *player)
+t_all *ft_def_dir_plane(t_all *all)
 {
-	if (ori == 'E')
-		ft_east(player);
-	else if (ori == 'N')
-		ft_north(player);
-	else if (ori == 'W')
-		ft_west(player);
-	else if (ori == 'S')
-		ft_south(player);
+	if (all->map->ori == 'E')
+		ft_east(all->vec);
+	else if (all->map->ori == 'N')
+		ft_north(all->vec);
+	else if (all->map->ori == 'W')
+		ft_west(all->vec);
+	else if (all->map->ori == 'S')
+		ft_south(all->vec);
+	return (all);
 }

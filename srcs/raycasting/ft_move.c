@@ -18,16 +18,16 @@ void move_down(t_vec *vec, t_map *map)
 
 void move_right(t_vec *vec, t_map *map)
 {
-  if(map->map[(int)(map->pos_x + vec->player->plane[0] * vec->moveSpeed)][(int)(map->pos_y)] == '0') 
-     map->pos_x += vec->player->plane[0] * vec->moveSpeed;
-  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->player->plane[1] * vec->moveSpeed)] == '0')
-    map->pos_y += vec->player->plane[1] * vec->moveSpeed;
+  if(map->map[(int)(map->pos_x + vec->plane[0] * vec->moveSpeed)][(int)(map->pos_y)] == '0') 
+     map->pos_x += vec->plane[0] * vec->moveSpeed;
+  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->plane[1] * vec->moveSpeed)] == '0')
+    map->pos_y += vec->plane[1] * vec->moveSpeed;
 }
 
 void move_left(t_vec *vec, t_map *map)
 {
-  if(map->map[(int)(map->pos_x + vec->player->plane[0] * vec->moveSpeed)][(int)(map->pos_y)] == '0') 
-     map->pos_x -= vec->player->plane[0] * vec->moveSpeed;
-  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->player->plane[1] * vec->moveSpeed)] == '0')
-    map->pos_y -= vec->player->plane[1] * vec->moveSpeed;
+  if(map->map[(int)(map->pos_x + vec->plane[0] * vec->moveSpeed)][(int)(map->pos_y)] == '0') 
+     map->pos_x -= vec->plane[0] * vec->moveSpeed;
+  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->plane[1] * vec->moveSpeed)] == '0')
+    map->pos_y -= vec->plane[1] * vec->moveSpeed;
 }

@@ -19,12 +19,6 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 LIBFT_PATH = ../libft/
 LIBFT = libft.a
 
-FT_PRINTF_PATH = ../ft_printf/
-FT_PRINTF_FILES = ft_printf.c ft_flags.c ft_printf_utils.c ft_print_it.c \
-			ft_find_my_args.c ft_cs_types.c ft_s_flags.c ft_p_type.c \
-			ft_diux_types.c 
-FT_PRINTF_SRCS = ${addprefix ${FT_PRINTF_PATH}, ${FT_PRINTF_FILES}}
-
 GNL_PATH = ../get_next_line/
 GNL_FILES = get_next_line.c
 GNL_SRCS = ${addprefix ${GNL_PATH}, ${GNL_FILES}}
@@ -36,8 +30,8 @@ SRCS = srcs/parsing/ft_check_map.c srcs/parsing/ft_colors.c srcs/parsing/ft_reso
 		srcs/parsing/ft_textures.c srcs/parsing/ft_utils.c srcs/parsing/ft_map.c main.c \
 		srcs/raycasting/ft_intersections.c srcs/raycasting/ft_r_utils.c \
 		srcs/raycasting/ft_raycasting.c srcs/raycasting/ft_draw.c \
-		srcs/raycasting/ft_keys_init.c srcs/raycasting/ft_move.c srcs/raycasting/ft_rot.c \
-		srcs/raycasting/ft_keys.c \
+		srcs/raycasting/ft_move.c srcs/raycasting/ft_rot.c \
+		srcs/raycasting/ft_keys.c srcs/utils/ft_error.c srcs/utils/ft_init.c \
 		${GNL_SRCS} ${FT_PRINTF_SRCS} ${MINILIBX_SRCS}
 
 SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \

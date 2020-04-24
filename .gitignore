@@ -1,6 +1,7 @@
 /srcs/parsing/*.o
 main.o
 /srcs/raycasting/*.o
+/srcs/utils/*.o
 ../mlx/*.o
 ../mlx/*.a
 ../mlx/*.a

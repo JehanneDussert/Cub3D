@@ -25,18 +25,18 @@ int ft_draw_mode(t_vec *vec, int color)
 	return (color);
 }
 
-void ft_draw_ray(int i, int start, int end, t_map *info, t_wdw *wdw, t_vec *vec)
+void ft_draw_ray(int i, t_all *all)
 {
 	int j;
 	int color;
 
 	j = -1;
 	color = 0;
-	color = ft_draw_mode(vec, color);
-	while (++j < start)
-		wdw->data[j * info->reso[0] + i] = SKYBLUE;
-	while (j < end)
-		wdw->data[(j++) * info->reso[0] + i] = color;
-	while (j < info->reso[1])
-		wdw->data[(j++) * info->reso[0] + i] = GREY_FLOOR;
+	color = ft_draw_mode(all->vec, color);
+	while (++j < all->vec->drawStart)
+		all->image->data[j * all->map->reso[0] + i] = SKYBLUE;
+	while (j < all->vec->drawEnd)
+		all->image->data[(j++) * all->map->reso[0] + i] = color;
+	while (j < all->map->reso[1])
+		all->image->data[(j++) * all->map->reso[0] + i] = GREY_FLOOR;
 }

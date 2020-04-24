@@ -12,35 +12,35 @@
 
 #include "../../includes/cub3d.h"
 
-void ft_ray_dir(t_map *info, t_vec *vec, t_player *player, int i)
+void ft_ray_dir(t_vec *vec, t_map *map, int i)
 {
 	// On calcule la position du ray et sa direction
-	vec->camera_x = 2 * i / (double)info->reso[0] - 1; // Coordonnee x sur l'ecran
-	vec->ray_dir_x = player->dir[0] + player->plane[0] * vec->camera_x;
-	vec->ray_dir_y = player->dir[1] + player->plane[1] * vec->camera_x;
+	vec->camera_x = 2 * i / (double)map->reso[0] - 1; // Coordonnee x sur l'ecran
+	vec->ray_dir_x = vec->dir[0] + vec->plane[0] * vec->camera_x;
+	vec->ray_dir_y = vec->dir[1] + vec->plane[1] * vec->camera_x;
 }
 
-void ft_init_sideDist(t_vec *vec, t_map *info)
+void ft_init_sideDist(t_vec *vec, t_map *map)
 {
 	if (vec->ray_dir_x < 0)
 	{
 		vec->step_x = -1;
-		vec->sideDist_x = (info->pos_x - vec->map_x) * vec->delta_dist_x;
+		vec->sideDist_x = (map->pos_x - vec->map_x) * vec->delta_dist_x;
 	}
 	else
 	{
 		vec->step_x = 1;
-		vec->sideDist_x = (vec->map_x + 1.0 - info->pos_x) * vec->delta_dist_x;
+		vec->sideDist_x = (vec->map_x + 1.0 - map->pos_x) * vec->delta_dist_x;
 	}
 	if (vec->ray_dir_y < 0)
 	{
 		vec->step_y = -1;
-		vec->sideDist_y = (info->pos_y - vec->map_y) * vec->delta_dist_y;
+		vec->sideDist_y = (map->pos_y - vec->map_y) * vec->delta_dist_y;
 	}
 	else
 	{
 		vec->step_y = 1;
-		vec->sideDist_y = (vec->map_y + 1.0 - info->pos_y) * vec->delta_dist_y;
+		vec->sideDist_y = (vec->map_y + 1.0 - map->pos_y) * vec->delta_dist_y;
 	}
 }
 
@@ -71,12 +71,12 @@ void ft_hit(char **map, t_vec *vec)
 	}
 }
 
-int ft_vec_side(t_vec *vec, t_map *info)
+int ft_vec_side(t_vec *vec, t_map *map)
 {
 	if (vec->side == 0)
-		vec->dist = (vec->map_x - info->pos_x + (1 - vec->step_x) / 2) / vec->ray_dir_x;
+		vec->dist = (vec->map_x - map->pos_x + (1 - vec->step_x) / 2) / vec->ray_dir_x;
 	else
-		vec->dist = (vec->map_y - info->pos_y + (1 - vec->step_y) / 2) / vec->ray_dir_y;
+		vec->dist = (vec->map_y - map->pos_y + (1 - vec->step_y) / 2) / vec->ray_dir_y;
 	return (vec->side);
 }
 
@@ -97,55 +97,40 @@ void ft_init_draw(t_vec *vec, int height)
 		vec->drawEnd = height - 1;
 }
 
-void ft_delta_dist(t_map *info, t_player *player, t_vec *vec, t_wdw *wdw)
+t_all	*ft_delta_dist(t_vec *vec, t_map *map, t_all *all)
 {
 	int i;
 
 	i = -1;
-	while (++i < info->reso[0])
+	while (++i < map->reso[0])
 	{
 		/* 
 		** On calcule la position du ray et la direction
 		*/
-		ft_ray_dir(info, vec, player, i);
-		vec->map_x = (int)info->pos_x;
-		vec->map_y = (int)info->pos_y;
+		ft_ray_dir(vec, map, i);
+		vec->map_x = (int)map->pos_x;
+		vec->map_y = (int)map->pos_y;
 		vec->hit = 0;
 		/*
 		** Distance pour aller d'un cote x a un autre et d'un cote y a un autre
 		*/
 		vec->delta_dist_x = (vec->ray_dir_y == 0) ? 0 : ((vec->ray_dir_x == 0) ? 1 : ft_abs(1 / vec->ray_dir_x));
 		vec->delta_dist_y = (vec->ray_dir_x == 0) ? 0 : ((vec->ray_dir_y == 0) ? 1 : ft_abs(1 / vec->ray_dir_y));
-		ft_init_sideDist(vec, info);
+		ft_init_sideDist(vec, map);
 		/*
 		** DDA : on va avancer dans les x / y jusqu'a frapper un mur
 		*/
-		ft_hit(info->map, vec);
+		ft_hit(map->map, vec);
 		/*
 		** On va calculer la longueur du rayon-mur afin de calculer la taille du mur a dessiner
 		*/
-		vec->side = ft_vec_side(vec, info);
-		ft_init_draw(vec, info->reso[1]);
+		vec->side = ft_vec_side(vec, map);
+		ft_init_draw(vec, map->reso[1]);
 		/*
 		** if (side == 1)
 		**		color = color / 2;
 		*/
-		ft_draw_ray(i, vec->drawStart, vec->drawEnd, info, wdw, vec);
+		ft_draw_ray(i, all);
 	}
-}
-
-void ft_ray(t_map *info, t_image *image, t_player *player, t_wdw *wdw)
-{
-	t_vec *vec;
-
-	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
-		return;
-	// On trace un ray par coordonnee horizontale
-	image->win_ptr = mlx_new_window(image->mlx_ptr, info->reso[0], info->reso[1], image->title);
-	ft_def_dir_plane(info->ori, image->player);
-	image->img_ptr = mlx_new_image(image->mlx_ptr, info->reso[0], info->reso[1]);
-	wdw->data = (int *)mlx_get_data_addr(image->img_ptr, &wdw->bpp, &wdw->size_l, &wdw->endian);
-	ft_delta_dist(info, player, vec, wdw);
-	mlx_put_image_to_window(image->mlx_ptr, image->win_ptr, image->img_ptr, 0, 0);
-	//mlx_loop(image->mlx_ptr);
+	return (all);
 }

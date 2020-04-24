@@ -26,11 +26,12 @@ int		ft_check_info(char *line, int *reso, int *i)
 	return (*reso);
 }
 
-void	ft_check_resolution(char *line, t_map *info, char *map, int *i)
+int	ft_check_resolution(char *line, t_map *info, int *i)
 {
 	if (!(ft_check_info(line, &info->reso[0], i)))
-		ft_error(&map, &line, &info, "[ERROR]\nWrong resolution.");
+		return (-1);
 	if (!(ft_check_info(line, &info->reso[1], i)))
-		ft_error(&map, &line, &info, "[ERROR]\nWrong resolution.");
+		return (-1);
 	*i = 0;
+	return (0);
 }
