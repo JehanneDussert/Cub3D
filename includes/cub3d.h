@@ -57,6 +57,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+typedef struct		s_text
+{
+	void	*ptr;
+	char	*img;
+	int		bpp;
+	int		size_l;
+	int		endian;
+}					t_text;
+
 typedef struct	s_map
 {
 	int			reso[2];
@@ -131,6 +140,7 @@ typedef struct	s_all
 	t_map		*map;
 	t_image		*image;
 	t_vec		*vec;
+	t_text		*text;
 }				t_all;
 
 /* Parsing */
@@ -155,14 +165,13 @@ void			ft_draw_ray(int i, t_all *all);
 int				keyRelease(int keycode, t_all *all);
 int				keyPress(int keycode, t_vec *vec);
 int				keyDeal(t_all *all);
-int				KillWindow(int key, t_vec *vec);
+int				KillWindow(int key, t_all *all);
 void			move_up(t_vec *vec, t_map *map);
 void			move_down(t_vec *vec, t_map *map);
 void			move_right(t_vec *vec, t_map *map);
 void			move_left(t_vec *vec, t_map *map);
 void			turn_right(t_vec *vec);
 void			turn_left(t_vec *vec);
-int				KillWindow(int key, t_vec *vec);
 
 /* Utils */
 int     		ft_error(int msg, t_all *all);
@@ -173,5 +182,6 @@ int				ft_l_atoi(const char *str, int *i);
 t_all		    *ft_init_all(t_all *all);
 t_map			*ft_init_map(t_map *map);
 t_vec			*ft_keys_init(t_vec *vec);
+int				ft_init_texture(t_all *all);
 
 #endif

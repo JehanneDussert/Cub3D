@@ -12,46 +12,30 @@
 
 #include "../../includes/cub3d.h"
 
-int keyPress(int keycode, t_vec *vec)
+int KillWindow(int key, t_all *all)
 {
-	// En fonction de la keyPressed on va turn / move
-	printf("hey\n");
-	if (keycode == W_KEY)
-		vec->keyUp = 1;
-	if (keycode == S_KEY)
-		vec->keyDown = 1;
-	if (keycode == D_KEY)
-		vec->keyRight = 1;
-  	if (keycode == A_KEY)
-    	vec->keyLeft= 1;
-  	if (keycode == ARROW_RIGHT)
-    	vec->keyTurnRight = 1;
-  	if (keycode == ARROW_LEFT)
-   		vec->keyTurnLeft = 1;
-  	if (keycode == 12)
-    	vec->moveSpeed = (vec->moveSpeed < 0.18) ?  (vec->moveSpeed * 1.5) : vec->moveSpeed;
-  	if (keycode == 6)
-    	vec->moveSpeed = (vec->moveSpeed > 0.08) ?  (vec->moveSpeed / 1.5) : vec->moveSpeed; 
-  	/*if (keycode == 46)
-  	{
-		if (mlx->move.mode == 0)
-    		mlx->move.mode = 1;
-    	else if (mlx->move.mode == 1)
-      		mlx->move.mode = 2;
-    	else
-    		mlx->move.mode = 0;
-  	}*/
-	if (keycode == 53)
-    	vec->killWindow = 1;
-	return (0);
+	int		i;
+
+	(void)key;
+	i = 0;
+	while (all->map->map[i])
+	{
+		free(all->map->map[i]);
+		i++;
+	}
+	free(all->map->map[i]);
+	free(all->map->map);
+	mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
+	mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
+	exit(0);
+	return(1);
 }
 
 int keyRelease(int keycode, t_all *all)
 {
 	// On va réinitialiser les keys à 0 pour arrêter de turn / move
-	//printf("This is my key :%d\n", keycode);
+	printf("This is my key :%d\n", keycode);
 	printf("In function key release\n");
-	//keyDeal(all);
 	if (keycode == 13)
     	all->vec->keyUp = 0;
   	if (keycode == 1)
@@ -66,38 +50,71 @@ int keyRelease(int keycode, t_all *all)
     	all->vec->keyTurnLeft = 0;
   	if (keycode == 53)
     	all->vec->killWindow = 0;
-	//keyDeal(all);
+	return (0);
+}
+
+int keyPress(int keycode, t_vec *vec)
+{
+	// En fonction de la keyPressed on va turn / move
+	printf("This is my key :%d\n", keycode);
+	if (keycode == W_KEY)
+		vec->keyUp = 1;
+	if (keycode == S_KEY)
+		vec->keyDown = 1;
+	if (keycode == D_KEY)
+		vec->keyRight = 1;
+  	if (keycode == A_KEY)
+    	vec->keyLeft= 1;
+  	if (keycode == ARROW_RIGHT)
+    	vec->keyTurnRight = 1;
+  	if (keycode == ARROW_LEFT)
+   		vec->keyTurnLeft = 1;
+	else
+		printf("%d\n", keycode);
+  	/*if (keycode == 12)
+    	vec->moveSpeed = (vec->moveSpeed < 0.18) ?  (vec->moveSpeed * 1.5) : vec->moveSpeed;
+  	if (keycode == 6)
+    	vec->moveSpeed = (vec->moveSpeed > 0.08) ?  (vec->moveSpeed / 1.5) : vec->moveSpeed; 
+  	*/
+	/*if (keycode == 46)
+  	{
+		if (mlx->move.mode == 0)
+    		mlx->move.mode = 1;
+    	else if (mlx->move.mode == 1)
+      		mlx->move.mode = 2;
+    	else
+    		mlx->move.mode = 0;
+  	}*/
+	/*if (keycode == 53)
+    	vec->killWindow = 1;*/
 	return (0);
 }
 
 int keyDeal(t_all *all)
 {
-	printf("yoyoyo\n");
-	if (all->vec->keyUp == 1)
-		move_up(all->vec, all->map);
-  	if (all->vec->keyDown == 1)
-    	move_down(all->vec, all->map);
-  	if (all->vec->keyRight == 1)
-    	move_right(all->vec, all->map);
-  	if (all->vec->keyLeft == 1)
-    	move_left(all->vec, all->map);
-  	if (all->vec->keyTurnRight == 1)
-    	turn_right(all->vec);
-  	if (all->vec->keyTurnLeft == 1)
-    	turn_left(all->vec);
-	if (all->vec->killWindow == 1)
-		exit (0);
-	printf("keydeal\n");
-  	ft_raycasting(all);  
-	printf("new raycasting\n");
-	return (0);
-}
+	int i;
 
-int KillWindow(int key, t_vec *vec)
-{
-	(void)key;
-	(void)vec;
-  	exit (0);
+	i = -1;
+	if (!(all->image->img_ptr = mlx_new_image(all->image->mlx_ptr, all->map->reso[0], all->map->reso[1])))
+		return (ft_error(7, all));
+	printf("new image ok\n");
+	if (!(all->image->data = (int *)mlx_get_data_addr(all->image->img_ptr, &all->image->bpp, &all->image->size_l, &all->image->endian)))
+		return (ft_error(7, all));
+	printf("data addr ok\n");
+	all->image->bpp = all->image->bpp / 8;
+	/*while (++i < all->map->reso[0] * (all->map->reso[1] / 2))
+		*(int *)&all->image->data[i * all->image->bpp] = all->map->c_path;
+	while (++i < all->map->reso[0] * (all->map->reso[1]))
+		*(int *)&all->image->data[i * all->image->bpp] = all->map->f_path;
+	*/
+	if (!(all = ft_raycasting(all)))
+		return (ft_error(4, all));
+	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr, all->image->img_ptr, 0, 0)))
+		return (ft_error(7, all));
+	printf("put image ok\n");
+	//KillWindow(0, all);
+	printf("keydeal\n");
+	return (0);
 }
 
 /*

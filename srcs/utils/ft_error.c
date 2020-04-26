@@ -25,6 +25,10 @@ int     ft_error(int msg, t_all *all)
         ft_putstr_fd("[ERROR]\nFile opening problem.", 0);
     else if (msg == 6)
         ft_putstr_fd("[ERROR]\nWrong resolution.", 0);
-    ft_free_all(&all);
-    return (-1);
+    else if (msg == 7)
+        ft_putstr_fd("[ERROR]\nMlx failed.", 0);
+    else if (msg == 8)
+        ft_putstr_fd("[ERROR]\nWrong texture.", 0);
+    KillWindow(0, all);
+    return (1);
 }
