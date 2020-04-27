@@ -35,17 +35,47 @@ int		ft_init_texture(t_all *all)
 	return (0);
 }
 
-t_vec   *ft_keys_init(t_vec *vec)
+t_keys *ft_keys_init(t_keys *keys)
 {
-    vec->keyUp = 0;
-	vec->keyDown = 0;
-	vec->keyLeft = 0;
-	vec->keyRight = 0;
-	vec->keyTurnRight = 0;
-	vec->keyTurnLeft = 0;
-	vec->killWindow = 0;
-    vec->moveSpeed = 0.05;
-    vec->rotSpeed = 0.01;
+	keys->keyUp = 0;
+	keys->keyDown = 0;
+	keys->keyLeft = 0;
+	keys->keyRight = 0;
+	keys->keyTurnRight = 0;
+	keys->keyTurnLeft = 0;
+	keys->moveSpeed = 0.05;
+	keys->rotSpeed = 0.01;
+	keys->killWindow = 0;
+	return (keys);
+}
+
+t_vec   *ft_vec_init(t_vec *vec)
+{
+	vec->map_x = 0;
+	vec->map_y = 0;
+	vec->sideDist_x = 0.0;
+	vec->sideDist_y = 0.0;
+	vec->step_x = 0;
+	vec->step_y = 0;
+	vec->side = 0;
+	vec->hit = 0;
+	vec->dist = 0.0;
+	vec->ray_dir_x = 0.0;
+	vec->ray_dir_y = 0.0;
+	vec->delta_dist_x = 0.0;
+	vec->delta_dist_y = 0.0;
+	vec->camera_x = 0.0;
+	vec->lineHeight = 0;
+	vec->drawStart = 0;
+	vec->drawEnd = 0;
+	vec->oldDir_x = 0.0;
+	vec->oldDir_y = 0.0;
+	vec->oldPlane_x = 0.0;
+	vec->oldPlane_y = 0.0;
+	vec->dir[0] = 0;
+	vec->dir[1] = 0;
+	vec->plane[0] = 0.66;
+	vec->plane[1] = 0.0;
     return (vec);
 }
 
@@ -62,6 +92,7 @@ t_map	*ft_init_map(t_map *map)
 	map->c_path = -1;
 	map->pos_x = 0;
 	map->pos_y = 0;
+	map->ori = ' ';
 	return (map);
 }
 
@@ -75,9 +106,13 @@ t_all    *ft_init_all(t_all *all)
         return (NULL);
 	if (!(all->text = (t_text *)malloc(sizeof(t_text))))
         return (NULL);
-    if (!(ft_keys_init(all->vec)))
+	if (!(all->keys = (t_keys *)malloc(sizeof(t_keys))))
+        return (NULL);
+    if (!(ft_vec_init(all->vec)))
         return (NULL);
     if (!(ft_init_map(all->map)))
+        return (NULL);
+	if (!(ft_keys_init(all->keys)))
         return (NULL);
     return (all);
 }

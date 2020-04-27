@@ -37,44 +37,44 @@ int keyRelease(int keycode, t_all *all)
 	printf("This is my key :%d\n", keycode);
 	printf("In function key release\n");
 	if (keycode == 13)
-    	all->vec->keyUp = 0;
+    	all->keys->keyUp = 0;
   	if (keycode == 1)
-    	all->vec->keyDown = 0;
+    	all->keys->keyDown = 0;
   	if (keycode == 2)
-    	all->vec->keyRight = 0;
+    	all->keys->keyRight = 0;
   	if (keycode == 0)
-    	all->vec->keyLeft = 0;
+    	all->keys->keyLeft = 0;
   	if (keycode == 124)
-    	all->vec->keyTurnRight = 0;
+    	all->keys->keyTurnRight = 0;
   	if (keycode == 123)
-    	all->vec->keyTurnLeft = 0;
+    	all->keys->keyTurnLeft = 0;
   	if (keycode == 53)
-    	all->vec->killWindow = 0;
+    	all->keys->killWindow = 0;
 	return (0);
 }
 
-int keyPress(int keycode, t_vec *vec)
+int keyPress(int keycode, t_keys *keys)
 {
 	// En fonction de la keyPressed on va turn / move
 	printf("This is my key :%d\n", keycode);
 	if (keycode == W_KEY)
-		vec->keyUp = 1;
+		keys->keyUp = 1;
 	if (keycode == S_KEY)
-		vec->keyDown = 1;
+		keys->keyDown = 1;
 	if (keycode == D_KEY)
-		vec->keyRight = 1;
+		keys->keyRight = 1;
   	if (keycode == A_KEY)
-    	vec->keyLeft= 1;
+    	keys->keyLeft= 1;
   	if (keycode == ARROW_RIGHT)
-    	vec->keyTurnRight = 1;
+    	keys->keyTurnRight = 1;
   	if (keycode == ARROW_LEFT)
-   		vec->keyTurnLeft = 1;
+   		keys->keyTurnLeft = 1;
 	else
 		printf("%d\n", keycode);
   	/*if (keycode == 12)
-    	vec->moveSpeed = (vec->moveSpeed < 0.18) ?  (vec->moveSpeed * 1.5) : vec->moveSpeed;
+    	keys->moveSpeed = (keys->moveSpeed < 0.18) ?  (keys->moveSpeed * 1.5) : keys->moveSpeed;
   	if (keycode == 6)
-    	vec->moveSpeed = (vec->moveSpeed > 0.08) ?  (vec->moveSpeed / 1.5) : vec->moveSpeed; 
+    	keys->moveSpeed = (keys->moveSpeed > 0.08) ?  (keys->moveSpeed / 1.5) : keys->moveSpeed; 
   	*/
 	/*if (keycode == 46)
   	{
@@ -86,7 +86,7 @@ int keyPress(int keycode, t_vec *vec)
     		mlx->move.mode = 0;
   	}*/
 	/*if (keycode == 53)
-    	vec->killWindow = 1;*/
+    	keys->killWindow = 1;*/
 	return (0);
 }
 
@@ -111,9 +111,10 @@ int keyDeal(t_all *all)
 		return (ft_error(4, all));
 	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr, all->image->img_ptr, 0, 0)))
 		return (ft_error(7, all));
+	mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
+	//	return (ft_error(7, all));
 	printf("put image ok\n");
 	//KillWindow(0, all);
-	printf("keydeal\n");
 	return (0);
 }
 

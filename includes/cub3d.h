@@ -116,6 +116,16 @@ typedef struct s_vec
 	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
+	double		oldDir_x;
+	double		oldDir_y;
+	double		oldPlane_x;
+	double		oldPlane_y;
+	int			dir[2];
+	double		plane[2];
+}				t_vec;
+
+typedef struct	s_keys
+{
 	int			keyUp;
 	int			keyDown;
 	int			keyLeft;
@@ -125,15 +135,7 @@ typedef struct s_vec
 	double		moveSpeed;
 	double		rotSpeed;
 	int			killWindow;
-	double		oldDir_x;
-	double		oldDir_y;
-	double		oldPlane_x;
-	double		oldPlane_y;
-	int			dir[2];
-	double		plane[2];
-	t_map		*map;
-	t_image		*img;
-}				t_vec;
+}				t_keys;
 
 typedef struct	s_all
 {
@@ -141,6 +143,7 @@ typedef struct	s_all
 	t_image		*image;
 	t_vec		*vec;
 	t_text		*text;
+	t_keys		*keys;
 }				t_all;
 
 /* Parsing */
@@ -157,21 +160,28 @@ void			ft_print(t_all *all);
 
 /* Raycasting */
 t_all			*ft_raycasting(t_all *all);
-t_all			*ft_def_dir_plane(t_all *all);
-t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
 void			ft_ray_dir(t_vec *vec, t_map *map, int i);
 void			ft_hit(char **map, t_vec *vec);
+
+/* Draw */
 void			ft_draw_ray(int i, t_all *all);
+int				ft_draw_mode(t_vec *vec, int color);
+
+/* Keys */
 int				keyRelease(int keycode, t_all *all);
-int				keyPress(int keycode, t_vec *vec);
+int				keyPress(int keycode, t_keys *keys);
 int				keyDeal(t_all *all);
 int				KillWindow(int key, t_all *all);
+
+/* Move */
 void			move_up(t_vec *vec, t_map *map);
 void			move_down(t_vec *vec, t_map *map);
 void			move_right(t_vec *vec, t_map *map);
 void			move_left(t_vec *vec, t_map *map);
 void			turn_right(t_vec *vec);
 void			turn_left(t_vec *vec);
+t_all			*ft_def_dir_plane(t_all *all);
+t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
 
 /* Utils */
 int     		ft_error(int msg, t_all *all);
@@ -181,7 +191,8 @@ int				ft_l_atoi(const char *str, int *i);
 /* Init */
 t_all		    *ft_init_all(t_all *all);
 t_map			*ft_init_map(t_map *map);
-t_vec			*ft_keys_init(t_vec *vec);
+t_vec			*ft_vec_init(t_vec *vec);
+t_keys			*ft_keys_init(t_keys *keys);
 int				ft_init_texture(t_all *all);
 
 #endif
