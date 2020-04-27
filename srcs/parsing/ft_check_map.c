@@ -89,8 +89,8 @@ void	ft_print(t_all *all)
 	printf("My w_path :%s\n", all->map->w_path);
 	printf("My spr_path :%s\n", all->map->spr_path);
 	printf("My ori :%c\n", all->map->ori);
-//	printf("My x :%f\n", all->map->pos_x);
-//	printf("My y :%f\n", all->map->pos_y);
+	printf("My x :%f\n", all->map->pos_x);
+	printf("My y :%f\n", all->map->pos_y);
 	int i = 0;
 	while (all->map->map[i])
 	{

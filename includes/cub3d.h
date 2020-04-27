@@ -101,17 +101,17 @@ typedef struct s_vec
 {
 	int			map_x;
 	int			map_y;
-	double		sideDist_x;
-	double		sideDist_y;
+	double		sideDistX;
+	double		sideDistY;
 	int			step_x;
 	int			step_y;
 	int			side;
 	int			hit;
 	double		dist;
-	double		ray_dir_x;
-	double		ray_dir_y;
-	double		delta_dist_x;
-	double		delta_dist_y;
+	double		rayDirX;
+	double		rayDirY;
+	double		deltaDistX;
+	double		deltaDistY;
 	double		camera_x;
 	int			lineHeight;
 	int			drawStart;
@@ -120,8 +120,13 @@ typedef struct s_vec
 	double		oldDir_y;
 	double		oldPlane_x;
 	double		oldPlane_y;
-	int			dir[2];
-	double		plane[2];
+	// avant int
+	// int		dir[2];
+	double		dirX;
+	double		dirY;
+	//double		plane[2];
+	double		planeX;
+	double		planeY;
 }				t_vec;
 
 typedef struct	s_keys
@@ -161,23 +166,25 @@ void			ft_print(t_all *all);
 /* Raycasting */
 t_all			*ft_raycasting(t_all *all);
 void			ft_ray_dir(t_vec *vec, t_map *map, int i);
-void			ft_hit(char **map, t_vec *vec);
+void			ft_hit(t_map *map, t_vec *vec);
 
 /* Draw */
 void			ft_draw_ray(int i, t_all *all);
 int				ft_draw_mode(t_vec *vec, int color);
 
 /* Keys */
-int				keyRelease(int keycode, t_all *all);
+int				keyRelease(int keycode, t_keys *keys);
 int				keyPress(int keycode, t_keys *keys);
 int				keyDeal(t_all *all);
 int				KillWindow(int key, t_all *all);
 
 /* Move */
+int  			ft_move(t_all *all);
 void			move_up(t_all *all);
 void			move_down(t_all *all);
 void			move_right(t_all *all);
 void			move_left(t_all *all);
+int  			ft_rotation(t_all *all);
 void			turn_right(t_vec *vec, t_keys *keys);
 void			turn_left(t_vec *vec, t_keys *keys);
 t_all			*ft_def_dir_plane(t_all *all);

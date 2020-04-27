@@ -2,32 +2,52 @@
 
 void move_up(t_all *all)
 {
-  if(all->map->map[(int)(all->map->pos_x + all->vec->ray_dir_x * all->keys->moveSpeed)][(int)(all->map->pos_y)] == 0) 
-    all->map->pos_x += all->vec->ray_dir_x * all->keys->moveSpeed;
-  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->ray_dir_y * all->keys->moveSpeed)] == 0)
-    all->map->pos_y += all->vec->ray_dir_y * all->keys->moveSpeed;
+  printf("move up\n");
+  if(all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x + all->vec->dirX * all->keys->moveSpeed)] == '0') 
+    all->map->pos_x += all->vec->dirX * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_y + all->vec->dirY * all->keys->moveSpeed)][(int)(all->map->pos_x)] == '0')
+    all->map->pos_y += all->vec->dirY * all->keys->moveSpeed;
 }
 
 void move_down(t_all *all)
 {
-  if(all->map->map[(int)(all->map->pos_x + all->vec->ray_dir_x * all->keys->moveSpeed)][(int)(all->map->pos_y)] == 0) 
-    all->map->pos_x -= all->vec->ray_dir_x * all->keys->moveSpeed;
-  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->ray_dir_y * all->keys->moveSpeed)] == 0)
-    all->map->pos_y -= all->vec->ray_dir_y * all->keys->moveSpeed;
+  printf("move down\n");
+  if(all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x - all->vec->dirX * all->keys->moveSpeed)] == '0') 
+    all->map->pos_x -= all->vec->dirX * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_y - all->vec->dirY * all->keys->moveSpeed)][(int)(all->map->pos_x)] == '0')
+    all->map->pos_y -= all->vec->dirY * all->keys->moveSpeed;
 }
 
 void move_right(t_all *all)
 {
-  if(all->map->map[(int)(all->map->pos_x + all->vec->plane[0] * all->keys->moveSpeed)][(int)(all->map->pos_y)] == '0') 
-     all->map->pos_x += all->vec->plane[0] * all->keys->moveSpeed;
-  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->plane[1] * all->keys->moveSpeed)] == '0')
-    all->map->pos_y += all->vec->plane[1] * all->keys->moveSpeed;
+  printf("move right\n");
+  if(all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x + all->vec->planeX * all->keys->moveSpeed)] == '0') 
+     all->map->pos_x += all->vec->planeX * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_y + all->vec->planeY * all->keys->moveSpeed)][(int)(all->map->pos_x)] == '0')
+    all->map->pos_y += all->vec->planeY * all->keys->moveSpeed;
 }
 
 void move_left(t_all *all)
 {
-  if(all->map->map[(int)(all->map->pos_x + all->vec->plane[0] * all->keys->moveSpeed)][(int)(all->map->pos_y)] == '0') 
-     all->map->pos_x -= all->vec->plane[0] * all->keys->moveSpeed;
-  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->plane[1] * all->keys->moveSpeed)] == '0')
-    all->map->pos_y -= all->vec->plane[1] * all->keys->moveSpeed;
+  printf("move left\n");
+  if(all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x - all->vec->planeX * all->keys->moveSpeed)] == '0') 
+     all->map->pos_x -= all->vec->planeX * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_y - all->vec->planeY * all->keys->moveSpeed)][(int)(all->map->pos_x)] == '0')
+    all->map->pos_y -= all->vec->planeY * all->keys->moveSpeed;
+}
+
+int  ft_move(t_all *all)
+{
+  if (all->keys->keyUp == 1)
+    move_up(all);
+  if (all->keys->keyDown == 1)
+    move_down(all);
+  if (all->keys->keyLeft == 1)
+    move_left(all);
+  if (all->keys->keyRight == 1)
+    move_right(all);
+  if ((ft_rotation(all) != 0))
+    return (ft_error(9, all));
+  printf("heyyy\n");
+  return (0);
 }

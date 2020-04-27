@@ -53,17 +53,17 @@ t_vec   *ft_vec_init(t_vec *vec)
 {
 	vec->map_x = 0;
 	vec->map_y = 0;
-	vec->sideDist_x = 0.0;
-	vec->sideDist_y = 0.0;
+	vec->sideDistX = 0.0;
+	vec->sideDistY = 0.0;
 	vec->step_x = 0;
 	vec->step_y = 0;
 	vec->side = 0;
 	vec->hit = 0;
 	vec->dist = 0.0;
-	vec->ray_dir_x = 0.0;
-	vec->ray_dir_y = 0.0;
-	vec->delta_dist_x = 0.0;
-	vec->delta_dist_y = 0.0;
+	vec->rayDirX = 0.0;
+	vec->rayDirY = 0.0;
+	vec->deltaDistX = 0.0;
+	vec->deltaDistY = 0.0;
 	vec->camera_x = 0.0;
 	vec->lineHeight = 0;
 	vec->drawStart = 0;
@@ -72,10 +72,10 @@ t_vec   *ft_vec_init(t_vec *vec)
 	vec->oldDir_y = 0.0;
 	vec->oldPlane_x = 0.0;
 	vec->oldPlane_y = 0.0;
-	vec->dir[0] = 0;
-	vec->dir[1] = 0;
-	vec->plane[0] = 0.66;
-	vec->plane[1] = 0.0;
+	vec->dirX = -1;
+	vec->dirY = 0;
+	vec->planeX = 0.66;
+	vec->planeY = 0;
     return (vec);
 }
 
