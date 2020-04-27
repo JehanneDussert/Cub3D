@@ -174,12 +174,12 @@ int				keyDeal(t_all *all);
 int				KillWindow(int key, t_all *all);
 
 /* Move */
-void			move_up(t_vec *vec, t_map *map);
-void			move_down(t_vec *vec, t_map *map);
-void			move_right(t_vec *vec, t_map *map);
-void			move_left(t_vec *vec, t_map *map);
-void			turn_right(t_vec *vec);
-void			turn_left(t_vec *vec);
+void			move_up(t_all *all);
+void			move_down(t_all *all);
+void			move_right(t_all *all);
+void			move_left(t_all *all);
+void			turn_right(t_vec *vec, t_keys *keys);
+void			turn_left(t_vec *vec, t_keys *keys);
 t_all			*ft_def_dir_plane(t_all *all);
 t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
 

@@ -1,33 +1,33 @@
 #include "../../includes/cub3d.h"
 
-void move_up(t_vec *vec, t_map *map)
+void move_up(t_all *all)
 {
-  if(map->map[(int)(map->pos_x + vec->ray_dir_x * vec->moveSpeed)][(int)(map->pos_y)] == 0) 
-    map->pos_x += vec->ray_dir_x * vec->moveSpeed;
-  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->ray_dir_y * vec->moveSpeed)] == 0)
-    map->pos_y += vec->ray_dir_y * vec->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x + all->vec->ray_dir_x * all->keys->moveSpeed)][(int)(all->map->pos_y)] == 0) 
+    all->map->pos_x += all->vec->ray_dir_x * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->ray_dir_y * all->keys->moveSpeed)] == 0)
+    all->map->pos_y += all->vec->ray_dir_y * all->keys->moveSpeed;
 }
 
-void move_down(t_vec *vec, t_map *map)
+void move_down(t_all *all)
 {
-  if(map->map[(int)(map->pos_x + vec->ray_dir_x * vec->moveSpeed)][(int)(map->pos_y)] == 0) 
-    map->pos_x -= vec->ray_dir_x * vec->moveSpeed;
-  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->ray_dir_y * vec->moveSpeed)] == 0)
-    map->pos_y -= vec->ray_dir_y * vec->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x + all->vec->ray_dir_x * all->keys->moveSpeed)][(int)(all->map->pos_y)] == 0) 
+    all->map->pos_x -= all->vec->ray_dir_x * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->ray_dir_y * all->keys->moveSpeed)] == 0)
+    all->map->pos_y -= all->vec->ray_dir_y * all->keys->moveSpeed;
 }
 
-void move_right(t_vec *vec, t_map *map)
+void move_right(t_all *all)
 {
-  if(map->map[(int)(map->pos_x + vec->plane[0] * vec->moveSpeed)][(int)(map->pos_y)] == '0') 
-     map->pos_x += vec->plane[0] * vec->moveSpeed;
-  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->plane[1] * vec->moveSpeed)] == '0')
-    map->pos_y += vec->plane[1] * vec->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x + all->vec->plane[0] * all->keys->moveSpeed)][(int)(all->map->pos_y)] == '0') 
+     all->map->pos_x += all->vec->plane[0] * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->plane[1] * all->keys->moveSpeed)] == '0')
+    all->map->pos_y += all->vec->plane[1] * all->keys->moveSpeed;
 }
 
-void move_left(t_vec *vec, t_map *map)
+void move_left(t_all *all)
 {
-  if(map->map[(int)(map->pos_x + vec->plane[0] * vec->moveSpeed)][(int)(map->pos_y)] == '0') 
-     map->pos_x -= vec->plane[0] * vec->moveSpeed;
-  if(map->map[(int)(map->pos_x)][(int)(map->pos_y + vec->plane[1] * vec->moveSpeed)] == '0')
-    map->pos_y -= vec->plane[1] * vec->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x + all->vec->plane[0] * all->keys->moveSpeed)][(int)(all->map->pos_y)] == '0') 
+     all->map->pos_x -= all->vec->plane[0] * all->keys->moveSpeed;
+  if(all->map->map[(int)(all->map->pos_x)][(int)(all->map->pos_y + all->vec->plane[1] * all->keys->moveSpeed)] == '0')
+    all->map->pos_y -= all->vec->plane[1] * all->keys->moveSpeed;
 }
