@@ -16,22 +16,22 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-LIBFT_PATH = ../libft/
+LIBFT_PATH = libft/
 LIBFT = libft.a
 
-GNL_PATH = ../get_next_line/
+GNL_PATH = get_next_line/
 GNL_FILES = get_next_line.c
 GNL_SRCS = ${addprefix ${GNL_PATH}, ${GNL_FILES}}
 
-MINILIBX_PATH = ../minilibx/
+MINILIBX_PATH = minilibx/
 MINILIBX = libmlx.a
 
-SRCS = srcs/parsing/ft_check_map.c srcs/parsing/ft_colors.c srcs/parsing/ft_resolution.c \
-		srcs/parsing/ft_textures.c srcs/parsing/ft_utils.c srcs/parsing/ft_map.c main.c \
-		srcs/raycasting/ft_intersections.c srcs/raycasting/ft_r_utils.c \
-		srcs/raycasting/ft_raycasting.c srcs/raycasting/ft_draw.c \
-		srcs/raycasting/ft_move.c srcs/raycasting/ft_rot.c \
-		srcs/raycasting/ft_keys.c srcs/utils/ft_error.c srcs/utils/ft_init.c \
+SRCS = files/srcs/parsing/ft_check_map.c files/srcs/parsing/ft_colors.c files/srcs/parsing/ft_resolution.c \
+		files/srcs/parsing/ft_textures.c files/srcs/parsing/ft_utils.c files/srcs/parsing/ft_map.c files/main.c \
+		files/srcs/raycasting/ft_intersections.c files/srcs/raycasting/ft_r_utils.c \
+		files/srcs/raycasting/ft_raycasting.c files/srcs/raycasting/ft_draw.c \
+		files/srcs/raycasting/ft_move.c files/srcs/raycasting/ft_rot.c \
+		files/srcs/raycasting/ft_keys.c files/srcs/utils/ft_error.c files/srcs/utils/ft_init.c \
 		${GNL_SRCS} ${FT_PRINTF_SRCS} ${MINILIBX_SRCS}
 
 SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
@@ -66,7 +66,8 @@ clean :
 
 fclean : clean
 		rm -f ${NAME}
-		make -C ${LIBFT_PATH} ${MINILIBX_PATH} fclean
+		make -C ${LIBFT_PATH} fclean
+		make -C ${MINILIBX_PATH} clean
 
 re : fclean all
 

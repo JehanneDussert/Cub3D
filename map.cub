@@ -1,8 +1,8 @@
-R 1920 1080
-NO ./textures/north_wall.bmp
-SO ./textures/south_wall.bmp
-WE ./textures/west_wall.bmp
-EA ./textures/east_wall.bmp
+R 1500 700
+NO ../textures/north_wall.bmp
+SO ../textures/south_wall.bmp
+WE ../textures/west_wall.bmp
+EA ../textures/east_wall.bmp
 
 S ./path_to_the_sprite_texture
 F 220,100,0
