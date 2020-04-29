@@ -1,7 +1,7 @@
-files/srcs/parsing/*.o
+/files/srcs/parsing/*.o
 main.o
-files/srcs/raycasting/*.o
-files/srcs/utils/*.o
+/files/srcs/raycasting/*.o
+/files/srcs/utils/*.o
 /mlx/*.o
 /mlx/*.a
 /mlx/*.a

@@ -37,19 +37,19 @@ int	ft_start(t_all *all, char **argv, int save)
 	//printf("keyPress ok\n");
     if (!(mlx_hook(all->image->win_ptr, 3, 2, keyRelease, all)))
 		return (ft_error(4, all));
-	printf("keyRelease ok\n");
+	//printf("keyRelease ok\n");
     if (!(mlx_hook(all->image->win_ptr, 17, 0, KillWindow, all)))
 		return (ft_error(4, all));
-	printf("killWindow ok\n");
+	//printf("killWindow ok\n");
     mlx_loop_hook(all->image->mlx_ptr, keyDeal, all);
 	/*{
 		printf("why ???\n");
 		return (ft_error(4, all));
 	}*/
-	printf("keyDeal ok\n");
+	//printf("keyDeal ok\n");
     if (!(mlx_loop(all->image->mlx_ptr)))
 		return (ft_error(4, all));
-	printf("loop ok\n");
+	//printf("loop ok\n");
 	return (0);
 }
 
