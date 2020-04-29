@@ -43,8 +43,8 @@ t_keys *ft_keys_init(t_keys *keys)
 	keys->keyRight = 0;
 	keys->keyTurnRight = 0;
 	keys->keyTurnLeft = 0;
-	keys->moveSpeed = 0.05;
-	keys->rotSpeed = 0.05;
+	keys->moveSpeed = 0.2;
+	keys->rotSpeed = 0.2;
 	keys->killWindow = 0;
 	return (keys);
 }
