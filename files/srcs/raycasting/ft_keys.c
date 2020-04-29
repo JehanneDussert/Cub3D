@@ -58,17 +58,17 @@ int keyPress(int keycode, t_all *all)
 	printf("This is my key :%d\n", keycode);
 	if (keycode == 13)
     	all->keys->keyUp = 1;
-  	else if (keycode == 1)
+  	if (keycode == 1)
     	all->keys->keyDown = 1;
-  	else if (keycode == 2)
+  	if (keycode == 2)
     	all->keys->keyRight = 1;
-  	else if (keycode == 0)
+  	if (keycode == 0)
     	all->keys->keyLeft = 1;
-  	else if (keycode == 124)
+  	if (keycode == 124)
     	all->keys->keyTurnRight = 1;
-  	else if (keycode == 123)
+  	if (keycode == 123)
     	all->keys->keyTurnLeft = 1;
-  	else if (keycode == 53)
+  	if (keycode == 53)
     	all->keys->killWindow = 1;
 	return (0);
 }
