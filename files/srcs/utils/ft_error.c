@@ -31,6 +31,6 @@ int     ft_error(int msg, t_all *all)
         ft_putstr_fd("[ERROR]\nWrong texture.", 0);
     else if (msg == 9)
         ft_putstr_fd("[ERROR]\nMovement error.", 0);
-    KillWindow(0, all);
+    KillWindow(all);
     return (1);
 }

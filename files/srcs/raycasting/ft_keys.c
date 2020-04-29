@@ -12,65 +12,64 @@
 
 #include "../../includes/cub3d.h"
 
-int KillWindow(int key, t_all *all)
+int KillWindow(t_all *all)
 {
 	int		i;
 
-	(void)key;
 	i = 0;
 	while (all->map->map[i])
 	{
 		free(all->map->map[i]);
 		i++;
 	}
-	free(all->map->map[i]);
-	free(all->map->map);
+	//free(all->map->map[i]);
+	//free(all->map->map);
+	//free(all->vec);
 	mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
 	mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
 	exit(0);
 	return(1);
 }
 
-int keyRelease(int keycode, t_keys *keys)
+int keyRelease(int keycode, t_all *all)
 {
 	// On va réinitialiser les keys à 0 pour arrêter de turn / move
-	printf("This is my key :%d\n", keycode);
-	printf("In function key release\n");
+	printf("This is my key, function key release :%d\n", keycode);
 	if (keycode == 13)
-    	keys->keyUp = 0;
+    	all->keys->keyUp = 0;
   	else if (keycode == 1)
-    	keys->keyDown = 0;
+    	all->keys->keyDown = 0;
   	else if (keycode == 2)
-    	keys->keyRight = 0;
+    	all->keys->keyRight = 0;
   	else if (keycode == 0)
-    	keys->keyLeft = 0;
+    	all->keys->keyLeft = 0;
   	else if (keycode == 124)
-    	keys->keyTurnRight = 0;
+    	all->keys->keyTurnRight = 0;
   	else if (keycode == 123)
-    	keys->keyTurnLeft = 0;
+    	all->keys->keyTurnLeft = 0;
   	else if (keycode == 53)
-    	keys->killWindow = 0;
+    	all->keys->killWindow = 0;
 	return (0);
 }
 
-int keyPress(int keycode, t_keys *keys)
+int keyPress(int keycode, t_all *all)
 {
 	// En fonction de la keyPressed on va turn / move
 	printf("This is my key :%d\n", keycode);
 	if (keycode == 13)
-    	keys->keyUp = 1;
+    	all->keys->keyUp = 1;
   	else if (keycode == 1)
-    	keys->keyDown = 1;
+    	all->keys->keyDown = 1;
   	else if (keycode == 2)
-    	keys->keyRight = 1;
+    	all->keys->keyRight = 1;
   	else if (keycode == 0)
-    	keys->keyLeft = 1;
+    	all->keys->keyLeft = 1;
   	else if (keycode == 124)
-    	keys->keyTurnRight = 1;
+    	all->keys->keyTurnRight = 1;
   	else if (keycode == 123)
-    	keys->keyTurnLeft = 1;
+    	all->keys->keyTurnLeft = 1;
   	else if (keycode == 53)
-    	keys->killWindow = 1;
+    	all->keys->killWindow = 1;
 	return (0);
 }
 
@@ -96,6 +95,8 @@ int keyDeal(t_all *all)
 	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr, all->image->img_ptr, 0, 0)))
 		return (ft_error(7, all));
 	mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
+	if (all->keys->killWindow == 1)
+		KillWindow(all);
 	return (0);
 }
 

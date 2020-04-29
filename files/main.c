@@ -32,13 +32,13 @@ int	ft_start(t_all *all, char **argv, int save)
 	//printf("new windw ok\n");
 	//if (!(ft_init_texture(all)))
 	//	return (ft_error(8, all));
-	if (!(mlx_hook(all->image->win_ptr, 2, 1, keyPress, &all->keys)))
+	if (!(mlx_hook(all->image->win_ptr, 2, 1, keyPress, all)))
 		return (ft_error(4, all));
 	//printf("keyPress ok\n");
-    if (!(mlx_hook(all->image->win_ptr, 3, 2, keyRelease, &all->keys)))
+    if (!(mlx_hook(all->image->win_ptr, 3, 2, keyRelease, all)))
 		return (ft_error(4, all));
 	printf("keyRelease ok\n");
-    if (!(mlx_hook(all->image->win_ptr, 17, 0, KillWindow, &all->image)))
+    if (!(mlx_hook(all->image->win_ptr, 17, 0, KillWindow, all)))
 		return (ft_error(4, all));
 	printf("killWindow ok\n");
     mlx_loop_hook(all->image->mlx_ptr, keyDeal, all);

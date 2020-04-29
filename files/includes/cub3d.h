@@ -173,10 +173,10 @@ void			ft_draw_ray(int i, t_all *all);
 int				ft_draw_mode(t_vec *vec, int color);
 
 /* Keys */
-int				keyRelease(int keycode, t_keys *keys);
-int				keyPress(int keycode, t_keys *keys);
+int				keyRelease(int keycode, t_all *all);
+int				keyPress(int keycode, t_all *all);
 int				keyDeal(t_all *all);
-int				KillWindow(int key, t_all *all);
+int				KillWindow(t_all *all);
 
 /* Move */
 int  			ft_move(t_all *all);
