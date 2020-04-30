@@ -36,7 +36,6 @@ void ft_draw_ray(int i, t_all *all)
     	ft_look_down(all);
 	if (all->player->pos == UP)
     	ft_look_up(all);
-	printf("Draw start : %d\nDraw end : %d\n", all->vec->drawStart, all->vec->drawEnd);
 	color = ft_draw_mode(all->vec, color);
 	while (++j < all->vec->drawStart)
 		all->image->data[j * all->map->reso[0] + i] = SKYBLUE;
