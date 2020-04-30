@@ -43,8 +43,8 @@ t_keys *ft_keys_init(t_keys *keys)
 	keys->keyRight = 0;
 	keys->keyTurnRight = 0;
 	keys->keyTurnLeft = 0;
-	keys->moveSpeed = 0.2;
-	keys->rotSpeed = 0.2;
+	keys->moveSpeed = 0.15;
+	keys->rotSpeed = 0.15;
 	keys->killWindow = 0;
 	return (keys);
 }
@@ -96,6 +96,13 @@ t_map	*ft_init_map(t_map *map)
 	return (map);
 }
 
+t_player	*ft_player_init(t_player *player)
+{
+	player->look = 0;
+	player->pos = 0;
+	return (player);
+}
+
 t_all    *ft_init_all(t_all *all)
 {
     if (!(all->image = (t_image *)malloc(sizeof(t_image))))
@@ -108,11 +115,18 @@ t_all    *ft_init_all(t_all *all)
         return (NULL);
 	if (!(all->keys = (t_keys *)malloc(sizeof(t_keys))))
         return (NULL);
+	/*if (!(all->player = (t_player *)malloc(sizeof(t_player))))
+		return (NULL);*/
+	//all->player->look = 0;
+	//all->player->pos = 0;
     if (!(ft_vec_init(all->vec)))
         return (NULL);
     if (!(ft_init_map(all->map)))
         return (NULL);
 	if (!(ft_keys_init(all->keys)))
         return (NULL);
+	all->player = ft_player_init(all->player);
+	/*if (!(ft_player_init(all->player)))
+		return (NULL);*/
     return (all);
 }

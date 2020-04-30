@@ -49,6 +49,17 @@ int keyRelease(int keycode, t_all *all)
     	all->keys->keyTurnLeft = 0;
   	else if (keycode == 53)
     	all->keys->killWindow = 0;
+	else if (keycode == 126)
+		all->player->look = 0;
+	else if (keycode == 125)
+		all->player->look = 0;
+	else if (keycode == SPACE_KEY)
+		all->player->pos = 0;
+	else if (keycode == O_KEY)
+	{
+		all->player->pos = 0;
+		all->keys->moveSpeed = 0.15;
+	}
 	return (0);
 }
 
@@ -58,18 +69,29 @@ int keyPress(int keycode, t_all *all)
 	printf("This is my key :%d\n", keycode);
 	if (keycode == 13)
     	all->keys->keyUp = 1;
-  	if (keycode == 1)
+  	else if (keycode == 1)
     	all->keys->keyDown = 1;
-  	if (keycode == 2)
+  	else if (keycode == 2)
     	all->keys->keyRight = 1;
-  	if (keycode == 0)
+  	else if (keycode == 0)
     	all->keys->keyLeft = 1;
-  	if (keycode == 124)
+  	else if (keycode == 124)
     	all->keys->keyTurnRight = 1;
-  	if (keycode == 123)
+  	else if (keycode == 123)
     	all->keys->keyTurnLeft = 1;
-  	if (keycode == 53)
+  	else if (keycode == 53)
     	all->keys->killWindow = 1;
+	else if (keycode == 126)
+		all->player->look = UP;
+	else if (keycode == 125)
+		all->player->look = DOWN;
+	else if (keycode == SPACE_KEY)
+		all->player->pos = UP;
+	else if (keycode == O_KEY)
+	{
+		all->player->pos = DOWN;
+		all->keys->moveSpeed = 0.05;
+	}
 	return (0);
 }
 

@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_draw_mode(t_vec *vec, int color)
+int		ft_draw_side(t_vec *vec, int color)
 {
 	if (vec->step_y == 1 && vec->side == 1)
 		color = 0xCD5C5C;
@@ -25,21 +25,30 @@ int ft_draw_mode(t_vec *vec, int color)
 	return (color);
 }
 
-void ft_draw_ray(int i, t_all *all)
+void	ft_draw_mode(t_all *all)
+{
+	if (all->player->look == DOWN)
+    	ft_look_down(all);
+	else if (all->player->look == UP)
+    	ft_look_up(all);
+	else if (all->player->pos == UP)
+		ft_player_jump(all);
+	else if (all->player->pos == DOWN)
+		ft_player_crawl(all);
+}
+
+void	ft_draw_ray(int i, t_all *all)
 {
 	int j;
 	int color;
 
 	j = -1;
 	color = 0;
-	if (all->player->pos == DOWN)
-    	ft_look_down(all);
-	if (all->player->pos == UP)
-    	ft_look_up(all);
-	color = ft_draw_mode(all->vec, color);
+	ft_draw_mode(all);
+	color = ft_draw_side(all->vec, color);
 	while (++j < all->vec->drawStart)
 		all->image->data[j * all->map->reso[0] + i] = SKYBLUE;
-	while (j < all->vec->drawEnd)
+	while (j < all->vec->drawEnd && j < all->map->reso[1])
 		all->image->data[(j++) * all->map->reso[0] + i] = color;
 	while (j < all->map->reso[1])
 		all->image->data[(j++) * all->map->reso[0] + i] = GREY_FLOOR;

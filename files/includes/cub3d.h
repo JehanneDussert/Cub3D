@@ -62,6 +62,7 @@
 typedef struct		s_player
 {
 	/* Definir si le perso est debout / accroupi / saute */
+	int				look;
 	int				pos;
 }					t_player;
 
@@ -179,7 +180,8 @@ void			ft_hit(t_map *map, t_vec *vec);
 
 /* Draw */
 void			ft_draw_ray(int i, t_all *all);
-int				ft_draw_mode(t_vec *vec, int color);
+int				ft_draw_side(t_vec *vec, int color);
+void			ft_draw_mode(t_all *all);
 
 /* Keys */
 int				keyRelease(int keycode, t_all *all);
@@ -200,6 +202,8 @@ t_all			*ft_def_dir_plane(t_all *all);
 t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
 int     		ft_look_up(t_all *all);
 int     		ft_look_down(t_all *all);
+int     		ft_player_jump(t_all *all);
+int     		ft_player_crawl(t_all *all);
 
 /* Utils */
 int     		ft_error(int msg, t_all *all);
