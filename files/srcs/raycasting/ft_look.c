@@ -17,13 +17,13 @@ int     ft_look_down(t_all *all)
 int     ft_player_jump(t_all *all)
 {
     all->vec->drawStart /= (0.9 - all->keys->moveSpeed);
-    all->vec->drawEnd /= (0.9 - all->keys->moveSpeed);
+    all->vec->drawEnd /= (0.94 - all->keys->moveSpeed);
     return (0);
 }
 
 int     ft_player_crawl(t_all *all)
 {
-    all->vec->drawStart *= (0.9 - all->keys->moveSpeed);
-    all->vec->drawEnd *= (0.9 - all->keys->moveSpeed);
+    all->vec->drawStart *= (0.94 - all->keys->moveSpeed);
+    all->vec->drawEnd *= (0.94 - all->keys->moveSpeed);
     return (0);
 }
