@@ -43,6 +43,8 @@
 # define L_KEY 37
 # define I_KEY 34
 # define O_KEY 31
+# define UP 1
+# define DOWN 2
 
 //# include "../../ft_printf/ft_printf.h"
 # include "../../get_next_line/get_next_line.h"
@@ -56,6 +58,12 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
+typedef struct		s_player
+{
+	/* Definir si le perso est debout / accroupi / saute */
+	int				pos;
+}					t_player;
 
 typedef struct		s_text
 {
@@ -149,6 +157,7 @@ typedef struct	s_all
 	t_vec		*vec;
 	t_text		*text;
 	t_keys		*keys;
+	t_player	*player;
 }				t_all;
 
 /* Parsing */
@@ -189,6 +198,8 @@ void			turn_right(t_vec *vec, t_keys *keys);
 void			turn_left(t_vec *vec, t_keys *keys);
 t_all			*ft_def_dir_plane(t_all *all);
 t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
+int     		ft_look_up(t_all *all);
+int     		ft_look_down(t_all *all);
 
 /* Utils */
 int     		ft_error(int msg, t_all *all);
