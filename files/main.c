@@ -24,27 +24,28 @@ int	ft_start(t_all *all, char **argv, int save)
 		return (-1);
 	if (!(all->image->mlx_ptr = mlx_init()))
 		return (ft_error(7, all));
-	if (!(all->image->win_ptr = mlx_new_window(all->image->mlx_ptr, all->map->reso[0], all->map->reso[1], all->image->title)))
+	if (!(all->image->win_ptr = mlx_new_window(all->image->mlx_ptr,
+		all->map->reso[0], all->map->reso[1], all->image->title)))
 		return (ft_error(7, all));
-	if (!(mlx_hook(all->image->win_ptr, 2, 1, keyPress, all)))
+	if (!(mlx_hook(all->image->win_ptr, 2, 1, ft_keypress, all)))
 		return (ft_error(4, all));
-    if (!(mlx_hook(all->image->win_ptr, 3, 2, keyRelease, all)))
+	if (!(mlx_hook(all->image->win_ptr, 3, 2, ft_keyrelease, all)))
 		return (ft_error(4, all));
-    if (!(mlx_hook(all->image->win_ptr, 17, 0, KillWindow, all)))
+	if (!(mlx_hook(all->image->win_ptr, 17, 0, ft_killwindow, all)))
 		return (ft_error(4, all));
-    mlx_loop_hook(all->image->mlx_ptr, keyDeal, all);
-    if (!(mlx_loop(all->image->mlx_ptr)))
+	mlx_loop_hook(all->image->mlx_ptr, ft_keydeal, all);
+	if (!(mlx_loop(all->image->mlx_ptr)))
 		return (ft_error(4, all));
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_all	*all;
 	int		save;
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
-        return (ft_error(2, all));
+		return (ft_error(2, all));
 	save = -1;
 	if (argc > 1 && argc < 4)
 	{
