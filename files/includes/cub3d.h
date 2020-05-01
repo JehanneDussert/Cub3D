@@ -46,6 +46,10 @@
 # define UP 1
 # define DOWN 2
 
+# define NORMAL 0.15
+# define SLOW 0.05
+# define RUN 0.25
+
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
 # include "../../minilibx/mlx.h"

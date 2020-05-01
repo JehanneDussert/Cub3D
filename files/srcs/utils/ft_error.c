@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
+/*   Updated: 2020/03/13 02:36:44 by jdussert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void    ft_free_all(t_all **all)
@@ -31,6 +43,6 @@ int     ft_error(int msg, t_all *all)
         ft_putstr_fd("[ERROR]\nWrong texture.", 0);
     else if (msg == 9)
         ft_putstr_fd("[ERROR]\nMovement error.", 0);
-    KillWindow(all);
+    ft_killwindow(all);
     return (1);
 }

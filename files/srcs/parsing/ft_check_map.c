@@ -54,7 +54,8 @@ t_map	*ft_parsing(t_all *all, char *title)
 		line = ft_strtrim(line, " ");
 		if (ft_check_existence(all->map, line, &i, 0) == 1)
 			exit(ft_error(0, all));
-		else if (line[i] == 'R' && all->map->reso[0] == -1 && all->map->reso[1] == -1)
+		else if (line[i] == 'R' && all->map->reso[0] == -1 &&
+			all->map->reso[1] == -1)
 		{
 			if (ft_check_resolution(line, all->map, &i) == -1)
 				exit(ft_error(6, all));

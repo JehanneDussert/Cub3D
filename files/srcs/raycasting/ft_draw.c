@@ -28,9 +28,9 @@ int		ft_draw_side(t_vec *vec, int color)
 void	ft_draw_mode(t_all *all)
 {
 	if (all->player->look == DOWN)
-    	ft_look_down(all);
+		ft_look_down(all);
 	else if (all->player->look == UP)
-    	ft_look_up(all);
+		ft_look_up(all);
 	else if (all->player->pos == UP)
 		ft_player_jump(all);
 	else if (all->player->pos == DOWN)
@@ -46,9 +46,9 @@ void	ft_draw_ray(int i, t_all *all)
 	color = 0;
 	ft_draw_mode(all);
 	color = ft_draw_side(all->vec, color);
-	while (++j < all->vec->drawStart)
+	while (++j < all->vec->draw_start)
 		all->image->data[j * all->map->reso[0] + i] = SKYBLUE;
-	while (j < all->vec->drawEnd && j < all->map->reso[1])
+	while (j < all->vec->draw_end && j < all->map->reso[1])
 		all->image->data[(j++) * all->map->reso[0] + i] = color;
 	while (j < all->map->reso[1])
 		all->image->data[(j++) * all->map->reso[0] + i] = GREY_FLOOR;

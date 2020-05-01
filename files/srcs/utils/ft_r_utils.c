@@ -14,34 +14,34 @@
 
 void ft_north(t_vec *vec)
 {
-	vec->dirX = 0;
-	vec->dirY = -1;
-	vec->planeX = 0.66;
-	vec->planeY = 0;
+	vec->dir_x = 0;
+	vec->dir_y = -1;
+	vec->plane_x = 0.66;
+	vec->plane_y = 0;
 }
 
 void ft_south(t_vec *vec)
 {
-	vec->dirX = 0;
-	vec->dirY = 1;
-	vec->planeX = -0.66;
-	vec->planeY = 0;
+	vec->dir_x = 0;
+	vec->dir_y = 1;
+	vec->plane_x = -0.66;
+	vec->plane_y = 0;
 }
 
 void ft_east(t_vec *vec)
 {
-	vec->dirX = 1;
-	vec->dirY = 0;
-	vec->planeX = 0;
-	vec->planeY = 0.66;
+	vec->dir_x = 1;
+	vec->dir_y = 0;
+	vec->plane_x = 0;
+	vec->plane_y = 0.66;
 }
 
 void ft_west(t_vec *vec)
 {
-	vec->dirX = -1;
-	vec->dirY = 0;
-	vec->planeX = 0;
-	vec->planeY = -0.66;
+	vec->dir_x = -1;
+	vec->dir_y = 0;
+	vec->plane_x = 0;
+	vec->plane_y = -0.66;
 }
 
 t_all *ft_def_dir_plane(t_all *all)

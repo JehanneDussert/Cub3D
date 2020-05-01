@@ -2,29 +2,29 @@
 
 void turn_right(t_vec *vec, t_keys *keys)
 {
-  vec->oldDir_x = vec->dirX;
-  vec->dirX = vec->dirX * cos(-keys->rotSpeed) - vec->dirY * sin(-keys->rotSpeed);
-  vec->dirY = vec->oldDir_x * sin(-keys->rotSpeed) + vec->dirY * cos(-keys->rotSpeed);
-  vec->oldPlane_x = vec->planeX;
-  vec->planeX = vec->planeX * cos(-keys->rotSpeed) - vec->planeY * sin(-keys->rotSpeed);
-  vec->planeY = vec->oldPlane_x * sin(-keys->rotSpeed) + vec->planeY * cos(-keys->rotSpeed);
+  vec->old_dirx = vec->dir_x;
+  vec->dir_x = vec->dir_x * cos(-keys->rot_speed) - vec->dir_y * sin(-keys->rot_speed);
+  vec->dir_y = vec->old_dirx * sin(-keys->rot_speed) + vec->dir_y * cos(-keys->rot_speed);
+  vec->old_planex = vec->plane_x;
+  vec->plane_x = vec->plane_x * cos(-keys->rot_speed) - vec->plane_y * sin(-keys->rot_speed);
+  vec->plane_y = vec->old_planex * sin(-keys->rot_speed) + vec->plane_y * cos(-keys->rot_speed);
 }
 
 void turn_left(t_vec *vec, t_keys *keys)
 {
-  vec->oldDir_x = vec->dirX;
-  vec->dirX = vec->dirX * cos(keys->rotSpeed) - vec->dirY * sin(keys->rotSpeed);
-  vec->dirY = vec->oldDir_x * sin(keys->rotSpeed) + vec->dirY * cos(keys->rotSpeed);
-  vec->oldPlane_x = vec->planeX;
-  vec->planeX = vec->planeX * cos(keys->rotSpeed) - vec->planeY * sin(keys->rotSpeed);
-  vec->planeY = vec->oldPlane_x * sin(keys->rotSpeed) + vec->planeY * cos(keys->rotSpeed);
+  vec->old_dirx = vec->dir_x;
+  vec->dir_x = vec->dir_x * cos(keys->rot_speed) - vec->dir_y * sin(keys->rot_speed);
+  vec->dir_y = vec->old_dirx * sin(keys->rot_speed) + vec->dir_y * cos(keys->rot_speed);
+  vec->old_planex = vec->plane_x;
+  vec->plane_x = vec->plane_x * cos(keys->rot_speed) - vec->plane_y * sin(keys->rot_speed);
+  vec->plane_y = vec->old_planex * sin(keys->rot_speed) + vec->plane_y * cos(keys->rot_speed);
 }
 
 int  ft_rotation(t_all *all)
 {
-  if (all->keys->keyTurnLeft == 1)
+  if (all->keys->keyturnleft == 1)
     turn_right(all->vec, all->keys);
-  if (all->keys->keyTurnRight == 1)
+  if (all->keys->keyturnright == 1)
     turn_left(all->vec, all->keys);
   return (0);
 }
