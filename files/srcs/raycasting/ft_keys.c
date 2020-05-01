@@ -42,13 +42,13 @@ int	ft_killwindow(t_all *all)
 
 int	ft_keyrelease(int keycode, t_all *all)
 {
-	if (keycode == Z_KEY)
+	if (keycode == A_KEY)
 		all->keys->keyup = 0;
-	else if (keycode == S_KEY)
+	else if (keycode == W_KEY)
 		all->keys->keydown = 0;
 	else if (keycode == D_KEY)
 		all->keys->keyright = 0;
-	else if (keycode == Q_KEY)
+	else if (keycode == S_KEY)
 		all->keys->keyleft = 0;
 	else if (keycode == ARROW_RIGHT)
 		all->keys->keyturnright = 0;
@@ -74,13 +74,14 @@ int	ft_keyrelease(int keycode, t_all *all)
 
 int	ft_keypress(int keycode, t_all *all)
 {
-	if (keycode == Z_KEY)
+	printf("keycode : %d\n", keycode);
+	if (keycode == A_KEY)
 		all->keys->keyup = 1;
-	else if (keycode == S_KEY)
+	else if (keycode == W_KEY)
 		all->keys->keydown = 1;
 	else if (keycode == D_KEY)
 		all->keys->keyright = 1;
-	else if (keycode == Q_KEY)
+	else if (keycode == S_KEY)
 		all->keys->keyleft = 1;
 	else if (keycode == ARROW_RIGHT)
 		all->keys->keyturnright = 1;

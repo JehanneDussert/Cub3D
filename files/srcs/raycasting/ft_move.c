@@ -46,7 +46,6 @@ void move_left(t_all *all)
 
 int  ft_move(t_all *all)
 {
-  printf("my key :%d\n", all->keys->keyup);
   if (all->keys->keyup == 1)
     move_up(all);
   if (all->keys->keydown == 1)
