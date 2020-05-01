@@ -115,8 +115,8 @@ t_all    *ft_init_all(t_all *all)
         return (NULL);
 	if (!(all->keys = (t_keys *)malloc(sizeof(t_keys))))
         return (NULL);
-	/*if (!(all->player = (t_player *)malloc(sizeof(t_player))))
-		return (NULL);*/
+	if (!(all->player = (t_player *)malloc(sizeof(t_player))))
+		return (NULL);
 	//all->player->look = 0;
 	//all->player->pos = 0;
     if (!(ft_vec_init(all->vec)))

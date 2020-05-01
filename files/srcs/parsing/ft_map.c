@@ -168,7 +168,7 @@ char	**ft_map(char *line, int n, int fd, t_map *info)
 	len = ft_lstsize(lst);
 	i = 0;
 	j = 0;
-	if ((map = ft_calloc(len + 1, sizeof(map))) == NULL)
+	if ((map = ft_calloc(len + 1, sizeof(*map))) == NULL)
 		return (NULL);
 	while (lst)
 	{
