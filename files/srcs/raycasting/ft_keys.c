@@ -62,6 +62,8 @@ int	ft_keyrelease(int keycode, t_all *all)
 		all->player->look = 0;
 	else if (keycode == SPACE_KEY)
 		all->player->pos = 0;
+	else if (keycode == P_KEY)
+		all->keys->move_speed = NORMAL;
 	else if (keycode == O_KEY)
 	{
 		all->player->pos = 0;
@@ -92,6 +94,8 @@ int	ft_keypress(int keycode, t_all *all)
 		all->player->look = DOWN;
 	else if (keycode == SPACE_KEY)
 		all->player->pos = UP;
+	else if (keycode == P_KEY)
+		all->keys->move_speed = RUN;
 	else if (keycode == O_KEY)
 	{
 		all->player->pos = DOWN;
