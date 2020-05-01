@@ -35,23 +35,23 @@ int keyRelease(int keycode, t_all *all)
 {
 	// On va réinitialiser les keys à 0 pour arrêter de turn / move
 	printf("This is my key, function key release :%d\n", keycode);
-	if (keycode == 13)
+	if (keycode == Z_KEY)
     	all->keys->keyUp = 0;
-  	else if (keycode == 1)
+  	else if (keycode == S_KEY)
     	all->keys->keyDown = 0;
-  	else if (keycode == 2)
+  	else if (keycode == D_KEY)
     	all->keys->keyRight = 0;
-  	else if (keycode == 0)
+  	else if (keycode == Q_KEY)
     	all->keys->keyLeft = 0;
-  	else if (keycode == 124)
+  	else if (keycode == ARROW_RIGHT)
     	all->keys->keyTurnRight = 0;
-  	else if (keycode == 123)
+  	else if (keycode == ARROW_LEFT)
     	all->keys->keyTurnLeft = 0;
-  	else if (keycode == 53)
+  	else if (keycode == EXIT_CODE)
     	all->keys->killWindow = 0;
-	else if (keycode == 126)
+	else if (keycode == ARROW_UP)
 		all->player->look = 0;
-	else if (keycode == 125)
+	else if (keycode == ARROW_DOWN)
 		all->player->look = 0;
 	else if (keycode == SPACE_KEY)
 		all->player->pos = 0;
@@ -67,23 +67,23 @@ int keyPress(int keycode, t_all *all)
 {
 	// En fonction de la keyPressed on va turn / move
 	printf("This is my key :%d\n", keycode);
-	if (keycode == 13)
+	if (keycode == Z_KEY)
     	all->keys->keyUp = 1;
-  	else if (keycode == 1)
+  	else if (keycode == S_KEY)
     	all->keys->keyDown = 1;
-  	else if (keycode == 2)
+  	else if (keycode == D_KEY)
     	all->keys->keyRight = 1;
-  	else if (keycode == 0)
+  	else if (keycode == Q_KEY)
     	all->keys->keyLeft = 1;
-  	else if (keycode == 124)
+  	else if (keycode == ARROW_RIGHT)
     	all->keys->keyTurnRight = 1;
-  	else if (keycode == 123)
+  	else if (keycode == ARROW_LEFT)
     	all->keys->keyTurnLeft = 1;
-  	else if (keycode == 53)
+  	else if (keycode == EXIT_CODE)
     	all->keys->killWindow = 1;
-	else if (keycode == 126)
+	else if (keycode == ARROW_UP)
 		all->player->look = UP;
-	else if (keycode == 125)
+	else if (keycode == ARROW_DOWN)
 		all->player->look = DOWN;
 	else if (keycode == SPACE_KEY)
 		all->player->pos = UP;
