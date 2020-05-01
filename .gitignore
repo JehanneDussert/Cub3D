@@ -1,6 +1,8 @@
 /files/srcs/parsing/*.o
 /files/srcs/raycasting/*.o
 /files/srcs/utils/*.o
+/files/textures/*.XPM
+/files/textures/*.png
 /files/main.o
 /minilibx/*.o
 /minilibx/*.a
