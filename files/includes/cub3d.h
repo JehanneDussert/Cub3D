@@ -61,7 +61,6 @@
 
 typedef struct		s_player
 {
-	/* Definir si le perso est debout / accroupi / saute */
 	int				look;
 	int				pos;
 }					t_player;
