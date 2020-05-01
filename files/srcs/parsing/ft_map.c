@@ -12,6 +12,8 @@
 
 #include "../../includes/cub3d.h"
 
+#include "../../includes/cub3d.h"
+
 t_map	*ft_check_pos(t_map *info, char **map)
 {
 	int	i;

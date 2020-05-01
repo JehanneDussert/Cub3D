@@ -12,25 +12,26 @@
 
 #include "../../includes/cub3d.h"
 
-int			ft_init_texture_data(t_all *all)
+int			ft_init_texture_data(t_text *text)
 {
-	if (!(all->text[0].img = mlx_get_data_addr(all->text[0].ptr,
-	&all->text[0].bpp, &all->text[0].size_l, &all->text[0].endian)))
-		return (ft_error(8, all));
-	if (!(all->text[1].img = mlx_get_data_addr(all->text[1].ptr,
-	&all->text[1].bpp, &all->text[1].size_l, &all->text[1].endian)))
-		return (ft_error(8, all));
-	if (!(all->text[2].img = mlx_get_data_addr(all->text[2].ptr,
-	&all->text[2].bpp, &all->text[2].size_l, &all->text[2].endian)))
-		return (ft_error(8, all));
-	if (!(all->text[2].img = mlx_get_data_addr(all->text[3].ptr,
-	&all->text[3].bpp, &all->text[2].size_l, &all->text[3].endian)))
-		return (ft_error(8, all));
+	if (!(text[0].img = mlx_get_data_addr(text[0].ptr,
+	&text[0].bpp, &text[0].size_l, &text[0].endian)))
+		return (-1);
+	if (!(text[1].img = mlx_get_data_addr(text[1].ptr,
+	&text[1].bpp, &text[1].size_l, &text[1].endian)))
+		return (-1);
+	if (!(text[2].img = mlx_get_data_addr(text[2].ptr,
+	&text[2].bpp, &text[2].size_l, &text[2].endian)))
+		return (-1);
+	if (!(text[2].img = mlx_get_data_addr(text[3].ptr,
+	&text[3].bpp, &text[2].size_l, &text[3].endian)))
+		return (-1);
 	return (0);
 }
 
 int			ft_init_texture(t_all *all)
 {
+	printf("N PATH %s\n", all->map->n_path);
 	if ((all->text[0].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
 	all->map->n_path, &all->image->width, &all->image->height)) == NULL)
 		return (ft_error(8, all));
@@ -43,7 +44,8 @@ int			ft_init_texture(t_all *all)
 	if ((all->text[3].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
 	all->map->e_path, &all->image->width, &all->image->height)) == NULL)
 		return (ft_error(8, all));
-	ft_init_texture_data(all);
+	if (ft_init_texture_data(all->text) != 0)
+		return (ft_error(8, all));
 	return (0);
 }
 

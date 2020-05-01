@@ -12,6 +12,8 @@
 
 #include "../../includes/cub3d.h"
 
+#include "../../includes/cub3d.h"
+
 int		ft_check_existence(t_map *map, char *line, int *i, int mode)
 {
 	if (mode == 0)
