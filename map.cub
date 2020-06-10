@@ -1,10 +1,10 @@
-R 1500 700
-NO ../textures/north_wall.bmp
-SO ../textures/south_wall.bmp
-WE ../textures/west_wall.bmp
-EA ../textures/east_wall.bmp
+R 1400 600
+NO ./texture/colorstone.XPM
+SO ./texture/wood.XPM
+WE ./texture/greystone.XPM
+EA ./texture/mossy.XPM
+S ./texture/barrel.XPM
 
-S ./path_to_the_sprite_texture
 F 220,100,0
 C 225,30,0
 

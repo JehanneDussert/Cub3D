@@ -14,38 +14,45 @@
 
 int			ft_init_texture_data(t_text *text)
 {
-	if (!(text[0].img = mlx_get_data_addr(text[0].ptr,
-	&text[0].bpp, &text[0].size_l, &text[0].endian)))
+	text[0].img = mlx_get_data_addr(text[0].ptr, &text[0].bpp, &text[0].size_l, &text[0].endian);
+	if (text[0].img == NULL)
 		return (-1);
-	if (!(text[1].img = mlx_get_data_addr(text[1].ptr,
-	&text[1].bpp, &text[1].size_l, &text[1].endian)))
+	text[1].img = mlx_get_data_addr(text[1].ptr, &text[1].bpp, &text[1].size_l, &text[1].endian);
+	if (text[1].img == NULL)
 		return (-1);
-	if (!(text[2].img = mlx_get_data_addr(text[2].ptr,
-	&text[2].bpp, &text[2].size_l, &text[2].endian)))
+	text[2].img = mlx_get_data_addr(text[2].ptr, &text[2].bpp, &text[2].size_l, &text[2].endian);
+	if (text[2].img == NULL)
 		return (-1);
-	if (!(text[2].img = mlx_get_data_addr(text[3].ptr,
-	&text[3].bpp, &text[2].size_l, &text[3].endian)))
+	text[3].img = mlx_get_data_addr(text[3].ptr, &text[3].bpp, &text[3].size_l, &text[3].endian);
+	if (text[3].img == NULL)
+		return (-1);
+	text[4].img = mlx_get_data_addr(text[4].ptr, &text[4].bpp, &text[4].size_l, &text[4].endian);
+	if (text[4].img == NULL)
 		return (-1);
 	return (0);
 }
 
-int			ft_init_texture(t_all *all)
+int			ft_init_texture(t_all *all, t_text *text, int width, int height)
 {
-	printf("N PATH %s\n", all->map->n_path);
-	if ((all->text[0].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->n_path, &all->image->width, &all->image->height)) == NULL)
+	if ((text[0].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
+	all->map->n_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	if ((all->text[1].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->s_path, &all->image->width, &all->image->height)) == NULL)
+	if ((text[1].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
+	all->map->s_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	if ((all->text[2].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->w_path, &all->image->width, &all->image->height)) == NULL)
+	if ((text[2].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
+	all->map->w_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	if ((all->text[3].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->e_path, &all->image->width, &all->image->height)) == NULL)
+	if ((text[3].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
+	all->map->e_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	if (ft_init_texture_data(all->text) != 0)
+	if ((text[4].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
+	all->map->spr_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
+	text[5].ptr = NULL;
+	if (ft_init_texture_data(text) != 0)
+		return (ft_error(8, all));
+	all->text = text;
 	return (0);
 }
 
@@ -90,6 +97,14 @@ t_vec		*ft_vec_init(t_vec *vec)
 	vec->dir_y = 0;
 	vec->plane_x = 0.66;
 	vec->plane_y = 0;
+	vec->texNum = 0;
+	vec->texX = 0;
+	vec->texY = 0;
+	vec->wallX = 0.0;
+	vec->step = 0.0;
+	vec->texPos = 0.0;
+	vec->texWidth = 64;
+	vec->texHeight = 64;
 	return (vec);
 }
 
@@ -97,11 +112,11 @@ t_map		*ft_init_map(t_map *map)
 {
 	map->reso[0] = -1;
 	map->reso[1] = -1;
-	map->n_path = NULL;
-	map->s_path = NULL;
-	map->w_path = NULL;
-	map->e_path = NULL;
-	map->spr_path = NULL;
+	map->n_path[0] = '\0';
+	map->s_path[0] = '\0';
+	map->w_path[0] = '\0';
+	map->e_path[0] = '\0';
+	map->spr_path[0] = '\0';
 	map->f_path = -1;
 	map->c_path = -1;
 	map->pos_x = 0;
@@ -124,8 +139,6 @@ t_all		*ft_init_all(t_all *all)
 	if (!(all->map = (t_map *)malloc(sizeof(t_map))))
 		return (NULL);
 	if (!(all->vec = (t_vec *)malloc(sizeof(t_vec))))
-		return (NULL);
-	if (!(all->text = (t_text *)malloc(sizeof(t_text))))
 		return (NULL);
 	if (!(all->keys = (t_keys *)malloc(sizeof(t_keys))))
 		return (NULL);

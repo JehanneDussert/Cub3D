@@ -14,12 +14,7 @@
 
 t_all	*ft_raycasting(t_all *all)
 {
-	//printf("rentrée\n");
-	//if (!(all = ft_def_dir_plane(all)))
-	//	return (NULL);
-	//printf("dir plane ok\n");
 	if (!(all = ft_delta_dist(all->vec, all->map, all)))
 		return (NULL);
-	//printf("delta dist ok\n");
 	return (all);
 }

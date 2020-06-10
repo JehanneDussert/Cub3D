@@ -24,25 +24,27 @@
 # define ORANGE 0xFF6900
 # define GREY_FLOOR 0x424242
 # define YELLOW 0xFFED2D
+# define BLACK 0x000000
 
-# define ARROW_UP 126
-# define ARROW_DOWN 125
-# define ARROW_LEFT 123
-# define ARROW_RIGHT 124
-# define EXIT_CODE 53
-# define W_KEY 6
 # define S_KEY 1
 # define D_KEY 2
-# define A_KEY 12
-# define SHIFT_KEY 257
+# define W_KEY 6
 # define C_KEY 8
+# define A_KEY 12
 # define R_KEY 15
-# define P_KEY 35
-# define SPACE_KEY 49
-# define M_KEY 41
-# define L_KEY 37
-# define I_KEY 34
 # define O_KEY 31
+# define I_KEY 34
+# define P_KEY 35
+# define L_KEY 37
+# define M_KEY 41
+# define SPACE_KEY 49
+# define EXIT_CODE 53
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define ARROW_DOWN 125
+# define ARROW_UP 126
+# define SHIFT_KEY 257
+
 # define UP 1
 # define DOWN 2
 
@@ -80,11 +82,11 @@ typedef struct	s_text
 typedef struct	s_map
 {
 	int			reso[2];
-	void		*n_path;
-	void		*s_path;
-	void		*e_path;
-	void		*w_path;
-	void		*spr_path;
+	char		n_path[256];
+	char		s_path[256];
+	char		e_path[256];
+	char		w_path[256];
+	char		spr_path[256];
 	int			f_path;
 	int			c_path;
 	char		**map;
@@ -105,7 +107,8 @@ typedef struct	s_image
 	int			size_l;
 	int			endian;
 	char		**xpm;
-	int			*data;
+	char		*data;
+	int			*mini_data;
 }				t_image;
 
 typedef struct	s_vec
@@ -135,6 +138,14 @@ typedef struct	s_vec
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	int			texNum;
+	int			texX;
+	int			texY;
+	double		wallX;
+	double		step;
+	double		texPos;
+	int			texWidth;
+	int			texHeight;
 }				t_vec;
 
 typedef struct	s_keys
@@ -168,6 +179,7 @@ void			ft_jump(char *line, int *i);
 int				ft_check_resolution(char *line, t_map *info, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
+int				ft_open_text(t_map *map);
 t_list			*ft_list(char *line, int n, int fd, t_map *info);
 char			**ft_map(char *line, int n, int fd, t_map *info);
 int				ft_check_char(char *line, int i);
@@ -187,6 +199,7 @@ void			ft_hit(t_map *map, t_vec *vec);
 void			ft_draw_ray(int i, t_all *all);
 int				ft_draw_side(t_vec *vec, int color);
 void			ft_draw_mode(t_all *all);
+int				ft_draw_text(int i, t_all *all);
 
 /*
 ** Keys
@@ -228,6 +241,11 @@ t_all			*ft_init_all(t_all *all);
 t_map			*ft_init_map(t_map *map);
 t_vec			*ft_vec_init(t_vec *vec);
 t_keys			*ft_keys_init(t_keys *keys);
-int				ft_init_texture(t_all *all);
+int				ft_init_texture(t_all *all, t_text *text, int width, int height);
+
+/*
+** Mini map
+*/
+void			ft_mini_map(t_all *all);
 
 #endif

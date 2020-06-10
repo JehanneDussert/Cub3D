@@ -28,11 +28,11 @@ MINILIBX = libmlx.a
 
 SRCS = files/srcs/parsing/ft_check_map.c files/srcs/parsing/ft_colors.c files/srcs/parsing/ft_resolution.c \
 		files/srcs/parsing/ft_textures.c files/srcs/parsing/ft_utils.c files/srcs/parsing/ft_map.c files/main.c \
-		files/srcs/raycasting/ft_intersections.c files/srcs/utils/ft_r_utils.c \
+		files/srcs/raycasting/ft_intersections.c files/srcs/utils/ft_r_utils.c files/srcs/raycasting/ft_mini_map.c \
 		files/srcs/raycasting/ft_raycasting.c files/srcs/raycasting/ft_draw.c \
 		files/srcs/raycasting/ft_move.c files/srcs/raycasting/ft_rot.c \
 		files/srcs/raycasting/ft_keys.c files/srcs/utils/ft_error.c files/srcs/utils/ft_init.c \
-		files/srcs/raycasting/ft_look.c \
+		files/srcs/raycasting/ft_look.c files/srcs/raycasting/ft_draw_textures.c \
 		${GNL_SRCS} ${FT_PRINTF_SRCS} ${MINILIBX_SRCS}
 
 SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \

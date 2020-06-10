@@ -73,13 +73,13 @@ void	ft_hit(t_map *map, t_vec *vec)
 	*/
 		if (map->map[vec->map_y][vec->map_x] == '1')
 			vec->hit = 1;
-		if (vec->side == 0)
-			vec->dist = (vec->map_x - map->pos_x +
-			(1 - vec->step_x) / 2) / vec->raydir_x;
-		else
-			vec->dist = (vec->map_y - map->pos_y +
-			(1 - vec->step_y) / 2) / vec->raydir_y;
 	}
+	if (vec->side == 0)
+		vec->dist = (vec->map_x - map->pos_x +
+		(1 - vec->step_x) / 2) / vec->raydir_x;
+	else
+		vec->dist = (vec->map_y - map->pos_y +
+		(1 - vec->step_y) / 2) / vec->raydir_y;
 }
 
 void	ft_init_draw(t_vec *vec, int height)
@@ -131,7 +131,9 @@ t_all	*ft_delta_dist(t_vec *vec, t_map *map, t_all *all)
 		** if (side == 1)
 		**		color = color / 2;
 		*/
-		ft_draw_ray(i, all);
+		//ft_textures(all);
+		if (ft_draw_text(i, all) != 1)
+			ft_draw_ray(i, all);
 		vec->hit = 0;
 	}
 	return (all);

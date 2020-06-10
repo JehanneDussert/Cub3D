@@ -20,18 +20,18 @@ int		ft_check_existence(t_map *map, char *line, int *i, int mode)
 	{
 		if ((line[*i] == 'R' && (map->reso[0] != -1 || map->reso[1] != -1)) ||
 		(line[*i] == 'F' && map->f_path != -1) || (line[*i] == 'C'
-		&& map->c_path != -1) || (ft_first(line, "NO") == 1 && map->n_path
-		!= NULL) || (ft_first(line, "SO") == 1 && map->s_path != NULL) ||
-		(ft_first(line, "WE") == 1 && map->w_path != NULL) ||
-		(ft_first(line, "EA") == 1 && map->e_path != NULL) ||
-		(ft_first(line, "S") == 1 && map->spr_path != NULL))
+		&& map->c_path != -1) || (ft_first(line, "NO") == 1 && map->n_path[0]
+		!= '\0') || (ft_first(line, "SO") == 1 && map->s_path[0] != '\0') ||
+		(ft_first(line, "WE") == 1 && map->w_path[0] != '\0') ||
+		(ft_first(line, "EA") == 1 && map->e_path[0] != '\0') ||
+		(ft_first(line, "S") == 1 && map->spr_path[0] != '\0'))
 			return (1);
 	}
 	else if (mode == 1)
 	{
 		if (map->reso[0] != -1 && map->reso[1] != -1 && map->f_path != -1 &&
-		map->c_path != -1 && map->n_path != NULL && map->s_path != NULL &&
-		map->spr_path != NULL && map->w_path != NULL && map->e_path != NULL)
+		map->c_path != -1 && map->n_path[0] != '\0' && map->s_path[0] != '\0' &&
+		map->spr_path[0] != '\0' && map->w_path[0] != '\0' && map->e_path[0] != '\0')
 			return (1);
 	}
 	return (0);
@@ -67,7 +67,11 @@ t_map	*ft_parsing(t_all *all, char *title)
 			line[i] == 'F' ? ft_colors(line, &all->map->f_path, &i) :
 			ft_colors(line, &all->map->c_path, &i);
 		else if (ft_check_text(line, i) == 1)
+		{
 			ft_text(line, all->map);
+			if (ft_open_text(all->map) == -1)
+				exit(ft_error(5, all));
+		}
 		free(line);
 		line = NULL;
 		i = 0;
@@ -77,7 +81,7 @@ t_map	*ft_parsing(t_all *all, char *title)
 		all->map->map = ft_map(line, n, fd, all->map);
 	else
 		exit(ft_error(0, all));
-	ft_print(all);
+	//ft_print(all);
 	return (all->map);
 }
 

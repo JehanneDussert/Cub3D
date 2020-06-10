@@ -17,7 +17,7 @@ int	ft_killwindow(t_all *all)
 	int		i;
 
 	i = 0;
-	while (all->map->map[i])
+	while (all->map->map && all->map->map[i])
 	{
 		free(all->map->map[i]);
 		i++;
@@ -102,6 +102,8 @@ int	ft_keypress(int keycode, t_all *all)
 		all->player->pos = DOWN;
 		all->keys->move_speed = SLOW;
 	}
+	/*else if (keycode == M_KEY)
+		ft_mini_map(all);*/
 	return (0);
 }
 
@@ -113,16 +115,14 @@ int	ft_keydeal(t_all *all)
 	if (!(all->image->img_ptr = mlx_new_image(all->image->mlx_ptr,
 		all->map->reso[0], all->map->reso[1])))
 		return (ft_error(7, all));
-	if (!(all->image->data = (int *)mlx_get_data_addr(all->image->img_ptr,
+	if (!(all->image->data = mlx_get_data_addr(all->image->img_ptr,
 		&all->image->bpp, &all->image->size_l, &all->image->endian)))
 		return (ft_error(7, all));
 	all->image->bpp = all->image->bpp / 8;
-	/*
-	** while (++i < all->map->reso[0] * (all->map->reso[1] / 2))
-	**	*(int *)&all->image->data[i * all->image->bpp] = all->map->c_path;
-	** while (++i < all->map->reso[0] * (all->map->reso[1]))
-	**	*(int *)&all->image->data[i * all->image->bpp] = all->map->f_path;
-	*/
+	while (++i < all->map->reso[0] * (all->map->reso[1] / 2))
+		*(int *)&all->image->data[i * all->image->bpp] = all->map->c_path;
+	while (++i < all->map->reso[0] * (all->map->reso[1]))
+		*(int *)&all->image->data[i * all->image->bpp] = all->map->f_path;
 	if (!(all = ft_raycasting(all)))
 		return (ft_error(4, all));
 	if ((ft_move(all)) != 0)

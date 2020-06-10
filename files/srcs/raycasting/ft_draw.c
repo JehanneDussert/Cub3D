@@ -47,9 +47,9 @@ void	ft_draw_ray(int i, t_all *all)
 	ft_draw_mode(all);
 	color = ft_draw_side(all->vec, color);
 	while (++j < all->vec->draw_start)
-		all->image->data[j * all->map->reso[0] + i] = SKYBLUE;
+		*(int *)&all->image->data[j * all->map->reso[0] + i] = SKYBLUE;
 	while (j < all->vec->draw_end && j < all->map->reso[1])
-		all->image->data[(j++) * all->map->reso[0] + i] = color;
+		*(int *)&all->image->data[(j++) * all->map->reso[0] + i] = color;
 	while (j < all->map->reso[1])
-		all->image->data[(j++) * all->map->reso[0] + i] = GREY_FLOOR;
+		*(int *)&all->image->data[(j++) * all->map->reso[0] + i] = GREY_FLOOR;
 }
