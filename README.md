@@ -12,10 +12,6 @@ See [Wolfenstein 3D](http://users.atw.hu/wolf3d/).
 ## Commands
 * W, A, S, D to move ;
 * ESC to close the window and exit the program ;
-* SPACE to jump ;
-* O to crawl ;
 * P to run ;
 * → to turn right ;
-* ← to turn left ;
-* ↑	to look up ;
-* ↓ to look down.
+* ← to turn left.
