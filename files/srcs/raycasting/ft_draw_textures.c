@@ -2,7 +2,7 @@
 
 void    ft_textures(t_all *all)
 {
-    all->vec->texNum = all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x)] - '0';
+    //all->vec->texNum = all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x)] - '0';
     if (all->vec->side == 0)
         all->vec->wallX = all->map->pos_y + all->vec->dist * all->vec->raydir_y;
     else
@@ -13,8 +13,8 @@ void    ft_textures(t_all *all)
         all->vec->texX = 64.0 - all->vec->texX - 1;
     if (all->vec->side == 1 && all->vec->raydir_y < 0)
         all->vec->texX = 64.0 - all->vec->texX - 1;
-    all->vec->step = 1.0 * 64.0 / all->vec->line_height;
-    all->vec->texPos = (all->vec->draw_start - all->map->reso[1] / 2 + all->vec->line_height / 2) * all->vec->step;
+    //all->vec->step = 1.0 * 64.0 / all->vec->line_height;
+    //all->vec->texPos = (all->vec->draw_start - all->map->reso[1] / 2 + all->vec->line_height / 2) * all->vec->step;
 }
 
 int    ft_draw_ns(int i, t_all *all)

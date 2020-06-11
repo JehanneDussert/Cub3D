@@ -48,9 +48,10 @@
 # define UP 1
 # define DOWN 2
 
-# define NORMAL 0.12
+# define NORMAL 0.15
 # define SLOW 0.05
 # define RUN 0.2
+# define NBSPR 15
 
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
@@ -142,8 +143,6 @@ typedef struct	s_vec
 	int			texX;
 	int			texY;
 	double		wallX;
-	double		step;
-	double		texPos;
 	int			texWidth;
 	int			texHeight;
 }				t_vec;
@@ -161,6 +160,33 @@ typedef struct	s_keys
 	int			killwindow;
 }				t_keys;
 
+typedef struct	s_spr_txt
+{
+	double		invDet;
+	double		transform_x;
+	double		transform_y;
+	int			move_screen;
+	int			spr_h;
+	int			spr_w;
+	int			screen_x;
+	int			draw_sx;
+	int			draw_ex;
+	int			draw_sy;
+	int			draw_ey;
+	int			text_w;
+	int			text_h;
+	int			texX;
+	int			texY;
+	int			d;
+	int			texture;
+}				t_spr_txt;
+
+typedef struct	s_spr
+{
+  double		x;
+  double		y;
+}				t_spr;
+
 typedef struct	s_all
 {
 	t_map		*map;
@@ -169,6 +195,9 @@ typedef struct	s_all
 	t_text		*text;
 	t_keys		*keys;
 	t_player	*player;
+	t_spr		*spr[50];
+	t_spr_txt	*spr_txt;
+	double		*buffer;
 }				t_all;
 
 /*
@@ -247,5 +276,10 @@ int				ft_init_texture(t_all *all, t_text *text, int width, int height);
 ** Mini map
 */
 void			ft_mini_map(t_all *all);
+
+/*
+** Sprites
+*/
+void    		ft_sprites(t_all *all, t_spr *spr);
 
 #endif

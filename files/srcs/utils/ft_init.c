@@ -14,20 +14,15 @@
 
 int			ft_init_texture_data(t_text *text)
 {
-	text[0].img = mlx_get_data_addr(text[0].ptr, &text[0].bpp, &text[0].size_l, &text[0].endian);
-	if (text[0].img == NULL)
+	if((text[0].img = mlx_get_data_addr(text[0].ptr, &text[0].bpp, &text[0].size_l, &text[0].endian)) == NULL)
 		return (-1);
-	text[1].img = mlx_get_data_addr(text[1].ptr, &text[1].bpp, &text[1].size_l, &text[1].endian);
-	if (text[1].img == NULL)
+	if ((text[1].img = mlx_get_data_addr(text[1].ptr, &text[1].bpp, &text[1].size_l, &text[1].endian)) == NULL)
 		return (-1);
-	text[2].img = mlx_get_data_addr(text[2].ptr, &text[2].bpp, &text[2].size_l, &text[2].endian);
-	if (text[2].img == NULL)
+	if ((text[2].img = mlx_get_data_addr(text[2].ptr, &text[2].bpp, &text[2].size_l, &text[2].endian)) == NULL)
 		return (-1);
-	text[3].img = mlx_get_data_addr(text[3].ptr, &text[3].bpp, &text[3].size_l, &text[3].endian);
-	if (text[3].img == NULL)
+	if ((text[3].img = mlx_get_data_addr(text[3].ptr, &text[3].bpp, &text[3].size_l, &text[3].endian)) == NULL)
 		return (-1);
-	text[4].img = mlx_get_data_addr(text[4].ptr, &text[4].bpp, &text[4].size_l, &text[4].endian);
-	if (text[4].img == NULL)
+	if ((text[4].img = mlx_get_data_addr(text[4].ptr, &text[4].bpp, &text[4].size_l, &text[4].endian)) == NULL)
 		return (-1);
 	return (0);
 }
@@ -49,7 +44,7 @@ int			ft_init_texture(t_all *all, t_text *text, int width, int height)
 	if ((text[4].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
 	all->map->spr_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	text[5].ptr = NULL;
+	//text[5].ptr = NULL;
 	if (ft_init_texture_data(text) != 0)
 		return (ft_error(8, all));
 	all->text = text;
@@ -101,8 +96,6 @@ t_vec		*ft_vec_init(t_vec *vec)
 	vec->texX = 0;
 	vec->texY = 0;
 	vec->wallX = 0.0;
-	vec->step = 0.0;
-	vec->texPos = 0.0;
 	vec->texWidth = 64;
 	vec->texHeight = 64;
 	return (vec);

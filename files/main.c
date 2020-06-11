@@ -15,7 +15,7 @@
 int	ft_start(t_all *all, char **argv, int save)
 {
 	(void)save;
-	t_text	text[6];
+	t_text	text[5];
 
 	if (!(all = ft_init_all(all)))
 		return (ft_error(2, all));
