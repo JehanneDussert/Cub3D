@@ -12,8 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-#include "../../includes/cub3d.h"
-
 int		ft_check_existence(t_map *map, char *line, int *i, int mode)
 {
 	if (mode == 0)
@@ -78,7 +76,7 @@ t_map	*ft_parsing(t_all *all, char *title)
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && line[0] == '1')
-		all->map->map = ft_map(line, n, fd, all->map);
+		all->map->map = ft_map(line, n, fd, all);
 	else
 		exit(ft_error(0, all));
 	//ft_print(all);

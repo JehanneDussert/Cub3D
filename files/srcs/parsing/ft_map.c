@@ -129,20 +129,38 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
 	return (lst);
 }
 
-t_list	*ft_list(char *line, int n, int fd, t_map *info)
+t_list	*ft_list(char *line, int n, int fd, t_all *all)
 {
 	t_list	*lst;
 	char	*clean_line;
 	int		map_len;
+	int		i;
+	int		j;
+	int		nb;
 
 	lst = NULL;
-	info->ori = '1';
+	nb = 0;
+	j = 0;
 	while (n == 1 || n == 0)
 	{
-		map_len = ft_map_len(line, &info->ori);
-		if (map_len < 3)
+		i = 0;
+		map_len = ft_map_len(line, &all->map->ori);
+		if (map_len < 3 && line == NULL)
 			return (NULL);
-		clean_line = ft_clean_line(line, &info->ori, map_len);
+		clean_line = ft_clean_line(line, &all->map->ori, map_len);
+		if (map_len < 3 && clean_line[0] == '\0')
+			return (lst);
+		while (clean_line[i])
+		{
+			if (clean_line[i] == '2')
+			{
+				all->spr[nb].x = (double)i + 0.5;
+				all->spr[nb].y = (double)j + 0.5;
+				nb++;
+				all->map->spr++;
+			}
+			i++;
+		}
 		if (lst == NULL)
 			lst = ft_new_line(lst, clean_line, map_len, 0);
 		else
@@ -154,11 +172,12 @@ t_list	*ft_list(char *line, int n, int fd, t_map *info)
 		free(line);
 		line = NULL;
 		n = get_next_line(fd, &line);
+		j++;
 	}
 	return (ft_check_map_errors(line, map_len, 1) == 1 ? lst : NULL);
 }
 
-char	**ft_map(char *line, int n, int fd, t_map *info)
+char	**ft_map(char *line, int n, int fd, t_all *all)
 {
 	char	**map;
 	t_list	*lst;
@@ -166,7 +185,7 @@ char	**ft_map(char *line, int n, int fd, t_map *info)
 	int		i;
 	int		j;
 
-	lst = ft_list(line, n, fd, info);
+	lst = ft_list(line, n, fd, all);
 	len = ft_lstsize(lst);
 	i = 0;
 	j = 0;
@@ -178,5 +197,5 @@ char	**ft_map(char *line, int n, int fd, t_map *info)
 		lst = lst->next;
 		i++;
 	}
-	return (ft_check_pos(info, map) != NULL ? map : NULL);
+	return (ft_check_pos(all->map, map) != NULL ? map : NULL);
 }

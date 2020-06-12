@@ -114,7 +114,8 @@ t_map		*ft_init_map(t_map *map)
 	map->c_path = -1;
 	map->pos_x = 0;
 	map->pos_y = 0;
-	map->ori = ' ';
+	map->ori = '1';
+	map->spr = 0;
 	return (map);
 }
 

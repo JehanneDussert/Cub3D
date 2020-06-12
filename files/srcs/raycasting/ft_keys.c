@@ -125,7 +125,8 @@ int	ft_keydeal(t_all *all)
 		*(int *)&all->image->data[i * all->image->bpp] = all->map->f_path;
 	if (!(all = ft_raycasting(all)))
 		return (ft_error(4, all));
-	//ft_sprites(all, all->spr);
+	ft_sprites(all, all->spr, all->map->spr);
+	free(all->buffer);
 	if ((ft_move(all)) != 0)
 		return (ft_error(9, all));
 	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,

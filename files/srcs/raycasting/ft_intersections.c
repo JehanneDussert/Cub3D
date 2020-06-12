@@ -49,7 +49,7 @@ void	ft_init_sidedist(t_vec *vec, t_map *map)
 	}
 }
 
-void	ft_hit(t_map *map, t_vec *vec)
+void	ft_hit(t_all *all, t_vec *vec, int i)
 {
 	/*
 	** On va incrementer x ou y d'un carre jusqu'a hit un wall
@@ -71,15 +71,16 @@ void	ft_hit(t_map *map, t_vec *vec)
 	/*
 	** On regarde si on a frappe un wall
 	*/
-		if (map->map[vec->map_y][vec->map_x] == '1')
+		if (all->map->map[vec->map_y][vec->map_x] == '1')
 			vec->hit = 1;
 	}
 	if (vec->side == 0)
-		vec->dist = (vec->map_x - map->pos_x +
+		vec->dist = (vec->map_x - all->map->pos_x +
 		(1 - vec->step_x) / 2) / vec->raydir_x;
 	else
-		vec->dist = (vec->map_y - map->pos_y +
+		vec->dist = (vec->map_y - all->map->pos_y +
 		(1 - vec->step_y) / 2) / vec->raydir_y;
+	all->buffer[i] = vec->dist;
 }
 
 void	ft_init_draw(t_vec *vec, int height)
@@ -104,6 +105,7 @@ t_all	*ft_delta_dist(t_vec *vec, t_map *map, t_all *all)
 	int i;
 
 	i = -1;
+	all->buffer = malloc(sizeof(double) * all->map->reso[0]);
 	while (++i < map->reso[0])
 	{
 		/*
@@ -121,7 +123,7 @@ t_all	*ft_delta_dist(t_vec *vec, t_map *map, t_all *all)
 		/*
 		** DDA : on va avancer dans les x / y jusqu'a frapper un mur
 		*/
-		ft_hit(map, vec);
+		ft_hit(all, vec, i);
 		/*
 		** On va calculer la longueur du rayon-mur afin de calculer
 		** la taille du mur a dessiner

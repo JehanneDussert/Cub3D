@@ -52,6 +52,7 @@
 # define SLOW 0.05
 # define RUN 0.2
 # define NBSPR 15
+# define W_H 64
 
 # include "../../get_next_line/get_next_line.h"
 # include "../../libft/libft.h"
@@ -94,6 +95,7 @@ typedef struct	s_map
 	double		pos_x;
 	double		pos_y;
 	char		ori;
+	int			spr;
 }				t_map;
 
 typedef struct	s_image
@@ -179,6 +181,7 @@ typedef struct	s_spr_txt
 	int			texY;
 	int			d;
 	int			texture;
+	int			i;
 }				t_spr_txt;
 
 typedef struct	s_spr
@@ -195,7 +198,7 @@ typedef struct	s_all
 	t_text		*text;
 	t_keys		*keys;
 	t_player	*player;
-	t_spr		*spr[50];
+	t_spr		spr[50];
 	t_spr_txt	*spr_txt;
 	double		*buffer;
 }				t_all;
@@ -209,8 +212,8 @@ int				ft_check_resolution(char *line, t_map *info, int *i);
 int				ft_colors(char *line, int *color, int *i);
 void			ft_text(char *line, t_map *info);
 int				ft_open_text(t_map *map);
-t_list			*ft_list(char *line, int n, int fd, t_map *info);
-char			**ft_map(char *line, int n, int fd, t_map *info);
+t_list			*ft_list(char *line, int n, int fd, t_all *all);
+char			**ft_map(char *line, int n, int fd, t_all *all);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_all *all);
@@ -220,7 +223,7 @@ void			ft_print(t_all *all);
 */
 t_all			*ft_raycasting(t_all *all);
 void			ft_ray_dir(t_vec *vec, t_map *map, int i);
-void			ft_hit(t_map *map, t_vec *vec);
+void			ft_hit(t_all *all, t_vec *vec, int i);
 
 /*
 ** Draw
@@ -280,6 +283,6 @@ void			ft_mini_map(t_all *all);
 /*
 ** Sprites
 */
-void    		ft_sprites(t_all *all, t_spr *spr);
+void    		ft_sprites(t_all *all, t_spr *spr, int nb_spr);
 
 #endif
