@@ -76,7 +76,10 @@ t_map	*ft_parsing(t_all *all, char *title)
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && line[0] == '1')
-		all->map->map = ft_map(line, n, fd, all);
+		{
+			if ((all->map->map = ft_map(line, n, fd, all)) == NULL)
+				exit(printf("erreur de map, à changer\n"));
+		}
 	else
 		exit(ft_error(0, all));
 	//ft_print(all);

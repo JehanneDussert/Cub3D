@@ -96,6 +96,7 @@ typedef struct	s_map
 	double		pos_y;
 	char		ori;
 	int			spr;
+	int			map_l;
 }				t_map;
 
 typedef struct	s_image

@@ -116,6 +116,7 @@ t_map		*ft_init_map(t_map *map)
 	map->pos_y = 0;
 	map->ori = '1';
 	map->spr = 0;
+	map->map_l = 0;
 	return (map);
 }
 

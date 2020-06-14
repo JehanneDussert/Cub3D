@@ -74,7 +74,7 @@ int	ft_keyrelease(int keycode, t_all *all)
 
 int	ft_keypress(int keycode, t_all *all)
 {
-	printf("keycode : %d\n", keycode);
+	//printf("keycode : %d\n", keycode);
 	if (keycode == A_KEY)
 		all->keys->keyup = 1;
 	else if (keycode == W_KEY)

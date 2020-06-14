@@ -38,7 +38,7 @@ t_map	*ft_check_pos(t_map *info, char **map)
 	return (NULL);
 }
 
-int		ft_check_map_errors(char *line, int len, int mode)
+int		ft_check_map_errors(char *line, int mode)
 {
 	int	i;
 
@@ -54,13 +54,13 @@ int		ft_check_map_errors(char *line, int len, int mode)
 	}
 	else if (mode == 1)
 	{
-		if (line[0] != '1' || line[len - 1] != '1')
+		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
 			return (0);
 	}
 	return (1);
 }
 
-int		ft_map_len(char *line, char *ori)
+int		ft_map_len(char *line, char *ori, int *map_l)
 {
 	int	i;
 	int	map_len;
@@ -81,10 +81,12 @@ int		ft_map_len(char *line, char *ori)
 		else
 			return (-1);
 	}
+	if (i > *map_l)
+		*map_l = i;
 	return (map_len);
 }
 
-char	*ft_clean_line(char *line, char *ori, int len)
+char	*ft_clean_line(char *line, char *ori, int map_l)
 {
 	char	*clean_line;
 	int		i;
@@ -92,10 +94,17 @@ char	*ft_clean_line(char *line, char *ori, int len)
 
 	i = 0;
 	j = 0;
-	if (!(clean_line = (char *)malloc(sizeof(char) * (len + 1))))
+	//if ((clean_line = ft_calloc(map_l + 1, sizeof(char) * (map_l + 1))) == NULL)
+	//	return (NULL);
+	if (!(clean_line = (char *)malloc(sizeof(char) * (map_l + 1))))
 		return (NULL);
 	while (line[i])
 	{
+		if (line[i] == ' ')
+		{
+			clean_line[j] = '1';
+			j++;
+		}
 		if (ft_check_char(line, i) == 1 || ft_check_char(line, i) == 2)
 		{
 			if (ft_check_char(line, i) == 2)
@@ -105,23 +114,23 @@ char	*ft_clean_line(char *line, char *ori, int len)
 		}
 		i++;
 	}
-	clean_line[len] = '\0';
+	clean_line[j] = '\0';
 	return (clean_line);
 }
 
-t_list	*ft_new_line(t_list *lst, char *clean_line, int len, int mode)
+t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 {
 	t_list	*tmp;
 
 	if (mode == 0)
 	{
-		if (ft_check_map_errors(clean_line, len, 0) == 0)
+		if (ft_check_map_errors(clean_line, 0) == 0)
 			return (NULL);
 		lst = ft_lstnew(clean_line);
 	}
 	else if (mode == 1)
 	{
-		if (ft_check_map_errors(clean_line, len, 1) == 0)
+		if (ft_check_map_errors(clean_line, 1) == 0)
 			return (NULL);
 		tmp = ft_lstnew(clean_line);
 		ft_lstadd_back(&lst, tmp);
@@ -144,10 +153,12 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 	while (n == 1 || n == 0)
 	{
 		i = 0;
-		map_len = ft_map_len(line, &all->map->ori);
+		map_len = ft_map_len(line, &all->map->ori, &all->map->map_l);
+		if (map_len > all->map->map_l)
+			all->map->map_l = map_len;
 		if (map_len < 3 && line == NULL)
 			return (NULL);
-		clean_line = ft_clean_line(line, &all->map->ori, map_len);
+		clean_line = ft_clean_line(line, &all->map->ori, all->map->map_l);
 		if (map_len < 3 && clean_line[0] == '\0')
 			return (lst);
 		while (clean_line[i])
@@ -162,11 +173,11 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 			i++;
 		}
 		if (lst == NULL)
-			lst = ft_new_line(lst, clean_line, map_len, 0);
+			lst = ft_new_line(lst, clean_line, 0);
 		else
 		{
-			lst = ft_new_line(lst, clean_line, map_len, 1);
-			if (n == 0 && ft_check_map_errors(clean_line, map_len, 0) == 1)
+			lst = ft_new_line(lst, clean_line, 1);
+			if (n == 0 && ft_check_map_errors(clean_line, 0) == 1)
 				return (lst);
 		}
 		free(line);
@@ -174,28 +185,34 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 		n = get_next_line(fd, &line);
 		j++;
 	}
-	return (ft_check_map_errors(line, map_len, 1) == 1 ? lst : NULL);
+	return (ft_check_map_errors(line, 1) == 1 ? lst : NULL);
 }
 
 char	**ft_map(char *line, int n, int fd, t_all *all)
 {
-	char	**map;
 	t_list	*lst;
+	t_list	*tmp;
 	int		len;
 	int		i;
 	int		j;
 
 	lst = ft_list(line, n, fd, all);
+	tmp = lst;
 	len = ft_lstsize(lst);
-	i = 0;
 	j = 0;
-	if ((map = ft_calloc(len + 1, sizeof(*map))) == NULL)
+	i = 0;
+	if ((all->map->map = ft_calloc(len + 1, sizeof(*all->map->map))) == NULL)
 		return (NULL);
 	while (lst)
 	{
-		map[i] = lst->content;
+		if ((i + 1) == len)
+		{
+			if (ft_check_map_errors(lst->content, 0) != 1)
+				return (NULL);
+		}
+		all->map->map[i] = ft_substr(lst->content, 0, all->map->map_l + 1);
 		lst = lst->next;
 		i++;
 	}
-	return (ft_check_pos(all->map, map) != NULL ? map : NULL);
+	return (ft_check_pos(all->map, all->map->map) != NULL ? all->map->map : NULL);
 }

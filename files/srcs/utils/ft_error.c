@@ -43,6 +43,8 @@ int     ft_error(int msg, t_all *all)
         ft_putstr_fd("[ERROR]\nWrong texture.", 0);
     else if (msg == 9)
         ft_putstr_fd("[ERROR]\nMovement error.", 0);
+    else if (msg == 10)
+        ft_putstr_fd("[ERROR]\nWrong map.", 0);
     ft_killwindow(all);
     return (1);
 }

@@ -54,6 +54,7 @@ void	ft_hit(t_all *all, t_vec *vec, int i)
 	/*
 	** On va incrementer x ou y d'un carre jusqu'a hit un wall
 	*/
+	(void)i;
 	while (vec->hit == 0)
 	{
 		if (vec->sidedist_x < vec->sidedist_y)
