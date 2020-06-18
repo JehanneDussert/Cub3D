@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/12 16:39:16 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/18 16:58:53 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_map	*ft_parsing(t_all *all, char *title)
 		exit(ft_error(5, all));
 	if (!(line = (char *)malloc(sizeof(2))))
 		exit(ft_error(2, all));
-	while ((n = get_next_line(fd, &line)) == 1 && line[i] != '1')
+	while ((n = get_next_line(fd, &line)) == 1 && (line[i] != '1' && line[i] != ' '))
 	{
 		if ((line[i] == '\0' && n < 0) || line == NULL)
 			exit(ft_error(0, all));
@@ -75,20 +75,20 @@ t_map	*ft_parsing(t_all *all, char *title)
 		i = 0;
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
-	n == 1 && line[0] == '1')
+	n == 1 && (line[0] == '1' || line[0] == ' '))
 		{
 			if ((all->map->map = ft_map(line, n, fd, all)) == NULL)
 				exit(printf("erreur de map, à changer\n"));
 		}
 	else
 		exit(ft_error(0, all));
-	//ft_print(all);
+	ft_print(all);
 	return (all->map);
 }
 
 void	ft_print(t_all *all)
 {
-	printf("Resolution : %d %d\n", all->map->reso[0], all->map->reso[1]);
+	/*printf("Resolution : %d %d\n", all->map->reso[0], all->map->reso[1]);
 	printf("My floor :%d\n", all->map->f_path);
 	printf("My ceiling :%d\n", all->map->c_path);
 	printf("My n_path :%s\n", all->map->n_path);
@@ -98,7 +98,7 @@ void	ft_print(t_all *all)
 	printf("My spr_path :%s\n", all->map->spr_path);
 	printf("My ori :%c\n", all->map->ori);
 	printf("My x :%f\n", all->map->pos_x);
-	printf("My y :%f\n", all->map->pos_y);
+	printf("My y :%f\n", all->map->pos_y);*/
 	int i = 0;
 	while (all->map->map[i])
 	{

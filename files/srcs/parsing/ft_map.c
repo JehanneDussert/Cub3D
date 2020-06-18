@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/12 16:31:08 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/18 16:59:04 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int		ft_check_map_errors(char *line, int mode)
 	{
 		while (line[i])
 		{
-			if (line[i] != '1')
+			if (line[i] != '1' && line[i] != ' ')
 				return (0);
 			i++;
 		}
 	}
 	else if (mode == 1)
 	{
-		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
+		if ((line[0] != '1' && line[0] != ' ') || line[ft_strlen(line) - 1] != '1')
 			return (0);
 	}
 	return (1);
