@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 16:22:31 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 17:04:57 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,58 @@ int		ft_check_existence(t_map *map, char *line, int *i, int mode)
 	{
 		if (map->reso[0] != -1 && map->reso[1] != -1 && map->f_path != -1 &&
 		map->c_path != -1 && map->n_path[0] != '\0' && map->s_path[0] != '\0' &&
-		map->spr_path[0] != '\0' && map->w_path[0] != '\0' && map->e_path[0] != '\0')
+		map->spr_path[0] != '\0' && map->w_path[0] != '\0'
+		&& map->e_path[0] != '\0')
 			return (1);
 	}
 	return (0);
+}
+
+int		ft_info(t_all *all, char *line, int *i)
+{
+	if (line[*i] == 'R' && all->map->reso[0] == -1 &&
+		all->map->reso[1] == -1)
+	{
+		if (ft_check_resolution(line, all->map, i) == -1)
+			exit(ft_error(6, all));
+	}
+	else if ((line[*i] == 'F' && all->map->f_path == -1) || (line[*i] == 'C'
+	&& all->map->c_path == -1))
+	{
+		if (line[*i] == 'F')
+		{
+			if (ft_colors(line, &all->map->f_path, i) == -1)
+				exit(ft_error(12, all));
+		}
+		else if (line[*i] == 'C')
+			if (ft_colors(line, &all->map->c_path, i) == -1)
+				exit(ft_error(12, all));
+	}
+	else if (ft_check_text(line, *i) == 1)
+	{
+		ft_text(line, all->map);
+		if (ft_open_text(all->map) == -1)
+			exit(ft_error(5, all));
+	}
+	return (1);
+}
+
+int		ft_line_error(t_all *all, char *line, int *i, int n)
+{
+	if ((line[*i] == '\0' && n < 0) || line == NULL)
+		exit(ft_error(0, all));
+	line = ft_strtrim(line, " ");
+	if (ft_check_existence(all->map, line, i, 0) == 1)
+		exit(ft_error(0, all));
+	ft_info(all, line, i);
+	return (1);
+}
+
+void	ft_free_line(char *line, int *i)
+{
+	free(line);
+	line = NULL;
+	*i = 0;
 }
 
 t_map	*ft_parsing(t_all *all, char *title)
@@ -47,50 +95,21 @@ t_map	*ft_parsing(t_all *all, char *title)
 		exit(ft_error(5, all));
 	if (!(line = (char *)malloc(sizeof(2))))
 		exit(ft_error(2, all));
-	while ((n = get_next_line(fd, &line)) == 1 && (line[i] != '1' && line[i] != ' '))
+	while ((n = get_next_line(fd, &line)) == 1 && (line[i] != '1'
+			&& line[i] != ' '))
 	{
-		if ((line[i] == '\0' && n < 0) || line == NULL)
-			exit(ft_error(0, all));
-		line = ft_strtrim(line, " ");
-		if (ft_check_existence(all->map, line, &i, 0) == 1)
-			exit(ft_error(0, all));
-		else if (line[i] == 'R' && all->map->reso[0] == -1 &&
-			all->map->reso[1] == -1)
-		{
-			if (ft_check_resolution(line, all->map, &i) == -1)
-				exit(ft_error(6, all));
-		}
-		else if ((line[i] == 'F' && all->map->f_path == -1) || (line[i] == 'C'
-		&& all->map->c_path == -1))
-		{
-			if (line[i] == 'F')
-			{
-				if (ft_colors(line, &all->map->f_path, &i) == -1)
-					exit(ft_error(12, all));
-			}
-			else if (line[i] == 'C')
-				if (ft_colors(line, &all->map->c_path, &i) == -1)
-					exit(ft_error(12, all));
-		}
-		else if (ft_check_text(line, i) == 1)
-		{
-			ft_text(line, all->map);
-			if (ft_open_text(all->map) == -1)
-				exit(ft_error(5, all));
-		}
-		free(line);
-		line = NULL;
-		i = 0;
+		ft_line_error(all, line, &i, n);
+		ft_free_line(line, &i);
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && (line[0] == '1' || line[0] == ' '))
-		{
-			if ((all->map->map = ft_map(line, n, fd, all)) == NULL)
-				exit(ft_error(10, all));
-		}
+	{
+		if ((all->map->map = ft_map(line, n, fd, all)) == NULL)
+			exit(ft_error(10, all));
+	}
 	else
 		exit(ft_error(0, all));
-	ft_print(all);
+	//ft_print(all);
 	return (all->map);
 }
 
