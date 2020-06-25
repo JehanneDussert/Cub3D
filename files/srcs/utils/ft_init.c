@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 16:16:14 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:41:39 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ t_vec		*ft_vec_init(t_vec *vec)
 	vec->dir_y = 0;
 	vec->plane_x = 0.66;
 	vec->plane_y = 0;
-	vec->texNum = 0;
-	vec->texX = 0;
-	vec->texY = 0;
-	vec->wallX = 0.0;
-	vec->texWidth = 64;
-	vec->texHeight = 64;
+	vec->tex_num = 0;
+	vec->texx = 0;
+	vec->texy = 0;
+	vec->wallx = 0.0;
+	vec->tex_w = 64;
+	vec->tex_h = 64;
 	return (vec);
 }
 

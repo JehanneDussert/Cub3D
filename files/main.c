@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 16:32:33 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:46:36 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,15 @@ int	ft_start(t_all *all, char **argv, int save)
 		return (ft_error(7, all));
 	if (ft_init_texture(all, text, 64, 64) != 0)
 		return (-1);
-	ft_mlx(all);
+	if (!(mlx_hook(all->image->win_ptr, 2, 1, ft_keypress, all)))
+		return (ft_error(4, all));
+	if (!(mlx_hook(all->image->win_ptr, 3, 2, ft_keyrelease, all)))
+		return (ft_error(4, all));
+	if (!(mlx_hook(all->image->win_ptr, 17, 0, ft_killwindow, all)))
+		return (ft_error(4, all));
+	mlx_loop_hook(all->image->mlx_ptr, ft_keydeal, all);
+	if (!(mlx_loop(all->image->mlx_ptr)))
+		return (ft_error(4, all));
 	return (0);
 }
 

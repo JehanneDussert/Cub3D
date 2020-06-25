@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 16:42:13 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 17:22:44 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,11 @@ int				ft_player_crawl(t_all *all);
 int				ft_error(int msg, t_all *all);
 void			ft_free_all(t_all **all);
 int				ft_l_atoi(const char *str, int *i);
+int				ft_check_len(char *str, char *tmp);
+t_map			*ft_check_pos(t_map *info, char **map);
+int				ft_map_len(char *line, char *ori, int *map_l);
+int				ft_check_map_errors(char *line, int mode);
+void			ft_replace_space(char *str, int *i);
 
 /*
 ** Init
