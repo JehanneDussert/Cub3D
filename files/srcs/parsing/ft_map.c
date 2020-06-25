@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 17:31:12 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 17:50:12 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 	return (lst);
 }
 
-void	ft_nb_spr(t_all *all, char *str, int *nb, int j)
+int	ft_nb_spr(t_all *all, char *str, int *nb, int j)
 {
 	int	i;
 
@@ -77,6 +77,9 @@ void	ft_nb_spr(t_all *all, char *str, int *nb, int j)
 		}
 		i++;
 	}
+	if (all->map->spr > 49)
+		return (-1);
+	return (1);
 }
 
 t_list	*ft_list(char *line, int n, int fd, t_all *all)
@@ -102,8 +105,7 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 			return (NULL);
 		if (map_len < 3 && clean_line[0] == '\0')
 			return (lst);
-		ft_nb_spr(all, clean_line, &nb, j);
-		if (all->map->spr > 49)
+		if (ft_nb_spr(all, clean_line, &nb, j) == -1)
 			return (NULL);
 		if (lst == NULL)
 			lst = ft_new_line(lst, clean_line, 0);
