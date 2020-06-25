@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/18 16:59:04 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 15:39:57 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,37 @@ t_map	*ft_check_pos(t_map *info, char **map)
 		i++;
 	}
 	return (NULL);
+}
+
+int		ft_check_len(char *str, char *tmp)
+{
+	int str_len;
+	int tmp_len;
+	int i;
+
+	str_len = ft_strlen(str);
+	tmp_len = ft_strlen(tmp);
+	if (str_len > tmp_len)
+	{
+		i = tmp_len;
+		while (str && str[i] != '\0')
+		{
+			if (str[i] != '1')
+				return (-1);
+			i++;
+		}
+	}
+	else if (str_len < tmp_len)
+	{
+		i = str_len;
+		while (tmp && tmp[i] != '\0')
+		{
+			if (tmp[i] != '1')
+				return (-1);
+			i++;
+		}	
+	}
+	return (1);
 }
 
 int		ft_check_map_errors(char *line, int mode)
@@ -112,6 +143,8 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 			clean_line[j] = line[i];
 			j++;
 		}
+		else
+			return (NULL);
 		i++;
 	}
 	clean_line[j] = '\0';
@@ -158,7 +191,8 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 			all->map->map_l = map_len;
 		if (map_len < 3 && line == NULL)
 			return (NULL);
-		clean_line = ft_clean_line(line, &all->map->ori, all->map->map_l);
+		if ((clean_line = ft_clean_line(line, &all->map->ori, all->map->map_l)) == NULL)
+			return (NULL);
 		if (map_len < 3 && clean_line[0] == '\0')
 			return (lst);
 		while (clean_line[i])
@@ -169,6 +203,8 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 				all->spr[nb].y = (double)j + 0.5;
 				nb++;
 				all->map->spr++;
+				if (all->map->spr > 49)
+					return (NULL);
 			}
 			i++;
 		}
@@ -197,7 +233,7 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 	int		j;
 
 	lst = ft_list(line, n, fd, all);
-	tmp = lst;
+	//tmp = lst;
 	len = ft_lstsize(lst);
 	j = 0;
 	i = 0;
@@ -205,6 +241,7 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 		return (NULL);
 	while (lst)
 	{
+		tmp = lst;
 		if ((i + 1) == len)
 		{
 			if (ft_check_map_errors(lst->content, 0) != 1)
@@ -212,6 +249,11 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 		}
 		all->map->map[i] = ft_substr(lst->content, 0, all->map->map_l + 1);
 		lst = lst->next;
+		if (lst != NULL)
+		{
+			if (ft_check_len(lst->content, tmp->content) != 1)
+				return (NULL);
+		}
 		i++;
 	}
 	return (ft_check_pos(all->map, all->map->map) != NULL ? all->map->map : NULL);

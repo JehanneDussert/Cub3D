@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/13 02:36:44 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 15:49:09 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int     ft_error(int msg, t_all *all)
         ft_putstr_fd("[ERROR]\nMovement error.", 0);
     else if (msg == 10)
         ft_putstr_fd("[ERROR]\nWrong map.", 0);
+    else if (msg == 11)
+        ft_putstr_fd("[ERROR]\nToo much sprites.", 0);
+    else if (msg == 12)
+        ft_putstr_fd("[ERROR]\nWrong colors.", 0);
     ft_killwindow(all);
     return (1);
 }

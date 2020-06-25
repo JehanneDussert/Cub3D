@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/18 16:58:53 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:22:31 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,16 @@ t_map	*ft_parsing(t_all *all, char *title)
 		}
 		else if ((line[i] == 'F' && all->map->f_path == -1) || (line[i] == 'C'
 		&& all->map->c_path == -1))
-			line[i] == 'F' ? ft_colors(line, &all->map->f_path, &i) :
-			ft_colors(line, &all->map->c_path, &i);
+		{
+			if (line[i] == 'F')
+			{
+				if (ft_colors(line, &all->map->f_path, &i) == -1)
+					exit(ft_error(12, all));
+			}
+			else if (line[i] == 'C')
+				if (ft_colors(line, &all->map->c_path, &i) == -1)
+					exit(ft_error(12, all));
+		}
 		else if (ft_check_text(line, i) == 1)
 		{
 			ft_text(line, all->map);
@@ -78,7 +86,7 @@ t_map	*ft_parsing(t_all *all, char *title)
 	n == 1 && (line[0] == '1' || line[0] == ' '))
 		{
 			if ((all->map->map = ft_map(line, n, fd, all)) == NULL)
-				exit(printf("erreur de map, à changer\n"));
+				exit(ft_error(10, all));
 		}
 	else
 		exit(ft_error(0, all));

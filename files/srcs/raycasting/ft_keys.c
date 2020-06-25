@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/02/27 11:26:43 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:16:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ int	ft_killwindow(t_all *all)
 	int		i;
 
 	i = 0;
-	while (all->map->map && all->map->map[i])
+	if (all->map->map != NULL)
 	{
+		while (all->map->map && all->map->map[i])
+		{
+			free(all->map->map[i]);
+			i++;
+		}
 		free(all->map->map[i]);
-		i++;
+		free(all->map->map);
 	}
-	free(all->map->map[i]);
-	free(all->map->map);
 	/*if (all->image)
 		free(all->image);
 	if (all->vec)
@@ -34,8 +37,11 @@ int	ft_killwindow(t_all *all)
 		free(all->keys);
 	if (all->player)
 		free(all->player);*/
-	mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
-	mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
+	if (all->image->mlx_ptr != NULL && all->image->win_ptr != NULL)
+	{
+		mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
+		mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
+	}
 	exit(0);
 	return (1);
 }
@@ -74,7 +80,6 @@ int	ft_keyrelease(int keycode, t_all *all)
 
 int	ft_keypress(int keycode, t_all *all)
 {
-	//printf("keycode : %d\n", keycode);
 	if (keycode == A_KEY)
 		all->keys->keyup = 1;
 	else if (keycode == W_KEY)
@@ -102,8 +107,6 @@ int	ft_keypress(int keycode, t_all *all)
 		all->player->pos = DOWN;
 		all->keys->move_speed = SLOW;
 	}
-	/*else if (keycode == M_KEY)
-		ft_mini_map(all);*/
 	return (0);
 }
 

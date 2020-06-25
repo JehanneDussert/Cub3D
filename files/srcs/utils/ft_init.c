@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/13 02:36:44 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:16:14 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_map		*ft_init_map(t_map *map)
 	map->ori = '1';
 	map->spr = 0;
 	map->map_l = 0;
+	map->map = NULL;
 	return (map);
 }
 
@@ -131,6 +132,8 @@ t_all		*ft_init_all(t_all *all)
 {
 	if (!(all->image = (t_image *)malloc(sizeof(t_image))))
 		return (NULL);
+	all->image->mlx_ptr = NULL;
+	all->image->win_ptr = NULL;
 	if (!(all->map = (t_map *)malloc(sizeof(t_map))))
 		return (NULL);
 	if (!(all->vec = (t_vec *)malloc(sizeof(t_vec))))
