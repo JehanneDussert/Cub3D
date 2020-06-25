@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 13:57:13 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:42:13 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,12 @@ typedef struct	s_vec
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-	int			texNum;
-	int			texX;
-	int			texY;
-	double		wallX;
-	int			texWidth;
-	int			texHeight;
+	int			tex_num;
+	int			texx;
+	int			texy;
+	double		wallx;
+	int			tex_w;
+	int			tex_h;
 }				t_vec;
 
 typedef struct	s_keys
@@ -165,7 +165,7 @@ typedef struct	s_keys
 
 typedef struct	s_spr_txt
 {
-	double		invDet;
+	double		inv_det;
 	double		transform_x;
 	double		transform_y;
 	int			move_screen;
@@ -178,8 +178,8 @@ typedef struct	s_spr_txt
 	int			draw_ey;
 	int			text_w;
 	int			text_h;
-	int			texX;
-	int			texY;
+	int			texx;
+	int			texy;
 	int			d;
 	int			texture;
 	int			i;
@@ -187,8 +187,8 @@ typedef struct	s_spr_txt
 
 typedef struct	s_spr
 {
-  double		x;
-  double		y;
+	double		x;
+	double		y;
 }				t_spr;
 
 typedef struct	s_all
@@ -274,7 +274,8 @@ t_all			*ft_init_all(t_all *all);
 t_map			*ft_init_map(t_map *map);
 t_vec			*ft_vec_init(t_vec *vec);
 t_keys			*ft_keys_init(t_keys *keys);
-int				ft_init_texture(t_all *all, t_text *text, int width, int height);
+int				ft_init_texture(t_all *all, t_text *text, int width,
+				int height);
 
 /*
 ** Mini map
@@ -284,6 +285,6 @@ void			ft_mini_map(t_all *all);
 /*
 ** Sprites
 */
-void    		ft_sprites(t_all *all, t_spr *spr, int nb_spr);
+void			ft_sprites(t_all *all, t_spr *spr, int nb_spr);
 
 #endif
