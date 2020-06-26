@@ -27,7 +27,7 @@ MINILIBX_PATH = minilibx/
 MINILIBX = libmlx.a
 
 SRCS = files/srcs/parsing/ft_check_map.c files/srcs/parsing/ft_colors.c files/srcs/parsing/ft_resolution.c \
-		files/srcs/parsing/ft_textures.c files/srcs/parsing/ft_utils.c files/srcs/parsing/ft_map.c files/main.c \
+		files/srcs/parsing/ft_textures.c files/srcs/utils/ft_utils.c files/srcs/parsing/ft_map.c files/main.c \
 		files/srcs/raycasting/ft_intersections.c files/srcs/utils/ft_r_utils.c \
 		files/srcs/raycasting/ft_raycasting.c files/srcs/raycasting/ft_draw.c \
 		files/srcs/raycasting/ft_move.c files/srcs/raycasting/ft_rot.c \
