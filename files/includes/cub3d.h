@@ -146,8 +146,6 @@ typedef struct	s_vec
 	int			texx;
 	int			texy;
 	double		wallx;
-	int			tex_w;
-	int			tex_h;
 }				t_vec;
 
 typedef struct	s_keys

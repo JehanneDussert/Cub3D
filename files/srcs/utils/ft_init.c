@@ -49,7 +49,6 @@ int			ft_init_texture(t_all *all, t_text *text, int width, int height)
 	if ((text[4].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
 	all->map->spr_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	text[5].ptr = NULL;
 	if (ft_init_texture_data(text) != 0)
 		return (ft_error(8, all));
 	all->text = text;
