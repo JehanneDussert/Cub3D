@@ -12,34 +12,11 @@
 
 #include "includes/cub3d.h"
 
-int	ft_mlx(t_all *all)
-{
-	if (!(mlx_hook(all->image->win_ptr, 2, 1, ft_keypress, all)))
-		return (ft_error(4, all));
-	if (!(mlx_hook(all->image->win_ptr, 3, 2, ft_keyrelease, all)))
-		return (ft_error(4, all));
-	if (!(mlx_hook(all->image->win_ptr, 17, 0, ft_killwindow, all)))
-		return (ft_error(4, all));
-	mlx_loop_hook(all->image->mlx_ptr, ft_keydeal, all);
-	if (!(mlx_loop(all->image->mlx_ptr)))
-		return (ft_error(4, all));
-	return (1);
-}
-
-int	ft_init(t_all *all)
-{
-	if (!(all = ft_init_all(all)))
-		return (ft_error(2, all));
-	if ((all->image->mlx_ptr = mlx_init()) == NULL)
-		return (ft_error(7, all));
-	return (1);
-}
-
 int	ft_start(t_all *all, char **argv, int save)
 {
-	(void)save;
 	t_text	text[5];
 
+	(void)save;
 	ft_init(all);
 	all->image->title = argv[1];
 	if (!(all->map = ft_parsing(all, all->image->title)))
@@ -61,6 +38,29 @@ int	ft_start(t_all *all, char **argv, int save)
 	if (!(mlx_loop(all->image->mlx_ptr)))
 		return (ft_error(4, all));
 	return (0);
+}
+
+int	ft_mlx(t_all *all)
+{
+	if (!(mlx_hook(all->image->win_ptr, 2, 1, ft_keypress, all)))
+		return (ft_error(4, all));
+	if (!(mlx_hook(all->image->win_ptr, 3, 2, ft_keyrelease, all)))
+		return (ft_error(4, all));
+	if (!(mlx_hook(all->image->win_ptr, 17, 0, ft_killwindow, all)))
+		return (ft_error(4, all));
+	mlx_loop_hook(all->image->mlx_ptr, ft_keydeal, all);
+	if (!(mlx_loop(all->image->mlx_ptr)))
+		return (ft_error(4, all));
+	return (1);
+}
+
+int	ft_init(t_all *all)
+{
+	if (!(all = ft_init_all(all)))
+		return (ft_error(2, all));
+	if ((all->image->mlx_ptr = mlx_init()) == NULL)
+		return (ft_error(7, all));
+	return (1);
 }
 
 int	main(int argc, char **argv)
