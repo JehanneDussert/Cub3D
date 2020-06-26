@@ -14,15 +14,20 @@
 
 int			ft_init_texture_data(t_text *text)
 {
-	if((text[0].img = mlx_get_data_addr(text[0].ptr, &text[0].bpp, &text[0].size_l, &text[0].endian)) == NULL)
+	if ((text[0].img = mlx_get_data_addr(text[0].ptr, &text[0].bpp,
+		&text[0].size_l, &text[0].endian)) == NULL)
 		return (-1);
-	if ((text[1].img = mlx_get_data_addr(text[1].ptr, &text[1].bpp, &text[1].size_l, &text[1].endian)) == NULL)
+	if ((text[1].img = mlx_get_data_addr(text[1].ptr, &text[1].bpp,
+		&text[1].size_l, &text[1].endian)) == NULL)
 		return (-1);
-	if ((text[2].img = mlx_get_data_addr(text[2].ptr, &text[2].bpp, &text[2].size_l, &text[2].endian)) == NULL)
+	if ((text[2].img = mlx_get_data_addr(text[2].ptr, &text[2].bpp,
+		&text[2].size_l, &text[2].endian)) == NULL)
 		return (-1);
-	if ((text[3].img = mlx_get_data_addr(text[3].ptr, &text[3].bpp, &text[3].size_l, &text[3].endian)) == NULL)
+	if ((text[3].img = mlx_get_data_addr(text[3].ptr, &text[3].bpp,
+		&text[3].size_l, &text[3].endian)) == NULL)
 		return (-1);
-	if ((text[4].img = mlx_get_data_addr(text[4].ptr, &text[4].bpp, &text[4].size_l, &text[4].endian)) == NULL)
+	if ((text[4].img = mlx_get_data_addr(text[4].ptr, &text[4].bpp,
+		&text[4].size_l, &text[4].endian)) == NULL)
 		return (-1);
 	return (0);
 }
@@ -44,61 +49,11 @@ int			ft_init_texture(t_all *all, t_text *text, int width, int height)
 	if ((text[4].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
 	all->map->spr_path, &width, &height)) == NULL)
 		return (ft_error(8, all));
-	//text[5].ptr = NULL;
+	text[5].ptr = NULL;
 	if (ft_init_texture_data(text) != 0)
 		return (ft_error(8, all));
 	all->text = text;
 	return (0);
-}
-
-t_keys		*ft_keys_init(t_keys *keys)
-{
-	keys->keyup = 0;
-	keys->keydown = 0;
-	keys->keyleft = 0;
-	keys->keyright = 0;
-	keys->keyturnright = 0;
-	keys->keyturnleft = 0;
-	keys->move_speed = 0.15;
-	keys->rot_speed = 0.15;
-	keys->killwindow = 0;
-	return (keys);
-}
-
-t_vec		*ft_vec_init(t_vec *vec)
-{
-	vec->map_x = 0;
-	vec->map_y = 0;
-	vec->sidedist_x = 0.0;
-	vec->sidedist_y = 0.0;
-	vec->step_x = 0;
-	vec->step_y = 0;
-	vec->side = 0;
-	vec->hit = 0;
-	vec->dist = 0.0;
-	vec->raydir_x = 0.0;
-	vec->raydir_y = 0.0;
-	vec->deltadist_x = 0.0;
-	vec->deltadist_y = 0.0;
-	vec->camera_x = 0.0;
-	vec->line_height = 0;
-	vec->draw_start = 0;
-	vec->draw_end = 0;
-	vec->old_dirx = 0.0;
-	vec->old_diry = 0.0;
-	vec->old_planex = 0.0;
-	vec->old_planey = 0.0;
-	vec->dir_x = -1;
-	vec->dir_y = 0;
-	vec->plane_x = 0.66;
-	vec->plane_y = 0;
-	vec->tex_num = 0;
-	vec->texx = 0;
-	vec->texy = 0;
-	vec->wallx = 0.0;
-	vec->tex_w = 64;
-	vec->tex_h = 64;
-	return (vec);
 }
 
 t_map		*ft_init_map(t_map *map)
