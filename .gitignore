@@ -1,3 +1,4 @@
+/files/srcs/sprites/*.o
 /files/srcs/parsing/*.o
 /files/srcs/raycasting/*.o
 /files/srcs/utils/*.o
