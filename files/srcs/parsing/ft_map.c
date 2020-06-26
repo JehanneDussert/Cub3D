@@ -61,7 +61,7 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 	return (lst);
 }
 
-int	ft_nb_spr(t_all *all, char *str, int *nb, int j)
+int		ft_nb_spr(t_all *all, char *str, int *nb, int j)
 {
 	int	i;
 
@@ -123,17 +123,11 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 	return (ft_check_map_errors(line, 1) == 1 ? lst : NULL);
 }
 
-char	**ft_map(char *line, int n, int fd, t_all *all)
+char	**ft_create_map(t_all *all, t_list *lst, int len)
 {
-	t_list	*lst;
 	t_list	*tmp;
-	int		len;
 	int		i;
-	int		j;
 
-	lst = ft_list(line, n, fd, all);
-	len = ft_lstsize(lst);
-	j = 0;
 	i = 0;
 	if ((all->map->map = ft_calloc(len + 1, sizeof(*all->map->map))) == NULL)
 		return (NULL);
@@ -154,6 +148,17 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 		}
 		i++;
 	}
+	return (all->map->map);
+}
+
+char	**ft_map(char *line, int n, int fd, t_all *all)
+{
+	t_list	*lst;
+	int		len;
+
+	lst = ft_list(line, n, fd, all);
+	len = ft_lstsize(lst);
+	ft_create_map(all, lst, len);
 	return (ft_check_pos(all->map, all->map->map) != NULL ?
 		all->map->map : NULL);
 }
