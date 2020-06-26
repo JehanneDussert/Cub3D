@@ -26,7 +26,7 @@ int		ft_check_info(char *line, int *reso, int *i)
 	return (*reso);
 }
 
-int	ft_check_resolution(char *line, t_map *info, int *i)
+int		ft_check_resolution(char *line, t_map *info, int *i)
 {
 	if (!(ft_check_info(line, &info->reso[0], i)))
 		return (-1);
