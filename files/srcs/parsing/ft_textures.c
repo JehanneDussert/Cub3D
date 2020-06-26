@@ -41,7 +41,7 @@ void	ft_text(char *line, t_map *map)
 
 	i = 2;
 	len = 0;
-	while(i < (int)ft_strlen(line) && line[i] == ' ')
+	while (i < (int)ft_strlen(line) && line[i] == ' ')
 		i++;
 	while ((i + len) <= (int)ft_strlen(line) && line[len + i] != ' ')
 		len++;
