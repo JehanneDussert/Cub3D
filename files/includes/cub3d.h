@@ -273,6 +273,7 @@ void			ft_replace_space(char *str, int *i);
 /*
 ** Init
 */
+int				ft_init(t_all *all);
 t_all			*ft_init_all(t_all *all);
 t_map			*ft_init_map(t_map *map);
 t_vec			*ft_vec_init(t_vec *vec);
