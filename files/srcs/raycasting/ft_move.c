@@ -12,49 +12,57 @@
 
 #include "../../includes/cub3d.h"
 
-void move_up(t_all *all)
+void	move_up(t_all *all)
 {
-  if (all->map->map[(int)(all->map->pos_y + all->vec->dir_y * all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
-    all->map->pos_y += all->vec->dir_y * all->keys->move_speed;
-  if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x + all->vec->dir_x * all->keys->move_speed)] != '1') 
-    all->map->pos_x += all->vec->dir_x * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y + all->vec->dir_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		all->map->pos_y += all->vec->dir_y * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		+ all->vec->dir_x * all->keys->move_speed)] != '1')
+		all->map->pos_x += all->vec->dir_x * all->keys->move_speed;
 }
 
-void move_down(t_all *all)
+void	move_down(t_all *all)
 {
-  if (all->map->map[(int)(all->map->pos_y - all->vec->dir_y * all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
-    all->map->pos_y -= all->vec->dir_y * all->keys->move_speed;
-  if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x - all->vec->dir_x * all->keys->move_speed)] != '1') 
-    all->map->pos_x -= all->vec->dir_x * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y - all->vec->dir_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		all->map->pos_y -= all->vec->dir_y * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		- all->vec->dir_x * all->keys->move_speed)] != '1')
+		all->map->pos_x -= all->vec->dir_x * all->keys->move_speed;
 }
 
-void move_right(t_all *all)
+void	move_right(t_all *all)
 {
-  if (all->map->map[(int)(all->map->pos_y + all->vec->plane_y * all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
-    all->map->pos_y += all->vec->plane_y * all->keys->move_speed;
-  if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x + all->vec->plane_x * all->keys->move_speed)] != '1') 
-     all->map->pos_x += all->vec->plane_x * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y + all->vec->plane_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		all->map->pos_y += all->vec->plane_y * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		+ all->vec->plane_x * all->keys->move_speed)] != '1')
+		all->map->pos_x += all->vec->plane_x * all->keys->move_speed;
 }
 
-void move_left(t_all *all)
+void	move_left(t_all *all)
 {
-  if (all->map->map[(int)(all->map->pos_y - all->vec->plane_y * all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
-    all->map->pos_y -= all->vec->plane_y * all->keys->move_speed;
-  if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x - all->vec->plane_x * all->keys->move_speed)] != '1') 
-     all->map->pos_x -= all->vec->plane_x * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y - all->vec->plane_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		all->map->pos_y -= all->vec->plane_y * all->keys->move_speed;
+	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		- all->vec->plane_x * all->keys->move_speed)] != '1')
+		all->map->pos_x -= all->vec->plane_x * all->keys->move_speed;
 }
 
-int  ft_move(t_all *all)
+int		ft_move(t_all *all)
 {
-  if (all->keys->keyup == 1)
-    move_up(all);
-  if (all->keys->keydown == 1)
-    move_down(all);
-  if (all->keys->keyleft == 1)
-    move_left(all);
-  if (all->keys->keyright == 1)
-    move_right(all);
-  if ((ft_rotation(all) != 0))
-    return (ft_error(9, all));
-  return (0);
+	if (all->keys->keyup == 1)
+		move_up(all);
+	if (all->keys->keydown == 1)
+		move_down(all);
+	if (all->keys->keyleft == 1)
+		move_left(all);
+	if (all->keys->keyright == 1)
+		move_right(all);
+	if ((ft_rotation(all) != 0))
+		return (ft_error(9, all));
+	return (0);
 }
