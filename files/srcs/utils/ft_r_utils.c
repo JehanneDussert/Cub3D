@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void ft_north(t_vec *vec)
+void	ft_north(t_vec *vec)
 {
 	vec->dir_x = 0;
 	vec->dir_y = -1;
@@ -20,7 +20,7 @@ void ft_north(t_vec *vec)
 	vec->plane_y = 0;
 }
 
-void ft_south(t_vec *vec)
+void	ft_south(t_vec *vec)
 {
 	vec->dir_x = 0;
 	vec->dir_y = 1;
@@ -28,7 +28,7 @@ void ft_south(t_vec *vec)
 	vec->plane_y = 0;
 }
 
-void ft_east(t_vec *vec)
+void	ft_east(t_vec *vec)
 {
 	vec->dir_x = 1;
 	vec->dir_y = 0;
@@ -36,7 +36,7 @@ void ft_east(t_vec *vec)
 	vec->plane_y = 0.66;
 }
 
-void ft_west(t_vec *vec)
+void	ft_west(t_vec *vec)
 {
 	vec->dir_x = -1;
 	vec->dir_y = 0;
@@ -44,7 +44,7 @@ void ft_west(t_vec *vec)
 	vec->plane_y = -0.66;
 }
 
-t_all *ft_def_dir_plane(t_all *all)
+t_all	*ft_def_dir_plane(t_all *all)
 {
 	if (all->map->ori == 'E')
 		ft_east(all->vec);
