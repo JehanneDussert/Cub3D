@@ -109,27 +109,5 @@ t_map	*ft_parsing(t_all *all, char *title)
 	}
 	else
 		exit(ft_error(0, all));
-	//ft_print(all);
 	return (all->map);
-}
-
-void	ft_print(t_all *all)
-{
-	/*printf("Resolution : %d %d\n", all->map->reso[0], all->map->reso[1]);
-	printf("My floor :%d\n", all->map->f_path);
-	printf("My ceiling :%d\n", all->map->c_path);
-	printf("My n_path :%s\n", all->map->n_path);
-	printf("My s_path :%s\n", all->map->s_path);
-	printf("My e_path :%s\n", all->map->e_path);
-	printf("My w_path :%s\n", all->map->w_path);
-	printf("My spr_path :%s\n", all->map->spr_path);
-	printf("My ori :%c\n", all->map->ori);
-	printf("My x :%f\n", all->map->pos_x);
-	printf("My y :%f\n", all->map->pos_y);*/
-	int i = 0;
-	while (all->map->map[i])
-	{
-		printf("Contenu :%s\n", all->map->map[i]);
-		i++;
-	}
 }
