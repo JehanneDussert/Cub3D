@@ -71,10 +71,7 @@ int	ft_keyrelease(int keycode, t_all *all)
 	else if (keycode == P_KEY)
 		all->keys->move_speed = NORMAL;
 	else if (keycode == O_KEY)
-	{
-		all->player->pos = 0;
 		all->keys->move_speed = NORMAL;
-	}
 	return (0);
 }
 
@@ -103,10 +100,18 @@ int	ft_keypress(int keycode, t_all *all)
 	else if (keycode == P_KEY)
 		all->keys->move_speed = RUN;
 	else if (keycode == O_KEY)
-	{
-		all->player->pos = DOWN;
 		all->keys->move_speed = SLOW;
-	}
+	return (0);
+}
+
+int	ft_new_image(t_all *all)
+{
+	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
+		all->image->img_ptr, 0, 0)))
+		return (ft_error(7, all));
+	mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
+	if (all->keys->killwindow == 1)
+		ft_killwindow(all);
 	return (0);
 }
 
@@ -132,24 +137,6 @@ int	ft_keydeal(t_all *all)
 	free(all->buffer);
 	if ((ft_move(all)) != 0)
 		return (ft_error(9, all));
-	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
-		all->image->img_ptr, 0, 0)))
-		return (ft_error(7, all));
-	mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
-	if (all->keys->killwindow == 1)
-		ft_killwindow(all);
+	ft_new_image(all);
 	return (0);
 }
-
-/*
-** int funct(int button, int x, int y, void *param)
-** {
-** 	// Dans le cas où la souris est utilisée
-** 	return (0);
-** }
-**
-** int funct(void *param)
-** {
-** 	//  Pour tous les autres évènements
-** 	return (0);
-}*/
