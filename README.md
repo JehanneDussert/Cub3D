@@ -13,5 +13,6 @@ See [Wolfenstein 3D](http://users.atw.hu/wolf3d/).
 * W, A, S, D to move ;
 * ESC to close the window and exit the program ;
 * P to run ;
+* O to slow down ;
 * → to turn right ;
 * ← to turn left.
