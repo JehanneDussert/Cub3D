@@ -28,6 +28,7 @@ int			ft_colors(char *line, int *color, int *i)
 	while (j >= 0)
 	{
 		tab[j] = ft_l_atoi(line, i);
+		printf("tab j :%d\n", tab[j]);
 		if (tab[j] > 255 || tab[j] < 0)
 			return (-1);
 		j--;

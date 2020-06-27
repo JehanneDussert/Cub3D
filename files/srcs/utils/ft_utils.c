@@ -12,10 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
-void	ft_replace_space(char *str, int *i)
+void	ft_replace_space(char *str, int *i, int *j)
 {
 	str[*i] = '1';
 	(*i)++;
+	(*j)++;
 }
 
 void	ft_jump(char *line, int *i)

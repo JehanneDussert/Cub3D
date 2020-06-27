@@ -268,7 +268,7 @@ int				ft_check_len(char *str, char *tmp);
 t_map			*ft_check_pos(t_map *info, char **map);
 int				ft_map_len(char *line, char *ori, int *map_l);
 int				ft_check_map_errors(char *line, int mode);
-void			ft_replace_space(char *str, int *i);
+void			ft_replace_space(char *str, int *i, int *j);
 
 /*
 ** Init

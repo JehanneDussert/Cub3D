@@ -55,7 +55,7 @@ $(NAME)	:	${OBJS} ${LIBFT_PATH}${LIBFT} ${MINILIBX_PATH}${MINILIBX}
 		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MINILIBX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
 
 $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
-	make add -C ${LIBFT_PATH}
+	make all -C ${LIBFT_PATH}
 
 ${MINILIBX_PATH}${MINILIBX} : ${MINILIBX_FILES}
 	make -C ${MINILIBX_PATH}

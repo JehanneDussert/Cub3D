@@ -24,8 +24,8 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 		return (NULL);
 	while (line[i])
 	{
-		if (line[i] == ' ')
-			ft_replace_space(clean_line, &j);
+		while (line[i] == ' ')
+			ft_replace_space(clean_line, &i, &j);
 		if (ft_check_char(line, i) == 1 || ft_check_char(line, i) == 2)
 		{
 			if (ft_check_char(line, i) == 2)
