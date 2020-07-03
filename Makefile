@@ -33,6 +33,7 @@ SRCS = files/srcs/parsing/ft_check_map.c files/srcs/parsing/ft_colors.c files/sr
 		files/srcs/raycasting/ft_move.c files/srcs/raycasting/ft_rot.c \
 		files/srcs/raycasting/ft_keys.c files/srcs/utils/ft_error.c files/srcs/utils/ft_init.c \
 		files/srcs/raycasting/ft_look.c files/srcs/raycasting/ft_draw_textures.c files/srcs/sprites/ft_sprites.c \
+		files/srcs/save/ft_save.c \
 		${GNL_SRCS} ${FT_PRINTF_SRCS} ${MINILIBX_SRCS}
 
 SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
