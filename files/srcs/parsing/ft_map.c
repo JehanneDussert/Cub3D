@@ -70,6 +70,8 @@ int		ft_nb_spr(t_all *all, char *str, int *nb, int j)
 	{
 		if (str[i] == '2')
 		{
+			if (all->map->spr > 49)
+				return (ft_error(11, all));
 			all->spr[*nb].x = (double)i + 0.5;
 			all->spr[*nb].y = (double)j + 0.5;
 			(*nb)++;
