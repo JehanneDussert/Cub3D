@@ -131,8 +131,10 @@ int	ft_keydeal(t_all *all)
 		*(int *)&all->image->data[i * all->image->bpp] = all->map->c_path;
 	while (++i < all->map->reso[0] * (all->map->reso[1]))
 		*(int *)&all->image->data[i * all->image->bpp] = all->map->f_path;
-	if (!(all = ft_raycasting(all)))
+	if (!(all = ft_raycasting(all->vec, all->map, all)))
 		return (ft_error(4, all));
+	/*if (!(all = ft_raycasting(all)))
+		return (ft_error(4, all));*/
 	ft_sprites(all, all->spr, all->map->spr);
 	free(all->buffer);
 	if ((ft_move(all)) != 0)

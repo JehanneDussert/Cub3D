@@ -75,6 +75,8 @@ int		ft_save(t_all *all)
 {
 	t_text  text[5];
 	
+	if ((all->image->mlx_ptr = mlx_init()) == NULL)
+		return (ft_error(7, all));
 	if (!(all->image->win_ptr = mlx_new_window(all->image->mlx_ptr,
 		all->map->reso[0], all->map->reso[1], "Save")))
 		return (ft_error(7, all));

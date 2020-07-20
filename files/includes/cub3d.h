@@ -232,7 +232,7 @@ void			ft_print(t_all *all);
 /*
 ** Raycasting
 */
-t_all			*ft_raycasting(t_all *all);
+t_all			*ft_raycasting(t_vec *vec, t_map *map, t_all *all);
 void			ft_ray_dir(t_vec *vec, t_map *map, int i);
 void			ft_hit(t_all *all, t_vec *vec, int i);
 
@@ -264,7 +264,6 @@ int				ft_rotation(t_all *all);
 void			turn_right(t_vec *vec, t_keys *keys);
 void			turn_left(t_vec *vec, t_keys *keys);
 t_all			*ft_def_dir_plane(t_all *all);
-t_all			*ft_delta_dist(t_vec *vec, t_map *map, t_all *all);
 int				ft_look_up(t_all *all);
 int				ft_look_down(t_all *all);
 int				ft_player_jump(t_all *all);
