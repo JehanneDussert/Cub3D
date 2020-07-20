@@ -189,6 +189,17 @@ typedef struct	s_spr
 	double		y;
 }				t_spr;
 
+typedef struct		s_save
+{
+	int			fd;
+	int			size;
+	int			unused;
+	int			offset_begin;
+	int			header_bytes;
+	short int	plane;
+	short int	bpp;
+}					t_save;
+
 typedef struct	s_all
 {
 	t_map		*map;
@@ -197,6 +208,7 @@ typedef struct	s_all
 	t_text		*text;
 	t_keys		*keys;
 	t_player	*player;
+	t_save		*save;
 	t_spr		spr[50];
 	t_spr_txt	*spr_txt;
 	double		*buffer;
@@ -290,5 +302,10 @@ void			ft_mini_map(t_all *all);
 ** Sprites
 */
 void			ft_sprites(t_all *all, t_spr *spr, int nb_spr);
+
+/*
+** Save
+*/
+int				ft_save(t_all *all);
 
 #endif

@@ -46,6 +46,10 @@ int		ft_error(int msg, t_all *all)
 		ft_putstr_fd("[ERROR]\nMovement error.", 0);
 	else if (msg == 11)
 		ft_putstr_fd("[ERROR]\nToo much sprites.", 0);
+	else if (msg == 13)
+		ft_putstr_fd("[ERROR]\nTextures initialisation failed.", 0);
+	else if (msg == 14)
+		ft_putstr_fd("[ERROR]\nOpening .bmp file failed.", 0);
 	ft_killwindow(all);
 	return (1);
 }
