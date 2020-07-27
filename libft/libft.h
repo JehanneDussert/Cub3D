@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 10:12:39 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/12 12:30:57 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:31:14 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int					ft_abs(double nb);
 int					ft_sqrt(int n);
 int					ft_rounded_down(float f);
 int					ft_degre_to_rad(int deg);
+void				ft_free(void **ptr);
 
 #endif
