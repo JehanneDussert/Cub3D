@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 12:44:24 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:05:33 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ int	ft_killwindow(t_all *all)
 		free(all->map->map[i]);
 		free(all->map->map);
 	}
-	/*if (all->image)
-		free(all->image);
-	if (all->vec)
-		free(all->vec);
-	if (all->text)
-		free(all->text);
-	if (all->keys)
-		free(all->keys);
-	if (all->player)
-		free(all->player);*/
 	if (all->image->mlx_ptr != NULL && all->image->win_ptr != NULL)
 	{
 		mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
