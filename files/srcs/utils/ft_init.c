@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 17:00:01 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:23:13 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ int			ft_init_texture_data(t_text *text)
 int			ft_init_texture(t_all *all, t_text *text, int width, int height)
 {
 	if ((text[0].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->n_path, &width, &height)) == NULL)
+	all->map->north_t, &width, &height)) == NULL)
 		return (ft_error(8, all));
 	if ((text[1].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->s_path, &width, &height)) == NULL)
+	all->map->south_t, &width, &height)) == NULL)
 		return (ft_error(8, all));
 	if ((text[2].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->w_path, &width, &height)) == NULL)
+	all->map->west_t, &width, &height)) == NULL)
 		return (ft_error(8, all));
 	if ((text[3].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->e_path, &width, &height)) == NULL)
+	all->map->east_t, &width, &height)) == NULL)
 		return (ft_error(8, all));
 	if ((text[4].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
-	all->map->spr_path, &width, &height)) == NULL)
+	all->map->sprite_t, &width, &height)) == NULL)
 		return (ft_error(8, all));
 	text[5].ptr = NULL;
 	if (ft_init_texture_data(text) != 0)
@@ -60,11 +60,11 @@ t_map		*ft_init_map(t_map *map)
 {
 	map->reso[0] = -1;
 	map->reso[1] = -1;
-	map->n_path[0] = '\0';
-	map->s_path[0] = '\0';
-	map->w_path[0] = '\0';
-	map->e_path[0] = '\0';
-	map->spr_path[0] = '\0';
+	map->north_t[0] = '\0';
+	map->south_t[0] = '\0';
+	map->west_t[0] = '\0';
+	map->east_t[0] = '\0';
+	map->sprite_t[0] = '\0';
 	map->f_path = -1;
 	map->c_path = -1;
 	map->pos_x = 0;
@@ -72,6 +72,7 @@ t_map		*ft_init_map(t_map *map)
 	map->ori = '1';
 	map->spr = 0;
 	map->map_l = 0;
+	map->len_y = 0;
 	map->map = NULL;
 	return (map);
 }

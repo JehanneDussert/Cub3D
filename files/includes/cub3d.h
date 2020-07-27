@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 15:46:14 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:22:19 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ typedef struct	s_text
 typedef struct	s_map
 {
 	int			reso[2];
-	char		n_path[256];
-	char		s_path[256];
-	char		e_path[256];
-	char		w_path[256];
-	char		spr_path[256];
+	char		north_t[256];
+	char		south_t[256];
+	char		east_t[256];
+	char		west_t[256];
+	char		sprite_t[256];
 	int			f_path;
 	int			c_path;
 	char		**map;
@@ -97,6 +97,7 @@ typedef struct	s_map
 	char		ori;
 	int			spr;
 	int			map_l;
+	int			len_y;
 }				t_map;
 
 typedef struct	s_image

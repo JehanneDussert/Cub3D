@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/03 12:09:46 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:16:29 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int		ft_open_text(t_map *map)
 {
-	if (!(open(map->n_path, O_RDONLY)))
+	if (!(open(map->north_t, O_RDONLY)))
 		return (-1);
-	if (!(open(map->s_path, O_RDONLY)))
+	if (!(open(map->south_t, O_RDONLY)))
 		return (-1);
-	if (!(open(map->e_path, O_RDONLY)))
+	if (!(open(map->east_t, O_RDONLY)))
 		return (-1);
-	if (!(open(map->w_path, O_RDONLY)))
+	if (!(open(map->west_t, O_RDONLY)))
 		return (-1);
 	return (1);
 }
@@ -46,13 +46,13 @@ void	ft_text(char *line, t_map *map)
 	while ((i + len) <= (int)ft_strlen(line) && line[len + i] != ' ')
 		len++;
 	if (ft_ref_parse(line, "NO", ft_strlen(line)))
-		ft_strlcpy(map->n_path, &line[i], len);
+		ft_strlcpy(map->north_t, &line[i], len);
 	else if (ft_ref_parse(line, "SO", ft_strlen(line)))
-		ft_strlcpy(map->s_path, &line[i], len);
+		ft_strlcpy(map->south_t, &line[i], len);
 	else if (ft_ref_parse(line, "WE", ft_strlen(line)))
-		ft_strlcpy(map->w_path, &line[i], len);
+		ft_strlcpy(map->west_t, &line[i], len);
 	else if (ft_ref_parse(line, "EA", ft_strlen(line)))
-		ft_strlcpy(map->e_path, &line[i], len);
+		ft_strlcpy(map->east_t, &line[i], len);
 	else if (ft_ref_parse(line, "S", ft_strlen(line)))
-		ft_strlcpy(map->spr_path, &line[i], len);
+		ft_strlcpy(map->sprite_t, &line[i], len);
 }
