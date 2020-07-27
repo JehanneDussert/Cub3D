@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 12:43:24 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:46:14 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,8 @@ t_map			*ft_check_pos(t_map *info, char **map);
 int				ft_map_len(char *line, char *ori, int *map_l);
 int				ft_check_map_errors(char *line, int mode);
 void			ft_replace_space(char *str, int *i, int *j);
+int				ft_nb_spr(t_all *all, char *str, int j);
+int				ft_len(char *line, t_all *all);
 
 /*
 ** Init

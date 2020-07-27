@@ -6,11 +6,24 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 17:22:34 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:46:04 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int		ft_len(char *line, t_all *all)
+{
+	int	map_len;
+
+	map_len = ft_map_len(line, &all->map->ori, &all->map->map_l);
+	if (map_len > all->map->map_l)
+		all->map->map_l = map_len;
+		/* hmmm pas joly*/
+	if (map_len < 3 && line == NULL)
+		return (-1);
+	return (map_len);
+}
 
 void	ft_replace_space(char *str, int *i, int *j)
 {
@@ -36,4 +49,26 @@ int		ft_l_atoi(const char *str, int *i)
 		(*i)++;
 	}
 	return (result);
+}
+
+int		ft_nb_spr(t_all *all, char *str, int j)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '2')
+		{
+			if (all->map->spr > 49)
+				return (ft_error(11, all));
+			all->spr[all->map->spr].x = (double)i + 0.5;
+			all->spr[all->map->spr].y = (double)j + 0.5;
+			all->map->spr++;
+		}
+		i++;
+	}
+	if (all->map->spr > 49)
+		return (-1);
+	return (1);
 }
