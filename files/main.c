@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 12:34:48 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:53:42 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_mlx(t_all *all)
 	if ((all->image->mlx_ptr = mlx_init()) == NULL)
 		return (ft_error(7, all));
 	if (!(all->image->win_ptr = mlx_new_window(all->image->mlx_ptr,
-		all->map->reso[0], all->map->reso[1], "cub3d")))
+		all->map->reso[0], all->map->reso[1], "cub3D")))
 		return (ft_error(7, all));
 	if (ft_init_texture(all, text, 64, 64) != 0)
 		return (ft_error(13, all));

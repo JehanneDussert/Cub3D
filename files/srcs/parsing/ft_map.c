@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 15:46:36 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 16:37:42 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 	lst = ft_list(line, n, fd, all);
 	len = ft_lstsize(lst);
 	ft_create_map(all, lst, len);
+	if (lst)
+		ft_lstclear(&lst, free);
 	return (ft_check_pos(all->map, all->map->map) != NULL ?
 		all->map->map : NULL);
 }
