@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 16:46:36 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:34:48 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_init(t_all *all)
 
 int	ft_mlx(t_all *all)
 {
-	t_text	text[5];
+	t_text	text[6];
 
 	if ((all->image->mlx_ptr = mlx_init()) == NULL)
 		return (ft_error(7, all));
@@ -60,11 +60,10 @@ int	ft_start(t_all *all, char **argv, int save)
 int	main(int argc, char **argv)
 {
 	t_all	*all;
-	int		save;
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return (ft_error(2, all));
-	save = -1;
+	all->s = -1;
 	if (argc > 1 && argc < 4)
 	{
 		if (ft_last(argv[1], ".cub") != 1)
@@ -72,9 +71,9 @@ int	main(int argc, char **argv)
 		if (argc == 3 && (ft_strncmp(argv[2], "--save", 5) != 0))
 			return (ft_error(1, all));
 		else if (argc == 3 && ft_strncmp(argv[2], "--save", 5) == 0)
-			save = 1;
+			all->s = 1;
 	}
-	if (argc == 2 || (argc == 3 && save == 1))
-		ft_start(all, argv, save);
+	if (argc == 2 || (argc == 3 && all->s == 1))
+		ft_start(all, argv, all->s);
 	return (0);
 }

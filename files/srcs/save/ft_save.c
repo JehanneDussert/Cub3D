@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_save.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdussert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 16:03:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/03 16:03:45 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:21:57 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_write_text_bmp_file(t_all *all, int fd)
 	{
 		x = 0;
 		line = all->map->reso[0] * (all->map->reso[1] - y);
+		printf("data b:%s\n", all->image->data);
 		while (x < all->map->reso[0])
 		{
 			write(fd, &all->image->data[line * 4] , 4);
@@ -45,6 +46,7 @@ void	ft_write_text_bmp_file(t_all *all, int fd)
 		}
 		y++;
 	}
+	printf("data a:%s\n", all->image->data);
 }
 
 void    ft_write_bmp_file(t_all *all)
@@ -73,12 +75,12 @@ void    ft_write_bmp_file(t_all *all)
 
 int		ft_save(t_all *all)
 {
-	t_text  text[5];
+	t_text  text[6];
 	
 	if ((all->image->mlx_ptr = mlx_init()) == NULL)
 		return (ft_error(7, all));
-	if (!(all->image->win_ptr = mlx_new_window(all->image->mlx_ptr,
-		all->map->reso[0], all->map->reso[1], "Save")))
+	if ((all->image->win_ptr = mlx_new_window(all->image->mlx_ptr,
+		all->map->reso[0], all->map->reso[1], "Save")) == NULL)
 		return (ft_error(7, all));
 	if (ft_init_texture(all, text, 64, 64) != 0)
 		return (ft_error(13, all));

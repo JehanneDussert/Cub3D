@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 17:22:44 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:43:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@
 # define UP 1
 # define DOWN 2
 
-# define NORMAL 0.15
+# define NORMAL 0.1
 # define SLOW 0.05
-# define RUN 0.2
+# define RUN 0.15
 # define NBSPR 15
 # define W_H 64
 
@@ -212,6 +212,7 @@ typedef struct	s_all
 	t_spr		spr[50];
 	t_spr_txt	*spr_txt;
 	double		*buffer;
+	int			s;
 }				t_all;
 
 /*

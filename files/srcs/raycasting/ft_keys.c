@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/06/25 16:16:24 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:44:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ int	ft_new_image(t_all *all)
 	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
 		all->image->img_ptr, 0, 0)))
 		return (ft_error(7, all));
-	mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
+	if (all->s == 0)
+		mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
 	if (all->keys->killwindow == 1)
 		ft_killwindow(all);
 	return (0);
