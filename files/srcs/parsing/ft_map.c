@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/28 17:12:20 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:32:51 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,22 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 		if (ft_len(line, all) == -1 || (clean_line =
 		ft_clean_line(line, &all->map->ori, all->map->map_l)) == NULL)
 		{
-			free(clean_line);
+			ft_free((void **)&line);
+			ft_free((void **)&clean_line);
 			return (NULL);
 		}
 		if (ft_len(line, all) < 3 && clean_line[0] == '\0')
+		{
+			ft_free((void **)&line);
+			ft_free((void **)&clean_line);
 			return (lst);
+		}
 		if (ft_nb_spr(all, clean_line, all->map->len_y++) == -1)
+		{
+			ft_free((void **)&line);
+			ft_free((void **)&clean_line);
 			return (NULL);
+		}
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 		{
 			while (lst)
@@ -79,13 +88,20 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 				free(lst->content);
 				lst = lst->next;
 			}
+			ft_free((void **)&line);
+			ft_free((void **)&clean_line);
 			return (NULL);
 		}
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
+		{
+			ft_free((void **)&line);
+			ft_free((void **)&clean_line);
 			return (lst);
+		}
 		ft_free((void **)&line);
 		n = get_next_line(fd, &line);
 	}
+	ft_free((void **)&line);
 	return (ft_check_map_errors(line, 1) == 1 ? lst : NULL);
 }
 
@@ -122,7 +138,6 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 	t_list	*lst;
 	int		len;
 
-	printf("line ft_map :%s\n", line);
 	if ((lst = ft_list(line, n, fd, all)) == NULL)
 		return (NULL);
 	len = ft_lstsize(lst);
