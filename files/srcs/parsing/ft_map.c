@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/28 16:11:44 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:12:20 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 	t_list	*lst;
 	int		len;
 
+	printf("line ft_map :%s\n", line);
 	if ((lst = ft_list(line, n, fd, all)) == NULL)
 		return (NULL);
 	len = ft_lstsize(lst);

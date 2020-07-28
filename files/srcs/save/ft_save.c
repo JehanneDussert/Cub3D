@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 16:03:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 14:02:18 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:07:28 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_write_text_bmp_file(t_all *all, int fd)
 	{
 		x = 0;
 		line = all->map->reso[0] * (all->map->reso[1] - y);
-		printf("data b:%s\n", all->image->data);
 		while (x < all->map->reso[0])
 		{
 			write(fd, &all->image->data[line * 4], 4);
@@ -46,7 +45,6 @@ void	ft_write_text_bmp_file(t_all *all, int fd)
 		}
 		y++;
 	}
-	printf("data a:%s\n", all->image->data);
 }
 
 void	ft_write_bmp_file(t_all *all)

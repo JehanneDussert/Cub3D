@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/28 16:13:14 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:11:25 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ int		ft_line_error(t_all *all, char *line, int *i, int n)
 	if (ft_check_existence(all->map, line, i, 0) == 1)
 		exit(ft_error(0, all));
 	ft_info(all, line, i);
-	ft_putendl_fd(line, 1);
 	free(line);
 	line = NULL;
 	return (1);
 }
 
-void	ft_free_line(char *line, int *i)
+char	*ft_free_line(char *line, int *i)
 {
 	// Double free ?
 	free(line);
 	line = NULL;
 	*i = 0;
+	return (line);
 }
 
 t_map	*ft_parsing(t_all *all, char *title)
@@ -99,11 +99,11 @@ t_map	*ft_parsing(t_all *all, char *title)
 		exit(ft_error(5, all));
 	if (!(line = (char *)malloc(sizeof(2))))
 		exit(ft_error(2, all));
-	while ((n = get_next_line(fd, &line)) == 1 && (line[i] != '1'
-			&& line[i] != ' '))
+	while ((n = get_next_line(fd, &line)) == 1 && (ft_check_char(line, i) != 1))
 	{
 		ft_line_error(all, line, &i, n);
-		ft_free_line(line, &i);
+		line = ft_free_line(line, &i);
+		printf("line :%s\n", line);
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && (line[0] == '1' || line[0] == ' '))
@@ -113,8 +113,7 @@ t_map	*ft_parsing(t_all *all, char *title)
 	}
 	else
 	{
-		free(line);
-		line = NULL;
+		line = ft_free_line(line, &i);
 		exit(ft_error(0, all));
 	}
 	return (all->map);
