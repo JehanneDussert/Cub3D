@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/14 08:57:55 by jdussert          #+#    #+#              #
-#    Updated: 2020/07/27 15:31:35 by jdussert         ###   ########.fr        #
+#    Updated: 2020/07/28 15:26:08 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS_BONUS	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			  ft_lstmap.c
 
 SRCS_ADD	= ft_itoa_base.c ft_last.c ft_int_len.c ft_first.c ft_ref_parse.c \
-			  ft_sqrt.c ft_free.c
+			  ft_sqrt.c ft_free.c ft_memalloc.c
 
 OBJS	= ${SRCS:.c=.o}
 

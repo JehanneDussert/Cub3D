@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/13 14:34:59 by jdussert          #+#    #+#              #
-#    Updated: 2020/07/27 16:11:56 by jdussert         ###   ########.fr        #
+#    Updated: 2020/07/28 15:28:08 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 LIBFT_PATH = libft/
 LIBFT = libft.a
@@ -46,7 +46,7 @@ SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 			ft_lstmap.c ft_itoa_base.c ft_last.c ft_int_len.c ft_first.c \
-			ft_ref_parse.c ft_free.c
+			ft_ref_parse.c ft_free.c ft_memalloc.c
 
 SRCS_MINILIBX = mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
 

@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 18:23:22 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/28 16:11:44 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,15 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 			return (lst);
 		if (ft_nb_spr(all, clean_line, all->map->len_y++) == -1)
 			return (NULL);
-		lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1));
+		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
+		{
+			while (lst)
+			{
+				free(lst->content);
+				lst = lst->next;
+			}
+			return (NULL);
+		}
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
 			return (lst);
 		ft_free((void **)&line);
@@ -114,7 +122,8 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 	t_list	*lst;
 	int		len;
 
-	lst = ft_list(line, n, fd, all);
+	if ((lst = ft_list(line, n, fd, all)) == NULL)
+		return (NULL);
 	len = ft_lstsize(lst);
 	ft_create_map(all, lst, len);
 	if (lst)
