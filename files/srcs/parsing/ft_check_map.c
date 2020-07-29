@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/28 17:11:25 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/29 12:48:28 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ t_map	*ft_parsing(t_all *all, char *title)
 		exit(ft_error(2, all));
 	while ((n = get_next_line(fd, &line)) == 1 && (ft_check_char(line, i) != 1))
 	{
+		//printf("line before free :%s\n", line);
 		ft_line_error(all, line, &i, n);
 		line = ft_free_line(line, &i);
-		printf("line :%s\n", line);
+		//printf("line :%s\n", line);
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && (line[0] == '1' || line[0] == ' '))

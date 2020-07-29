@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/28 17:32:51 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:16:54 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 	if ((tmp = ft_lstnew(clean_line)) == NULL)
 		return (NULL);
 	ft_lstadd_back(&lst, tmp);
+	//ft_putendl_fd("clean line after add back :", 1);
+	//ft_putendl_fd(clean_line, 1);
 	return (lst);
 }
 
@@ -64,44 +66,24 @@ t_list	*ft_list(char *line, int n, int fd, t_all *all)
 	{
 		if (ft_len(line, all) == -1 || (clean_line =
 		ft_clean_line(line, &all->map->ori, all->map->map_l)) == NULL)
-		{
-			ft_free((void **)&line);
-			ft_free((void **)&clean_line);
-			return (NULL);
-		}
+			return (ft_error_map(line, clean_line));
 		if (ft_len(line, all) < 3 && clean_line[0] == '\0')
-		{
-			ft_free((void **)&line);
-			ft_free((void **)&clean_line);
-			return (lst);
-		}
+			return (ft_end_map(&line, &clean_line, lst));
 		if (ft_nb_spr(all, clean_line, all->map->len_y++) == -1)
-		{
-			ft_free((void **)&line);
-			ft_free((void **)&clean_line);
-			return (NULL);
-		}
+			return (ft_error_map(line, clean_line));
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
-		{
-			while (lst)
-			{
-				free(lst->content);
-				lst = lst->next;
-			}
-			ft_free((void **)&line);
-			ft_free((void **)&clean_line);
-			return (NULL);
-		}
+			return (ft_free_lst(line, clean_line, lst));
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
-		{
-			ft_free((void **)&line);
-			ft_free((void **)&clean_line);
-			return (lst);
-		}
+			return (ft_end_map(&line, &clean_line, lst));
 		ft_free((void **)&line);
+		//ft_end_map(&line, &clean_line, lst);
+		ft_putendl_fd("line :", 1);
+		ft_putendl_fd(line, 1);
+		ft_putendl_fd("clean line :", 1);
+		ft_putendl_fd(clean_line, 1);
 		n = get_next_line(fd, &line);
 	}
-	ft_free((void **)&line);
+	//ft_end_map(line, clean_line, lst);
 	return (ft_check_map_errors(line, 1) == 1 ? lst : NULL);
 }
 

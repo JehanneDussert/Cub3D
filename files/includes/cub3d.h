@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 18:22:19 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:17:06 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,9 +297,11 @@ int				ft_init_texture(t_all *all, t_text *text, int width,
 				int height);
 
 /*
-** Mini map
+** Free memory
 */
-void			ft_mini_map(t_all *all);
+t_list			*ft_error_map(char *line, char *clean_line);
+t_list			*ft_end_map(char **line, char **clean_line, t_list *lst);
+t_list			*ft_free_lst(char *line, char *clean_line, t_list *lst);
 
 /*
 ** Sprites
