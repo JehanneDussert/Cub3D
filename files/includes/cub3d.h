@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/29 15:52:19 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/29 18:49:56 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ typedef struct	s_spr
 	double		y;
 }				t_spr;
 
-typedef struct		s_save
+typedef struct	s_save
 {
 	int			fd;
 	int			size;
@@ -199,7 +199,7 @@ typedef struct		s_save
 	int			header_bytes;
 	short int	plane;
 	short int	bpp;
-}					t_save;
+}				t_save;
 
 typedef struct	s_all
 {
@@ -275,7 +275,6 @@ int				ft_player_crawl(t_all *all);
 ** Utils
 */
 int				ft_error(int msg, t_all *all);
-void			ft_free_all(t_all **all);
 int				ft_l_atoi(const char *str, int *i);
 int				ft_check_len(char *str, char *tmp);
 t_map			*ft_check_pos(t_map *info, char **map);
@@ -302,6 +301,8 @@ int				ft_init_texture(t_all *all, t_text *text, int width,
 t_list			*ft_error_map(char *line, char *clean_line);
 t_list			*ft_end_map(char **line, char **clean_line, t_list *lst);
 t_list			*ft_free_lst(char *line, char *clean_line, t_list *lst);
+t_map			*ft_free_line(char *line, int *i);
+void			ft_free_all(t_all **all);
 
 /*
 ** Sprites

@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/29 12:48:28 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/29 18:49:28 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		ft_check_existence(t_map *map, char *line, int *i, int mode)
 	else if (mode == 1)
 	{
 		if (map->reso[0] != -1 && map->reso[1] != -1 && map->f_path != -1 &&
-		map->c_path != -1 && map->north_t[0] != '\0' && map->south_t[0] != '\0' &&
-		map->sprite_t[0] != '\0' && map->west_t[0] != '\0'
+		map->c_path != -1 && map->north_t[0] != '\0' && map->south_t[0] != '\0'
+		&& map->sprite_t[0] != '\0' && map->west_t[0] != '\0'
 		&& map->east_t[0] != '\0')
 			return (1);
 	}
@@ -73,18 +73,8 @@ int		ft_line_error(t_all *all, char *line, int *i, int n)
 	if (ft_check_existence(all->map, line, i, 0) == 1)
 		exit(ft_error(0, all));
 	ft_info(all, line, i);
-	free(line);
-	line = NULL;
+	ft_free((void **)&line);
 	return (1);
-}
-
-char	*ft_free_line(char *line, int *i)
-{
-	// Double free ?
-	free(line);
-	line = NULL;
-	*i = 0;
-	return (line);
 }
 
 t_map	*ft_parsing(t_all *all, char *title)
@@ -101,10 +91,8 @@ t_map	*ft_parsing(t_all *all, char *title)
 		exit(ft_error(2, all));
 	while ((n = get_next_line(fd, &line)) == 1 && (ft_check_char(line, i) != 1))
 	{
-		//printf("line before free :%s\n", line);
 		ft_line_error(all, line, &i, n);
-		line = ft_free_line(line, &i);
-		//printf("line :%s\n", line);
+		ft_free_line(line, &i);
 	}
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && (line[0] == '1' || line[0] == ' '))
@@ -113,9 +101,6 @@ t_map	*ft_parsing(t_all *all, char *title)
 			exit(ft_error(10, all));
 	}
 	else
-	{
-		line = ft_free_line(line, &i);
-		exit(ft_error(0, all));
-	}
+		return (ft_free_line(line, &i));
 	return (all->map);
 }
