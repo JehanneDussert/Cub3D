@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 18:29:28 by jehannedu         #+#    #+#             */
-/*   Updated: 2020/07/28 16:14:07 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/07/31 13:53:05 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int		ft_check_len(char *str, char *tmp)
 
 int		ft_check_char(char *line, int i)
 {
-	if (line[i] == '1' || line[i] == '2' || line[i] == '0')
+	if (line[i] == '1' || line[i] == '2' || line[i] == '0' || line[i] == ' ')
 		return (1);
 	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
 	|| line[i] == 'E')
