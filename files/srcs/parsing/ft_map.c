@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/03 12:07:20 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/03 16:22:22 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 	{
 		while (line[i] == ' ')
 			ft_replace_space(clean_line, &i, &j);
-		if (ft_check_char(line, i) == 1 || ft_check_char(line, i) == 2)
+		if (ft_check_map_char(line, i) == 1 || ft_check_map_char(line, i) == 2)
 		{
-			if (ft_check_char(line, i) == 2)
+			if (ft_check_map_char(line, i) == 2)
 				*ori = line[i];
 			clean_line[j] = line[i];
 			j++;

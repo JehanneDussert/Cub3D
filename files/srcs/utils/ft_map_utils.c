@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 18:29:28 by jehannedu         #+#    #+#             */
-/*   Updated: 2020/08/03 12:04:04 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/03 16:22:15 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,16 @@ int		ft_check_map_errors(char *line, int mode)
 int		ft_map_len(char *line, char *ori, int *map_l)
 {
 	int	i;
-	int	map_len;
 
 	i = 0;
-	map_len = 0;
 	while (line[i])
 	{
 		if (line[i] == ' ')
 			i++;
-		else if (ft_check_char(line, i) == 1 || ft_check_char(line, i) == 2)
+		else if (ft_check_map_char(line, i) == 1 || ft_check_map_char(line, i) == 2)
 		{
-			if (*ori != '1' && ft_check_char(line, i) == 2)
+			if (*ori != '1' && ft_check_map_char(line, i) == 2)
 				return (-1);
-			map_len++;
 			i++;
 		}
 		else
@@ -58,7 +55,7 @@ int		ft_map_len(char *line, char *ori, int *map_l)
 	}
 	if (i > *map_l)
 		*map_l = i;
-	return (map_len);
+	return (i);
 }
 
 t_map	*ft_check_pos(t_map *info, char **map)
@@ -72,7 +69,7 @@ t_map	*ft_check_pos(t_map *info, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_check_char(map[i], j) == 2)
+			if (ft_check_map_char(map[i], j) == 2)
 			{
 				info->pos_x = (double)j + 0.5;
 				info->pos_y = (double)i + 0.5;
@@ -112,12 +109,22 @@ int		ft_check_len(char *str, char *tmp)
 	return (1);
 }
 
-int		ft_check_char(char *line, int i)
+int		ft_check_map_char(char *line, int i)
 {
 	if (line[i] == '1' || line[i] == '2' || line[i] == '0' || line[i] == ' ')
 		return (1);
 	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
 	|| line[i] == 'E')
 		return (2);
+	return (0);
+}
+
+int		ft_check_char(char *line)
+{
+	if (line[0] == 'R' || line[0] == 'C' || line[0] == 'S' || line[0] == 'F'
+		|| (ft_first(line, "NO") == 1) || (ft_first(line, "SO") == 1)
+		|| (ft_first(line, "WE") == 1) || (ft_first(line, "EA") == 1)
+		|| line[0] == '\0')
+		return (1);
 	return (0);
 }
