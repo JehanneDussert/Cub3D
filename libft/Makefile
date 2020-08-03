@@ -6,13 +6,13 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/14 08:57:55 by jdussert          #+#    #+#              #
-#    Updated: 2020/07/28 16:59:10 by jdussert         ###   ########.fr        #
+#    Updated: 2020/07/31 15:01:31 by jdussert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRCS	= ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 		  ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c \

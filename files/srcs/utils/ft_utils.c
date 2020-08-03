@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 15:46:04 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/03 11:22:27 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		ft_len(char *line, t_all *all)
 	if (map_len > all->map->map_l)
 		all->map->map_l = map_len;
 		/* hmmm pas joly*/
+	//printf("len : map len :%d\n", map_len);
 	if (map_len < 3 && line == NULL)
 		return (-1);
 	return (map_len);
