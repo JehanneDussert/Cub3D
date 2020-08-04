@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/03 16:22:22 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 11:35:17 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ t_list	*ft_list(char **line, int n, int fd, t_all *all)
 			return (ft_error_map(*line));
 		if (ft_len(*line, all) < 3 && clean_line[0] == '\0')
 			return (ft_end_map(line, lst));
-		if (ft_nb_spr(all, clean_line, all->map->len_y++) == -1)
-			return (ft_error_map(*line));
+		//if (ft_nb_spr(all) == -1)
+		//	return (ft_error_map(*line));
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 			return (ft_free_lst(*line, lst));
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
@@ -116,6 +116,8 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 		return (NULL);
 	len = ft_lstsize(lst);
 	ft_create_map(all, lst, len);
+	if (ft_nb_spr(all) == -1)
+		exit(ft_error(11, all));
 	if (lst)
 		ft_lstclear(&lst, free);
 	return (ft_check_pos(all->map, all->map->map) != NULL ?
