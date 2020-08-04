@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 17:16:20 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 18:04:35 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,13 @@ int		ft_error(int msg, t_all *all)
 
 int		ft_parsing_error(t_all *all)
 {
-	if (all->map->reso[0] == -1 || all->map->reso[1] == -1)
+	if (all->map->reso[0] == -1 && all->map->reso[1] == -1 &&
+		all->map->f_path == -1 && all->map->c_path == -1 &&
+		all->map->north_t[0] == '\0' && all->map->south_t[0] == '\0'
+		&& all->map->sprite_t[0] == '\0' && all->map->west_t[0] == '\0'
+		&& all->map->east_t[0] == '\0')
+		ft_error(0, all);
+	else if (all->map->reso[0] == -1 || all->map->reso[1] == -1)
 		ft_error(6, all);
 	else if (all->map->c_path == -1 || all->map->f_path == -1)
 		ft_error(12, all);
