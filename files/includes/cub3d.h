@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 16:17:15 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 17:16:26 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,7 @@ t_list			*ft_error_map(char *line);
 t_list			*ft_end_map(char **line, t_list *lst);
 t_list			*ft_free_lst(char *line, t_list *lst);
 void			ft_free_all(t_all **all);
+int				ft_parsing_error(t_all *all);
 
 /*
 ** Sprites
