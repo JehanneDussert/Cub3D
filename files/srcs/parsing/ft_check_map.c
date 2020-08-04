@@ -6,18 +6,18 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 16:39:39 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:46:49 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int		ft_check_existence(t_map *map, char *line, int *i, int mode)
+int		ft_check_existence(t_map *map, char *line, int mode)
 {
 	if (mode == 0)
 	{
-		if ((line[*i] == 'R' && (map->reso[0] != -1 || map->reso[1] != -1)) ||
-		(line[*i] == 'F' && map->f_path != -1) || (line[*i] == 'C'
+		if ((line[0] == 'R' && (map->reso[0] != -1 || map->reso[1] != -1)) ||
+		(line[0] == 'F' && map->f_path != -1) || (line[0] == 'C'
 		&& map->c_path != -1) || (ft_first(line, "NO") == 1 && map->north_t[0]
 		!= '\0') || (ft_first(line, "SO") == 1 && map->south_t[0] != '\0') ||
 		(ft_first(line, "WE") == 1 && map->west_t[0] != '\0') ||
@@ -70,23 +70,27 @@ int		ft_line_error(t_all *all, char *line, int *i, int n)
 	if ((line[*i] == '\0' && n < 0) || line == NULL)
 		exit(ft_error(0, all));
 	line = ft_strtrim(line, " ");
-	if (ft_check_existence(all->map, line, i, 0) == 1)
+	if (ft_check_existence(all->map, line, 0) == 1)
 		exit(ft_error(0, all));
 	ft_info(all, line, i);
 	ft_free((void **)&line);
 	return (1);
 }
 
-int		ft_parse_info(t_all *all, char **line, int fd, int *n, int *i)
+int		ft_parse_info(t_all *all, char **line, int fd, int *n)
 {
-	while ((*n = get_next_line(fd, line)) == 1 && ((ft_check_map_char(*line, *i) != 1)
-			|| (*line[0] == ' ' && ft_check_existence(all->map, *line, i, 1) != 1)))
+	int	i;
+
+	i = 0;
+	while ((*n = get_next_line(fd, line)) == 1 &&
+		((ft_check_map_char(*line, i) != 1) ||
+		(*line[0] == ' ' && ft_check_existence(all->map, *line, 1) != 1)))
 	{
 		if (ft_check_char(*line) == 0)
 			exit(ft_error(15, all));
-		ft_line_error(all, *line, i, *n);
+		ft_line_error(all, *line, &i, *n);
 		ft_free((void **)line);
-		*i = 0;
+		i = 0;
 	}
 	return (*n);
 }
@@ -95,16 +99,14 @@ t_map	*ft_parsing(t_all *all, char *title)
 {
 	char	*line;
 	int		n;
-	int		i;
 	int		fd;
 
-	i = 0;
 	if (!(fd = open(title, O_RDONLY)))
 		exit(ft_error(5, all));
 	if (!(line = (char *)malloc(sizeof(2))))
 		exit(ft_error(2, all));
-	n = ft_parse_info(all, &line, fd, &n, &i);
-	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
+	n = ft_parse_info(all, &line, fd, &n);
+	if ((ft_check_existence(all->map, line, 1) == 1) &&
 	n == 1 && (line[0] == '1' || line[0] == ' '))
 	{
 		if ((all->map->map = ft_map(line, n, fd, all)) == NULL)

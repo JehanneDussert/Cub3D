@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 16:40:12 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:47:29 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 
 	if (ft_check_map_errors(clean_line, mode) == 0)
 		return (NULL);
-		// Attention au malloc qui crash ?
 	if ((tmp = ft_lstnew(clean_line)) == NULL)
 		return (NULL);
 	ft_lstadd_back(&lst, tmp);
