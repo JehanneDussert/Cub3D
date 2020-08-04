@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 14:57:11 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:17:15 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ typedef struct	s_all
 	t_player	*player;
 	t_save		*save;
 	t_spr		spr[50];
-	t_s_txt	*s_txt;
+	t_s_txt		*s_txt;
 	double		*buffer;
 	int			s;
 }				t_all;
@@ -303,7 +303,7 @@ int				ft_init_texture(t_all *all, t_text *text, int width,
 */
 t_list			*ft_error_map(char *line);
 t_list			*ft_end_map(char **line, t_list *lst);
-t_list			*ft_free_lst(char *line,  t_list *lst);
+t_list			*ft_free_lst(char *line, t_list *lst);
 void			ft_free_all(t_all **all);
 
 /*

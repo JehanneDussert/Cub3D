@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 15:32:08 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:39:39 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ int		ft_line_error(t_all *all, char *line, int *i, int n)
 	return (1);
 }
 
+int		ft_parse_info(t_all *all, char **line, int fd, int *n, int *i)
+{
+	while ((*n = get_next_line(fd, line)) == 1 && ((ft_check_map_char(*line, *i) != 1)
+			|| (*line[0] == ' ' && ft_check_existence(all->map, *line, i, 1) != 1)))
+	{
+		if (ft_check_char(*line) == 0)
+			exit(ft_error(15, all));
+		ft_line_error(all, *line, i, *n);
+		ft_free((void **)line);
+		*i = 0;
+	}
+	return (*n);
+}
+
 t_map	*ft_parsing(t_all *all, char *title)
 {
 	char	*line;
@@ -89,15 +103,7 @@ t_map	*ft_parsing(t_all *all, char *title)
 		exit(ft_error(5, all));
 	if (!(line = (char *)malloc(sizeof(2))))
 		exit(ft_error(2, all));
-	while ((n = get_next_line(fd, &line)) == 1 && ((ft_check_map_char(line, i) != 1)
-			|| (line[0] == ' ' && ft_check_existence(all->map, line, &i, 1) != 1)))
-	{
-		if (ft_check_char(line) == 0)
-			exit(ft_error(15, all));
-		ft_line_error(all, line, &i, n);
-		ft_free((void **)&line);
-		i = 0;
-	}
+	n = ft_parse_info(all, &line, fd, &n, &i);
 	if ((ft_check_existence(all->map, line, &i, 1) == 1) &&
 	n == 1 && (line[0] == '1' || line[0] == ' '))
 	{
@@ -105,9 +111,6 @@ t_map	*ft_parsing(t_all *all, char *title)
 			exit(ft_error(10, all));
 	}
 	else
-	{
-		printf("cc\n");
 		return (NULL);
-	}
 	return (all->map);
 }

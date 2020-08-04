@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 18:29:28 by jehannedu         #+#    #+#             */
-/*   Updated: 2020/08/04 15:08:53 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:26:59 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,6 @@ int		ft_map_len(char *line, char *ori, int *map_l)
 	if (i > *map_l)
 		*map_l = i;
 	return (i);
-}
-
-t_map	*ft_check_pos(t_map *info, char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (ft_check_map_char(map[i], j) == 2)
-			{
-				info->pos_x = (double)j + 0.5;
-				info->pos_y = (double)i + 0.5;
-				return (info);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (NULL);
 }
 
 int		ft_check_len(char *str, char *tmp)

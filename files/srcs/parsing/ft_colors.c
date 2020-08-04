@@ -6,11 +6,19 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 16:11:26 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:20:34 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void		ft_clean_color(char *line, int *i)
+{
+	ft_jump(line, i);
+	if (line[*i] == ',')
+		(*i)++;
+	ft_jump(line, i);
+}
 
 int			ft_colors(char *line, int *color, int *i)
 {
@@ -32,10 +40,7 @@ int			ft_colors(char *line, int *color, int *i)
 		if (tab[j] > 255 || tab[j] < 0)
 			return (-1);
 		j--;
-		ft_jump(line, i);
-		if (line[*i] == ',')
-			(*i)++;
-		ft_jump(line, i);
+		ft_clean_color(line, i);
 	}
 	tab[3] = 0;
 	*i = 0;
