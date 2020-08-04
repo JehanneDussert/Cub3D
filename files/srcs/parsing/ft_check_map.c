@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 15:08:59 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 15:32:08 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ t_map	*ft_parsing(t_all *all, char *title)
 			exit(ft_error(10, all));
 	}
 	else
+	{
+		printf("cc\n");
 		return (NULL);
+	}
 	return (all->map);
 }
