@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 11:35:17 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 15:09:33 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 	{
 		while (line[i] == ' ')
 			ft_replace_space(clean_line, &i, &j);
-		if (ft_check_map_char(line, i) == 1 || ft_check_map_char(line, i) == 2)
+		if (ft_check_map_char(line, i) != 0)
 		{
 			if (ft_check_map_char(line, i) == 2)
 				*ori = line[i];
@@ -67,8 +67,6 @@ t_list	*ft_list(char **line, int n, int fd, t_all *all)
 			return (ft_error_map(*line));
 		if (ft_len(*line, all) < 3 && clean_line[0] == '\0')
 			return (ft_end_map(line, lst));
-		//if (ft_nb_spr(all) == -1)
-		//	return (ft_error_map(*line));
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 			return (ft_free_lst(*line, lst));
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)

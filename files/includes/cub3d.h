@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 13:08:50 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 14:57:11 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ typedef struct	s_keys
 	int			killwindow;
 }				t_keys;
 
-typedef struct	s_spr_txt
+typedef struct	s_s_txt
 {
 	double		x;
 	double		y;
@@ -184,7 +184,7 @@ typedef struct	s_spr_txt
 	int			d;
 	int			texture;
 	int			i;
-}				t_spr_txt;
+}				t_s_txt;
 
 typedef struct	s_spr
 {
@@ -213,7 +213,7 @@ typedef struct	s_all
 	t_player	*player;
 	t_save		*save;
 	t_spr		spr[50];
-	t_spr_txt	*spr_txt;
+	t_s_txt	*s_txt;
 	double		*buffer;
 	int			s;
 }				t_all;

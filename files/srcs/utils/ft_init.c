@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 12:32:41 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 14:09:42 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,6 @@ t_player	*ft_player_init(t_player *player)
 	return (player);
 }
 
-void	ft_init_pos_spr(t_all *all)
-{
-	int	i;
-
-	i = 0;
-	while (i < 50)
-	{
-		all->spr[i].x = 0;
-		all->spr[i].y = 0;
-		i++;
-	}
-}
-
 t_all		*ft_init_all(t_all *all)
 {
 	if (!(all->image = (t_image *)malloc(sizeof(t_image))))
@@ -118,6 +105,5 @@ t_all		*ft_init_all(t_all *all)
 	if (!(ft_keys_init(all->keys)))
 		return (NULL);
 	all->player = ft_player_init(all->player);
-	//ft_init_pos_spr(all);
 	return (all);
 }
