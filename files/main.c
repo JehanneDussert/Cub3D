@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 15:48:02 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:12:32 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,9 @@ int	ft_mlx(t_all *all)
 int	ft_start(t_all *all, char **argv, int save)
 {
 	ft_init(all);
-	printf("len :%d\n", all->map->len_y);
 	all->image->title = argv[1];
 	if (!(all->map = ft_parsing(all, all->image->title)))
 		return (ft_error(3, all));
-	printf("coucou\n");
 	if (!(all = ft_def_dir_plane(all)))
 		return (-1);
 	if (save == 1)

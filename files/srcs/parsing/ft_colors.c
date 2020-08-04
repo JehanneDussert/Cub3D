@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 15:21:34 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/04 16:11:26 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int			ft_colors(char *line, int *color, int *i)
 		++(*i);
 	while (j >= 0)
 	{
+		ft_jump(line, i);
+		if (ft_isdigit(line[*i]) == 0)
+			return (-1);
 		ft_jump(line, i);
 		tab[j] = ft_l_atoi(line, i);
 		if (tab[j] > 255 || tab[j] < 0)
