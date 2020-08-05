@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 15:55:04 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/05 12:22:37 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_killwindow(t_all *all)
 	i = 0;
 	while (all->map && all->map->map && i < all->map->len_y)
 	{
+
 		ft_free((void **)&all->map->map[i]);
 		i++;
 	}
