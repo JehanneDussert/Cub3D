@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 16:12:32 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/06 12:54:00 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int	main(int argc, char **argv)
 	}
 	if (argc == 2 || (argc == 3 && all->s == 1))
 		ft_start(all, argv, all->s);
+	ft_killwindow(all);
 	return (0);
 }

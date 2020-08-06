@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/05 14:42:32 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/06 12:49:24 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ char	**ft_create_map(t_all *all, t_list *lst, int len)
 			if (ft_check_map_errors(lst->content, 0) != 1)
 				return (NULL);
 		}
-		all->map->map[i] = ft_substr(lst->content, 0, all->map->map_l + 1);
+		if (!(all->map->map[i] = ft_substr(lst->content, 0, all->map->map_l + 1)))
+			return (NULL);
 		lst = lst->next;
 		if (lst != NULL)
 		{
@@ -111,11 +112,19 @@ char	**ft_map(char *line, int n, int fd, t_all *all)
 	if ((lst = ft_list(&line, n, fd, all)) == NULL)
 		return (NULL);
 	all->map->len_y = ft_lstsize(lst);
-	ft_create_map(all, lst, all->map->len_y);
+	if (ft_create_map(all, lst, all->map->len_y) == NULL)
+	{
+		if (line)
+			ft_free((void **)&line);
+		if (lst)
+			ft_lstclear(&lst, free);
+		exit(ft_error(10, all));
+	}
 	if (ft_nb_spr(all) == -1)
 		exit(ft_error(11, all));
 	if (lst)
 		ft_lstclear(&lst, free);
+	//printf("line :%p\tlst :%p\n", line, lst);
 	return (ft_check_pos(all->map, all->map->map) != NULL ?
 		all->map->map : NULL);
 }

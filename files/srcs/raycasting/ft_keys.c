@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/05 16:50:49 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/06 14:07:06 by jdussert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,21 @@ int	ft_killwindow(t_all *all)
 	{
 		ft_free((void **)&all->map->map[i]);
 		ft_free((void **)&all->map->map);
+		ft_free((void **)&all->map);
 	}
 	if (all->image->mlx_ptr != NULL && all->image->win_ptr != NULL)
 	{
 		mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
 		mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
 	}
+	ft_free((void **)&all->image);
+	ft_free((void **)&all->vec);
+	ft_free((void **)&all->keys);
+	ft_free((void **)&all->player);
+	ft_free((void **)&all->s_txt);
+	ft_free((void **)&all->save);
+	ft_free((void **)&all->spr);
+	ft_free((void **)&all);
 	exit(0);
 	return (1);
 }
