@@ -76,132 +76,126 @@ typedef struct	s_player
 
 typedef struct	s_text
 {
-	void		*ptr;
-	char		*img;
-	int			bpp;
-	int			size_l;
-	int			endian;
+	void	*ptr;
+	char	*img;
+	int		bpp;
+	int		size_l;
+	int		endian;
 }				t_text;
 
 typedef struct	s_spr
 {
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 }				t_spr;
 
 typedef struct	s_map
 {
-	int			reso[2];
-	char		north_t[256];
-	char		south_t[256];
-	char		east_t[256];
-	char		west_t[256];
-	char		sprite_t[256];
-	int			f_path;
-	int			c_path;
-	char		**map;
-	double		pos_x;
-	double		pos_y;
-	char		ori;
-	int			spr;
-	int			map_l;
-	int			len_y;
-	t_list			*lst;
+	int		reso[2];
+	char	north_t[256];
+	char	south_t[256];
+	char	east_t[256];
+	char	west_t[256];
+	char	sprite_t[256];
+	int		f_path;
+	int		c_path;
+	char	**map;
+	double	pos_x;
+	double	pos_y;
+	char	ori;
+	int		spr;
+	int		map_l;
+	int		len_y;
+	t_list	*lst;
 }				t_map;
 
 typedef struct	s_image
 {
-	void		*mlx_ptr;
-	void		*img_ptr;
-	void		*win_ptr;
-	int			width;
-	int			height;
-	char		*title;
-	int			bpp;
-	int			size_l;
-	int			endian;
-	char		**xpm;
-	char		*data;
+	void	*mlx_ptr;
+	void	*img_ptr;
+	void	*win_ptr;
+	int		width;
+	int		height;
+	char	*title;
+	int		bpp;
+	int		size_l;
+	int		endian;
+	char	**xpm;
+	char	*data;
 	int		x;
 	int		y;
 }				t_image;
 
 typedef struct	s_vec
 {
-	int			map_x;
-	int			map_y;
-	double		sidedist_x;
-	double		sidedist_y;
-	int			step_x;
-	int			step_y;
-	int			side;
-	int			hit;
-	double		dist;
-	double		raydir_x;
-	double		raydir_y;
-	double		deltadist_x;
-	double		deltadist_y;
-	double		camera_x;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	double		old_dirx;
-	double		old_diry;
-	double		old_planex;
-	double		old_planey;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	int			tex_num;
-	int			texx;
-	int			texy;
-	double		wallx;
+	int		map_x;
+	int		map_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		hit;
+	double	dist;
+	double	raydir_x;
+	double	raydir_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	camera_x;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	old_dirx;
+	double	old_diry;
+	double	old_planex;
+	double	old_planey;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int		tex_num;
+	int		texx;
+	int		texy;
+	double	wallx;
 }				t_vec;
 
 typedef struct	s_keys
 {
-	int			keyup;
-	int			keydown;
-	int			keyleft;
-	int			keyright;
-	int			keyturnright;
-	int			keyturnleft;
-	double		move_speed;
-	double		rot_speed;
-	int			killwindow;
+	int		keyup;
+	int		keydown;
+	int		keyleft;
+	int		keyright;
+	int		keyturnright;
+	int		keyturnleft;
+	double	move_speed;
+	double	rot_speed;
+	int		killwindow;
 }				t_keys;
 
 typedef struct	s_s_txt
 {
-	double		x;
-	double		y;
-	double		inv_det;
-	double		transform_x;
-	double		transform_y;
-	int			move_screen;
-	int			spr_h;
-	int			spr_w;
-	int			screen_x;
-	int			draw_sx;
-	int			draw_ex;
-	int			draw_sy;
-	int			draw_ey;
-	int			text_w;
-	int			text_h;
-	int			texx;
-	int			texy;
-	int			d;
-	int			texture;
-	int			i;
+	double	x;
+	double	y;
+	double	inv_det;
+	double	transform_x;
+	double	transform_y;
+	int		move_screen;
+	int		spr_h;
+	int		spr_w;
+	int		screen_x;
+	int		draw_sx;
+	int		draw_ex;
+	int		draw_sy;
+	int		draw_ey;
+	int		text_w;
+	int		text_h;
+	int		texx;
+	int		texy;
+	int		d;
+	int		texture;
+	int		i;
 }				t_s_txt;
-/*
-typedef struct	s_spr
-{
-	double		x;
-	double		y;
-}				t_spr;
-*/
+
 typedef struct	s_save
 {
 	int			fd;
@@ -232,9 +226,9 @@ typedef struct	s_all
 ** Parsing
 */
 
-int			ft_parsing(t_map *map, int *fd);
+int				ft_parsing(t_map *map, int *fd);
 void			ft_jump(char *line, int *i);
-int			ft_resolution(char *line, t_map *map, int *i);
+int				ft_resolution(char *line, t_map *map, int *i);
 int				ft_check_resolution(char *line, t_map *info, int *i);
 void			ft_def_color(char *line, t_map *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
@@ -299,20 +293,21 @@ int				ft_map_len(char *line, char *ori, int *map_l);
 int				ft_check_map_errors(char *line, int mode);
 void			ft_replace_space(char *str, int *i, int *j);
 int				ft_nb_spr(t_map *map);
-void				ft_pos_spr(t_map *map, t_all *all);
+void			ft_pos_spr(t_map *map, t_all *all);
 int				ft_len(char *line, t_map *map);
-void				ft_check_screen_size(t_image *img, t_map *map);
+void			ft_check_screen_size(t_image *img, t_map *map);
 
 /*
 ** Init
 */
-void				ft_init(t_all *all, t_vec *vec, t_keys *keys, t_s_txt *s_txt);
+void			ft_init(t_all *all, t_vec *vec, t_keys *keys, t_s_txt *s_txt);
 void			ft_init_all(t_all *all, t_player *p, t_map *map, t_image *img);
 void			ft_init_map(t_map *map);
 void			ft_player(t_player *p);
 t_vec			*ft_vec_init(t_vec *vec);
 t_keys			*ft_keys_init(t_keys *keys);
-int				ft_init_texture(t_all *all, t_text *text, int width, int height);
+int				ft_init_texture(t_all *all, t_text *text, int width,
+				int height);
 
 /*
 ** Free memory
