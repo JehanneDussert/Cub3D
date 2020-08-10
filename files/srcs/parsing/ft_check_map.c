@@ -35,7 +35,7 @@ int		ft_check_info_map(t_map *map)
 	return (0);
 }
 
-void		ft_info(t_map *map, char **line)
+void	ft_info(t_map *map, char **line)
 {
 	int	i;
 
@@ -51,21 +51,26 @@ void		ft_info(t_map *map, char **line)
 	ft_free((void **)line);
 }
 
-int	ft_parsing(t_map *map, int *fd)
+int		ft_bad_char(char **line)
+{
+	ft_simple_error("[ERROR] Bad character\n");
+	ft_free((void **)line);
+	return (-1);
+}
+
+int		ft_parsing(t_map *map, int *fd)
 {
 	char	*line;
-	int	n;
+	int		n;
 
-	while ((n = get_next_line(*fd, &line)) != 0 && ft_check_info_map(map) != 1 && ft_check_char(line) != 0)
+	while ((n = get_next_line(*fd, &line)) != 0 && ft_check_info_map(map) != 1
+			&& ft_check_char(line) != 0)
 		ft_info(map, &line);
 	if (ft_check_map_char(line, 0) == 0)
-	{
-		ft_simple_error("[ERROR] Bad character.\n");
-		ft_free((void **)&line);
-		return (-1);
-	}
+		return (ft_bad_char(&line));
 	ft_free((void **)&line);
-	if (ft_check_info_map(map) == 1 && (n == get_next_line(*fd, &line)) != 0 && (line[0] == '1' || line[0] == ' '))
+	if (ft_check_info_map(map) == 1 && (n == get_next_line(*fd, &line)) != 0
+		&& (line[0] == '1' || line[0] == ' '))
 	{
 		if (ft_map(map, line, n, fd) == NULL)
 			return (-1);

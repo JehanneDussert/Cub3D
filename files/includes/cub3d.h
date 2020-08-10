@@ -317,6 +317,7 @@ t_list			*ft_end_map(char **line, t_list *lst);
 t_list			*ft_free_lst(char *line, t_list *lst);
 void			ft_free_all(t_all **all);
 int				ft_parsing_error(t_map *map);
+void			ft_free_map(t_map *map);
 
 /*
 ** Sprites

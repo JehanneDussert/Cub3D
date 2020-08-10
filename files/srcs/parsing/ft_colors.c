@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int			ft_colors(char *line, int *color, int *i)
+int		ft_colors(char *line, int *color, int *i)
 {
 	unsigned char	*tab;
 	int				j;

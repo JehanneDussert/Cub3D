@@ -90,3 +90,16 @@ int		ft_parsing_error(t_map *map)
 	return (1);
 }
 
+
+void	ft_free_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->map[i])
+	{
+		ft_free((void **)&map->map[i]);
+		i++;
+	}
+	ft_free((void **)&map->map);
+}
