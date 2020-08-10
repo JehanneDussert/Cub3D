@@ -87,7 +87,7 @@ t_all	*ft_raycasting(t_vec *vec, t_map *map, t_all *all)
 	int i;
 
 	i = -1;
-	if (!(all->buffer = malloc(sizeof(double) * all->map->reso[0])))
+	if (!(all->buffer = malloc(sizeof(double) * map->reso[0])))
 		return (NULL);
 	while (++i < map->reso[0])
 	{

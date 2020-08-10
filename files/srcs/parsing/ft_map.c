@@ -53,36 +53,51 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 	return (lst);
 }
 
-t_list	*ft_list(char **line, int n, int fd, t_all *all)
+t_list	*ft_list(char *line, int n, int *fd, t_map *map)
 {
 	t_list	*lst;
 	char	*clean_line;
 
 	lst = NULL;
-	while (n == 1 || n == 0)
+	while (n == 0 || n == 1)
 	{
-		if (ft_len(*line, all) == -1 || (clean_line =
-		ft_clean_line(*line, &all->map->ori, all->map->map_l)) == NULL)
-			return (ft_error_map(*line));
-		if (ft_len(*line, all) < 3 && clean_line[0] == '\0')
-			return (ft_end_map(line, lst));
+		if (ft_len(line, map) == -1 || (clean_line =
+		ft_clean_line(line, &map->ori, map->map_l)) == NULL)
+		{
+			ft_free((void **)&clean_line);
+			ft_simple_error("Wrong map");
+		}
+		if (ft_len(line, map) < 3 && clean_line[0] == '\0')
+		{
+			ft_free((void **)&line);
+			ft_free((void **)&clean_line);
+			return (lst);
+		}
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
-			return (ft_free_lst(*line, lst));
+		{
+			ft_free((void **)&clean_line);
+			ft_simple_error("3");
+		}
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
-			return (ft_end_map(line, lst));
-		ft_free((void **)line);
-		n = get_next_line(fd, line);
+		{	
+			ft_simple_error("4");
+			break ;
+		}
+		ft_free((void **)&line);
+		n = get_next_line(*fd, &line);
 	}
-	return (ft_check_map_errors(*line, 1) == 1 ? lst : NULL);
+	ft_free((void **)&line);
+	return (ft_check_map_errors(line, 1) == 1 ? lst : NULL);
 }
 
-char	**ft_create_map(t_all *all, t_list *lst, int len)
+char	**ft_create_map(t_map *map, t_list *lst, int len)
 {
 	t_list	*tmp;
 	int		i;
+	char	**tab;
 
 	i = 0;
-	if ((all->map->map = ft_calloc(len + 1, sizeof(*all->map->map))) == NULL)
+	if ((tab = ft_calloc(len + 1, sizeof(char *))) == NULL)
 		return (NULL);
 	while (lst)
 	{
@@ -92,7 +107,7 @@ char	**ft_create_map(t_all *all, t_list *lst, int len)
 			if (ft_check_map_errors(lst->content, 0) != 1)
 				return (NULL);
 		}
-		if (!(all->map->map[i] = ft_substr(lst->content, 0, all->map->map_l + 1)))
+		if (!(tab[i] = ft_substr(lst->content, 0, map->map_l + 1)))
 			return (NULL);
 		lst = lst->next;
 		if (lst != NULL)
@@ -100,31 +115,49 @@ char	**ft_create_map(t_all *all, t_list *lst, int len)
 			if (ft_check_len(lst->content, tmp->content) != 1)
 				return (NULL);
 		}
+		else if (map->ori == 1)
+			return (NULL);
 		i++;
 	}
-	return (all->map->map);
+	return (tab);
 }
 
-char	**ft_map(char *line, int n, int fd, t_all *all)
+void	ft_free_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->map[i])
+	{
+		ft_free((void **)&map->map[i]);
+		i++;
+	}
+	ft_free((void **)&map->map);
+}
+
+char	**ft_map(t_map *map, char *line, int n, int *fd)
 {
 	t_list	*lst;
 
-	if ((lst = ft_list(&line, n, fd, all)) == NULL)
-		return (NULL);
-	all->map->len_y = ft_lstsize(lst);
-	if (ft_create_map(all, lst, all->map->len_y) == NULL)
+	if ((lst = ft_list(line, n, fd, map)) == NULL)
+		ft_lstclear(&lst, free);
+	map->len_y = ft_lstsize(lst);
+	if (!(map->map = ft_create_map(map, lst, map->len_y)))
 	{
+		ft_putstr_fd("yo", 1);
 		if (line)
 			ft_free((void **)&line);
 		if (lst)
 			ft_lstclear(&lst, free);
-		exit(ft_error(10, all));
+		ft_simple_error("[ERROR] Wrong map.\n");
+		return (NULL);
 	}
-	if (ft_nb_spr(all) == -1)
-		exit(ft_error(11, all));
+	if (map->ori == '1')
+		ft_free_map(map);
 	if (lst)
 		ft_lstclear(&lst, free);
-	//printf("line :%p\tlst :%p\n", line, lst);
-	return (ft_check_pos(all->map, all->map->map) != NULL ?
-		all->map->map : NULL);
+	close(*fd);
+	if (map->map != NULL)
+		return (ft_check_pos(map, map->map) != NULL ? map->map : NULL);
+	return (NULL);
 }

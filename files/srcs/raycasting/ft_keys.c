@@ -22,93 +22,71 @@ int	ft_killwindow(t_all *all)
 
 		ft_free((void **)&all->map->map[i]);
 		i++;
-	}
+	}	
 	if (all->map && all->map->map)
 	{
-		ft_free((void **)&all->map->map[i]);
 		ft_free((void **)&all->map->map);
-		ft_free((void **)&all->map);
 	}
-	if (all->image->mlx_ptr != NULL && all->image->win_ptr != NULL)
+	if (all->image->mlx_ptr != 0 && all->image->win_ptr != 0)
 	{
 		mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
 		mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
 	}
-	ft_free((void **)&all->image);
-	ft_free((void **)&all->vec);
-	ft_free((void **)&all->keys);
-	ft_free((void **)&all->player);
-	ft_free((void **)&all->s_txt);
-	ft_free((void **)&all->save);
-	ft_free((void **)&all->spr);
-	ft_free((void **)&all);
 	exit(0);
 	return (1);
 }
 
-int	ft_keyrelease(int keycode, t_all *all)
+int	ft_keyrelease(int keycode, t_keys *keys)
 {
 	if (keycode == A_KEY)
-		all->keys->keyup = 0;
+		keys->keyup = 0;
 	else if (keycode == W_KEY)
-		all->keys->keydown = 0;
+		keys->keydown = 0;
 	else if (keycode == D_KEY)
-		all->keys->keyright = 0;
+		keys->keyright = 0;
 	else if (keycode == S_KEY)
-		all->keys->keyleft = 0;
+		keys->keyleft = 0;
 	else if (keycode == ARROW_RIGHT)
-		all->keys->keyturnright = 0;
+		keys->keyturnright = 0;
 	else if (keycode == ARROW_LEFT)
-		all->keys->keyturnleft = 0;
+		keys->keyturnleft = 0;
 	else if (keycode == EXIT_CODE)
-		all->keys->killwindow = 0;
-	else if (keycode == ARROW_UP)
-		all->player->look = 0;
-	else if (keycode == ARROW_DOWN)
-		all->player->look = 0;
-	else if (keycode == SPACE_KEY)
-		all->player->pos = 0;
+		keys->killwindow = 0;
 	else if (keycode == P_KEY)
-		all->keys->move_speed = NORMAL;
+		keys->move_speed = NORMAL;
 	else if (keycode == O_KEY)
-		all->keys->move_speed = NORMAL;
+		keys->move_speed = NORMAL;
 	return (0);
 }
 
-int	ft_keypress(int keycode, t_all *all)
+int	ft_keypress(int keycode, t_keys *keys)
 {
 	if (keycode == A_KEY)
-		all->keys->keyup = 1;
+		keys->keyup = 1;
 	else if (keycode == W_KEY)
-		all->keys->keydown = 1;
+		keys->keydown = 1;
 	else if (keycode == D_KEY)
-		all->keys->keyright = 1;
+		keys->keyright = 1;
 	else if (keycode == S_KEY)
-		all->keys->keyleft = 1;
+		keys->keyleft = 1;
 	else if (keycode == ARROW_RIGHT)
-		all->keys->keyturnright = 1;
+		keys->keyturnright = 1;
 	else if (keycode == ARROW_LEFT)
-		all->keys->keyturnleft = 1;
+		keys->keyturnleft = 1;
 	else if (keycode == EXIT_CODE)
-		all->keys->killwindow = 1;
-	else if (keycode == ARROW_UP)
-		all->player->look = UP;
-	else if (keycode == ARROW_DOWN)
-		all->player->look = DOWN;
-	else if (keycode == SPACE_KEY)
-		all->player->pos = UP;
+		keys->killwindow = 1;
 	else if (keycode == P_KEY)
-		all->keys->move_speed = RUN;
+		keys->move_speed = RUN;
 	else if (keycode == O_KEY)
-		all->keys->move_speed = SLOW;
+		keys->move_speed = SLOW;
 	return (0);
 }
 
 int	ft_new_image(t_all *all)
 {
-	if (!(mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
-		all->image->img_ptr, 0, 0)))
-		return (ft_error(7, all));
+	mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
+		all->image->img_ptr, 0, 0);
+		//return (ft_error(7, all));
 	if (all->s == 0)
 		mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
 	if (all->keys->killwindow == 1)

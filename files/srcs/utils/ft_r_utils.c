@@ -44,15 +44,14 @@ void	ft_west(t_vec *vec)
 	vec->plane_y = -0.66;
 }
 
-t_all	*ft_def_dir_plane(t_all *all)
+void	ft_def_dir_plane(t_map *map, t_vec *vec)
 {
-	if (all->map->ori == 'E')
-		ft_east(all->vec);
-	else if (all->map->ori == 'N')
-		ft_north(all->vec);
-	else if (all->map->ori == 'W')
-		ft_west(all->vec);
-	else if (all->map->ori == 'S')
-		ft_south(all->vec);
-	return (all);
+	if (map->ori == 'E')
+		ft_east(vec);
+	else if (map->ori == 'N')
+		ft_north(vec);
+	else if (map->ori == 'W')
+		ft_west(vec);
+	else if (map->ori == 'S')
+		ft_south(vec);
 }

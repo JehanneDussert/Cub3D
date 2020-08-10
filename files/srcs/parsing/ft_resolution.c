@@ -38,3 +38,14 @@ int		ft_check_resolution(char *line, t_map *info, int *i)
 	*i = 0;
 	return (0);
 }
+
+int		ft_resolution(char *line, t_map *map, int *i)
+{
+	ft_jump(line, i);
+	if (ft_check_resolution(line, map, i) == -1)
+	{
+		ft_simple_error("[ERROR] Wrong resolution.\n");
+		return (-1);
+	}
+	return (0);
+}

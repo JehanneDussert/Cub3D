@@ -12,13 +12,13 @@
 
 #include "../../includes/cub3d.h"
 
-int		ft_len(char *line, t_all *all)
+int		ft_len(char *line, t_map *map)
 {
 	int	map_len;
 
-	map_len = ft_map_len(line, &all->map->ori, &all->map->map_l);
-	if (map_len > all->map->map_l)
-		all->map->map_l = map_len;
+	map_len = ft_map_len(line, &map->ori, &map->map_l);
+	if (map_len > map->map_l)
+		map->map_l = map_len;
 	if (map_len < 3 && line == NULL)
 		return (-1);
 	return (map_len);
@@ -49,29 +49,49 @@ int		ft_l_atoi(const char *str, int *i)
 	}
 	return (result);
 }
-
-int		ft_nb_spr(t_all *all)
+void		ft_pos_spr(t_map *map, t_all *all)
 {
 	int	i;
 	int	j;
+	int	nb;
 
 	j = 0;
-	while (all->map->map[j])
+	while (map->map[j])
 	{
 		i = 0;
-		while (all->map->map[j][i])
+		while (map->map[j][i])
 		{
-			if (all->map->map[j][i] == '2')
+			if (map->map[j][i] == '2')
 			{
-				all->spr[all->map->spr].x = (double)i + 0.5;
-				all->spr[all->map->spr].y = (double)j + 0.5;
-				all->map->spr++;
+				all->spr[nb].x = (double)i + 0.5;
+				all->spr[nb].y = (double)j + 0.5;
+				nb++;
 			}
 			i++;
 		}
 		j++;
 	}
-	if (all->map->spr > 49)
+}
+
+int		ft_nb_spr(t_map *map)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	printf("map :%p\n", map->map);
+	while (map->map[j])
+	{
+		i = 0;
+		while (map->map[j][i])
+		{
+			if (map->map[j][i] == '2')
+				map->spr++;
+			i++;
+		}
+		j++;
+	}
+	if (map->spr > 49)
 		return (-1);
 	return (1);
 }

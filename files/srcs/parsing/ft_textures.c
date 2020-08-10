@@ -56,3 +56,10 @@ void	ft_text(char *line, t_map *map)
 	else if (ft_ref_parse(line, "S", ft_strlen(line)))
 		ft_strlcpy(map->sprite_t, &line[i], len);
 }
+
+void	ft_find_textures(char *line, t_map *map)
+{
+	ft_text(line, map);
+	if (ft_open_text(map) == -1)
+		ft_simple_error("[ERROR] Can't open textures files.\n");
+}

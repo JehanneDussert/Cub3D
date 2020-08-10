@@ -23,7 +23,7 @@ GNL_PATH = get_next_line/
 GNL_FILES = get_next_line.c
 GNL_SRCS = ${addprefix ${GNL_PATH}, ${GNL_FILES}}
 
-MINILIBX_PATH = minilibx/
+MINILIBX_PATH = minilibx-linux/
 MINILIBX = libmlx.a
 
 SRCS = files/srcs/parsing/ft_check_map.c files/srcs/parsing/ft_colors.c files/srcs/parsing/ft_resolution.c \
@@ -48,12 +48,21 @@ SRCS_LIBFT = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			ft_lstmap.c ft_itoa_base.c ft_last.c ft_int_len.c ft_first.c \
 			ft_ref_parse.c ft_free.c ft_memalloc.c
 
-SRCS_MINILIBX = mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
+SRCS_MINILIBX = mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
+	mlx_mouse_hook.c mlx_key_hook.c mlx_expose_hook.c mlx_loop_hook.c \
+	mlx_int_anti_resize_win.c mlx_int_do_nothing.c \
+	mlx_int_wait_first_expose.c mlx_int_get_visual.c \
+	mlx_flush_event.c mlx_string_put.c \
+	mlx_new_image.c mlx_get_data_addr.c \
+	mlx_put_image_to_window.c mlx_get_color_value.c mlx_clear_window.c \
+	mlx_xpm.c mlx_int_str_to_wordtab.c mlx_destroy_window.c \
+	mlx_int_param_event.c mlx_int_set_win_event_mask.c mlx_hook.c \
+	mlx_rgb.c mlx_destroy_image.c mlx_mouse.c mlx_screen_size.c
 
 OBJS	= ${SRCS:.c=.o}
 
 $(NAME)	:	${OBJS} ${LIBFT_PATH}${LIBFT} ${MINILIBX_PATH}${MINILIBX}
-		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MINILIBX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
+		${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MINILIBX_PATH} -lmlx -lXext -lX11 -lbsd -lm -L ${LIBFT_PATH} -lft
 
 $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
 	make all -C ${LIBFT_PATH}

@@ -40,3 +40,18 @@ int			ft_colors(char *line, int *color, int *i)
 	*i = 0;
 	return (*color);
 }
+
+void	ft_def_color(char *line, t_map *map, int *i)
+{
+	ft_jump(line, i);
+	if (line[*i] == 'F')
+	{
+		if (ft_colors(line, &map->f_path, i) == -1)
+			ft_simple_error("[ERROR] Wrong floor color.\n");
+	}
+	else
+	{
+		if (ft_colors(line, &map->c_path, i) == -1)
+			ft_simple_error("[ERROR] Wrong ceil color.\n");
+	}
+}

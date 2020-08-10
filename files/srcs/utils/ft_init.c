@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int			ft_init_texture_data(t_text *text)
+int	ft_init_texture_data(t_text *text)
 {
 	if ((text[0].img = mlx_get_data_addr(text[0].ptr, &text[0].bpp,
 		&text[0].size_l, &text[0].endian)) == NULL)
@@ -32,7 +32,7 @@ int			ft_init_texture_data(t_text *text)
 	return (0);
 }
 
-int			ft_init_texture(t_all *all, t_text *text, int width, int height)
+int	ft_init_texture(t_all *all, t_text *text, int width, int height)
 {
 	if ((text[0].ptr = mlx_xpm_file_to_image(all->image->mlx_ptr,
 	all->map->north_t, &width, &height)) == NULL)
@@ -56,7 +56,7 @@ int			ft_init_texture(t_all *all, t_text *text, int width, int height)
 	return (0);
 }
 
-t_map		*ft_init_map(t_map *map)
+void	ft_init_map(t_map *map)
 {
 	map->reso[0] = -1;
 	map->reso[1] = -1;
@@ -74,36 +74,30 @@ t_map		*ft_init_map(t_map *map)
 	map->map_l = 0;
 	map->len_y = 0;
 	map->map = NULL;
-	return (map);
+	map = NULL;
 }
 
-t_player	*ft_player_init(t_player *player)
+void	ft_player(t_player *p)
 {
-	player->look = 0;
-	player->pos = 0;
-	return (player);
+	p->p_x = 0;
+	p->p_y = 0;
+	p->dir_x = 0;
+	p->dir_y = 0;
+	p->x = 0;
+	p->y = 0;
 }
 
-t_all		*ft_init_all(t_all *all)
+void	ft_init(t_all *all, t_vec *vec, t_keys *keys, t_s_txt *s_txt)
 {
-	if (!(all->image = (t_image *)malloc(sizeof(t_image))))
-		return (NULL);
-	all->image->mlx_ptr = NULL;
-	all->image->win_ptr = NULL;
-	if (!(all->map = (t_map *)malloc(sizeof(t_map))))
-		return (NULL);
-	if (!(all->vec = (t_vec *)malloc(sizeof(t_vec))))
-		return (NULL);
-	if (!(all->keys = (t_keys *)malloc(sizeof(t_keys))))
-		return (NULL);
-	if (!(all->player = (t_player *)malloc(sizeof(t_player))))
-		return (NULL);
-	if (!(ft_vec_init(all->vec)))
-		return (NULL);
-	if (!(ft_init_map(all->map)))
-		return (NULL);
-	if (!(ft_keys_init(all->keys)))
-		return (NULL);
-	all->player = ft_player_init(all->player);
-	return (all);
+	all->vec = vec;
+	all->keys = keys;
+	all->s_txt = s_txt;
+}
+
+void	ft_init_all(t_all *all, t_player *p, t_map *map, t_image *img)
+{
+	all->s = 0;
+	all->map = map;
+	all->image = img;
+	all->player = p;
 }
