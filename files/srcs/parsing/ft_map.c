@@ -34,7 +34,11 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 			j++;
 		}
 		else
+		{
+			if (clean_line)
+				ft_free((void **)&clean_line);
 			return (NULL);
+		}
 		i++;
 	}
 	clean_line[j] = '\0';
@@ -63,10 +67,8 @@ t_list	*ft_list(char *line, int n, int *fd, t_map *map)
 	{
 		if (ft_len(line, map) == -1 || (clean_line =
 		ft_clean_line(line, &map->ori, map->map_l)) == NULL)
-		{
-			ft_free((void **)&clean_line);
-			ft_simple_error("Wrong map");
-		}
+			break ;
+			//ft_simple_error("[ERROR] Wrong map.\n");
 		if (ft_len(line, map) < 3 && clean_line[0] == '\0')
 		{
 			ft_free((void **)&line);
@@ -76,18 +78,18 @@ t_list	*ft_list(char *line, int n, int *fd, t_map *map)
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 		{
 			ft_free((void **)&clean_line);
-			ft_simple_error("3");
+			break ;
 		}
 		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
 		{
-			ft_simple_error("4");
+			ft_simple_error("[ERROR] Wrong map.\n");
 			break ;
 		}
 		ft_free((void **)&line);
 		n = get_next_line(*fd, &line);
 	}
 	ft_free((void **)&line);
-	return (ft_check_map_errors(line, 1) == 1 ? lst : NULL);
+	return (lst);
 }
 
 char	**ft_create_map(t_map *map, t_list *lst, int len)
@@ -129,7 +131,6 @@ char	**ft_map(t_map *map, char *line, int n, int *fd)
 	map->len_y = ft_lstsize(lst);
 	if (!(map->map = ft_create_map(map, lst, map->len_y)))
 	{
-		ft_putstr_fd("yo", 1);
 		if (line)
 			ft_free((void **)&line);
 		if (lst)

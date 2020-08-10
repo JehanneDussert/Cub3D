@@ -28,8 +28,8 @@ int		ft_check_map_errors(char *line, int mode)
 	}
 	else if (mode == 1)
 	{
-		if ((line[0] != '1' && line[0] != ' ') ||
-			line[ft_strlen(line) - 1] != '1')
+		if (line && ((line[0] != '1' && line[0] != ' ') ||
+			line[ft_strlen(line) - 1] != '1'))
 			return (0);
 	}
 	return (1);
@@ -87,22 +87,26 @@ int		ft_check_len(char *str, char *tmp)
 
 int		ft_check_map_char(char *line, int i)
 {
-	if (line[i] == '1' || line[i] == '2' || line[i] == '0' || line[i] == ' ')
-		return (1);
-	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
-	|| line[i] == 'E')
-		return (2);
-	else if (line[i] == ' ')
-		return (3);
+	if (line)
+	{
+		if (line[i] == '1' || line[i] == '2' || line[i] == '0' || line[i] == ' ')
+			return (1);
+		else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+		|| line[i] == 'E')
+			return (2);
+		else if (line[i] == ' ')
+			return (3);
+	}
 	return (0);
 }
 
 int		ft_check_char(char *line)
 {
-	if (line[0] == 'R' || line[0] == 'C' || line[0] == 'S' || line[0] == 'F'
-		|| (ft_first(line, "NO") == 1) || (ft_first(line, "SO") == 1)
-		|| (ft_first(line, "WE") == 1) || (ft_first(line, "EA") == 1)
-		|| line[0] == '\0' || line[0] == ' ')
-		return (1);
+	if (line)
+		if (line[0] == 'R' || line[0] == 'C' || line[0] == 'S' || line[0] == 'F'
+			|| (ft_first(line, "NO") == 1) || (ft_first(line, "SO") == 1)
+			|| (ft_first(line, "WE") == 1) || (ft_first(line, "EA") == 1)
+			|| line[0] == '\0' || line[0] == ' ')
+			return (1);
 	return (0);
 }
