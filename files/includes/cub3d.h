@@ -106,6 +106,7 @@ typedef struct	s_map
 	int			spr;
 	int			map_l;
 	int			len_y;
+	t_list			*lst;
 }				t_map;
 
 typedef struct	s_image

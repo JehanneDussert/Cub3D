@@ -58,6 +58,7 @@ int	ft_start(t_image img, char **argv, int save)
 		return (ft_simple_error("[ERROR] Opening file failed.\n"));
 	if (ft_parsing(&map, &fd) == -1)
 		return (-1);
+	ft_nb_spr(&map);
 	if (save == 1)
 		ft_save(&img, &map);
 	else
