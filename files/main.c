@@ -30,6 +30,7 @@ int	ft_mlx(t_image *img, t_map *map)
 	ft_init_all(&all, &p, map, img);
 	if ((img->mlx_ptr = mlx_init()) == NULL)
 		return (ft_simple_error("Mlx init failed.\n"));
+	ft_check_screen_size(img, map);
 	if (!(img->win_ptr = mlx_new_window(img->mlx_ptr,
 		map->reso[0], map->reso[1], "cub3D")))
 		return (ft_simple_error("[ERROR] Opening new window failed.\n"));

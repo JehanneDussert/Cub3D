@@ -106,7 +106,6 @@ typedef struct	s_map
 	int			spr;
 	int			map_l;
 	int			len_y;
-	t_list			*lst;
 }				t_map;
 
 typedef struct	s_image
@@ -122,7 +121,8 @@ typedef struct	s_image
 	int			endian;
 	char		**xpm;
 	char		*data;
-	int			*mini_data;
+	int		x;
+	int		y;
 }				t_image;
 
 typedef struct	s_vec
@@ -300,6 +300,7 @@ void			ft_replace_space(char *str, int *i, int *j);
 int				ft_nb_spr(t_map *map);
 void				ft_pos_spr(t_map *map, t_all *all);
 int				ft_len(char *line, t_map *map);
+void				ft_check_screen_size(t_image *img, t_map *map);
 
 /*
 ** Init

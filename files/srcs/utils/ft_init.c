@@ -101,3 +101,12 @@ void	ft_init_all(t_all *all, t_player *p, t_map *map, t_image *img)
 	all->image = img;
 	all->player = p;
 }
+
+void	ft_check_screen_size(t_image *img, t_map *map)
+{
+	mlx_get_screen_size(img->mlx_ptr, &img->x, &img->y);
+	if (map->reso[0] > img->x)
+		map->reso[0] = img->x;
+	if (map->reso[1] > img->y)
+		map->reso[1] = img->y;
+}
