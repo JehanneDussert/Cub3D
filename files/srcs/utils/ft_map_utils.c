@@ -100,13 +100,12 @@ int		ft_check_map_char(char *line, int i)
 	return (0);
 }
 
-int		ft_check_char(char *line)
+int		ft_check_char(char *line, int i)
 {
-	if (line)
-		if (line[0] == 'R' || line[0] == 'C' || line[0] == 'S' || line[0] == 'F'
-			|| (ft_first(line, "NO") == 1) || (ft_first(line, "SO") == 1)
-			|| (ft_first(line, "WE") == 1) || (ft_first(line, "EA") == 1)
-			|| line[0] == '\0' || line[0] == ' ')
-			return (1);
+	if (line[i] == 'R' || line[i] == 'C' || line[i] == 'S' || line[i] == 'F'
+		|| (ft_first(line, "NO") == 1) || (ft_first(line, "SO") == 1)
+		|| (ft_first(line, "WE") == 1) || (ft_first(line, "EA") == 1)
+		|| line[i] == '\0' || line[i] == ' ')
+		return (1);
 	return (0);
 }

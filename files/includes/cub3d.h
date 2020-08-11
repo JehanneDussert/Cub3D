@@ -235,9 +235,9 @@ int				ft_colors(char *line, int *color, int *i);
 void			ft_find_textures(char *line, t_map *map);
 void			ft_text(char *line, t_map *info);
 int				ft_open_text(t_map *map);
-char			**ft_map(t_map *map, char *line, int n, int *fd);
+char			**ft_map(t_map *map, char **line, int n, int *fd);
 int				ft_check_map_char(char *line, int i);
-int				ft_check_char(char *line);
+int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_all *all);
 

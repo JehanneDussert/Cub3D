@@ -35,27 +35,26 @@ int		ft_check_info_map(t_map *map)
 	return (0);
 }
 
-void	ft_info(t_map *map, char **line)
+void	ft_info(t_map *map, char *line)
 {
 	int	i;
 
 	i = 0;
-	ft_jump(*line, &i);
-	if (*line[i] == 'R' && map->reso[0] == -1 && map->reso[1] == -1)
-		ft_resolution(*line, map, &i);
-	else if ((*line[i] == 'F' && map->f_path == -1) || (*line[i] == 'C'
+	ft_jump(line, &i);	
+	if (ft_check_char(line, i) == 0)
+		ft_simple_error("[ERROR] Bad character.\n");
+	else if (line[i] == 'R' && map->reso[0] == -1 && map->reso[1] == -1)
+		ft_resolution(line, map, &i);
+	else if ((line[i] == 'F' && map->f_path == -1) || (line[i] == 'C'
 	&& map->c_path == -1))
-		ft_def_color(*line, map, &i);
-	else if (ft_check_text(*line, i) == 1)
-		ft_find_textures(*line, map);
-	ft_free((void **)line);
+		ft_def_color(line, map, &i);
+	else if (ft_check_text(line, i) == 1)
+		ft_find_textures(line, map);
 }
 
-int		ft_bad_char(char **line)
+int		ft_bad_char(void)
 {
-	(void)line;
 	ft_simple_error("[ERROR] Bad character\n");
-	//ft_free((void **)line);
 	return (-1);
 }
 
@@ -64,25 +63,36 @@ int		ft_parsing(t_map *map, int *fd)
 	char	*line;
 	int		n;
 
-	while ((n = get_next_line(*fd, &line)) != 0 && ft_check_info_map(map) != 1
-			&& ft_check_char(line) != 0)
-		ft_info(map, &line);
-	ft_free((void **)&line);
-	if (ft_check_info_map(map) == 1 && (n == get_next_line(*fd, &line)) != 0
-		&& (line[0] == '1' || line[0] == ' '))
+	while ((n = get_next_line(*fd, &line)) != 0 && ft_check_info_map(map) != 1 && ft_check_char(line, 0) != 0)
 	{
-		if (ft_map(map, line, n, fd) == NULL)
+		ft_info(map, line);
+		ft_free((void **)&line);
+	}
+	while (line[0] != ' ' && line[0] != '1' && n != 0)
+	{
+		if (ft_check_char(line, 0) == 0)
 		{
+			ft_free((void **)&line);
+			return(ft_bad_char());
+		}
+		ft_free((void **)&line);
+		n = get_next_line(*fd, &line);
+	}
+	if (ft_check_info_map(map) == 1	&& (line[0] == '1' || line[0] == ' '))
+	{
+		if (ft_map(map, &line, n, fd) == NULL)
+		{
+			if (map->map)
+				ft_free_map(map);
 			ft_simple_error("[ERROR] Wrong map.\n");
 			close(*fd);
 			return (-1);
 		}
 		close(*fd);
 	}
-	else if (ft_check_char(line) == 0)
-		return (ft_bad_char(&line));
 	else if (ft_check_info_map(map) != 1)
 	{
+		ft_free((void **)&line);
 		ft_parsing_error(map);
 		close(*fd);
 		return (-1);

@@ -16,7 +16,11 @@ int		ft_len(char *line, t_map *map)
 {
 	int	map_len;
 
-	map_len = ft_map_len(line, &map->ori, &map->map_l);
+	if ((map_len = ft_map_len(line, &map->ori, &map->map_l)) == -1)
+	{
+		map->map_l = -1;
+		return (map->map_l);
+	}
 	if (map_len > map->map_l)
 		map->map_l = map_len;
 	if (map_len < 3 && line == NULL)
@@ -79,7 +83,6 @@ int		ft_nb_spr(t_map *map)
 	int	j;
 
 	j = 0;
-	printf("map :%p\n", map->map);
 	while (map->map[j])
 	{
 		i = 0;
