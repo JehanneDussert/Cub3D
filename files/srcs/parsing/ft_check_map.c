@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/11 16:39:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/11 16:57:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void	ft_info(t_map *map, char *line)
 		ft_find_textures(line, map);
 }
 
-int		ft_bad_char(void)
-{
-	ft_simple_error("[ERROR] Bad character\n");
-	return (-1);
-}
-
 int		ft_parsing(t_map *map, int *fd)
 {
 	char	*line;
@@ -72,31 +66,17 @@ int		ft_parsing(t_map *map, int *fd)
 	while (line[0] != ' ' && line[0] != '1' && n != 0)
 	{
 		if (ft_check_char(line, 0) == 0)
-		{
-			ft_free((void **)&line);
-			return (ft_bad_char());
-		}
+			return (ft_wrong_char(&line, fd));
 		ft_free((void **)&line);
 		n = get_next_line(*fd, &line);
 	}
 	if (ft_check_info_map(map) == 1 && (line[0] == '1' || line[0] == ' '))
 	{
 		if (ft_map(map, &line, n, fd) == NULL)
-		{
-			if (map->map)
-				ft_free_map(map);
-			ft_simple_error("[ERROR] Wrong map.\n");
-			close(*fd);
-			return (-1);
-		}
+			return (ft_wrong_map(map, fd));
 		close(*fd);
 	}
 	else if (ft_check_info_map(map) != 1)
-	{
-		ft_free((void **)&line);
-		ft_parsing_error(map);
-		close(*fd);
-		return (-1);
-	}
+		return (ft_miss_info(&line, map, fd));
 	return (0);
 }
