@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/05 12:15:22 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/11 16:39:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_info(t_map *map, char *line)
 	int	i;
 
 	i = 0;
-	ft_jump(line, &i);	
+	ft_jump(line, &i);
 	if (ft_check_char(line, i) == 0)
 		ft_simple_error("[ERROR] Bad character.\n");
 	else if (line[i] == 'R' && map->reso[0] == -1 && map->reso[1] == -1)
@@ -63,7 +63,8 @@ int		ft_parsing(t_map *map, int *fd)
 	char	*line;
 	int		n;
 
-	while ((n = get_next_line(*fd, &line)) != 0 && ft_check_info_map(map) != 1 && ft_check_char(line, 0) != 0)
+	while ((n = get_next_line(*fd, &line)) != 0
+			&& ft_check_info_map(map) != 1 && ft_check_char(line, 0) != 0)
 	{
 		ft_info(map, line);
 		ft_free((void **)&line);
@@ -73,12 +74,12 @@ int		ft_parsing(t_map *map, int *fd)
 		if (ft_check_char(line, 0) == 0)
 		{
 			ft_free((void **)&line);
-			return(ft_bad_char());
+			return (ft_bad_char());
 		}
 		ft_free((void **)&line);
 		n = get_next_line(*fd, &line);
 	}
-	if (ft_check_info_map(map) == 1	&& (line[0] == '1' || line[0] == ' '))
+	if (ft_check_info_map(map) == 1 && (line[0] == '1' || line[0] == ' '))
 	{
 		if (ft_map(map, &line, n, fd) == NULL)
 		{

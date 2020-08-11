@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/06 12:49:24 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/11 16:40:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ t_list	*ft_list(char **line, int n, int *fd, t_map *map)
 		}
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 		{
-
 			ft_free((void **)&clean_line);
 			break ;
 		}
@@ -126,8 +125,6 @@ char	**ft_create_map(t_map *map, t_list *lst, int len)
 			if (ft_check_len(lst->content, tmp->content) != 1)
 				return (NULL);
 		}
-		else if (map->ori == 1)
-			return (NULL);
 		i++;
 	}
 	return (map->map);
@@ -138,9 +135,10 @@ char	**ft_map(t_map *map, char **line, int n, int *fd)
 	t_list	*lst;
 
 	if ((lst = ft_list(line, n, fd, map)) == NULL)
-		ft_lstclear(&lst, free);	
+		ft_lstclear(&lst, free);
 	map->len_y = ft_lstsize(lst);
-	if ((lst && !(map->map = ft_create_map(map, lst, map->len_y))) || (map->ori == '1' && map->map))
+	if ((lst && !(map->map = ft_create_map(map, lst, map->len_y)))
+			|| (map->ori == '1' && map->map))
 	{
 		ft_free((void **)line);
 		ft_lstclear(&lst, free);
