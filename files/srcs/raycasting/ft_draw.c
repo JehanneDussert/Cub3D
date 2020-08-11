@@ -24,18 +24,6 @@ int		ft_draw_side(t_vec *vec, int color)
 		color = 0xffae75;
 	return (color);
 }
-/*
-void	ft_draw_mode(t_all *all)
-{
-	if (all->player->look == DOWN)
-		ft_look_down(all);
-	else if (all->player->look == UP)
-		ft_look_up(all);
-	else if (all->player->pos == UP)
-		ft_player_jump(all);
-	else if (all->player->pos == DOWN)
-		ft_player_crawl(all);
-}*/
 
 void	ft_draw_ray(int i, t_all *all)
 {
@@ -44,7 +32,6 @@ void	ft_draw_ray(int i, t_all *all)
 
 	j = -1;
 	color = 0;
-	//ft_draw_mode(all);
 	color = ft_draw_side(all->vec, color);
 	while (++j < all->vec->draw_start)
 		*(int *)&all->image->data[j * all->map->reso[0] + i] = SKYBLUE;

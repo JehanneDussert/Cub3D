@@ -19,10 +19,9 @@ int	ft_killwindow(t_all *all)
 	i = 0;
 	while (all->map && all->map->map && i < all->map->len_y)
 	{
-
 		ft_free((void **)&all->map->map[i]);
 		i++;
-	}	
+	}
 	if (all->map && all->map->map)
 	{
 		ft_free((void **)&all->map->map);
@@ -86,7 +85,6 @@ int	ft_new_image(t_all *all)
 {
 	mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
 		all->image->img_ptr, 0, 0);
-		//return (ft_error(7, all));
 	if (all->s == 0)
 		mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
 	if (all->keys->killwindow == 1)
