@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 16:03:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/11 15:51:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/11 16:34:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_save(t_image *img, t_map *map, t_player *p, t_vec *vec)
 
 	if ((img->mlx_ptr = mlx_init()) == NULL)
 		ft_simple_error("[ERROR] Mlx init failed.\n");
-	ft_player(p);
+	ft_player(p, vec);
 	ft_def_dir_plane(map, vec);
 	ft_nb_spr(map);
 	ft_pos_spr(map, &all);

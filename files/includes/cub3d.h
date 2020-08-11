@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 17:16:26 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/11 16:35:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,7 @@ void			ft_check_screen_size(t_image *img, t_map *map);
 void			ft_init(t_all *all, t_vec *vec, t_keys *keys, t_s_txt *s_txt);
 void			ft_init_all(t_all *all, t_player *p, t_map *map, t_image *img);
 void			ft_init_map(t_map *map);
-void			ft_player(t_player *p);
+void			ft_player(t_player *p, t_vec *vec);
 t_vec			*ft_vec_init(t_vec *vec);
 t_keys			*ft_keys_init(t_keys *keys);
 int				ft_init_texture(t_all *all, t_text *text, int width,
@@ -327,6 +327,6 @@ void			ft_sprites(t_all *all, t_spr *spr, int nb_spr);
 /*
 ** Save
 */
-int				ft_save(t_image *img, t_map *map);
+int				ft_save(t_image *img, t_map *map, t_player *p, t_vec *vec);
 
 #endif

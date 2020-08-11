@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 15:40:26 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/11 16:34:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_init_map(t_map *map)
 	map = NULL;
 }
 
-void	ft_player(t_player *p)
+void	ft_player(t_player *p, t_vec *vec)
 {
 	p->p_x = 0;
 	p->p_y = 0;
@@ -41,6 +41,7 @@ void	ft_player(t_player *p)
 	p->dir_y = 0;
 	p->x = 0;
 	p->y = 0;
+	ft_vec_init(vec);
 }
 
 void	ft_init(t_all *all, t_vec *vec, t_keys *keys, t_s_txt *s_txt)
