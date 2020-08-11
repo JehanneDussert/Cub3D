@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 12:01:25 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/11 15:37:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,49 +52,4 @@ int		ft_l_atoi(const char *str, int *i)
 		(*i)++;
 	}
 	return (result);
-}
-void		ft_pos_spr(t_map *map, t_all *all)
-{
-	int	i;
-	int	j;
-	int	nb;
-
-	j = 0;
-	while (map->map[j])
-	{
-		i = 0;
-		while (map->map[j][i])
-		{
-			if (map->map[j][i] == '2')
-			{
-				all->spr[nb].x = (double)i + 0.5;
-				all->spr[nb].y = (double)j + 0.5;
-				nb++;
-			}
-			i++;
-		}
-		j++;
-	}
-}
-
-int		ft_nb_spr(t_map *map)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (map->map[j])
-	{
-		i = 0;
-		while (map->map[j][i])
-		{
-			if (map->map[j][i] == '2')
-				map->spr++;
-			i++;
-		}
-		j++;
-	}
-	if (map->spr > 49)
-		return (-1);
-	return (1);
 }

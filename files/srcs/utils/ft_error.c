@@ -70,7 +70,7 @@ int		ft_parsing_error(t_map *map)
 		&& map->sprite_t[0] == '\0' && map->west_t[0] == '\0'
 		&& map->east_t[0] == '\0')
 		ft_simple_error("[ERROR] Invalid file.\n");
-	if ((map->reso[0] == -1 || map->reso[1] == -1) || 
+	if ((map->reso[0] == -1 || map->reso[1] == -1) ||
 		(map->reso[0] == -1 && map->reso[1] == -1))
 		ft_simple_error("[ERROR] Wrong resolution.\n");
 	if (map->c_path == -1 || map->f_path == -1)
@@ -79,7 +79,7 @@ int		ft_parsing_error(t_map *map)
 		ft_simple_error("[ERROR] Missing floor path.\n");
 	if (map->north_t[0] == '\0')
 		ft_simple_error("[ERROR] Missing north path.\n");
-	if (map->south_t[0] == '\0')	
+	if (map->south_t[0] == '\0')
 		ft_simple_error("[ERROR] Missing south path.\n");
 	if (map->east_t[0] == '\0')
 		ft_simple_error("[ERROR] Missing east path.\n");
@@ -89,7 +89,6 @@ int		ft_parsing_error(t_map *map)
 		ft_simple_error("[ERROR] Missing sprite path.\n");
 	return (1);
 }
-
 
 void	ft_free_map(t_map *map)
 {
