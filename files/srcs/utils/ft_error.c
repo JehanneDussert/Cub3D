@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/04 18:04:35 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/12 14:24:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		ft_parsing_error(t_map *map)
 		(map->reso[0] == -1 && map->reso[1] == -1))
 		ft_simple_error("[ERROR] Wrong resolution.\n");
 	if (map->c_path == -1 || map->f_path == -1)
-		ft_simple_error("[ERROR] Missing ceil path.\n");
+		ft_simple_error("[ERROR] Missing ceiling path.\n");
 	if (map->f_path == -1)
 		ft_simple_error("[ERROR] Missing floor path.\n");
 	if (map->north_t[0] == '\0')

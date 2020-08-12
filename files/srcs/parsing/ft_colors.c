@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 10:35:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 14:24:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	ft_def_color(char *line, t_map *map, int *i)
 	else
 	{
 		if (ft_colors(line, &map->c_path, i) == -1)
-			ft_simple_error("[ERROR] Wrong ceil color.\n");
+			ft_simple_error("[ERROR] Wrong ceiling color.\n");
 	}
 }
