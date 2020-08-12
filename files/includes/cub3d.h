@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 14:22:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 14:31:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@
 # define UP 1
 # define DOWN 2
 
-# define NORMAL 0.05
+# define NORMAL 0.09
 # define SLOW 0.01
-# define RUN 0.1
+# define RUN 0.13
 # define NBSPR 15
 # define W_H 64
 

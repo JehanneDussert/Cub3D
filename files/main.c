@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 14:14:07 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 14:41:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_mlx(t_image *img, t_map *map, t_player *p, t_vec *vec)
 	ft_init(&all, vec, &keys, &s_txt);
 	ft_init_all(&all, p, map, img);
 	if ((img->mlx_ptr = mlx_init()) == NULL)
-		return (ft_simple_error("Mlx init failed.\n"));
+		return (ft_simple_error("Error\nMlx init failed.\n"));
 	ft_check_screen_size(img, map);
 	if (!(img->win_ptr = mlx_new_window(img->mlx_ptr,
 		map->reso[0], map->reso[1], "cub3D")))
-		return (ft_simple_error("[ERROR] Opening new window failed.\n"));
+		return (ft_simple_error("Error\nOpening new window failed.\n"));
 	if (ft_init_texture(&all, text, 64, 64) != 0)
-		return (ft_simple_error("[ERROR] Init textures failed.\n"));
+		return (ft_simple_error("Error\nInit textures failed.\n"));
 	mlx_hook(img->win_ptr, 2, 1, ft_keypress, &keys);
 	mlx_hook(img->win_ptr, 3, 2, ft_keyrelease, &keys);
 	mlx_hook(img->win_ptr, 17, 1L << 17, ft_killwindow, &all);
@@ -50,7 +50,7 @@ int	ft_start(t_image img, char **argv, int save)
 
 	ft_init_map(&map);
 	if (!(fd = open(argv[1], O_RDONLY)))
-		return (ft_simple_error("[ERROR] Opening file failed.\n"));
+		return (ft_simple_error("Error\nOpening file failed.\n"));
 	if (ft_parsing(&map, &fd) == -1)
 		return (-1);
 	ft_nb_spr(&map);
@@ -68,12 +68,14 @@ int	main(int argc, char **argv)
 
 	s = 0;
 	img.mlx_ptr = 0;
+	if (argc == 1)
+		return(ft_simple_error("Error\nFile missing.\n"));
 	if (argc > 1 && argc < 4)
 	{
 		if (ft_last(argv[1], ".cub") != 1)
-			return (ft_simple_error("[ERROR] Invalid file.\n"));
+			return (ft_simple_error("Error\nInvalid file.\n"));
 		if (argc == 3 && (ft_strncmp(argv[2], "--save", 5) != 0))
-			return (ft_simple_error("[ERROR] Wrong arguments.\n"));
+			return (ft_simple_error("Error\nWrong arguments.\n"));
 		else if (argc == 3 && ft_strncmp(argv[2], "--save", 5) == 0)
 			s = 1;
 	}

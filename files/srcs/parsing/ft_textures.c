@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/07/27 18:16:29 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/12 14:42:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ void	ft_find_textures(char *line, t_map *map)
 {
 	ft_text(line, map);
 	if (ft_open_text(map) == -1)
-		ft_simple_error("[ERROR] Can't open textures files.\n");
+		ft_simple_error("Error\nCan't open textures files.\n");
 }
