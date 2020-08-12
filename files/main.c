@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 16:23:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 16:26:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_mlx(t_image *img, t_map *map, t_player *p, t_vec *vec)
 		return (ft_simple_error("Error\nMlx init failed.\n"));
 	ft_check_screen_size(img, map);
 	if (!(img->win_ptr = mlx_new_window(img->mlx_ptr,
-		map->reso[0], map->reso[1], "cub3D")))
+		map->reso[0], map->reso[1], "Cub3D")))
 		return (ft_simple_error("Error\nOpening new window failed.\n"));
 	if (ft_init_texture(&all, text, 64, 64) != 0)
 		return (ft_simple_error("Error\nInit textures failed.\n"));

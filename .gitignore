@@ -10,5 +10,5 @@
 /minilibx/*.a
 /libft/*.o
 /get_next_line/*.o
-cub3D
+Cub3D
 a.out*
