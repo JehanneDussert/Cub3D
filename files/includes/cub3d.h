@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 10:46:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 12:11:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,7 @@ int				ft_check_map_char(char *line, int i);
 int				ft_check_char(char *line, int i);
 int				ft_check_text(char *line, int i);
 void			ft_print(t_all *all);
+char			*ft_clean_line(char *line, char *ori, int map_l);
 
 /*
 ** Raycasting
@@ -300,6 +301,7 @@ int				ft_miss_info(char **line, t_map *map, int *fd);
 int				ft_wrong_map(t_map *map, int *fd);
 int				ft_wrong_char(char **line, int *fd);
 t_list			*ft_ret_lst(char **line, char **clean_line, t_list *lst);
+char			*ft_end_clean_line(char **clean_line);
 
 /*
 ** Init

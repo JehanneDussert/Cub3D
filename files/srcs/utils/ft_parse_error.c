@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:43:45 by user42            #+#    #+#             */
-/*   Updated: 2020/08/12 10:49:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 12:10:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,10 @@ t_list	*ft_ret_lst(char **line, char **clean_line, t_list *lst)
 	ft_free((void **)line);
 	ft_free((void **)clean_line);
 	return (lst);
+}
+
+char	*ft_end_clean_line(char **clean_line)
+{
+	ft_free((void **)clean_line);
+	return (NULL);
 }

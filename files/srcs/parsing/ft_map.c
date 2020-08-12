@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 11:36:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 12:12:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,11 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 			if (ft_check_map_char(line, i) == 2 && *ori == '1')
 				*ori = line[i];
 			else if (ft_check_map_char(line, i) == 2 && *ori != '1')
-			{
-				ft_free((void **)&clean_line);
-				return (NULL);
-			}
+				return (ft_end_clean_line(&clean_line));
 			clean_line[j++] = line[i];
 		}
 		else
-		{
-			if (clean_line)
-				ft_free((void **)&clean_line);
-			return (NULL);
-		}
+			return (ft_end_clean_line(&clean_line));
 	}
 	return (clean_line);
 }
@@ -81,11 +74,6 @@ t_list	*ft_list(char **line, int n, int *fd, t_map *map)
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 		{
 			ft_free((void **)&clean_line);
-			break ;
-		}
-		if (lst != NULL && n == 0 && ft_check_map_errors(clean_line, 0) == 1)
-		{
-			ft_simple_error("[ERROR] Wrong map.\n");
 			break ;
 		}
 		ft_free((void **)line);
