@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 16:03:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 12:29:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 14:09:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ int		ft_save(t_image *img, t_map *map, t_player *p, t_vec *vec)
 
 	if ((img->mlx_ptr = mlx_init()) == NULL)
 		ft_simple_error("[ERROR] Mlx init failed.\n");
-	ft_player(p, vec);
-	ft_def_dir_plane(map, vec);
-	ft_nb_spr(map);
 	ft_pos_spr(map, &all);
+	ft_player(p, vec);
+	ft_keys_init(&keys);
+	ft_def_dir_plane(map, vec);
 	ft_init(&all, vec, &keys, &s_txt);
 	ft_init_all(&all, p, map, img);
 	all.s = 1;
-	if (ft_init_texture(&all, text, 64, 64) != 0)
-		ft_simple_error("[ERROR] Wrong textures.\n");
+	ft_init_texture(&all, text, 64, 64);
 	ft_keydeal(&all);
 	ft_write_bmp_file(&all);
+	ft_free_map(map);
 	mlx_destroy_image(all.image->mlx_ptr, all.image->img_ptr);
 	return (0);
 }
