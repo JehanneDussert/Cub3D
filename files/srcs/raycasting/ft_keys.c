@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/06 14:07:06 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/12 12:29:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ int	ft_keypress(int keycode, t_keys *keys)
 
 int	ft_new_image(t_all *all)
 {
-	mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
-		all->image->img_ptr, 0, 0);
+	if (all->s == 0)
+		mlx_put_image_to_window(all->image->mlx_ptr, all->image->win_ptr,
+			all->image->img_ptr, 0, 0);
 	if (all->s == 0)
 		mlx_destroy_image(all->image->mlx_ptr, all->image->img_ptr);
 	if (all->keys->killwindow == 1)
