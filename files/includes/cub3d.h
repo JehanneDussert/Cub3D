@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 12:11:39 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 14:22:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,10 +277,6 @@ int				ft_rotation(t_all *all);
 void			turn_right(t_vec *vec, t_keys *keys);
 void			turn_left(t_vec *vec, t_keys *keys);
 void			ft_def_dir_plane(t_map *map, t_vec *vec);
-int				ft_look_up(t_all *all);
-int				ft_look_down(t_all *all);
-int				ft_player_jump(t_all *all);
-int				ft_player_crawl(t_all *all);
 
 /*
 ** Utils

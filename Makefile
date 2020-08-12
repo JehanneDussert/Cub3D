@@ -6,7 +6,7 @@
 #    By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/13 14:34:59 by jdussert          #+#    #+#              #
-#    Updated: 2020/08/12 12:03:23 by user42           ###   ########.fr        #
+#    Updated: 2020/08/12 14:21:44 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS = files/srcs/parsing/ft_check_map.c files/srcs/parsing/ft_colors.c files/sr
 		files/srcs/raycasting/ft_raycasting.c files/srcs/raycasting/ft_draw.c files/srcs/utils/ft_map_utils.c \
 		files/srcs/raycasting/ft_move.c files/srcs/raycasting/ft_rot.c \
 		files/srcs/raycasting/ft_keys.c files/srcs/utils/ft_error.c files/srcs/utils/ft_init.c \
-		files/srcs/raycasting/ft_look.c files/srcs/raycasting/ft_draw_textures.c files/srcs/sprites/ft_sprites.c \
+		files/srcs/raycasting/ft_draw_textures.c files/srcs/sprites/ft_sprites.c \
 		files/srcs/save/ft_save.c files/srcs/utils/ft_free_mem.c files/srcs/sprites/ft_sprites_utils.c files/srcs/utils/ft_init_txt.c files/srcs/utils/ft_utils2.c files/srcs/utils/ft_parse_error.c \
 		${GNL_SRCS} ${FT_PRINTF_SRCS} ${MINILIBX_SRCS}
 
