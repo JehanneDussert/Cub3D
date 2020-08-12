@@ -6,7 +6,7 @@
 /*   By: jehannedussert <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 18:23:28 by jehannedu         #+#    #+#             */
-/*   Updated: 2020/06/26 18:23:31 by jehannedu        ###   ########.fr       */
+/*   Updated: 2020/08/12 14:17:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_keys	*ft_keys_init(t_keys *keys)
 	keys->keyright = 0;
 	keys->keyturnright = 0;
 	keys->keyturnleft = 0;
-	keys->move_speed = 0.15;
-	keys->rot_speed = 0.15;
+	keys->move_speed = NORMAL;
+	keys->rot_speed = NORMAL;
 	keys->killwindow = 0;
 	return (keys);
 }
