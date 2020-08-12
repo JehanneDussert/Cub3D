@@ -1,14 +1,15 @@
-R 640 500
+R 1400 600
 NO ./texture/colorstone.XPM
 SO ./texture/wood.XPM
 WE ./texture/greystone.XPM
 EA ./texture/mossy.XPM
-
 S ./texture/barrel.XPM
-F 50,50,140
-C 0,0,50
 
-1111111
-100S001
-1000001
-1111111i
+F 220,100,0
+C 225,30,0
+
+111111
+100101
+102001
+1100N1
+111111

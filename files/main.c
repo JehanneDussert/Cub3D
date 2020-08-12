@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 14:41:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 16:23:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 	s = 0;
 	img.mlx_ptr = 0;
 	if (argc == 1)
-		return(ft_simple_error("Error\nFile missing.\n"));
+		return (ft_simple_error("Error\nFile missing.\n"));
 	if (argc > 1 && argc < 4)
 	{
 		if (ft_last(argv[1], ".cub") != 1)

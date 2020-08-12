@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 15:08:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 16:23:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,6 @@ t_list	*ft_new_line(t_list *lst, char *clean_line, int mode)
 	return (lst);
 }
 
-t_list	*ft_end_of_file(char **line, t_list *lst, int n, int *fd)
-{
-	int	i;
-
-	while (n == 1)
-	{
-		i = -1;
-		while (*line[++i])
-			if (*line[i] != '\0')
-			{
-				ft_free((void **)line);
-				ft_lstclear(&lst, free);
-				return (NULL);
-			}
-		ft_free((void **)line);
-		n = get_next_line(*fd, line);
-	}
-	if (n == 0)
-	{
-		i = -1;
-		while (*line[++i])
-			if (*line[i] != '\0')
-				return (NULL);
-		ft_free((void **)line);
-	}
-	return (lst);
-}
-
 t_list	*ft_list(char **line, int n, int *fd, t_map *map)
 {
 	t_list	*lst;
@@ -91,15 +63,13 @@ t_list	*ft_list(char **line, int n, int *fd, t_map *map)
 	lst = NULL;
 	while (n == 0 || n == 1)
 	{
-		if (lst && *line[0] == '\0' && n != 0)
-			return (ft_end_of_file(line, lst, n, fd));
 		if (ft_len(*line, map) == -1 || ((clean_line =
 		ft_clean_line(*line, &map->ori, map->map_l)) == NULL))
 		{
 			ft_lstclear(&lst, free);
 			break ;
 		}
-		if (ft_len(*line, map) < 3 && clean_line[0] == '\0')
+		if (ft_len(*line, map) < 3 && clean_line[0] == '\0' && n == 0)
 			return (ft_ret_lst(line, &clean_line, lst));
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 		{
