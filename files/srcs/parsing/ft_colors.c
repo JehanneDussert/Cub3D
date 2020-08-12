@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 09:50:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 10:35:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		ft_check_colors(char *line, int *i)
 	comma = 2;
 	while (line[j])
 	{
-
 		if (((ft_isdigit(line[j])) == 0 && line[j] != ',') || comma < 0)
 			return (-1);
 		else if (line[j] == ',')

@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/11 16:57:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 10:46:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,7 @@ void			ft_check_screen_size(t_image *img, t_map *map);
 int				ft_miss_info(char **line, t_map *map, int *fd);
 int				ft_wrong_map(t_map *map, int *fd);
 int				ft_wrong_char(char **line, int *fd);
+t_list			*ft_ret_lst(char **line, char **clean_line, t_list *lst);
 
 /*
 ** Init

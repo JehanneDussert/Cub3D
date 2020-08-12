@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/11 16:40:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 11:36:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	if (!(clean_line = (char *)malloc(sizeof(char) * (map_l + 1))))
+	if (!(clean_line = (char *)ft_memalloc(map_l + 1)))
 		return (NULL);
-	while (line[i])
+	while (line[++i])
 	{
 		while (line[i] == ' ')
 			ft_replace_space(clean_line, &i, &j);
@@ -35,8 +35,7 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 				ft_free((void **)&clean_line);
 				return (NULL);
 			}
-			clean_line[j] = line[i];
-			j++;
+			clean_line[j++] = line[i];
 		}
 		else
 		{
@@ -44,9 +43,7 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 				ft_free((void **)&clean_line);
 			return (NULL);
 		}
-		i++;
 	}
-	clean_line[j] = '\0';
 	return (clean_line);
 }
 
@@ -73,18 +70,14 @@ t_list	*ft_list(char **line, int n, int *fd, t_map *map)
 	lst = NULL;
 	while (n == 0 || n == 1)
 	{
-		if (ft_len(*line, map) == -1 || (clean_line =
-		ft_clean_line(*line, &map->ori, map->map_l)) == NULL)
+		if (ft_len(*line, map) == -1 || ((clean_line =
+		ft_clean_line(*line, &map->ori, map->map_l)) == NULL))
 		{
 			ft_lstclear(&lst, free);
 			break ;
 		}
 		if (ft_len(*line, map) < 3 && clean_line[0] == '\0')
-		{
-			ft_free((void **)line);
-			ft_free((void **)&clean_line);
-			return (lst);
-		}
+			return (ft_ret_lst(line, &clean_line, lst));
 		if ((lst = ft_new_line(lst, clean_line, (lst == NULL ? 0 : 1))) == NULL)
 		{
 			ft_free((void **)&clean_line);
@@ -116,15 +109,16 @@ char	**ft_create_map(t_map *map, t_list *lst, int len)
 		if ((i + 1) == len)
 		{
 			if (ft_check_map_errors(lst->content, 0) != 1)
+			{
+				ft_free_map(map);
 				return (NULL);
+			}
 		}
 		map->map[i] = ft_substr(lst->content, 0, map->map_l + 1);
 		lst = lst->next;
 		if (lst != NULL)
-		{
 			if (ft_check_len(lst->content, tmp->content) != 1)
 				return (NULL);
-		}
 		i++;
 	}
 	return (map->map);
