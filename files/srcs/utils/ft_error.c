@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 14:40:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/12 16:41:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	ft_file_prbl(int msg)
 		ft_putstr_fd("Error\nInvalid file.\n", 1);
 	else if (msg == 5)
 		ft_putstr_fd("Error\nFile opening problem.\n", 1);
-	else if (msg == 6)
-		ft_putstr_fd("Error\nWrong resolution.\n", 1);
 	else if (msg == 8)
 		ft_putstr_fd("Error\nWrong textures.\n", 1);
 	else if (msg == 10)
@@ -30,7 +28,7 @@ void	ft_file_prbl(int msg)
 
 int		ft_error(int msg, t_all *all)
 {
-	if (msg == 0 || msg == 5 || msg == 6 || msg == 8 || msg == 10 || msg == 12)
+	if (msg == 0 || msg == 5 || msg == 8 || msg == 10 || msg == 12)
 		ft_file_prbl(msg);
 	else if (msg == 1)
 		ft_putstr_fd("Error\nWrong argument.\n", 1);

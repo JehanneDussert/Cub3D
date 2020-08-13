@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:35:30 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 16:23:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/13 11:55:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 	j = 0;
 	if (!(clean_line = (char *)ft_memalloc(map_l + 1)))
 		return (NULL);
-	while (line[++i])
+	while (line[++i] != '\0')
 	{
 		while (line[i] == ' ')
 			ft_replace_space(clean_line, &i, &j);
@@ -34,6 +34,8 @@ char	*ft_clean_line(char *line, char *ori, int map_l)
 				return (ft_end_clean_line(&clean_line));
 			clean_line[j++] = line[i];
 		}
+		else if (line[i] == '\0')
+			return (clean_line);
 		else
 			return (ft_end_clean_line(&clean_line));
 	}
@@ -106,7 +108,10 @@ char	**ft_create_map(t_map *map, t_list *lst, int len)
 		lst = lst->next;
 		if (lst != NULL)
 			if (ft_check_len(lst->content, tmp->content) != 1)
+			{
+				ft_free_map(map);
 				return (NULL);
+			}
 		i++;
 	}
 	return (map->map);
