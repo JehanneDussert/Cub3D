@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 15:35:53 by user42            #+#    #+#             */
-/*   Updated: 2020/08/12 14:01:39 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 10:24:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,32 @@ int		ft_nb_spr(t_map *map)
 	if (map->spr > 49)
 		return (-1);
 	return (1);
+}
+
+void	ft_free_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->map[i])
+	{
+		ft_free((void **)&map->map[i]);
+		i++;
+	}
+	ft_free((void **)&map->map);
+}
+
+int		ft_duplicate_args(char **line)
+{
+	ft_simple_error("Error\nDuplicate arguments.\n");
+	ft_free((void **)line);
+	return (-1);
+}
+
+int		ft_correct_map(t_map *map, char *line, int n, int *fd)
+{
+	if ((ft_check_info_map(map) == 1 && (line[0] == '1' || line[0] == ' ')) &&
+			(ft_map(map, &line, n, fd) == NULL))
+		return (-1);
+	return (0);
 }

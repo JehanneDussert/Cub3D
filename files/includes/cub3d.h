@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 16:22:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 10:25:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@
 # define UP 1
 # define DOWN 2
 
-# define NORMAL 0.09
+# define NORMAL 0.05
 # define SLOW 0.01
-# define RUN 0.13
+# define RUN 0.1
 # define NBSPR 15
 # define W_H 64
 
@@ -232,8 +232,7 @@ int				ft_resolution(char *line, t_map *map, int *i);
 int				ft_check_resolution(char *line, t_map *info, int *i);
 void			ft_def_color(char *line, t_map *map, int *i);
 int				ft_colors(char *line, int *color, int *i);
-void			ft_find_textures(char *line, t_map *map);
-void			ft_text(char *line, t_map *info);
+int				ft_find_textures(char *line, t_map *map);
 int				ft_open_text(t_map *map);
 char			**ft_map(t_map *map, char **line, int n, int *fd);
 int				ft_check_map_char(char *line, int i);
@@ -298,6 +297,9 @@ int				ft_wrong_map(t_map *map, int *fd);
 int				ft_wrong_char(char **line, int *fd);
 t_list			*ft_ret_lst(char **line, char **clean_line, t_list *lst);
 char			*ft_end_clean_line(char **clean_line);
+int				ft_check_info_map(t_map *map);
+int				ft_duplicate_args(char **line);
+int				ft_correct_map(t_map *map, char *line, int n, int *fd);
 
 /*
 ** Init

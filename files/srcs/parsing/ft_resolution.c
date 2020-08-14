@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:47:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 16:43:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/13 14:03:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ int		ft_check_resolution(char *line, t_map *info, int *i)
 		return (-1);
 	ft_jump(line, i);
 	if (line[*i] != '\0')
+	{
+		info->reso[0] = -1;
+		info->reso[1] = -1;
 		return (-1);
+	}
 	*i = 0;
 	return (0);
 }

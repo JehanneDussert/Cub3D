@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 16:41:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 09:30:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,46 +57,45 @@ int		ft_error(int msg, t_all *all)
 int		ft_simple_error(char *msg)
 {
 	ft_putstr_fd(msg, 1);
-	return (0);
+	return (-1);
 }
 
-int		ft_parsing_error(t_map *map)
+int		ft_invalid_file(t_map *map)
 {
 	if (map->reso[0] == -1 && map->reso[1] == -1 &&
 		map->f_path == -1 && map->c_path == -1 &&
 		map->north_t[0] == '\0' && map->south_t[0] == '\0'
 		&& map->sprite_t[0] == '\0' && map->west_t[0] == '\0'
 		&& map->east_t[0] == '\0')
+	{
 		ft_simple_error("Error\nInvalid file.\n");
-	if ((map->reso[0] == -1 || map->reso[1] == -1) ||
-		(map->reso[0] == -1 && map->reso[1] == -1))
-		ft_simple_error("Error\nWrong resolution.\n");
-	if (map->c_path == -1 || map->f_path == -1)
-		ft_simple_error("Error\nMissing ceiling path.\n");
-	if (map->f_path == -1)
-		ft_simple_error("Error\nMissing floor path.\n");
-	if (map->north_t[0] == '\0')
-		ft_simple_error("Error\nMissing north path.\n");
-	if (map->south_t[0] == '\0')
-		ft_simple_error("Error\nMissing south path.\n");
-	if (map->east_t[0] == '\0')
-		ft_simple_error("Error\nMissing east path.\n");
-	if (map->west_t[0] == '\0')
-		ft_simple_error("Error\nMissing west path.\n");
-	if (map->sprite_t[0] == '\0')
-		ft_simple_error("Error\nMissing sprite path.\n");
+		return (0);
+	}
 	return (1);
 }
 
-void	ft_free_map(t_map *map)
+int		ft_parsing_error(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	while (map->map[i])
-	{
-		ft_free((void **)&map->map[i]);
-		i++;
-	}
-	ft_free((void **)&map->map);
+	if (ft_invalid_file(map) == 0)
+		return (1);
+	if ((map->reso[0] == -1 || map->reso[1] == -1) ||
+		(map->reso[0] == -1 && map->reso[1] == -1))
+		ft_simple_error("Error\nWrong resolution.\n");
+	if (map->c_path == -1)
+		ft_simple_error("Error\nMissing correct ceiling path.\n");
+	if (map->f_path == -1)
+		ft_simple_error("Error\nWrong floor path.\n");
+	if (map->north_t[0] == '\0')
+		ft_simple_error("Error\nWrong north path.\n");
+	if (map->south_t[0] == '\0')
+		ft_simple_error("Error\nWrong south path.\n");
+	if (map->east_t[0] == '\0')
+		ft_simple_error("Error\nWrong east path.\n");
+	if (map->west_t[0] == '\0')
+		ft_simple_error("Error\nWrong west path.\n");
+	if (map->sprite_t[0] == '\0')
+		ft_simple_error("Error\nWrong sprite path.\n");
+	if (ft_check_info_map(map) == 1 && !map->map)
+		ft_simple_error("Error\nMissing map.\n");
+	return (-1);
 }

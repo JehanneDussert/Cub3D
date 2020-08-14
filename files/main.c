@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 16:26:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/13 15:26:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ int	ft_start(t_image img, char **argv, int save)
 	t_vec		vec;
 
 	ft_init_map(&map);
-	if (!(fd = open(argv[1], O_RDONLY)))
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		return (ft_simple_error("Error\nOpening file failed.\n"));
 	if (ft_parsing(&map, &fd) == -1)
 		return (-1);
+	close(fd);
+	if (!map.map)
+		return (ft_simple_error("Error\nMissing map"));
 	ft_nb_spr(&map);
 	if (save == 1)
 		ft_save(&img, &map, &p, &vec);

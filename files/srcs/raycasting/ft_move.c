@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:47:07 by jdussert          #+#    #+#             */
-/*   Updated: 2020/03/03 12:09:39 by jdussert         ###   ########.fr       */
+/*   Updated: 2020/08/13 13:37:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,56 @@
 void	move_up(t_all *all)
 {
 	if (all->map->map[(int)(all->map->pos_y + all->vec->dir_y
-		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1' &&
+			all->map->map[(int)(all->map->pos_y + all->vec->dir_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '2')
 		all->map->pos_y += all->vec->dir_y * all->keys->move_speed;
 	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
-		+ all->vec->dir_x * all->keys->move_speed)] != '1')
+		+ all->vec->dir_x * all->keys->move_speed)] != '1' &&
+			all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		+ all->vec->dir_x * all->keys->move_speed)] != '2')
 		all->map->pos_x += all->vec->dir_x * all->keys->move_speed;
 }
 
 void	move_down(t_all *all)
 {
 	if (all->map->map[(int)(all->map->pos_y - all->vec->dir_y
-		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1' &&
+			all->map->map[(int)(all->map->pos_y - all->vec->dir_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '2')
 		all->map->pos_y -= all->vec->dir_y * all->keys->move_speed;
 	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
-		- all->vec->dir_x * all->keys->move_speed)] != '1')
+		- all->vec->dir_x * all->keys->move_speed)] != '1' &&
+		all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		- all->vec->dir_x * all->keys->move_speed)] != '2')
 		all->map->pos_x -= all->vec->dir_x * all->keys->move_speed;
 }
 
 void	move_right(t_all *all)
 {
 	if (all->map->map[(int)(all->map->pos_y + all->vec->plane_y
-		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1' &&
+		all->map->map[(int)(all->map->pos_y + all->vec->plane_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '2')
 		all->map->pos_y += all->vec->plane_y * all->keys->move_speed;
 	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
-		+ all->vec->plane_x * all->keys->move_speed)] != '1')
+		+ all->vec->plane_x * all->keys->move_speed)] != '1' &&
+		all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		+ all->vec->plane_x * all->keys->move_speed)] != '2')
 		all->map->pos_x += all->vec->plane_x * all->keys->move_speed;
 }
 
 void	move_left(t_all *all)
 {
 	if (all->map->map[(int)(all->map->pos_y - all->vec->plane_y
-		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1')
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '1' &&
+		all->map->map[(int)(all->map->pos_y - all->vec->plane_y
+		* all->keys->move_speed)][(int)(all->map->pos_x)] != '2')
 		all->map->pos_y -= all->vec->plane_y * all->keys->move_speed;
 	if (all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
-		- all->vec->plane_x * all->keys->move_speed)] != '1')
+		- all->vec->plane_x * all->keys->move_speed)] != '1' &&
+		all->map->map[(int)(all->map->pos_y)][(int)(all->map->pos_x
+		- all->vec->plane_x * all->keys->move_speed)] != '2')
 		all->map->pos_x -= all->vec->plane_x * all->keys->move_speed;
 }
 

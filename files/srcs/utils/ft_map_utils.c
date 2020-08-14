@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 18:29:28 by jehannedu         #+#    #+#             */
-/*   Updated: 2020/08/13 11:49:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 11:17:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,10 @@ int		ft_check_map_char(char *line, int i)
 
 int		ft_check_char(char *line, int i)
 {
+	ft_jump(line, &i);
 	if (line[i] == 'R' || line[i] == 'C' || line[i] == 'S' || line[i] == 'F'
-		|| (ft_first(line, "NO") == 1) || (ft_first(line, "SO") == 1)
-		|| (ft_first(line, "WE") == 1) || (ft_first(line, "EA") == 1)
+		|| (ft_first(line, "NO", &i) == 1) || (ft_first(line, "SO", &i) == 1)
+		|| (ft_first(line, "WE", &i) == 1) || (ft_first(line, "EA", &i) == 1)
 		|| line[i] == '\0' || line[i] == ' ')
 		return (1);
 	return (0);

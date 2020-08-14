@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:20:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/12 14:42:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 13:57:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_open_text(t_map *map)
 
 int		ft_check_text(char *line, int i)
 {
+	ft_jump(line, &i);
 	if (ft_strncmp(&line[i], "NO", 2) || ft_strncmp(&line[i], "SO", 2) ||
 		ft_strncmp(&line[i], "WE", 2) || ft_strncmp(&line[i], "EA", 2) ||
 		ft_strncmp(&line[i], "S", 1))
@@ -34,32 +35,58 @@ int		ft_check_text(char *line, int i)
 	return (0);
 }
 
-void	ft_text(char *line, t_map *map)
+int		ft_text(char *line, t_map *map)
 {
 	int i;
-	int len;
+	size_t len;
 
-	i = 2;
-	len = 0;
-	while (i < (int)ft_strlen(line) && line[i] == ' ')
-		i++;
-	while ((i + len) <= (int)ft_strlen(line) && line[len + i] != ' ')
-		len++;
-	if (ft_ref_parse(line, "NO", ft_strlen(line)))
+	i = 0;
+	len = ft_strlen(line);
+	ft_jump(line, &i);
+	if (map->north_t[0] == '\0'
+			&& ft_ref_parse(&line[i], "NO", len, &i))
+	{
+		ft_jump(line, &i);
 		ft_strlcpy(map->north_t, &line[i], len);
-	else if (ft_ref_parse(line, "SO", ft_strlen(line)))
+	}
+	else if (map->south_t[0] == '\0' &&
+			ft_ref_parse(&line[i], "SO", len, &i))
+	{
+		ft_jump(line, &i);
 		ft_strlcpy(map->south_t, &line[i], len);
-	else if (ft_ref_parse(line, "WE", ft_strlen(line)))
+	}
+	else if (map->west_t[0] == '\0' &&
+			ft_ref_parse(&line[i], "WE", len, &i))
+	{
+		ft_jump(line, &i);
 		ft_strlcpy(map->west_t, &line[i], len);
-	else if (ft_ref_parse(line, "EA", ft_strlen(line)))
+	}
+	else if (map->east_t[0] == '\0' &&
+			ft_ref_parse(&line[i], "EA", len, &i))
+	{
+		ft_jump(line, &i);
 		ft_strlcpy(map->east_t, &line[i], len);
-	else if (ft_ref_parse(line, "S", ft_strlen(line)))
+	}
+	else if (map->sprite_t[0] == '\0' &&
+			ft_ref_parse(&line[i], "S", len, &i))
+	{
+		ft_jump(line, &i);
 		ft_strlcpy(map->sprite_t, &line[i], len);
+	}
+	else if (ft_ref_parse(&line[i], "NO", len, &i) ||
+			ft_ref_parse(&line[i], "SO", len, &i) ||
+			ft_ref_parse(&line[i], "EA", len, &i) ||
+			ft_ref_parse(&line[i], "WE", len, &i) ||
+			ft_ref_parse(&line[i], "S", len, &i))
+		return (-1);
+	return (0);
 }
 
-void	ft_find_textures(char *line, t_map *map)
+int		ft_find_textures(char *line, t_map *map)
 {
-	ft_text(line, map);
-	if (ft_open_text(map) == -1)
-		ft_simple_error("Error\nCan't open textures files.\n");
+	if (ft_text(line, map) == -1)
+		return (ft_text(line, map));
+	else if (ft_open_text(map) == -1)
+		return (ft_simple_error("Error\nCan't open textures files.\n"));
+	return (0);
 }
