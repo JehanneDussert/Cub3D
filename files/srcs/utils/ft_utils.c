@@ -6,11 +6,21 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:27:33 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/13 13:45:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 16:00:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int		ft_check_text(char *line, int i)
+{
+	ft_jump(line, &i);
+	if (ft_strncmp(&line[i], "NO", 2) || ft_strncmp(&line[i], "SO", 2) ||
+		ft_strncmp(&line[i], "WE", 2) || ft_strncmp(&line[i], "EA", 2) ||
+		ft_strncmp(&line[i], "S", 1))
+		return (1);
+	return (0);
+}
 
 int		ft_len(char *line, t_map *map)
 {

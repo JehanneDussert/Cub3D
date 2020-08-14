@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:00:44 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/14 13:34:50 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 15:53:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int		ft_check_info_map(t_map *map)
 int		ft_info(t_map *map, char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	ft_jump(line, &i);
 	if (ft_check_char(line, i) == 0)
-		return(ft_simple_error("Error\nBad character.\n"));
+		return (-1);
 	if (line[i] == 'R' && map->reso[0] == -1 && map->reso[1] == -1)
 		ft_resolution(line, map, &i);
 	else if (line[i] == 'R')
@@ -70,10 +70,10 @@ int		ft_parsing(t_map *map, int *fd)
 	int		n;
 
 	while ((n = get_next_line(*fd, &line)) != 0
-			&& ft_check_info_map(map) != 1 && ft_check_char(line, 0) != 0)
+			&& ft_check_info_map(map) != 1)
 	{
 		if (ft_info(map, line) == -1)
-			return (ft_duplicate_args(&line));
+			return (ft_wrong_char(&line, fd));
 		ft_free((void **)&line);
 	}
 	while (line[0] != ' ' && line[0] != '1' && n != 0)
@@ -86,9 +86,8 @@ int		ft_parsing(t_map *map, int *fd)
 		n = get_next_line(*fd, &line);
 	}
 	if (ft_correct_map(map, line, n, fd) != 0)
-			return (ft_wrong_map(map, fd));
+		return (ft_wrong_map(map, fd));
 	else if (ft_check_info_map(map) != 1)
 		return (ft_miss_info(&line, map, fd));
-	//ft_free((void **)&line);
 	return (0);
 }

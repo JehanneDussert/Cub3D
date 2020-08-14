@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:34:14 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/14 10:25:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/14 15:58:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ char			*ft_end_clean_line(char **clean_line);
 int				ft_check_info_map(t_map *map);
 int				ft_duplicate_args(char **line);
 int				ft_correct_map(t_map *map, char *line, int n, int *fd);
-
+int				ft_check_text(char *line, int i);
 /*
 ** Init
 */
