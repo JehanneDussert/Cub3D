@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:36:05 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/14 15:47:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 09:56:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		ft_colors(char *line, int *color, int *i)
 
 	tab = (unsigned char *)color;
 	j = 2;
-	ft_jump(line, i);
 	if (line[*i] == 'F' || line[*i] == 'C')
 		++(*i);
 	while (j >= 0)
@@ -48,12 +47,13 @@ int		ft_colors(char *line, int *color, int *i)
 		if (ft_check_colors(line, i) == -1)
 			return (-1);
 		p_color = ft_l_atoi(line, i);
-		ft_jump(line, i);
 		if ((p_color > 255 || p_color < 0) || (j > 0
 			&& line[(*i)++] != ',') || j < 0)
 			return ((*color = -1));
 		tab[j] = p_color;
 		j--;
+		if (j == -1 && (line[*i] != ' ' && line[*i] != '\0'))
+			return (*color = -1);
 	}
 	tab[3] = 0;
 	*i = 0;

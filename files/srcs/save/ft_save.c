@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 16:03:43 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/13 12:05:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 10:30:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		ft_save(t_image *img, t_map *map, t_player *p, t_vec *vec)
 	ft_init_texture(&all, text, 64, 64);
 	ft_keydeal(&all);
 	ft_write_bmp_file(&all);
-	ft_free_map(map);
 	mlx_destroy_image(all.image->mlx_ptr, all.image->img_ptr);
+	ft_killwindow(&all);
 	return (0);
 }
