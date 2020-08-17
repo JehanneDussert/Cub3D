@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:25:58 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/17 10:31:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 11:52:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,14 @@
 int	ft_killwindow(t_all *all)
 {
 	int		i;
-	int		y;
 
 	i = 0;
-	y = 0;
 	while (all->map && all->map->map && i < all->map->len_y)
 		ft_free((void **)&all->map->map[i++]);
 	if (all->map && all->map->map)
 		ft_free((void **)&all->map->map);
-	while (y < 5)
-	{
-		mlx_destroy_image(all->image->mlx_ptr, all->text[y].ptr);
-		all->text[y].ptr = NULL;
-		all->text[y].img = NULL;
-		y++;
-	}
-	all->image->mlx_ptr = NULL;
 	if (all->image->mlx_ptr != 0 && all->image->win_ptr != 0)
-	{
 		mlx_clear_window(all->image->mlx_ptr, all->image->win_ptr);
-		mlx_destroy_window(all->image->mlx_ptr, all->image->win_ptr);
-	}
 	exit(0);
 	return (1);
 }

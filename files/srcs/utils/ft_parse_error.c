@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:43:45 by user42            #+#    #+#             */
-/*   Updated: 2020/08/12 16:45:50 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 11:14:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_wrong_char(char **line, int *fd)
 {
 	ft_free((void **)line);
 	close(*fd);
-	ft_simple_error("Error\nBad character.\n");
+	ft_simple_error("Error\nInformation is incorrect.\n");
 	return (-1);
 }
 

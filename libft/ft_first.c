@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 16:34:34 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/14 11:08:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 12:07:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_first(char *haystack, char *needle, int *start)
 	int	len_n;
 	int	i;
 	int	j;
-	
+
 	i = *start;
 	j = 0;
 	len_h = ft_strlen(haystack);

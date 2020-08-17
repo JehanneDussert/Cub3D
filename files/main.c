@@ -6,7 +6,7 @@
 /*   By: jdussert <jdussert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 16:10:35 by jdussert          #+#    #+#             */
-/*   Updated: 2020/08/13 15:26:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 11:59:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	ft_mlx(t_image *img, t_map *map, t_player *p, t_vec *vec)
 	if (!(img->win_ptr = mlx_new_window(img->mlx_ptr,
 		map->reso[0], map->reso[1], "Cub3D")))
 		return (ft_simple_error("Error\nOpening new window failed.\n"));
-	if (ft_init_texture(&all, text, 64, 64) != 0)
-		return (ft_simple_error("Error\nInit textures failed.\n"));
+	ft_init_texture(&all, text, 64, 64);
 	mlx_hook(img->win_ptr, 2, 1, ft_keypress, &keys);
 	mlx_hook(img->win_ptr, 3, 2, ft_keyrelease, &keys);
 	mlx_hook(img->win_ptr, 17, 1L << 17, ft_killwindow, &all);
 	mlx_loop_hook(img->mlx_ptr, ft_keydeal, &all);
 	mlx_loop(img->mlx_ptr);
+	mlx_destroy_window(all.image->mlx_ptr, all.image->win_ptr);
 	return (1);
 }
 
