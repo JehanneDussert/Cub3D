@@ -1,6 +1,3 @@
-# Cub3D
-🎮
-
 ### Welcome to my cub3D repository 👋
 
 ⭐️ The goal of this project is to make a dynamic view inside a maze in ray-casting. 
