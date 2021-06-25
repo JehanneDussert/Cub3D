@@ -1,18 +1,21 @@
 # Cub3D
 🎮
 
-Graphic design project made with minilibX.
-See [Wolfenstein 3D](http://users.atw.hu/wolf3d/).
+### Welcome to my cub3D repository 👋
 
-## Run the project
-* git clone the project
-* make
-* ./cub3D map.cub
+⭐️ The goal of this project is to make a dynamic view inside a maze in ray-casting. 
+Made with minilibX 🎮
 
-## Commands
-* W, A, S, D to move ;
-* ESC to close the window and exit the program ;
-* P to run ;
-* O to slow down ;
-* → to turn right ;
-* ← to turn left.
+## ✅ Features ⤵️
+- W, A, S, D to move
+- ESC to close the window and exit the program
+- P to run
+- O to slow down
+- → to turn right
+- ← to turn left
+
+## 💡 Usage
+- Make && ./cub3D [map_name].cub
+
+## 🖇 Reference
+- See [Wolfenstein 3D](http://users.atw.hu/wolf3d/).
